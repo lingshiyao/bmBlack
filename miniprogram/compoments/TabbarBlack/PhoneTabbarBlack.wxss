@@ -1,0 +1,37 @@
+.tabbar {
+    width: 77vw;
+    height: 13.61vw;
+    background: #353535;
+    border-radius: 7vw;
+    margin-left: 12.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon {
+    width: 6.53vw;
+    height: 6.53vw;
+}
+
+.b-b {
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+}
+
+.base {
+    position: relative;
+    width: 100vw;
+    height: 22.06vw;
+}
+
+.center {
+    width: 18.06vw;
+    height: 18.06vw;
+    background: #FDD3A1;
+    border-radius: 9vw;
+    position: absolute;
+    top: -2.225vw;
+    left: 40.97vw;
+}

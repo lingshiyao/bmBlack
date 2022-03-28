@@ -1,0 +1,35 @@
+
+.phone-home-recommend {
+    margin: 8.13vw 4vw 0vw 4vw;
+    width: 92vw;
+}
+
+.phone-home-recommend-title {
+    text-align: left;
+    font-size: 4.8vw;
+    font-weight: bold;
+    color: #1e1e1e;
+}
+
+.phone-home-recommend-item-list {
+    display: inline-block;
+    width: 96vw;
+    height: 60.33vw;
+    text-align: left;
+    overflow: hidden;
+}
+
+.phone-home-recommend-item-list-content {
+    height: 60.33vw;
+    width: 96vw;
+    overflow-x: scroll;
+    display: flex;
+    justify-content: space-between;
+    -webkit-scrollbar: 0;
+}
+
+.phone-home-recommend-item-list-content::-webkit-scrollbar {
+    width: 0px;
+    display: none;
+}
+

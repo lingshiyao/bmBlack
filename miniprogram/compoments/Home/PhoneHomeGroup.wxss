@@ -1,0 +1,31 @@
+
+.phone-home-group {
+    margin: 6vw 4vw 0vw 4vw;
+    width: 92vw;
+}
+
+.phone-home-group-title {
+    text-align: left;
+    font-size: 4.8vw;
+    font-weight: bold;
+    color: #1e1e1e;
+}
+
+.phone-home-group-item-list {
+    display: inline-block;
+    width: 92vw;
+    text-align: center;
+    overflow: hidden;
+}
+
+.phone-home-group-item-list-content {
+    width: 92vw;
+    display: inline-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.phone-home-group-item-list-space {
+    height: 17vw;
+}
+

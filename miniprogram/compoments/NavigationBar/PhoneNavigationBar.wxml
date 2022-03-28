@@ -1,0 +1,7 @@
+<view class="phone-nav">
+    <view>
+        <view class="phone-nav-logo-box">
+            <image show-menu-by-longpress mode="aspectFill" class="phone-nav-logo-box" src="{{src}}"></image>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,49 @@
+
+.phone-nft-info-bottom {
+    width: 100vw;
+    background: white;
+    height: 16.53vw;
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+    box-shadow: 0vw 0vw 4vw 0vw rgba(0, 0, 0, 0.05);
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+}
+
+.phone-nft-info-bottom-collection {
+    /*display: inline-block;*/
+    width: 12vw;
+    /*vertical-align: middle;*/
+    margin: 0vw 1.5vw 3vw 1.5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.phone-nft-info-bottom-buy {
+    display: inline-block;
+    width: 62vw;
+    height: 11.73vw;
+    background: #FDD3A1;
+    border-radius: 2vw;
+    vertical-align: middle;
+    line-height: 11.73vw;
+    font-size: 4.5vw;
+    margin-left: 1.5vw;
+    text-align: center;
+}
+
+.phone-nft-info-bottom-title {
+    height: 3.07vw;
+    font-size: 4vw;
+    font-weight: 400;
+    color: #000219;
+    margin-top: 1vw;
+}
+
+.phone-nft-info-bottom-img {
+    display: inline-block;
+    height: 5.5vw;
+}

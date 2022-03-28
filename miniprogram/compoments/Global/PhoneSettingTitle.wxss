@@ -1,0 +1,24 @@
+.title-box {
+    width: 91vw;
+    background: red;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 13.5vw;
+    background: #1F1F1F;
+    justify-content: space-between;
+}
+
+.title {
+    font-size: 6.67vw;
+    font-family: WD;
+    font-weight: 400;
+    color: #FDD3A1;
+    line-height: 5.69vw;
+}
+
+.setting {
+    width: 8.89vw;
+    height: 8.89vw;
+    margin-right: 25.5vw;
+}

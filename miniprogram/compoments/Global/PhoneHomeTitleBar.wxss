@@ -1,0 +1,45 @@
+.title-box {
+    width: 91vw;
+    background: red;
+    display: flex;
+    flex-direction: column;
+    background: #1F1F1F;
+    margin-left: 4vw;
+}
+
+.title {
+    font-size: 6.67vw;
+    font-family: WD;
+    font-weight: 400;
+    color: #FDD3A1;
+    line-height: 6.67vw;
+    margin-top: 3.4vw;
+}
+
+.search-box {
+    flex:1;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+    margin-top: 9.7vw;
+    align-items: center;
+}
+
+.item {
+    height: 5.42vw;
+    font-size: 5.56vw;
+    color: #FDD3A1;
+    line-height: 5.56vw;
+}
+
+.search {
+    width: 34.72vw;
+    height: 7.78vw;
+    background: #353535;
+    border-radius: 4vw;
+}

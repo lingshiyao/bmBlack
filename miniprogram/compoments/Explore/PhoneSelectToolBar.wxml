@@ -1,0 +1,11 @@
+<view class="phone-select-tool-bar">
+    <view class="phone-select-list">
+        <view class="phone-select-item" wx:key="unique" wx:for="{{dataEntity}}" wx:for-item="item" wx:for-index="index"
+              bindtap="tabberToolAction" data-index="{{index}}">
+            <view class="phone-select-title" style="{{item.isSelect?'color: #1E1E1E':'#646464'}}">
+                {{ item.title }}
+            </view>
+            <view wx:if="{{item.isSelect}}" class="phone-select-bottom-line"></view>
+        </view>
+    </view>
+</view>

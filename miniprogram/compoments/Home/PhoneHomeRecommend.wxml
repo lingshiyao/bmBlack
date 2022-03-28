@@ -1,0 +1,14 @@
+<view class="phone-home-recommend">
+    <view class="phone-home-recommend-title">
+        推荐店铺
+    </view>
+    <view class="phone-home-recommend-item-list">
+        <view class="phone-home-recommend-item-list-content">
+            <block wx:for="{{data.dataArray}}"
+                   wx:for-item="item" wx:for-index="index" wx:key="unique">
+                <PhoneHomeRecommendItem bindtap="goToStore" data-index="{{index}}"
+                                        data="{{item}}"/>
+            </block>
+        </view>
+    </view>
+</view>

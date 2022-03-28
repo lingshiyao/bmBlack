@@ -1,0 +1,10 @@
+<view class="title-box" style="{{marginTop}}">
+    <view class="title">{{title}}</view>
+    <view class="line">
+        <view data-index="0" bindtap="tabberAction" class="item">热门</view>
+        <view data-index="1" bindtap="tabberAction" class="item" style="margin-left:7.3vw;">分类</view>
+        <view class="search-box">
+            <view class="search"></view>
+        </view>
+    </view>
+</view>

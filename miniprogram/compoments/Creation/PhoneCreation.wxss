@@ -1,0 +1,95 @@
+
+.creation {
+    background: #1f1f1f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8vw;
+    min-height: 80vh;
+}
+
+.logo {
+    width: 28.53vw;
+    height: 9.33vw;
+    margin-left: 4vw;
+}
+
+.banner {
+    display: flex;
+    width: 100%;
+    margin-top: 2.53vw;
+}
+
+.input {
+    margin-left: 4.8vw;
+}
+
+.create-collection {
+    width: 92vw;
+    height: 51.73vw;
+    border-radius: 2.66vw;
+    margin-top: 2.4vw;
+    position: relative;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    margin-left: 4vw;
+    position: absolute;
+    top: 0;
+}
+
+.create-item {
+    width: 92vw;
+    height: 51.72vw;
+    border-radius: 2.66vw;
+    margin-top: 4vw;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.store-icon {
+    width: 92vw;
+    height: 51.73vw;
+}
+
+.title1 {
+    font-size: 6.67vw;
+    font-weight: bold;
+    color: #FDD3A1;
+    margin-top: 5.56vw;
+}
+
+.title2 {
+    font-size: 4.17vw;
+    font-weight: 400;
+    margin-top: 2.3vw;
+    color: #FDD3A1;
+    line-height: 5.69vw;
+    opacity: 0.2;
+}
+
+.btn {
+    width: 5vw;
+    height: 5vw;
+    background: #FDD3A1;
+    border-radius: 2.5vw;
+    margin-top: 19.8vw;
+}
+
+.btn2 {
+    width: 18.66vw;
+    height: 8vw;
+    background: #FFFFFF;
+    box-shadow: 0vw 0.4vw 4.26vw 0vw rgba(0, 0, 0, 0.2);
+    border-radius: 4vw;
+    font-size: 2.93vw;
+    font-weight: 400;
+    color: #EB5D47;
+    line-height: 8vw;
+    text-align: center;
+    margin-top: 11.6vw;
+}
+

@@ -1,0 +1,19 @@
+
+.v-html {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    align-items: center;
+}
+
+.area {
+    margin-top: -5vw;
+    width: 90vw;
+}
+
+.text {
+    min-height: 100vh;
+    padding: 5vw;
+    text-align: left;
+    font-size: 3.733vw;
+}

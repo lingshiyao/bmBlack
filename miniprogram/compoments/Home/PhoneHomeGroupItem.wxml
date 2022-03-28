@@ -1,0 +1,6 @@
+<view class="phone-home-group-item">
+    <image show-menu-by-longpress class="phone-home-group-item-img" src="{{data.imgSrc}}"></image>
+    <view class="phone-home-group-item-title">
+        {{ data.title }}
+    </view>
+</view>

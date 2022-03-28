@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "数字火星",
+  "component": true,
+  "usingComponents": {
+    "FootMsg": "/compoments/Tabbar/FootMsg",
+    "PhoneMy": "/compoments/My/PhoneMy",
+    "PhoneCreation": "/compoments/Creation/PhoneCreation",
+    "PhoneHomePage": "/compoments/PhoneHomePage",
+    "PhoneNavigationBar": "/compoments/NavigationBar/PhoneNavigationBar",
+    "PhoneTabbar": "/compoments/TabbarBlack/PhoneTabbarBlack",
+    "PhoneExplorePage": "/compoments/PhoneExplorePage",
+    "PhoneHomeTitleBar": "/compoments/Global/PhoneHomeTitleBar"
+  }
+}

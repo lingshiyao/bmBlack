@@ -1,0 +1,42 @@
+<view class="border">
+    <view bindtap="goToInfo">
+        <view class="line">
+            <view class="time">
+                {{date}}
+            </view>
+            <view class="status-fail" style="{{getColor}}">
+                {{orderStatus}}
+            </view>
+        </view>
+        <view class="bottom">
+            <LoadingImg border="border-radius: 3vw;" src="{{src}}" class="img-border"/>
+            <view class="content">
+                <view class="id">
+                    # {{name}}
+                </view>
+                <view class="line-content" style="margin-top:2.2vw">
+                    <view class="text-title">
+                        订单编号:
+                    </view>
+                    <view class="text-content">
+                        {{ order.id }}
+                    </view>
+                </view>
+                <view class="line-content" style="margin-top:2.2vw">
+                    <view class="text-title">
+                        所属店铺:
+                    </view>
+                    <view class="text-content">
+                        {{ order.store.name }}
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="pay">
+        <view wx:if="{{order.state === 'WAIT_FOR_PAYMENT_NOT_PAY' || order.state === 'WAIT_FOR_PAYMENT_PAY_ERROR'}}"
+              class="continue-pay" bindtap="goToPay">
+            继续支付
+        </view>
+    </view>
+</view>

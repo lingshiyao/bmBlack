@@ -1,0 +1,23 @@
+
+.phone-home-group-item {
+    width: 44.67vw;
+    height: 33.07vw;
+    border-radius: 3vw;
+    background-color: white;
+    display: inline-block;
+    margin: 2.2vw 0vw 0vw 0vw;
+}
+
+.phone-home-group-item-img {
+    width: 44.67vw;
+    height: 24.31vw;
+    border-radius: 3vw 3vw 0vw 0vw;
+    background-color: #00a3fb;
+}
+
+.phone-home-group-item-title {
+    margin: 2vw;
+    font-size: 3.2vw;
+    font-weight: bold;
+    color: #1e1e1e;
+}

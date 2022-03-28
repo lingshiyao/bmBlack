@@ -1,0 +1,31 @@
+.phone-tabbar {
+    background-color: white;
+    height: 13.07vw;
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
+    width: 100vw;
+    text-align: center;
+    /*padding-bottom: 30vw;*/
+}
+
+.phone-tabbar-item-list {
+    display: inline-block;
+    width: 25vw;
+    height: 13.07vw;
+    margin: 0 auto;
+}
+
+.phone-tabbar-item {
+    margin-top: 1.5vw;
+}
+
+.phone-tabbar-item-img {
+    width: 5.33vw;
+    height: 5.6vw;
+}
+
+.phone-tabbar-item-title {
+    font-size: 2.67vw;
+    color: #C8C8C8;
+}

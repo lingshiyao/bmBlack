@@ -1,0 +1,6 @@
+<view class="nothing">
+    <image show-menu-by-longpress src="{{src}}" class="nothing-img"/>
+    <view class="text">
+        {{ text }}
+    </view>
+</view>

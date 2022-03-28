@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "LoadingImg": "/compoments/Global/LoadingImg"
+  }
+}

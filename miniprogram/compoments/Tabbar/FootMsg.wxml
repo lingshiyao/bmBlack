@@ -1,0 +1,11 @@
+<view class="phone-foot">
+    <view bindtap="goToVHtml" data-index="1" class="phone-foot-title">
+        了解更多｜
+    </view>
+    <view bindtap="goToVHtml" data-index="2" class="phone-foot-title">
+        关于我们｜
+    </view>
+    <view bindtap="goToVHtml" data-index="3" class="phone-foot-title">
+        联系我们
+    </view>
+</view>

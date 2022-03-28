@@ -1,0 +1,106 @@
+<view>
+    <PhoneTitle title="设置"></PhoneTitle>
+    <view class="setting">
+        <view class="line" style="margin-top: 4vw;">
+            <view class="text">
+                用户头像
+            </view>
+            <view class="input-line">
+<!--                <input id="input_img" accept="image/*" class="file-ele" file-model="image" multiple="" name="image"-->
+<!--                       nv-file-select="" type="file" uploader=""-->
+<!--                       :bindchange="getImage">-->
+<!--                </input>-->
+                <image src="{{defaultUrl}}" class="header-box"
+                       binderror="headerLoadFail" bindtap="chooseImg">
+                </image>
+                <image src="{{rightArrowUrl}}" class="right-arrow"></image>
+            </view>
+        </view>
+        <view class="line" style="margin-top: 5.87vw;">
+            <view class="text">
+                用户名
+            </view>
+            <view class="input-line">
+                <view wx:if="{{userDetail.user.username == '' || userDetail.user.username == null}}" class="input-text">
+                    请输入
+                </view>
+                <view wx:else class="input-text-has">
+                    {{ userDetail.user.username }}
+                </view>
+                <image src="{{rightArrowUrl}}" class="right-arrow hidden"></image>
+            </view>
+        </view>
+        <view class="line" style="margin-top: 10.27vw;" bindtap="changUserInfo">
+            <view class="text">
+                昵称
+            </view>
+            <view class="input-line">
+                <view wx:if="{{userDetail.userExt.nickname == '' || userDetail.userExt.nickname == null}}"
+                      class="input-text">
+                    请输入
+                </view>
+                <view wx:else class="input-text-has">
+                    {{ userDetail.userExt.nickname }}
+                </view>
+                <image src="{{rightArrowUrl}}" class="right-arrow"></image>
+            </view>
+        </view>
+        <view class="line" style="margin-top: 10.27vw;" bindtap="changUserInfo">
+            <view class="text">
+                个性签名
+            </view>
+            <view class="input-line">
+                <view wx:if="{{userDetail.userExt.intro == '' || userDetail.userExt.intro == null}}" class="input-text">
+                    请输入
+                </view>
+                <view wx:else class="input-text-has">
+                    {{ userDetail.userExt.intro }}
+                </view>
+                <image src="{{rightArrowUrl}}" class="right-arrow"></image>
+            </view>
+        </view>
+        <view class="line" style="margin-top: 10.27vw;" bindtap="changUserInfo">
+            <view class="text">
+                Email
+            </view>
+            <view class="input-line">
+                <view wx:if="{{userDetail.userExt.email == '' || userDetail.userExt.email == null}}" class="input-text">
+                    请输入
+                </view>
+                <view wx:else class="input-text-has">
+                    {{ userDetail.userExt.email }}
+                </view>
+                <image src="{{rightArrowUrl}}" class="right-arrow"></image>
+            </view>
+        </view>
+        <view class="line-h" style="margin-top: 6.67vw;"></view>
+        <view class="line" style="margin-top: 7.07vw;">
+            <view class="text">
+                钱包地址
+            </view>
+            <view class="input-line">
+                <view wx:if="{{userDetail.userExt.address == '' || userDetail.userExt.address == null}}"
+                      class="input-text">
+                    请输入
+                </view>
+                <view wx:else class="input-text-has">
+                    {{ userDetail.userExt.address }}
+                </view>
+                <image src="{{rightArrowUrl}}" class="right-arrow hidden"></image>
+            </view>
+        </view>
+        <view class="line-h" style="margin-top: 6.67vw;"></view>
+        <view class="line" style="margin-top: 7.2vw;" bindtap="changePwd">
+            <view class="text">
+                登录密码
+            </view>
+            <view class="input-line">
+                <image src="{{rightArrowUrl}}" class="right-arrow"></image>
+            </view>
+        </view>
+        <view class="login-out" style="margin-top: 12.67vw;" bindtap="logout">
+            退出登录
+        </view>
+    </view>
+    <PhoneModalInput id="phoneModalInput"></PhoneModalInput>
+</view>

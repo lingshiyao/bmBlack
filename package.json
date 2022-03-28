@@ -1,0 +1,28 @@
+{
+  "name": "miniprogram-ts-less-quickstart",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "gqlg:help": "gqlg --help",
+    "gqlg:gen": "gqlg --schemaFilePath   ./schema.graphql --destDirPath ./gql/ --depthLimit 5",
+    "gqlg:move": "python gqlmove.py",
+    "codeGen": "graphql-codegen --config codegen.yml",
+    "gqlg:gen:ts:move": "python graphqlmove.py",
+    "gqlg:gen:ts:modifygraphqlfile": "python modifygraphqlfile.py",
+    "generatorRequest": "node generatorRequest.js",
+    "gql:update": "gqlg --schemaFilePath   ./schema.graphql --destDirPath ./gql/ --depthLimit 100 && python gqlmove.py && graphql-codegen gen && python graphqlmove.py && python modifygraphqlfile.py && node generatorRequest.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "dependencies": {},
+  "devDependencies": {
+    "@graphql-codegen/cli": "2.6.1",
+    "@graphql-codegen/introspection": "2.1.1",
+    "@graphql-codegen/typescript": "2.4.3",
+    "@graphql-codegen/typescript-document-nodes": "2.2.3",
+    "@graphql-codegen/typescript-operations": "2.3.0",
+    "graphql": "16.3.0",
+    "miniprogram-api-typings": "3.4.5"
+  }
+}

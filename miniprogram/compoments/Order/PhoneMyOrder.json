@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "PhoneNothing": "/compoments/Global/PhoneNothing",
+    "PhoneMyOderListItem": "/compoments/Order/PhoneMyOderListItem"
+  }
+}

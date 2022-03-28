@@ -1,0 +1,101 @@
+.my {
+    background: #1f1f1f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.banner {
+    width: 95.83vw;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.banner-bg {
+    width: 95.83vw;
+    height: 22.22vw;
+    border-radius: 4vw;
+    background: #2A2A2A;
+    margin-top: 3vw;
+}
+
+.header {
+    border-radius: 8.2vw;
+    background: #131c43;
+}
+
+.banner-area {
+    width: 95.83vw;
+    height: 22.22vw;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    margin-top: 3vw;
+    align-items: center;
+    margin-left: 4.31vw;
+}
+
+.header-border {
+    width: 13.6vw;
+    height: 13.6vw;
+    background: #131c43;
+    border-radius: 6.8vw;
+}
+
+.name {
+    font-size: 4.17vw;
+    font-weight: 500;
+    color: #FDD3A1;
+    margin-left: 2.92vw;
+}
+
+.right-border {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end
+}
+
+.select1 {
+    width: 92vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 3.73vw;
+}
+
+.select2 {
+    width: 93vw;
+    display: flex;
+    flex-direction: row;
+    margin-top: 3.1vw;
+}
+
+.top-line {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 4.8vw;
+    margin-bottom: 2.67vw;
+}
+
+.setting {
+    width: 5.87vw;
+    height: 5.87vw;
+    background: #ffffff;
+    box-shadow: 0vw 0vw 1vw 0vw rgba(0, 0, 0, 0.12);
+    border-radius: 3vw;
+    margin-right: 4vw;
+}
+
+.store-art-select-box {
+    /*margin-left: 1vw;*/
+    /*background-color: white;*/
+    /*border-radius: 6vw;*/
+    /*height: 9.5vw;*/
+    width: 26.4vw;
+    height: 7.78vw;
+}

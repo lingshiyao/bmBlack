@@ -1,0 +1,10 @@
+<view class="favorite" style="margin-bottom: 20vw;">
+    <PhoneNothing wx:if="{{favList.length === 0}}" text="亲，您还没有喜欢的哦~"></PhoneNothing>
+    <view class="grid">
+        <block wx:for="{{favList}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+            <PhoneStoreItem data="{{item}}"
+                            class="animate__animated animate__bounceIn animate__faster" bindtap="goToInfo"
+                            data-index="{{index}}"></PhoneStoreItem>
+        </block>
+    </view>
+</view>

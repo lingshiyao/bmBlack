@@ -1,0 +1,5 @@
+<view>
+    <PhoneHomeBanner bind:goToPage="bannerGoToPage" bannerData="{{bannerData}}"></PhoneHomeBanner>
+    <PhoneHomeRecommend bind:goToStore="goToStore" data="{{shufflingData}}"></PhoneHomeRecommend>
+    <PhoneHomeGroup bind:gotoExplore="gotoExplore" data="{{categoryData}}"></PhoneHomeGroup>
+</view>

@@ -1,0 +1,19 @@
+<view class="store-art-list">
+    <view class="store-art-list-content">
+        <view class="store-art-input-box">
+            <image class="store-art-input-img" src="/assets/ic_search.png"></image>
+            <input placeholder="输入名称" bindinput="searchInput" value="" class="store-art-input"></input>
+        </view>
+        <PhoneSelectBox menuData="{{selectBoxData}}"
+                        class="store-art-select-box"
+                        bind:clickCallBack="clickCallBack"/>
+    </view>
+
+    <view class="phone-store-item-box">
+        <block wx:for="{{data}}" wx:for-item="item" wx:for-index="index">
+            <PhoneStoreItem class="phone-store-item"
+                            bindtap="goToInfo" data-index="{{index}}"
+                            data="{{item}}"></PhoneStoreItem>
+        </block>
+    </view>
+</view>

@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "NFT详情",
+  "component": true,
+  "usingComponents": {
+    "PhoneInfoHeader": "/compoments/Info/PhoneInfoHeader",
+    "PhoneInfoAttrutie": "/compoments/Info/PhoneInfoAttrutie",
+    "PhoneInfoIntroduction": "/compoments/Info/PhoneInfoIntroduction",
+    "PhoneInfoBottom": "/compoments/Info/PhoneInfoBottom",
+    "PhoneTitle": "/compoments/Global/PhoneTitle"
+  }
+}

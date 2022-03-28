@@ -1,0 +1,913 @@
+#schema {
+#  query: QueryRoot
+#  mutation: MutationRoot
+#}
+
+type Art {
+    # 编号
+    id: ID!
+
+    # 名称
+    name: String!
+
+    # 描述
+    description: String!
+
+    # 文件数据
+    # 文件的IPFS地址
+    mediaIpfs: String
+
+    # 铸造价格
+    mintPrice: Decimal!
+
+    # 外部链接
+    externalLink: String!
+
+    # 属性
+    attrs: JSON!
+
+    # 供应量
+    maxSupply: Int!
+
+    # 个人持有副本限制
+    holdLimit: Int!
+
+    # 已铸造数量
+    supplied: Int!
+
+    # 是否为隐藏作品
+    isHidden: Boolean!
+
+    # 收藏数量
+    favCount: Int!
+
+    # 创建时间
+    createdAt: DateTime!
+
+    # 是否上链
+    createdOnChain: Boolean!
+
+    # 已铸造的Nft列表
+    nfts: [Nft!]!
+
+    # 所在的店铺列表
+    stores: [Store!]!
+}
+
+# 新增作品数据
+input ArtAddInput {
+    # 所在店铺
+    storeId: ID!
+
+    # 名称
+    name: String!
+
+    # 描述
+    description: String!
+
+    # 图片
+    media: Upload!
+
+    # 铸造价格
+    mintPrice: Decimal!
+
+    # 外部链接
+    externalLink: String!
+
+    # 属性
+    attrs: JSON!
+
+    # 供应量
+    maxSupply: Int!
+
+    # 个人持有限制
+    holdLimit: Int!
+}
+
+# 更新作品数据
+input ArtUpdateInput {
+    # 作品编号
+    id: ID!
+
+    # 名称
+    name: String!
+
+    # 描述
+    description: String!
+
+    # 外部链接
+    externalLink: String!
+
+    # 属性
+    attrs: JSON!
+}
+
+type Category {
+    # 编号
+    id: ID!
+
+    # 名称
+    name: String!
+
+    # 排序
+    order: Int!
+}
+
+input CategoryInput {
+    # 编号
+    id: ID!
+
+    # 名称
+    name: String!
+
+    # 排序
+    order: Int!
+}
+
+# 内容
+type Content {
+    id: ID!
+    key: String!
+    title: String!
+    body: String!
+}
+
+# 内容
+input ContentInput {
+    id: ID!
+    key: String!
+    title: String!
+    body: String!
+}
+
+# Implement the DateTime<Utc> scalar
+#
+# The input/output is a string in RFC3339 format.
+scalar DateTime
+
+scalar Decimal
+
+type Favorite {
+    # 收藏时间
+    addedAt: DateTime!
+
+    # 收藏者
+    user: UserDetail!
+
+    # 收藏作品
+    art: Art!
+}
+
+# A scalar that can represent any JSON value.
+scalar JSON
+
+# A scalar that can represent any JSON Object value.
+scalar JSONObject
+
+# 日志信息
+type LogInfo {
+    address: String!
+    topics: [String!]!
+    data: String!
+    blockHash: String!
+    epochNumber: String!
+    transactionHash: String!
+    transactionIndex: String!
+    logIndex: String!
+    transactionLogIndex: String!
+}
+
+type LoginInfo {
+    # 用户编号
+    id: ID!
+
+    # 通证
+    token: String!
+}
+
+type MintResult {
+    # 是否需要支付
+    needPay: Boolean!
+
+    # 订单 ID
+    orderId: String!
+
+    # 付款方式
+    tradeType: TradeType!
+
+    # 上下文数据
+    # 1. 当 trade_type 是`Wx_Native`时，值为：`code_url`,付款地址(用于生成二维码)
+    # 2. 当 trade_type 是`Wx_Js_Api`时，值为：`prepay_id`,预付款 ID
+    # 3. 当 trade_type 是`Wx_MiniProgram`时，值为：`prepay_id`,预付款 ID
+    tradeReturn: JSON!
+
+    # 价格
+    price: Decimal!
+}
+
+type Mutation {
+    # 注册
+    #
+    # 1. 基本的账号和密码验证
+    signup(input: SignupInput!): ID!
+
+    # 登录
+    #
+    # 登录成功后会返回`ID`，客户端可通过此`ID`查询用户详细信息进行其它流程
+    login(username: String!, userpass: String!): LoginInfo!
+
+    # 添加管理员
+    #
+    # 1. 需要`SuperAdmin`
+    # 2. 基本的账号验证
+    userAddAdmin(username: String!): ID!
+
+    # 更新用户类型
+    #
+    # 1. 需要`SuperAdmin`
+    userUpdateRole(userId: ID!, newRole: UserRole!): ID!
+
+    # 设置用户禁用状态
+    #
+    # 1. 需要`SuperAdmin`
+    userUpdateBanned(userId: ID!, banned: Boolean!): ID!
+
+    # 账户升级为商户
+    #
+    # 1. 需要'Admin'
+    # 2. 钱包地址要与合约所有者地址匹配
+    userUpgradeToTenant(userId: ID!): String!
+
+    # 更新用户信息
+    #
+    # 1. 需要`User`
+    userUpdate(
+        face: Upload
+        nickname: String!
+        intro: String!
+        email: String!
+    ): ID!
+
+    # 更新用户密码
+    #
+    # 1. 需要`User`
+    userUpdatePassword(newPassword: String!): ID!
+
+    # 新增内容
+    #
+    # 需要`Admin`
+    contentAdd(content: ContentInput!): ID!
+
+    # 更新内容
+    #
+    # 需要`Admin`
+    contentUpdate(content: ContentInput!): ID!
+
+    # 删除内容
+    #
+    # 需要`Admin`
+    contentRemove(id: ID!): ID!
+
+    # 新增项目类别
+    #
+    # 1. 需要`Admin`
+    categoryAdd(input: CategoryInput!): ID!
+
+    # 更新项目类别
+    #
+    # 1. 需要`Admin`
+    categoryUpdate(input: CategoryInput!): ID!
+
+    # 删除项目类别
+    #
+    # 1. 需要`Admin`
+    # 2. 存在子项目则无法删除
+    categoryRemove(id: ID!): ID!
+
+    # 新增店铺
+    #
+    # 1. 需要`User`
+    storeAdd(input: StoreAddInput!): ID!
+
+    # 修改店铺
+    #
+    # 1. 需要`User`
+    # 2. 验证店铺所有权
+    storeUpdate(input: StoreUpdateInput!): ID!
+
+    # 修改店铺图标
+    #
+    # 1. 需要`User`
+    storeUpdateIcon(input: StoreUpdateIconInput!): ID!
+
+    # 修改店铺广告栏
+    #
+    # 1. 需要`User`
+    storeUpdateBanner(input: StoreUpdateBannerInput!): ID!
+
+    # 新增作品
+    #
+    # 1. 需要`User`
+    # 2. 验证上架店铺所有权
+    artAdd(input: ArtAddInput!): ID!
+
+    # 修改作品
+    #
+    # 1. 需要`User`
+    # 2. 验证作品所有权
+    artUpdate(input: ArtUpdateInput!): ID!
+
+    # 修改作品上架的店铺
+    #
+    # 作品默认会上架到某个店铺，后续可在店铺之间转移
+    # 1. 需要`User`
+    # 2. 验证原始店铺所有权
+    # 3. 验证目标店铺所有权
+    artSetStore(artId: ID!, fromStoreId: ID!, toStoreId: ID!): ID!
+
+    # 收藏或取消收藏作品
+    #
+    # 1. 需要`User`
+    # 2. 验证作品的有效性
+    # 3. 返回值(true,收藏;false,未收藏)
+    favoriteToggle(artId: ID!): Boolean!
+
+    # 修改配置
+    #
+    # 1. 需要`Admin`
+    configUpdate(topArtId: ID, topStoreIds: [ID!]!): Boolean!
+
+    # 设置是否启用交易
+    #
+    # 1. 需要`Admin`
+    setDealEnable(enable: Boolean!): String!
+
+    # 铸造
+    #
+    # 1. 需要`User`
+    # 2. tokenId由合约自动生成，只需指定ArtId即可
+    # 3. 当 trade_type = Wx_Js_Api时，需要`open_id`
+    # 4. 当 价格为`0`时，不走微信支付，`open_id`设置为空
+    mint(
+        tradeType: TradeType!
+        openId: ID!
+        storeId: ID!
+        artId: ID!
+    ): MintResult!
+
+    # 盲盒铸造
+    #
+    # 1. 需要`User`
+    # 2. tokenId由合约自动生成，只需指定ArtId即可
+    # 3. 当 trade_type = Wx_Js_Api时，需要`open_id`
+    # 4. 当 价格为`0`时，不走微信支付，`open_id`设置为空
+    mintBlind(tradeType: TradeType!, openId: ID!, storeId: ID!): MintResult!
+
+    # 赠送
+    #
+    # 1. 需要`User`
+    transfer(toUsername: String!, nftId: ID!): String!
+
+    # 出售
+    sell(tokenId: ID!, price: Decimal!): String!
+
+    # 出售取消
+    sellCancel(tokenId: ID!): String!
+
+    # 购买
+    buy(tokenId: ID!): String!
+}
+
+type Nft {
+    # 作品内索引
+    index: Int!
+
+    # 链上ID
+    id: ID!
+
+    # 所有者地址
+    owner: String!
+
+    # 出售中
+    selling: Boolean!
+
+    # 价格
+    price: Decimal!
+
+    # 所属的作品
+    art: Art!
+}
+
+type Order {
+    id: String!
+    tradeWxId: String
+    tradeType: TradeType!
+    tradeAction: TradeAction!
+    tradeReturn: JSON!
+    refundId: String
+    refundWxId: String
+    tx: String
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    state: OrderState!
+
+    # 所属用户
+    user: UserDetail!
+
+    # 下单店铺
+    store: Store!
+
+    # 下单作品
+    art: Art!
+}
+
+# 创建订单结果
+type OrderCreateResult {
+    # 状态码
+    status: Int!
+
+    # `code_url`或`prepay_id`
+    tradeReturn: JSON!
+}
+
+# 订单过滤条件
+enum OrderFilter {
+    # 待买家付款（未支付；支付中；支付失败）
+    WAIT_FOR_PAYMENT
+
+    # 待确认上链（已付款未上链；上链中）
+    WAIT_FOR_TRANSACTION
+
+    # 已成功（已付款，已上链）
+    SUCCESS
+
+    # 订单关闭（支付关闭）
+    CLOSED
+
+    # 退款中的订单（退款进行中，退款成功，退款异常，退款关闭）
+    REFUND
+}
+
+# 订单最终状态（根据TradeState,TxState,RefundState 推导而来）
+enum OrderState {
+    # 未支付
+    WAIT_FOR_PAYMENT_NOT_PAY
+
+    # 支付中
+    WAIT_FOR_PAYMENT_USER_PAYING
+
+    # 支付失败
+    WAIT_FOR_PAYMENT_PAY_ERROR
+
+    # 等待上链
+    WAIT_FOR_TRANSACTION_NONE
+
+    # 上链中
+    WAIT_FOR_TRANSACTION_PENDING
+
+    # 上链失败
+    WAIT_FOR_TRANSACTION_FAILED
+
+    # 已成功
+    SUCCESS
+
+    # 订单关闭
+    CLOSED
+
+    # 退款处理中
+    REFUND_PROCESSING
+
+    # 退款成功
+    REFUND_SUCCESS
+
+    # 退款关闭
+    REFUND_CLOSED
+
+    # 退款异常
+    REFUND_ABNORMAL
+
+    # 未知错误
+    UNKNOWN
+}
+
+type PagedArts {
+    list: [Art!]!
+    total: Int!
+    totalPages: Int!
+}
+
+# 内容分页列表
+type PagedContents {
+    list: [Content!]!
+    total: Int!
+    totalPages: Int!
+}
+
+type PagedFavorites {
+    list: [Favorite!]!
+    total: Int!
+    totalPages: Int!
+}
+
+type PagedOrder {
+    list: [Order!]!
+    total: Int!
+    totalPages: Int!
+}
+
+type PagedStores {
+    list: [Store!]!
+    total: Int!
+    totalPages: Int!
+}
+
+type PagedUsers {
+    list: [User!]!
+    total: Int!
+    totalPages: Int!
+}
+
+type Query {
+    # 首页推荐信息
+    top: TopInfo!
+
+    # 获取用户信息
+    user(userId: ID!): UserDetail!
+
+    # 获取用户列表
+    #
+    # 1. 需要`Admin`
+    users(pageIndex: Int! = 0, pageSize: Int! = 20): PagedUsers!
+
+    # 提示内容
+    content(key: String!): Content!
+
+    # 内容列表
+    contents(pageIndex: Int! = 0, pageSize: Int! = 20): PagedContents!
+
+    # 获取类别列表
+    categories: [Category!]!
+
+    # 获取店铺列表
+    stores(
+        key: String
+        cateId: ID
+        owner: String
+        includeHidden: Boolean! = true
+        pageIndex: Int! = 0
+        pageSize: Int! = 20
+    ): PagedStores!
+
+    # 获取店铺信息
+    store(storeId: ID!): Store!
+
+    # 店铺内的统计数据
+    storeStat(storeId: ID!): StoreStat!
+
+    # 获取商店销售排行榜
+    #
+    storeLadder(
+        cateId: ID!
+        queryType: StoreLadderQueryType!
+        limit: Int! = 100
+    ): [StoreLadderItem!]!
+
+    # 获取作品列表
+    #
+    # 无法查询账户下Token信息，而无法查询Art信息
+    arts(
+        key: String
+        storeId: ID
+        includeHidden: Boolean! = true
+        ascByPrice: Boolean! = false
+        pageIndex: Int! = 0
+        pageSize: Int! = 20
+    ): PagedArts!
+
+    # 查询单个Art的信息
+    art(artId: ID!): Art!
+
+    # 作品属性相关统计
+    #
+    # 1. 指定店铺 id，返回该店铺内所有作品属性的统计信息
+    # 2. 客户端根据返回的字典，自行查询
+    artStat(storeId: ID!): JSONObject!
+
+    # 获取订单列表
+    #
+    # 1. 需要`User`
+    orders(
+        filter: OrderFilter
+        pageIndex: Int! = 0
+        pageSize: Int! = 20
+    ): PagedOrder!
+
+    # 获取Nft列表
+    #
+    # 1. nft存储在区块链，没法遍历所有Nft信息
+    nfts(userId: ID!, key: String): [Nft!]!
+
+    # 用户是否收藏了作品
+    #
+    # 1. 需要`User`
+    favExists(userId: Int!, artId: String!): Boolean!
+
+    # 获取Favorite列表
+    #
+    # 1. 需要`User`
+    favorites(pageIndex: Int! = 0, pageSize: Int! = 20): PagedFavorites!
+
+    # 查询是否启用交易
+    dealEnable: Boolean!
+
+    # 获取出售列表
+    sells: [Nft!]!
+
+    # 获取NFT的交易记录
+    logs(nftId: ID!): [LogInfo!]!
+
+    # 从微信支付换取`open_id`
+    wxJsapiOpenId(code: String!): JSON!
+
+    # 获取`jsapi`方式需要的`支付参数`
+    wxJsapiPayParams(prepayId: String!): JSON!
+
+    # 获取`native`方式需要的`付款地址`
+    #
+    # 1. 需要`User`
+    # 2. 验证订单是否存在
+    # 3. 只用于trade_type = Wx_Native，返回新的`付款地址`
+    wxNativeCodeUrl(orderId: String!): OrderCreateResult!
+}
+
+input SignupInput {
+    # 用户名
+    username: String!
+
+    # 密码
+    password: String!
+}
+
+type Store {
+    # 编号
+    id: ID!
+
+    # 名称
+    name: String!
+
+    # 描述
+    description: String!
+
+    # 图像
+    # 广告图片
+    # 外部链接（如：博客，官网等）
+    externalLink: String!
+
+    # 商店内单个账户购买限制
+    holdLimit: Int!
+
+    # 是否为盲盒店铺
+    isBlind: Boolean!
+
+    # 是否为隐藏店铺
+    isHidden: Boolean!
+
+    # 创建时间
+    createdAt: DateTime!
+
+    # 最后一次更新时间
+    updatedAt: DateTime!
+
+    # 店铺所有者
+    user: UserDetail!
+
+    # 店铺类型
+    category: Category!
+
+    # 作品数量
+    artCount: Int!
+}
+
+input StoreAddInput {
+    # 编号
+    id: ID!
+
+    # 类别编号
+    cateId: ID!
+
+    # 名称
+    name: String!
+
+    # 描述
+    description: String!
+
+    # 图像
+    icon: Upload!
+
+    # 广告图片
+    banner: Upload!
+
+    # 外部链接
+    externalLink: String!
+
+    # 店内购买限制
+    holdLimit: Int!
+
+    # 是否为盲盒店铺
+    isBlind: Boolean!
+}
+
+type StoreLadderItem {
+    # 商店ID
+    storeId: Int!
+
+    # 名称
+    name: String!
+
+    # 销售量
+    volume: Int!
+
+    # 24小时内变化
+    changeIn24Hours: Float!
+
+    # 7日内变化
+    changeIn7Days: Float!
+
+    # 买家数
+    owners: Int!
+
+    # 发行量
+    items: Int!
+}
+
+enum StoreLadderQueryType {
+    # 最近7日
+    LAST_7_DAYS
+
+    # 最近14日
+    LAST_14_DAYS
+
+    # 最近30日
+    LAST_30_DAYS
+
+    # 最近60日
+    LAST_60_DAYS
+
+    # 最近90日
+    LAST_90_DAYS
+
+    # 最近1年
+    LAST_1_YEARS
+
+    # 所有
+    ALL_TIME
+}
+
+type StoreStat {
+    # 发行数量
+    items: Int!
+
+    # 总拥有者
+    owners: Int!
+
+    # 已销数量
+    soldVolume: Int!
+
+    # 总销售额
+    soldAmount: Int!
+
+    # 按时间段销售量
+    soldVolumes: JSON!
+
+    # 24小时销售量变化
+    changeIn24Hours: Float!
+
+    # 7日销售量变化
+    changeIn7Days: Float!
+}
+
+input StoreUpdateBannerInput {
+    # 编号
+    id: ID!
+
+    # 广告图片
+    banner: Upload!
+}
+
+input StoreUpdateIconInput {
+    # 编号
+    id: ID!
+
+    # 图像
+    icon: Upload!
+}
+
+input StoreUpdateInput {
+    # 编号
+    id: ID!
+
+    # 类别编号
+    cateId: ID!
+
+    # 名称
+    name: String!
+
+    # 描述
+    description: String!
+
+    # 外部链接
+    externalLink: String!
+
+    # 店内购买限制
+    holdLimit: Int!
+}
+
+type TopInfo {
+    # 首页右上角推荐
+    topArt: Art
+
+    # 首页中部推荐
+    topStores: [Store!]!
+}
+
+# 动作状态（上链动作）
+enum TradeAction {
+    # 铸造
+    MINT
+
+    # 购买
+    BUY
+}
+
+# 付款方式
+enum TradeType {
+    WX_NATIVE
+    WX_JS_API
+    WX_MINI_PROGRAM
+}
+
+scalar Upload
+
+# 用户信息
+type User {
+    # 编号
+    id: ID!
+
+    # 用户名
+    username: String!
+
+    # 角色
+    role: UserRole!
+
+    # 是否禁用
+    banned: Boolean!
+
+    # 注册时间
+    signupAt: DateTime!
+
+    # 最后一次登录时间
+    lastLoginAt: DateTime!
+
+    # 是否已上链
+    createdOnChain: Boolean!
+}
+
+# 用户详情
+type UserDetail {
+    # 编号
+    id: ID!
+
+    # 用户信息
+    user: User!
+
+    # 用户扩展信息
+    userExt: UserExt!
+}
+
+# 用户扩展信息
+type UserExt {
+    # 钱包地址
+    address: String!
+
+    # 图像
+    # 昵称
+    nickname: String
+
+    # 简介
+    intro: String
+
+    # 邮箱
+    email: String
+}
+
+# 用户角色
+enum UserRole {
+    # 超级管理员
+    SUPER_ADMIN
+
+    # 管理员
+    ADMIN
+
+    # 普通用户
+    USER
+}

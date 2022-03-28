@@ -1,0 +1,57 @@
+
+.store-art-list {
+    margin-top: 3.87vw;
+}
+
+.store-art-input-box {
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    height: 9.5vw;
+    width: 44vw;
+    background-color: #353535;
+    border-radius: 4vw;
+}
+
+.store-art-list-content {
+    display: flex;
+    margin-left: 4vw;
+}
+
+.store-art-input {
+    /*height: 9.5vw;*/
+    /*width: 31.67vw;*/
+    /*line-height: 9.5vw;*/
+    font-size: 3.33vw;
+    margin-left: 2vw;
+    color: #FFFFFF;
+    /* background: red; */
+}
+
+.store-art-select-box {
+    margin-left: 2.67vw;
+    background-color: #353535;
+    border-radius: 6vw;
+    height: 9.5vw;
+    width: 44.67vw;
+}
+
+.phone-store-item-box {
+    text-align: left;
+    width: 96vw;
+    margin: 1.5vw;
+    display: grid;
+    grid-template-columns: repeat(2, 44vw);
+    grid-column-gap: 4vw;
+}
+
+.phone-store-item {
+    margin: 2vw;
+}
+
+.store-art-input-img {
+    width: 4vw;
+    height: 4vw;
+    margin-left: 2vw;
+}
+

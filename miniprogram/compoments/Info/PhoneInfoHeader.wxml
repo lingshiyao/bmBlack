@@ -1,0 +1,43 @@
+<view style="padding-top:1vw">
+    <view class="phone-nft-info">
+        <view class="img-supply">
+            <image show-menu-by-longpress class="img-supply-img" src="{{src}}"
+                   style="width:3vw;height:4vw"></image>
+            <view class="img-supply-title">
+                限量 {{ nft.maxSupply }} 份
+            </view>
+        </view>
+        <image show-menu-by-longpress id="nft_banner_img" style="position: absolute;"
+               class="animate__animated animate__bounceIn animate__faster phone-nft-info-img"
+               src="{{nft.imgs.headerImg}}"></image>
+    </view>
+    <view class="phone-nft-info-price-background">
+        <view>
+            <view class="phone-nft-info-price">
+                ¥ {{ nft.price }}
+            </view>
+            <view class="phone-nft-info-price-sell">
+                已售 {{ nft.supply }} 件
+            </view>
+        </view>
+        <view>
+            <view class="phone-nft-info-pj-number">
+                作品名称：
+            </view>
+            <view class="phone-nft-info-pj-number" style="margin: 0px; color: black; font-size: 4vw; font-weight: bold">
+                {{ nft.artName }}
+            </view>
+        </view>
+        <view style="margin-top: 2vw; display:flex;">
+            <view class="phone-nft-info-pj-number">
+                店铺名称：
+            </view>
+            <view class="phone-nft-info-pj-number" bindtap="goToStore"
+                  style="margin: 0px; color: #FDD3A1; font-size: 4vw; font-weight: bold">
+                {{ nft.storeName }}
+            </view>
+            <image show-menu-by-longpress style="margin-left: 1vw; width:3.5vw;height:3.5vw;"
+                   src="{{src1}}"></image>
+        </view>
+    </view>
+</view>

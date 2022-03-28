@@ -1,0 +1,75 @@
+
+.store-banner {
+    text-align: center;
+}
+
+.store-banner-img-box {
+    width: 100vw;
+    height: 33.4vw;
+    background: #ffaa01;
+    overflow: hidden;
+}
+
+.store-banner-header-img {
+    width: 22vw;
+    height: 22vw;
+    border-radius: 50%;
+    background: #ffaa01;
+}
+
+.store-banner-header-img-box {
+    margin-top: -13vw;
+    width: 22vw;
+    height: 22vw;
+    border-radius: 50%;
+    border: 1.5vw solid white;
+    overflow: hidden;
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+}
+
+.store-banner-header-title {
+    margin-top: 2vw;
+    font-size: 5vw;
+    font-weight: bold;
+    color: white;
+}
+
+.store-banner-header-subtitle {
+    margin-top: 0.05vw;
+    font-size: 3.5vw;
+    font-weight: 400;
+    color: white;
+}
+
+.store-banner-statistical {
+    background: #2A2A2A;
+    border-radius: 6vw;
+    position: relative;
+    height: 18vw;
+    width: 92vw;
+    margin-left: 4vw;
+    margin-top: 2vw;
+}
+
+.store-banner-statistical-item {
+    width: 23vw;
+    height: 20.53vw;
+    display: inline-block;
+}
+
+.store-banner-statistical-item-title {
+    font-size: 3.06vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    opacity: 0.6;
+    margin-top: 1.5vw;
+}
+
+.store-banner-statistical-item-num {
+    font-size: 5vw;
+    color: #FDD3A1;
+    margin-top: 2.6vw;
+}

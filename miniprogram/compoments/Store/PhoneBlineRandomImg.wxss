@@ -1,0 +1,15 @@
+
+.phone-blind-random-img {
+    width: 87.5vw;
+    height: 87.5vw;
+    overflow: hidden;
+    justify-content: center;
+    position: relative;
+    border-radius: 3vw 3vw 3vw 3vw;
+    display: inline-flex;
+    /*display: none;*/
+}
+
+.phone-blind-random-img-class {
+    position: absolute;
+}

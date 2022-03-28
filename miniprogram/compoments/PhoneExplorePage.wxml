@@ -1,0 +1,10 @@
+<view style="min-height: 100vh; text-align: center;">
+    <PhoneSelectToolBar data="{{toolBarData}}" bind:selectToolIndex="selectToolIndex"/>
+    <view class="phone-explore-list">
+        <view wx:for="{{exploreItemData}}" wx:for-item="item" wx:for-index="index" wx:key="unique"
+              style="margin-bottom: 3vw;">
+            <PhoneExploreItem class="animate__animated animate__bounceIn animate__faster" data="{{item}}"
+                              bindtap="goToStore" data-index="{{index}}"></PhoneExploreItem>
+        </view>
+    </view>
+</view>

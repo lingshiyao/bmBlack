@@ -1,0 +1,39 @@
+<!--PASS-->
+<view class="my">
+    <PhoneSettingTitle></PhoneSettingTitle>
+    <!--    <view class="top-line">-->
+    <!--        <image show-menu-by-longpress src="{{settingUrl}}" class="setting" bindtap="gotoSetting"></image>-->
+    <!--    </view>-->
+    <view class="banner">
+        <image show-menu-by-longpress src="{{userBGUrl}}" class="banner-bg"></image>
+        <view class="banner-area">
+            <image show-menu-by-longpress mode="aspectFill" src="{{headerUrl}}"
+                   class="header-border" binderror="headerLoadFail"/>
+            <view class="name">
+                {{ userName }}
+            </view>
+            <view class="right-border">
+                <image show-menu-by-longpress mode="aspectFill" src="{{rightBtnUrl}}"
+                       style="width: 5vw;height: 5vw;margin-right:8.33vw;"/>
+            </view>
+        </view>
+    </view>
+    <view class="select1">
+        <header-item1 selected="{{selected1[0]}}" name="订单" bindtap="onSelect1" data-index="0"></header-item1>
+        <header-item1 selected="{{selected1[1]}}" name="藏品" bindtap="onSelect1" data-index="1"></header-item1>
+        <header-item1 selected="{{selected1[2]}}" name="喜欢" bindtap="onSelect1" data-index="2"></header-item1>
+        <header-item1 selected="{{selected1[3]}}" name="创作" bindtap="onSelect1" data-index="3"></header-item1>
+        <!--        <view wx:if="{{selected1[0] == true}}" class="select2">-->
+        <!--            <PhoneSelectBox menuData="{{selectBoxData}}" class="store-art-select-box"-->
+        <!--                            bind:clickCallBack="clickCallBack"/>-->
+        <!--        </view>-->
+<!--        <view class="select2">-->
+            <PhoneSelectBox menuData="{{selectBoxData}}" class="store-art-select-box"
+                            bind:clickCallBack="clickCallBack"/>
+<!--        </view>-->
+    </view>
+    <PhoneMyFavorite wx:if="{{selected1[2]}}"></PhoneMyFavorite>
+    <PhoneMyCollection wx:if="{{selected1[1]}}"></PhoneMyCollection>
+    <PhoneMyOrder wx:if="{{selected1[0]}}" orderFilter="{{filter}}"></PhoneMyOrder>
+    <PhoneMyCreation wx:if="{{selected1[3]}}"/>
+</view>

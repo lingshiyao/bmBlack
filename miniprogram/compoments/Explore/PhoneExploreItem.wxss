@@ -1,0 +1,69 @@
+
+.phone-my-explore-item {
+    background: #f5f5f5;
+    border-radius: 3vw;
+    width: 44.67vw;
+    height: 50.4vw;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.phone-my-explore-item-background-img-box {
+    width: 44.67vw;
+    height: 25vw;
+    border-radius: 3vw 3vw 0vw 0vw;
+    background-color: #ffaa01;
+    overflow: hidden;
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+}
+
+.phone-my-explore-item-background-img {
+    border-radius: 3vw 3vw 0vw 0vw;
+    position: absolute;
+}
+
+.phone-my-explore-item-header-img-box {
+    width: 11vw;
+    height: 11vw;
+    border-radius: 6.5vw;
+    margin-top: -5.33vw;
+    /*box-shadow: 0vw 0vw 5vw 0vw rgba(0, 0, 0, 0.2);*/
+    background: #6b8fa2;
+    position: relative;
+    z-index: 2;
+}
+
+.phone-my-explore-item-title {
+    height: 2.53vw;
+    font-size: 2.4vw;
+    font-weight: 800;
+    color: #000000;
+}
+
+.phone-my-explore-item-des {
+    font-size: 2.13vw;
+    font-weight: 400;
+    color: #646464;
+    margin: 1.47vw 2.74vw 0vw 2.74vw;
+    height: 8.67vw;
+    text-align: center;
+    overflow: hidden;
+    word-break: break-all; /* IE 允许词内换行 */
+    word-wrap: break-word; /* IE 内容将在边界内换行 */
+}
+
+.phone-my-explore-item-bottom {
+    font-size: 2.13vw;
+    font-weight: 400;
+    color: #646464;
+    height: 4vw;
+    text-align: center;
+    overflow: hidden;
+    word-break: break-all; /* IE 允许词内换行 */
+    word-wrap: break-word; /* IE 内容将在边界内换行 */
+}

@@ -1,0 +1,8 @@
+<view class="phone-info-page">
+    <PhoneTitle title=""></PhoneTitle>
+    <PhoneInfoHeader nft="{{nft}}" bind:goToStore="goToStore"/>
+    <PhoneInfoAttrutie wx:if="{{(JSON.stringify(attributes) != '{}')}}"
+                       attributes="{{attributes}}"/>
+    <PhoneInfoIntroduction intr="{{description}}"/>
+    <PhoneInfoBottom nft="{{nft}}" bind:action="bottomAction"/>
+</view>

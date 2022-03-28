@@ -1,0 +1,6 @@
+<view>
+    <view bindtap="test" class="test">TEST</view>
+    <view class="console">
+        {{console}}
+    </view>
+</view>

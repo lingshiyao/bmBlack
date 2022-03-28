@@ -1,0 +1,8 @@
+<view class="phone-info-intr">
+    <view class="phone-info-intr-title">
+        简介
+    </view>
+    <view class="phone-info-intr-content">
+        {{ intr }}
+    </view>
+</view>

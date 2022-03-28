@@ -1,0 +1,3 @@
+<view class="title-box" style="{{marginTop}}">
+    <view class="title">{{title}}</view>
+</view>

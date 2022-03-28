@@ -1,0 +1,13 @@
+<view class="phone-blind-bottom">
+    <view class="phone-blind-bottom-background">
+<!--        <view class="phone-blind-bottom-title">-->
+<!--                  -->
+<!--        </view>-->
+        <view class="phone-blind-bottom-price">
+            ¥{{num * price}}
+        </view>
+        <view class="pay-button" bindtap="getBlind">
+            立即购买
+        </view>
+    </view>
+</view>

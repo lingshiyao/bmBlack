@@ -1,0 +1,86 @@
+
+.phone-nft-info {
+    width: 92vw;
+    background: white;
+    height: 97vw;
+    margin: 4vw;
+    border-radius: 3vw;
+}
+
+.phone-nft-info-img {
+    display: inline-flex;
+    justify-content: center;
+    overflow: hidden;
+    margin: 6vw 5vw;
+    background-color: darkorange;
+    width: 81vw;
+    height: 84vw;
+    border-radius: 3vw;
+    z-index: 2;
+}
+
+.phone-nft-info-price-background {
+    width: 92vw;
+    height: 31.2vw;
+    background: #ffffff;
+    border-radius: 3vw;
+    margin: 4vw;
+    text-align: left;
+}
+
+.phone-nft-info-price {
+    height: 7vw;
+    font-size: 7vw;
+    line-height: 7vw;
+    font-weight: bold;
+    color: #000219;
+    display: inline-block;
+    margin: 4vw;
+}
+
+.phone-nft-info-price-sell {
+    float: right;
+    height: 4vw;
+    font-size: 4vw;
+    line-height: 4vw;
+    font-weight: 400;
+    color: #646464;
+    margin-top: 6vw;
+    margin-right: 6vw;
+}
+
+.phone-nft-info-pj-number {
+    display: inline-block;
+    height: 4vw;
+    font-size: 4vw;
+    line-height: 4vw;
+    font-weight: 400;
+    color: #646464;
+    margin-left: 4vw;
+}
+
+.img-supply {
+    position: absolute;
+    z-index: 10;
+    background-color: #FDD3A1;
+    font-weight: 400;
+    font-size: 4vw;
+    padding: 1vw 3vw;
+    color: #ffffff;
+    border-radius: 3vw 0vw 3vw 0vw;
+    margin-top: 5.8vw;
+    margin-left: 4.9vw;
+}
+
+.img-supply-img {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 4vw;
+    width: 4vw;
+}
+
+.img-supply-title {
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: middle;
+}

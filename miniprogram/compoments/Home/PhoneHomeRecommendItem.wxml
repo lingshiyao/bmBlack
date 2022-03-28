@@ -1,0 +1,14 @@
+<view class="phone-home-recommend-item">
+    <view class="phone-home-recommend-item-img-box">
+        <LoadingImg show-menu-by-longpress class="phone-home-recommend-item-img-box"
+                    id="{{'phone_home_recommend_img' + data.id}}"
+                    src="{{data.img}}"
+                    border="border-radius: 3vw 3vw 0vw 0vw;"></LoadingImg>
+    </view>
+    <view class="phone-home-recommend-item-title">
+        {{ data.title }}
+    </view>
+    <view class="phone-home-recommend-item-subtitle">
+        {{ data.content }}
+    </view>
+</view>

@@ -1,0 +1,25 @@
+<view>
+    <PhoneTitle></PhoneTitle>
+    <view class="login">
+        <view class="title-border">
+            <view class="title">欢迎来到无界</view>
+        </view>
+        <view class="border" style="margin-top:11.466666666666667vw">
+            <input bindinput="nameInput" class="input" placeholder="账号"></input>
+        </view>
+        <view class="line-line"></view>
+        <view class="border" style="margin-top:10vw">
+            <input type="password" bindinput="pwdInput" class="input" placeholder="密码"></input>
+        </view>
+        <view class="line-line"></view>
+        <view style="{{loginBtnStyle}}" class="login-btn" bindtap="clickLogin">
+            登录
+        </view>
+        <view class="line">
+            <view class="s-txt" bindtap="register">
+                注册账号
+            </view>
+        </view>
+    </view>
+    <PhoneModalInput id="phoneModalInput"></PhoneModalInput>
+</view>

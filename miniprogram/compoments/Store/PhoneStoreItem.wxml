@@ -1,0 +1,46 @@
+<view class="phone-store-item-content">
+    <image show-menu-by-longpress id="{{id}}" mode="aspectFill" src="{{data.headerImg}}"
+           class="phone-store-item-img-border"></image>
+    <view class="phone-store-item-title">
+        {{ data.author }}
+        <image src="{{src}}" style="width:4vw;height:4vw;margin-left:1.4vw"></image>
+    </view>
+    <view class="phone-store-item-name">
+        <view class="phone-store-item-subtitle">
+            名称：
+        </view>
+        <view class="phone-store-item-name-title">
+            {{ data.name }}
+        </view>
+    </view>
+    <view wx:if="{{data.isShowNumber}}" class="phone-store-item-name">
+        <view class="phone-store-item-subtitle">
+            编号：
+        </view>
+        <view class="phone-store-item-name-title">
+            # {{ data.index }}/{{ data.maxSupply }}
+        </view>
+    </view>
+    <!--    <view wx:else class="phone-store-item-name">-->
+    <!--        <view class="phone-store-item-subtitle">-->
+    <!--            剩余：-->
+    <!--        </view>-->
+    <!--        <view class="phone-store-item-name-title">-->
+    <!--            {{ data.supple }}-->
+    <!--        </view>-->
+    <!--    </view>-->
+    <view>
+        <view class="phone-store-item-money">
+            ¥{{ data.price }}
+        </view>
+        <!--        <view class="phone-store-item-like">-->
+        <!--            <image src="{{src1}}" class="phone-store-item-like-img" style="width:3vw;height:3vw"></image>-->
+        <!--            {{ data.like }}-->
+        <!--        </view>-->
+        <view class="phone-store-item-name">
+            <view class="left">
+                剩{{ data.supple }}件
+            </view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,7 @@
+.phone-explore-list {
+    display: inline-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 93vw;
+    margin-bottom: 16vw;
+}

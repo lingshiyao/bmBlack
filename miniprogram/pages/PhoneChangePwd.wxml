@@ -1,0 +1,9 @@
+<view>
+    <view class="change-pwd">
+        <input value="{{pwd}}" class="input" placeholder="设置登录密码" style="margin-top:3.33vw"></input>
+        <input value="{{pwdConf}}" class="input" placeholder="确认登录密码" style="margin-top:4vw"></input>
+        <view style="{{submitBtnStyle}}" class="submit-btn" bindtap="changePwd">
+            确定
+        </view>
+    </view>
+</view>

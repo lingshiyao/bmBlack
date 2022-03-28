@@ -1,0 +1,24 @@
+<view class="store-banner">
+    <image mode="aspectFill" class="store-banner-img-box" id="store_banner_img" style="width: 100vw;"
+           src="{{data.banner}}"></image>
+<!--    <view class="store-banner-header-img-box">-->
+<!--        <image class="store-banner-header-img" mode="aspectFill" id="store_banner_header_img"-->
+<!--               style="position: absolute;" src="{{data.headerImg}}"></image>-->
+<!--    </view>-->
+    <view class="store-banner-header-title">
+        {{ data.projectName }}
+    </view>
+    <view class="store-banner-header-subtitle">
+        {{ time }}
+    </view>
+    <view class="store-banner-statistical" wx:if="{{!data.isBlind}}">
+        <view class="store-banner-statistical-item" wx:for="{{data.contents}}" wx:for-item="item">
+            <view class="store-banner-statistical-item-num">
+                {{ item.num }}
+            </view>
+            <view class="store-banner-statistical-item-title">
+                {{ item.title }}
+            </view>
+        </view>
+    </view>
+</view>

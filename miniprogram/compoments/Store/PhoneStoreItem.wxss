@@ -1,0 +1,120 @@
+
+.phone-store-item {
+    display: inline-block;
+    background: #2A2A2A;
+}
+
+.phone-store-item-content {
+    background: #2A2A2A;
+    width: 44vw;
+    border-radius: 4vw;
+    text-align: left;
+    overflow: hidden;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    /*margin: 2vw;*/
+}
+
+.phone-store-item-img-border {
+    width: 40.28vw;
+    height: 40.28vw;
+    border-radius: 4vw;
+    background: #FDD3A1;
+    overflow: hidden;
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+    margin-left: 1.8vw;
+    margin-top: 1.8vw;
+}
+
+.phone-store-item-img {
+    position: absolute;
+}
+
+.phone-store-item-title {
+    height: 3.5vw;
+    line-height: 2vw;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin-top: 2.36vw;
+    margin-left: 1.5vw;
+
+    font-size: 3.89vw;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.8;
+}
+
+.phone-store-item-name {
+    margin-left: 1.5vw;
+    margin-top: 1.5vw;
+    float: right;
+}
+
+.phone-store-item-subtitle {
+    height: 2vw;
+    line-height: 2vw;
+    font-size: 3vw;
+    font-weight: 400;
+    color: #646464;
+    display: inline-block;
+
+    font-size: 3.06vw;
+    font-weight: 500;
+    color: #FFFFFF;
+    opacity: 0.4;
+}
+
+.left {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    opacity: 0.4;
+    margin-right: 3vw;
+    margin-top: 0.5vw;
+}
+
+.phone-store-item-name-title {
+    height: 2vw;
+    line-height: 2vw;
+    font-weight: bold;
+    color: #1e1e1e;
+    display: inline-block;
+
+    font-size: 3.06vw;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+.phone-store-item-money {
+    margin-left: 1.5vw;
+    margin-top: 1vw;
+    font-size: 3.4vw;
+    display: inline-block;
+    color: #F9DABE;
+    margin-bottom: 2vw;
+
+    font-size: 5vw;
+    font-weight: bold;
+    margin-bottom: 4vw;
+}
+
+.phone-store-item-like {
+    float: right;
+    margin-top: 1vw;
+    margin-right: 2vw;
+    font-size: 3.1vw;
+    vertical-align: middle;
+}
+
+.phone-store-item-like-img {
+    vertical-align: middle;
+    margin-right: 1vw;
+    width: 3vw;
+    margin-top: -0.5vw;
+}

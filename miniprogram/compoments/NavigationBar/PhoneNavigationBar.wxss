@@ -1,0 +1,44 @@
+.phone-nav {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+    width: 100vw;
+}
+
+.phone-nav-logo-box {
+    display: inline-block;
+    margin: 3vw;
+    width: 30vw;
+    height: 9vw;
+}
+
+.phone-nav-logo {
+    display: inline-block;
+    margin: 4vw;
+    vertical-align: middle;
+    width: 22.53vw;
+}
+
+.phone-nav-input-box {
+    display: inline-block;
+    vertical-align: middle;
+    height: 9.5vw;
+    width: 65.98vw;
+    background-color: white;
+    border-radius: 2.7vw;
+}
+
+.phone-nav-input {
+    height: 9.5vw;
+    width: 55.98vw;
+    line-height: 9.5vw;
+    font-size: 3.33vw;
+    border: 0 none;
+    outline: none;
+    letter-spacing: 1px;
+    text-indent: 5.4vw;
+    background-size: 4vw;
+    background-position: left;
+    margin-left: 2.7vw;
+}
+

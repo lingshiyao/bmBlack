@@ -1,0 +1,37 @@
+<view class="pay-view">
+    <view class="qrcode-pay-view">
+        <view class="qrcode-pay-view-content">
+            <view class="pay-title">
+                <view>
+                    商品订单:
+                    <view style="color:#C8C8C8; font-size: 3.5vw">
+                        {{ orderString }}
+                    </view>
+                </view>
+                <view style="margin-top: 10px;">
+                    支付金额：
+                    <view style="color:#FDD3A1; font-size: 4.5vw">
+                        ¥{{ moneyString }}
+                    </view>
+                </view>
+                <view style="margin-top: 20px; vertical-align: middle;">
+                    支付方式：
+                </view>
+                <view class="qrcode-weixin">
+                    <image class="weixn-img" src="../../assets/ic_wechat.png"></image>
+                    微信支付
+                </view>
+            </view>
+            <view style="margin-top: 5vw">
+                <view>
+                    <!--                    FIXME-->
+                    <!--                    <qrcode-vue class="qr-code-vue" value="{{qrCodeIDString}}" size="{{600}}" level="H"></qrcode-vue>-->
+                    <image class="imgs" src="../../assets/pic_phone.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="pay-sure-btn" bindtap="sureAction">
+            已完成支付
+        </view>
+    </view>
+</view>

@@ -1,0 +1,13 @@
+{
+  "component": true,
+  "usingComponents": {
+    "header-item1": "/compoments/My/PhoneMyItem",
+    "PhoneMyOrder": "/compoments/Order/PhoneMyOrder",
+    "PhoneMyCollection": "/compoments/My/PhoneMyCollection",
+    "PhoneMyFavorite": "/compoments/My/PhoneMyFavorite",
+    "PhoneMyCreation": "/compoments/My/PhoneMyCreation",
+    "PhoneSelectBox": "/compoments/Store/PhoneSelectBox",
+    "LoadingImg": "/compoments/Global/LoadingImg",
+    "PhoneSettingTitle": "/compoments/Global/PhoneSettingTitle"
+  }
+}

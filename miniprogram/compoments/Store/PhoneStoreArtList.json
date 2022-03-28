@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "PhoneStoreItem": "/compoments/Store/PhoneStoreItem",
+    "PhoneSelectBox": "/compoments/Store/PhoneSelectBox"
+  }
+}

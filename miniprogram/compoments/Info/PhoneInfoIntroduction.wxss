@@ -1,0 +1,30 @@
+
+.phone-info-intr {
+    width: 92vw;
+    margin-top: 6vw;
+    text-align: left;
+    margin-left: 4vw;
+    margin-bottom: 22vw;
+}
+
+.phone-info-intr-title {
+    height: 5vw;
+    font-size: 5vw;
+    font-weight: bold;
+    color: #000219;
+}
+
+.phone-info-intr-content {
+    margin-top: 4vw;
+    background: white;
+    width: 80vw;
+    padding: 3vw 6vw 3vw 6vw;
+    font-size: 5vw;
+    font-weight: bold;
+    color: #000219;
+    word-break:break-all;
+    line-height: 7vw;
+    margin-bottom: 10vw;
+    border-radius: 3vw;
+}
+

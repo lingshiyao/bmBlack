@@ -1,0 +1,66 @@
+
+.phone-home-banner {
+    margin: 3vw 4vw;
+    background-color: white;
+    height: 116vw;
+    border-radius: 3vw;
+    width: 92vw;
+}
+
+.phone-home-banner-img {
+    overflow: hidden;
+    justify-content: center;
+    background-color: #ffaa01;
+    height: 78.13vw;
+    border-radius: 3vw 3vw 0vw 0vw;
+    width: 92vw;
+}
+
+.phone-home-banner-title {
+    font-size: 5.87vw;
+    text-align: left;
+    margin: 4.4vw 0vw 0vw 4vw;
+    font-weight: bold;
+}
+
+.phone-home-banner-subtitle {
+    font-size: 3.2vw;
+    text-align: left;
+    margin: 2vw 0vw 0vw 4vw;
+    color: #646464;
+    font-weight: 400;
+}
+
+.phone-home-banner-btn {
+    display: inline-block;
+    text-align: center;
+    margin: 2vw 0 0 4vw;
+    background: #FDD3A1;
+    border-radius: 1vw;
+    height: 6.8vw;
+    width: 21vw;
+    font-size: 2.13vw;
+    line-height: 6.8vw;
+}
+
+.phone-home-banner-notif-box {
+    display: block;
+    margin-top: 2vw;
+}
+
+.phone-home-banner-notif-img {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4vw;
+    width: 2.93vw;
+    height: 2.93vw;
+}
+
+.phone-home-banner-notif-title {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 2.67vw;
+    font-weight: 400;
+    color: #FDD3A1;
+    margin-left: 10px;
+}

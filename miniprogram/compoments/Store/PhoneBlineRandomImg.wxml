@@ -1,0 +1,5 @@
+<block wx:for="{{data}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+    <image mode="aspectFill" show-menu-by-longpress class="phone-blind-random-img"
+           id="phone-blind-random-img-id"
+           src="{{item.headerImg}}" bindload="onLoadingSuccess" data-index="{{index}}" style="{{styles[index]}}"></image>
+</block>

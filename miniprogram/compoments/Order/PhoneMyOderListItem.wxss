@@ -1,0 +1,138 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 3.87vw;
+}
+
+.text-title {
+    font-size: 3.2vw;
+    font-weight: 400;
+    color: #FFFFFF;
+    opacity: 0.4;
+}
+
+.text-content {
+    font-size: 3.2vw;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin-left: 2vw;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 35vw;
+}
+
+.line-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.id {
+    font-size: 4.8vw;
+    font-weight: 800;
+    color: #FFFFFF;
+}
+
+.border {
+    width: 92vw;
+    background: #2A2A2A;
+    border-radius: 3vw;
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.8vw;
+}
+
+.img-border {
+    width: 21vw;
+    height: 21vw;
+    border-radius: 3vw;
+    /*background: #FDD3A1;*/
+    /*overflow: hidden;*/
+    /*display: inline-flex;*/
+    /*justify-content: center;*/
+}
+
+.line {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4vw;
+    margin-left: 4vw;
+    margin-right: 4vw;
+}
+
+.bottom {
+    display: flex;
+    margin-top: 4vw;
+    margin-left: 4vw;
+    margin-bottom: 4vw;
+    flex-direction: row;
+}
+
+.time {
+    font-size: 3.2vw;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+.status-wait {
+    width: 15.6vw;
+    height: 3.07vw;
+    font-size: 3.2vw;
+    font-weight: 400;
+    color: #00a3fb;
+    text-align: right;
+    display: inline-block;
+}
+
+.status-wait-pay {
+    width: 15.6vw;
+    height: 3.07vw;
+    font-size: 3.2vw;
+    font-weight: 400;
+    text-align: right;
+    display: inline-block;
+}
+
+.status-success {
+    width: 15.6vw;
+    height: 3.07vw;
+    font-size: 3.2vw;
+    font-weight: 400;
+    color: #11cd69;
+    text-align: right;
+    display: inline-block;
+}
+
+.status-fail {
+    height: 5vw;
+    line-height: 5vw;
+    font-size: 3.2vw;
+    font-weight: 400;
+    color: #692D0B;
+    text-align: center;
+    /*display: inline-block;*/
+    background: #FDD3A1;
+    border-radius: 3vw;
+}
+
+.pay {
+    display: inline-block;
+    text-align: right;
+    margin-right: 4vw;
+    margin-bottom: 4vw;
+}
+
+.continue-pay {
+    display: inline-block;
+    text-align: center;
+    width: 17.33vw;
+    height: 6.67vw;
+    background: #FDD3A1;
+    border-radius: 1vw;
+    font-size: 2.67vw;
+    font-weight: 400;
+    color: #000000;
+    line-height: 6.67vw;
+}

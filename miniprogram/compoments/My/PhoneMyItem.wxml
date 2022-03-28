@@ -1,0 +1,13 @@
+<view>
+    <view wx:if="{{selected == true}}" class="header-item">
+        <view class="content">
+            {{ name }}
+        </view>
+        <view class="underline"></view>
+    </view>
+    <view wx:else class="header-item">
+        <view class="content-no-select">
+            {{ name }}
+        </view>
+    </view>
+</view>

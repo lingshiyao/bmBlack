@@ -1,0 +1,32 @@
+<view>
+    <PhoneNormalTitleBar></PhoneNormalTitleBar>
+    <view class="creation">
+        <view class="create-collection animate__animated animate__fadeIn animate__faster">
+            <image show-menu-by-longpress src="{{storeUrl}}" class="store-icon"></image>
+            <view class="left">
+                <view class="title1">
+                    创建店铺
+                </view>
+                <view class="title2">
+                    Create a Collection
+                </view>
+                <view class="btn" bindtap="showTip">
+                </view>
+            </view>
+        </view>
+        <view class="create-item animate__animated animate__fadeIn animate__faster">
+            <image show-menu-by-longpress src="{{itemUrl}}" class="store-icon"></image>
+            <view class="left">
+                <view class="title1">
+                    创建作品
+                </view>
+                <view class="title2">
+                    Create New Item
+                </view>
+                <view class="btn" bindtap="showTip">
+                </view>
+            </view>
+
+        </view>
+    </view>
+</view>

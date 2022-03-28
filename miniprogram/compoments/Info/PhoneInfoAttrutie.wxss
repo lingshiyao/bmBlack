@@ -1,0 +1,63 @@
+
+.phone-info-attribute {
+    width: 100vw;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+}
+
+.phone-info-attribute-content {
+    width: 92vw;
+    margin-top: 1vw;
+    text-align: left;
+}
+
+.phone-info-attribute-content-item {
+    margin-top: 4vw;
+    backdrop-filter: blur(4px);
+    width: 100%;
+    background: #ffffff;
+    border-radius: 3vw;
+}
+
+.phone-info-attribut-item-title {
+    height: 5vw;
+    font-size: 5vw;
+    font-weight: 400;
+    color: #646464;
+    display: inline-block;
+    margin-top: 2vw;
+    margin-left: 6vw;
+}
+
+.phone-info-attribut-item-content {
+    height: 5vw;
+    font-size: 5vw;
+    font-weight: 400;
+    color: #FDD3A1;
+    display: inline-block;
+    margin-left: 1vw
+}
+
+.phone-info-attribut-item-details {
+    height: 17px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #000219;
+    margin-left: 40px;
+    margin-top: 6px;
+}
+
+.phone-info-attribut-item {
+    display: inline-block;
+    /* width: 30vw; */
+    height: 10vw;
+    text-align: left;
+}
+
+.phone-info-attribute-title {
+    height: 5vw;
+    font-size: 5vw;
+    font-weight: bold;
+    color: #000219;
+}

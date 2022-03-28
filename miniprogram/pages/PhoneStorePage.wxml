@@ -1,0 +1,12 @@
+<view style="background:#1f1f1f">
+    <PhoneTitle title=""></PhoneTitle>
+    <PhoneStoreBanner data="{{bannerData}}"></PhoneStoreBanner>
+    <view wx:if="{{!bannerData.isBlind}}">
+        <PhoneStoreArtList data="{{collectData}}"
+                           bind:search="searchAction" bind:goToInfo="goToInfo"/>
+    </view>
+    <view wx:else>
+        <PhoneBlindBox data="{{collectData}}" bannerData="{{bannerData}}" bind:getNumber="getNumber"/>
+        <PhoneBlindBottom num="{{num}}" price="{{price}}" bind:getBlind="getBlind"/>
+    </view>
+</view>

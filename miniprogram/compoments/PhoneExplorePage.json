@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "PhoneSelectToolBar": "/compoments/Explore/PhoneSelectToolBar",
+    "PhoneExploreItem": "/compoments/Explore/PhoneExploreItem",
+    "PhoneSelectToolBar": "/compoments/Explore/PhoneSelectToolBar"
+  }
+}

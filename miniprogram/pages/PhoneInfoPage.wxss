@@ -1,0 +1,5 @@
+.phone-info-page {
+    background: #1f1f1f;
+    display: flex;
+    flex-direction: column;
+}

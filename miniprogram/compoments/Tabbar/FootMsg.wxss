@@ -1,0 +1,12 @@
+
+.phone-foot {
+    width: 100vw;
+    height: 30vw;
+    text-align: center;
+}
+
+.phone-foot-title {
+    display: inline-block;
+    font-size: 3vw;
+}
+

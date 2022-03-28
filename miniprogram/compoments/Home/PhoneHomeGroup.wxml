@@ -1,0 +1,14 @@
+<view class="phone-home-group">
+    <view class="phone-home-group-title">
+        推荐分组
+    </view>
+    <view class="phone-home-group-item-list">
+        <view class="phone-home-group-item-list-content">
+            <block wx:for="{{data.items}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+                <PhoneHomeGroupItem data="{{item}}"
+                                    bindtap="gotoExplore" data-index="{{index}}"></PhoneHomeGroupItem>
+            </block>
+        </view>
+    </view>
+    <view class="phone-home-group-item-list-space"></view>
+</view>

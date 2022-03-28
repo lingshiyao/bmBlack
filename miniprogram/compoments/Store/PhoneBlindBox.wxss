@@ -1,0 +1,137 @@
+
+.phone-blind-box {
+    display: inline-block;
+    margin-top: 5vw;
+    min-height: 70vh;
+    margin-left: 4vw;
+}
+
+.phone-blind-box-header {
+    height: 121.333333333333333vw;
+    width: 92vw;
+    border-radius: 3vw;
+    background: #2A2A2A;
+}
+
+.phone-blind-gif-header {
+    height: 92vw;
+    width: 92vw;
+    border-radius: 3vw 3vw 0vw 0vw;
+    background: #2A2A2A;
+}
+
+.phone-blind-title {
+    font-size: 4.8vw;
+    line-height: 4.8vw;
+    font-weight: 800;
+    color: #1e1e1e;
+    text-align: left;
+    margin: 4vw 3vw 0vw 3vw;
+}
+
+.phone-blind-type-title {
+    display: inline-block;
+    border: 0.13vw solid #FDD3A1;
+    border-radius: 1.5vw;
+    font-size: 2.67vw;
+    font-weight: 800;
+    color: #FDD3A1;
+    padding: 1vw 2.93vw 1vw 2.93vw;
+    background: #feebd1;
+}
+
+.phone-blind-type-number {
+    display: inline-block;
+    border: 0.13vw solid #FDD3A1;
+    font-size: 2.67vw;
+    font-weight: 800;
+    color: #FDD3A1;
+    border-width: 0.15vw 0.13vw 0.13vw 0vw;
+    border-radius: 0vw 1.5vw 1.5vw 0vw;
+    padding: 1vw 2.93vw 1vw 2.93vw;
+}
+
+.phone-blind-price {
+    height: 6.4vw;
+    font-size: 6.4vw;
+    font-weight: bold;
+    color: #f15252;
+    text-align: left;
+    margin: 1.5vw 3vw 0vw 3vw;
+    display: inline-block;
+}
+
+.phone-blind-buy {
+    height: 6.4vw;
+    font-size: 3.2vw;
+    line-height: 6.4vw;
+    font-weight: bold;
+    font-weight: 500;
+    color: #1e1e1e;
+    display: inline-block;
+    width: 29vw;
+    /*//background: #FDD3A1;*/
+    border-radius: 1vw;
+    margin: 2.5vw 3vw 0vw 3vw;
+}
+
+.phone-blind-price-box {
+    display: inline-flex;
+    width: 92vw;
+    justify-content: space-between;
+}
+
+.phone-blind-pj-title {
+    height: 4.53vw;
+    font-size: 4.8vw;
+    font-weight: 800;
+    color: #1e1e1e;
+    text-align: left;
+    margin: 7.87vw 0vw 4.67vw 0vw;
+}
+
+.v-html {
+    display: flex;
+    flex-direction: column;
+    width: 92vw;
+    align-items: center;
+    margin-bottom: 17vw;
+}
+
+.area {
+    width: 92vw;
+    margin-bottom: 10vw;
+}
+
+.text {
+    min-height: 20vw;
+    text-align: left;
+    font-size: 3.733vw;
+    word-break: break-all; /* IE 允许词内换行 */
+}
+
+.phone-bline-random-img {
+    margin-left: 2.2vw;
+    margin-top: 2.2vw;
+}
+
+.phone-blind-change-num {
+    width: 7vw;
+    height: 7vw;
+    background: #FDD3A1;
+    border-radius: 1vw;
+    display: inline-block;
+    font-size: 6vw;
+    line-height: 6.4vw;
+    text-align: center;
+}
+
+.phone-blind-num {
+    display: inline-block;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    height: 7vw;
+    font-size: 6vw;
+    text-align: center;
+    line-height: 6.4vw;
+}

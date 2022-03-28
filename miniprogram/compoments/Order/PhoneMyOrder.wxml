@@ -1,0 +1,11 @@
+<view>
+    <PhoneNothing wx:if="{{order.length == 0}}" text="亲，您还没有相关订单哦~"></PhoneNothing>
+    <view style="margin-bottom: 20vw;">
+        <block wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+            <PhoneMyOderListItem
+                    order="{{item}}"
+                    class="animate__animated animate__bounceIn animate__faster"
+                    style="margin-top: 2.67vw"/>
+        </block>
+    </view>
+</view>

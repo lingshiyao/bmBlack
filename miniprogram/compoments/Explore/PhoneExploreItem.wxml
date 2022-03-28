@@ -1,0 +1,15 @@
+<view class="phone-my-explore-item">
+    <image mode="aspectFill" show-menu-by-longpress class="phone-my-explore-item-background-img-box"
+           id="{{'phone_my_explore_img' + data.id}}"
+           src="{{data.banner}}"></image>
+    <image mode="aspectFill" class="phone-my-explore-item-header-img-box" show-menu-by-longpress src="{{data.headerImg}}"></image>
+    <view class="phone-my-explore-item-title">
+        {{ data.name }}
+    </view>
+    <view class="phone-my-explore-item-des">
+        {{ data.description }}
+    </view>
+    <view class="phone-my-explore-item-bottom">
+        {{ data.artCount }} 个项目
+    </view>
+</view>

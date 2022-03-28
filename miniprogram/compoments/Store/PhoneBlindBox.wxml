@@ -1,0 +1,48 @@
+<view class="phone-blind-box">
+    <view class="phone-blind-box-header" wx:if="{{data.length > 0}}">
+        <view class="phone-blind-gif-header">
+            <PhoneBlineRandomImg data="{{data}}" class="phone-bline-random-img"></PhoneBlineRandomImg>
+        </view>
+        <view class="phone-blind-title">
+            {{ bannerData.projectName }}
+        </view>
+        <view style="text-align: left; margin: 2.67vw 3vw 0vw 3vw;">
+            <view class="phone-blind-type-title" style="margin-right:1.2vw;">
+                {{ data[0].category }}
+            </view>
+            <view class="phone-blind-type-title" style="border-radius: 1.5vw 0vw 0vw 1.5vw;">
+                限量
+            </view>
+            <view class="phone-blind-type-number">
+                {{ bannerData.contents[0].num }}份
+            </view>
+        </view>
+        <view class="phone-blind-price-box">
+            <view wx:if="{{data[0].price > 0}}" class="phone-blind-price">
+                ¥{{ data[0].price }}
+            </view>
+            <view wx:else class="phone-blind-price">
+                免费
+            </view>
+            <view class="phone-blind-buy">
+                <view class="phone-blind-change-num" bindtap="changeNum" data-n="-1">
+                    -
+                </view>
+                <view class="phone-blind-num">
+                    {{ num }}
+                </view>
+                <view class="phone-blind-change-num" bindtap="changeNum" data-n="1">
+                    +
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="phone-blind-pj-title">
+        产品介绍
+    </view>
+    <view class="v-html">
+        <view class="area">
+            <rich-text class="text" nodes="{{bannerData.introduction}}" />
+        </view>
+    </view>
+</view>

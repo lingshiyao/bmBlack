@@ -1,0 +1,11 @@
+.test {
+    background: aqua;
+    padding: 5vw;
+    text-align: center;
+    font-size: 10vw;
+}
+
+.console {
+    width: 100vw;
+    word-wrap: break-word;
+}

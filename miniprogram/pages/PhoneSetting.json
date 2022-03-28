@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "设置",
+  "component": true,
+  "usingComponents": {
+    "PhoneModalInput": "/compoments/Global/PhoneModalInput",
+    "LoadingImg": "/compoments/Global/LoadingImg",
+    "PhoneTitle": "/compoments/Global/PhoneTitle"
+  }
+}

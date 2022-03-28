@@ -1,0 +1,7 @@
+<view class="grid" style="margin-bottom: 20vw">
+    <block wx:for="{{lst}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+        <PhoneExploreItem data="{{item}}"
+                          class="animate__animated animate__bounceIn animate__faster" bindtap="goToStore"
+                          data-index="{{index}}"></PhoneExploreItem>
+    </block>
+</view>

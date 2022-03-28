@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "店铺详情",
+  "component": true,
+  "usingComponents": {
+    "PhoneStoreBanner": "/compoments/Store/PhoneStoreBanner",
+    "PhoneStoreArtList": "/compoments/Store/PhoneStoreArtList",
+    "PhoneBlindBox": "/compoments/Store/PhoneBlindBox",
+    "PhoneBlindBottom": "/compoments/Store/PhoneBlindBottom",
+    "PhoneTitle": "/compoments/Global/PhoneTitle"
+  }
+}
