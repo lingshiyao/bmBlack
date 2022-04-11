@@ -1,0 +1,36 @@
+<view style="min-height: 100vh; text-align: center; background:#1F1F1F">
+    <view id="title" style="padding-bottom:5vw;">
+        <PhoneTitle title="{{title}}" status="1"></PhoneTitle>
+    </view>
+    <scroll-view
+            scroll-y="true"
+            enhanced="true"
+            show-scrollbar="{{false}}"
+            bindscrolltolower="bindDownLoad"
+            style="{{scrollStyle}}">
+        <view wx:if="{{exploreItemData.length == 0}}" style="margin-top:30vw;">
+            <PhoneNothing></PhoneNothing>
+        </view>
+        <view class="phone-explore-list" style="{{scrollStyle}}">
+            <view wx:for="{{exploreItemData}}" wx:for-item="item" wx:for-index="index" wx:key="unique"
+                  style="margin-bottom: 3vw;">
+                <view class="view-border-base-layout">
+                    <!--                <view wx:if="{{indexii==1}}" class="style-01"></view>-->
+                    <!--                <view wx:if="{{indexii==2}}" class="style-02"></view>-->
+                    <!--                <view wx:if="{{indexii==3}}" class="style-03"></view>-->
+                    <!--                <view wx:if="{{indexii==4}}" class="style-04"></view>-->
+                    <!--                <view wx:if="{{indexii==5}}" class="style-05"></view>-->
+                    <!--                <view wx:if="{{indexii==6}}" class="style-06"></view>-->
+                    <!--                <view class="item-iii">-->
+                    <view class="animate__animated animate__fadeInUp animate__faster">
+                        <PhoneExploreItem data="{{item}}"
+                                          bindtap="goToStore" data-index="{{index}}"
+                                          showStyle="{{showStyle}}"></PhoneExploreItem>
+                    </view>
+                    <!--                </view>-->
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+
+</view>

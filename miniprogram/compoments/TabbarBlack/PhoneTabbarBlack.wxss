@@ -14,14 +14,8 @@
     height: 6.53vw;
 }
 
-.b-b {
-    position: fixed;
-    z-index: 10;
-    bottom: 0;
-}
-
 .base {
-    position: relative;
+    /*position: relative;*/
     width: 100vw;
     height: 22.06vw;
 }
@@ -34,4 +28,10 @@
     position: absolute;
     top: -2.225vw;
     left: 40.97vw;
+}
+
+.b-b {
+    position: fixed;
+    z-index: 10;
+    bottom: 0;
 }

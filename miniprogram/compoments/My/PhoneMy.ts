@@ -3,6 +3,7 @@ import {PicCDNUtils} from "../../api/net/PicCDNUtils";
 import {ImgPathUtils} from "../../api/utils/ImgPathUtils";
 import {UserSet} from "../../api/storage/UserSet";
 import {PublicUtils} from "../../api/utils/PublicUtils";
+import {WXUtils} from "../../api/utils/WXUtils";
 
 const NULL: any = null;
 
@@ -16,16 +17,36 @@ Component({
         selected1: [true, false, false, false],
         filter: "",
         userName: "",
-        selectBoxData: new SelectBoxEntity()
+        userId: "",
+        selectBoxData: new SelectBoxEntity(),
+        headerHeight: 0
     }, methods: {
+        chooseOrder() {
+            ////////console.log("chooseCollected")
+            let selectedTmp = [false, false, false, false];
+            selectedTmp[0] = true;
+            this.setData({
+                'selected1': selectedTmp
+            });
+        },
+        chooseCollected() {
+            ////////console.log("chooseCollected")
+            let selectedTmp = [false, false, false, false];
+            selectedTmp[1] = true;
+            this.setData({
+                'selected1': selectedTmp
+            });
+        },
         gotoSetting() {
             wx.navigateTo({
                 url: '../pages/PhoneSetting',
             })
         }, onSelect1(event: any) {
+            wx.hideLoading();
             const index = parseInt(event.currentTarget.dataset.index.toString());
             let selectedTmp = [false, false, false, false];
             selectedTmp[index] = true;
+            this.triggerEvent('taBarIndex', index);
             let selected1_99dab54e: any = this.data.selected1;
             selected1_99dab54e = selectedTmp;
             this.setData({
@@ -91,6 +112,7 @@ Component({
             });
         }, async init() {
             const userInfo = await UserSet.getUserInfoIfFailedGoLogin();
+            console.log(userInfo)
             let selectBoxData_0a20b37c: any = this.data.selectBoxData;
             selectBoxData_0a20b37c.menu = ["全部", "待付款", "待确认", "已成功", "已关闭", "退款订单"];
             this.setData({
@@ -103,11 +125,20 @@ Component({
                     'headerUrl': headerUrl_70e5435a
                 });
                 let userName_69cadb77: any = this.data.userName;
-                userName_69cadb77 = userInfo.user.username;
+                userName_69cadb77 = userInfo.userExt.nickname;
                 this.setData({
                     'userName': userName_69cadb77
                 });
+
+                this.setData({
+                    userId: userInfo.user.id
+                })
             }
+            const rect = await WXUtils.getRect2('#header-base-id', this);
+            this.setData({
+                headerHeight: rect[0].height
+            })
+            // //////////console.log(rect[0].height)
         }, headerLoadFail() {
             this.setData({
                 headerUrl: PicCDNUtils.getPicUrl("pic_user.png")
@@ -117,5 +148,6 @@ Component({
 
     ready() {
         this.init();
+
     }, observers: {}
 });

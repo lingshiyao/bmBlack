@@ -13,6 +13,7 @@ Component({
             const index = parseInt(event.currentTarget.dataset.index.toString());
             loadingStatus[index] = true;
         }, init() {
+            let timeOut = 0;
             let fn = () => {
                 if (this.properties.data.length > 0) {
                     if (index >= this.properties.data.length) {
@@ -22,6 +23,7 @@ Component({
                     for (let i = index; i < this.properties.data.length + index; i++) {
                         const _index = i % this.properties.data.length;
                         if (loadingStatus[_index]) {
+                            timeOut = 4000;
                             // 找到下一张轮播图
                             const cleanStyles = [];
                             for (let j = 0; j < this.properties.data.length; j++) {
@@ -31,7 +33,7 @@ Component({
                             this.setData({
                                 styles: cleanStyles
                             })
-                            console.log(this.data.styles)
+                            // ////////////////////console.log(this.data.styles)
                             break;
                         }
                     }
@@ -39,7 +41,7 @@ Component({
                 }
                 clearTimeout(this.data.timeOut);
                 this.setData({
-                    'timeOut': setTimeout(fn, 1000)
+                    'timeOut': setTimeout(fn, timeOut)
                 });
             };
             fn();
@@ -52,6 +54,7 @@ Component({
 
     }, observers: {
         'data': function (data: any) {
+            // ////////////////////console.log(data)
             const stylesT = [];
             for (let i = 0; i < data.length; i++) {
                 stylesT.push("display: none;");

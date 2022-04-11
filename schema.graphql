@@ -1,11 +1,14 @@
 #schema {
-#  query: QueryRoot
-#  mutation: MutationRoot
+#    query: QueryRoot
+#    mutation: MutationRoot
 #}
 
 type Art {
     # 编号
     id: ID!
+
+    # 类型
+    kind: MediaKind!
 
     # 名称
     name: String!
@@ -59,13 +62,19 @@ input ArtAddInput {
     # 所在店铺
     storeId: ID!
 
+    # 类型
+    kind: MediaKind!
+
     # 名称
     name: String!
 
     # 描述
     description: String!
 
-    # 图片
+    # 缩略图
+    thumbnail: Upload!
+
+    # 媒体
     media: Upload!
 
     # 铸造价格
@@ -82,6 +91,21 @@ input ArtAddInput {
 
     # 个人持有限制
     holdLimit: Int!
+}
+
+type ArtPagedList {
+    list: [Art!]!
+    total: Int!
+    totalPages: Int!
+}
+
+# 更新作品数据
+input ArtUpdateHiddenInput {
+    # 作品编号
+    id: ID!
+
+    # 隐藏状态
+    isHidden: Boolean!
 }
 
 # 更新作品数据
@@ -102,6 +126,14 @@ input ArtUpdateInput {
     attrs: JSON!
 }
 
+input ArtUpdateThumbnailInput {
+    # 编号
+    id: ID!
+
+    # 缩略图
+    thumbnail: Upload!
+}
+
 type Category {
     # 编号
     id: ID!
@@ -109,11 +141,36 @@ type Category {
     # 名称
     name: String!
 
+    # 图标
+    icon: [Int!]
+
     # 排序
     order: Int!
 }
 
-input CategoryInput {
+input CategoryAddInput {
+    # 编号
+    id: ID!
+
+    # 名称
+    name: String!
+
+    # 图标
+    icon: Upload
+
+    # 排序
+    order: Int!
+}
+
+input CategoryUpdateIconInput {
+    # 编号
+    id: ID!
+
+    # 图像
+    icon: Upload!
+}
+
+input CategoryUpdateInput {
     # 编号
     id: ID!
 
@@ -140,6 +197,12 @@ input ContentInput {
     body: String!
 }
 
+type ContentPagedList {
+    list: [Content!]!
+    total: Int!
+    totalPages: Int!
+}
+
 # Implement the DateTime<Utc> scalar
 #
 # The input/output is a string in RFC3339 format.
@@ -156,6 +219,12 @@ type Favorite {
 
     # 收藏作品
     art: Art!
+}
+
+type FavoritePagedList {
+    list: [Favorite!]!
+    total: Int!
+    totalPages: Int!
 }
 
 # A scalar that can represent any JSON value.
@@ -177,12 +246,19 @@ type LogInfo {
     transactionLogIndex: String!
 }
 
-type LoginInfo {
-    # 用户编号
-    id: ID!
+# 请求验证码动作
+enum MediaKind {
+    # 图片
+    IMAGE
 
-    # 通证
-    token: String!
+    # 视频
+    VIDEO
+
+    # 音频
+    AUDIO
+
+    # 模型
+    MODEL
 }
 
 type MintResult {
@@ -206,31 +282,35 @@ type MintResult {
 }
 
 type Mutation {
-    # 注册
+    # 微信登录
     #
-    # 1. 基本的账号和密码验证
-    signup(input: SignupInput!): ID!
+    # 1. 先走微信授权流程，拿到`open_id`以及注册信息
+    # 2. 当没有注册信息时，通过该接口自动注册和登录
+    signinWx(input: SigninWxInput!): SigninInfo!
 
-    # 登录
+    # 短信登录
     #
-    # 登录成功后会返回`ID`，客户端可通过此`ID`查询用户详细信息进行其它流程
-    login(username: String!, userpass: String!): LoginInfo!
+    # 自动注册和登录
+    signinSms(input: SigninSMSInput!): SigninInfo!
+
+    # 请求短信验证码
+    smsRequestVerificationCode(input: SmsValidInput!): Boolean!
 
     # 添加管理员
     #
     # 1. 需要`SuperAdmin`
     # 2. 基本的账号验证
-    userAddAdmin(username: String!): ID!
+    userAddAdmin(phoneNumber: String!): ID!
 
     # 更新用户类型
     #
     # 1. 需要`SuperAdmin`
-    userUpdateRole(userId: ID!, newRole: UserRole!): ID!
+    userUpdateRole(userId: ID!, newRole: UserRole!): Boolean!
 
     # 设置用户禁用状态
     #
     # 1. 需要`SuperAdmin`
-    userUpdateBanned(userId: ID!, banned: Boolean!): ID!
+    userUpdateBanned(userId: ID!, banned: Boolean!): Boolean!
 
     # 账户升级为商户
     #
@@ -246,12 +326,15 @@ type Mutation {
         nickname: String!
         intro: String!
         email: String!
-    ): ID!
+    ): Boolean!
 
-    # 更新用户密码
+    # 绑定微信
     #
     # 1. 需要`User`
-    userUpdatePassword(newPassword: String!): ID!
+    # 2. 客户端先走微信授权流程，获取`code`
+    # 3. 内部会通过微信接口，从`code`换取`open_id`
+    # 4. 再把`user_id`与`open_id`进行绑定
+    userBindWx(openId: String!): Boolean!
 
     # 新增内容
     #
@@ -261,28 +344,33 @@ type Mutation {
     # 更新内容
     #
     # 需要`Admin`
-    contentUpdate(content: ContentInput!): ID!
+    contentUpdate(content: ContentInput!): Boolean!
 
     # 删除内容
     #
     # 需要`Admin`
-    contentRemove(id: ID!): ID!
+    contentRemove(id: ID!): Boolean!
 
     # 新增项目类别
     #
     # 1. 需要`Admin`
-    categoryAdd(input: CategoryInput!): ID!
+    categoryAdd(input: CategoryAddInput!): ID!
 
     # 更新项目类别
     #
     # 1. 需要`Admin`
-    categoryUpdate(input: CategoryInput!): ID!
+    categoryUpdate(input: CategoryUpdateInput!): Boolean!
+
+    # 修改类别图标
+    #
+    # 1. 需要`Admin`
+    categoryUpdateIcon(input: CategoryUpdateIconInput!): Boolean!
 
     # 删除项目类别
     #
     # 1. 需要`Admin`
     # 2. 存在子项目则无法删除
-    categoryRemove(id: ID!): ID!
+    categoryRemove(id: ID!): Boolean!
 
     # 新增店铺
     #
@@ -293,17 +381,24 @@ type Mutation {
     #
     # 1. 需要`User`
     # 2. 验证店铺所有权
-    storeUpdate(input: StoreUpdateInput!): ID!
+    storeUpdate(input: StoreUpdateInput!): Boolean!
+
+    # 修改店铺是否为隐藏状态
+    #
+    # 1. 需要`Admin`
+    storeUpdateHidden(input: StoreUpdateHiddenInput!): Boolean!
 
     # 修改店铺图标
     #
     # 1. 需要`User`
-    storeUpdateIcon(input: StoreUpdateIconInput!): ID!
+    # 2. 验证所有者
+    storeUpdateIcon(input: StoreUpdateIconInput!): Boolean!
 
     # 修改店铺广告栏
     #
     # 1. 需要`User`
-    storeUpdateBanner(input: StoreUpdateBannerInput!): ID!
+    # 2. 验证所有者
+    storeUpdateBanner(input: StoreUpdateBannerInput!): Boolean!
 
     # 新增作品
     #
@@ -314,8 +409,19 @@ type Mutation {
     # 修改作品
     #
     # 1. 需要`User`
-    # 2. 验证作品所有权
-    artUpdate(input: ArtUpdateInput!): ID!
+    # 2. 验证所有者
+    artUpdate(input: ArtUpdateInput!): Boolean!
+
+    # 修改作品的隐藏状态
+    #
+    # 1. 需要`Admin`
+    artUpdateHidden(input: ArtUpdateHiddenInput!): Boolean!
+
+    # 修改作品缩略图
+    #
+    # 1. 需要`User`
+    # 2. 验证所有者
+    artUpdateThumbnail(input: ArtUpdateThumbnailInput!): Boolean!
 
     # 修改作品上架的店铺
     #
@@ -323,7 +429,7 @@ type Mutation {
     # 1. 需要`User`
     # 2. 验证原始店铺所有权
     # 3. 验证目标店铺所有权
-    artSetStore(artId: ID!, fromStoreId: ID!, toStoreId: ID!): ID!
+    artSetStore(artId: ID!, fromStoreId: ID!, toStoreId: ID!): Boolean!
 
     # 收藏或取消收藏作品
     #
@@ -331,6 +437,13 @@ type Mutation {
     # 2. 验证作品的有效性
     # 3. 返回值(true,收藏;false,未收藏)
     favoriteToggle(artId: ID!): Boolean!
+
+    # 收藏或取消收藏店铺
+    #
+    # 1. 需要`User`
+    # 2. 验证店铺的有效性
+    # 3. 返回值(true:收藏,false:未收藏)
+    storeFavoriteToggle(storeId: ID!): Boolean!
 
     # 修改配置
     #
@@ -358,15 +471,21 @@ type Mutation {
     # 盲盒铸造
     #
     # 1. 需要`User`
-    # 2. tokenId由合约自动生成，只需指定ArtId即可
-    # 3. 当 trade_type = Wx_Js_Api时，需要`open_id`
-    # 4. 当 价格为`0`时，不走微信支付，`open_id`设置为空
-    mintBlind(tradeType: TradeType!, openId: ID!, storeId: ID!): MintResult!
+    # 2. 验证是否为盲盒店铺
+    # 3. tokenId由合约生成，只需指定ArtId即可
+    # 4. 当 trade_type = Wx_Js_Api时，需要`open_id`
+    # 5. 当 价格为`0`时，不走微信支付，`open_id`设置为空
+    mintBlind(
+        tradeType: TradeType!
+        openId: ID!
+        storeId: ID!
+        count: Int!
+    ): MintResult!
 
     # 赠送
     #
     # 1. 需要`User`
-    transfer(toUsername: String!, nftId: ID!): String!
+    transfer(toPhoneNumber: String!, tokenId: ID!): String!
 
     # 出售
     sell(tokenId: ID!, price: Decimal!): String!
@@ -404,6 +523,7 @@ type Order {
     tradeType: TradeType!
     tradeAction: TradeAction!
     tradeReturn: JSON!
+    tradeExpired: DateTime!
     refundId: String
     refundWxId: String
     tx: String
@@ -417,8 +537,14 @@ type Order {
     # 下单店铺
     store: Store!
 
-    # 下单作品
-    art: Art!
+    # 所有作品
+    arts: [Art!]!
+
+    # 总金额(单位：元)
+    totalYuan: Decimal!
+
+    # 总金额(单位：分)
+    totalFen: Int!
 }
 
 # 创建订单结果
@@ -446,6 +572,12 @@ enum OrderFilter {
 
     # 退款中的订单（退款进行中，退款成功，退款异常，退款关闭）
     REFUND
+}
+
+type OrderPagedList {
+    list: [Order!]!
+    total: Int!
+    totalPages: Int!
 }
 
 # 订单最终状态（根据TradeState,TxState,RefundState 推导而来）
@@ -490,44 +622,7 @@ enum OrderState {
     UNKNOWN
 }
 
-type PagedArts {
-    list: [Art!]!
-    total: Int!
-    totalPages: Int!
-}
-
-# 内容分页列表
-type PagedContents {
-    list: [Content!]!
-    total: Int!
-    totalPages: Int!
-}
-
-type PagedFavorites {
-    list: [Favorite!]!
-    total: Int!
-    totalPages: Int!
-}
-
-type PagedOrder {
-    list: [Order!]!
-    total: Int!
-    totalPages: Int!
-}
-
-type PagedStores {
-    list: [Store!]!
-    total: Int!
-    totalPages: Int!
-}
-
-type PagedUsers {
-    list: [User!]!
-    total: Int!
-    totalPages: Int!
-}
-
-type Query {
+type QueryRoot {
     # 首页推荐信息
     top: TopInfo!
 
@@ -537,13 +632,13 @@ type Query {
     # 获取用户列表
     #
     # 1. 需要`Admin`
-    users(pageIndex: Int! = 0, pageSize: Int! = 20): PagedUsers!
+    users(pageIndex: Int! = 0, pageSize: Int! = 20): UserPagedList!
 
     # 提示内容
     content(key: String!): Content!
 
     # 内容列表
-    contents(pageIndex: Int! = 0, pageSize: Int! = 20): PagedContents!
+    contents(pageIndex: Int! = 0, pageSize: Int! = 20): ContentPagedList!
 
     # 获取类别列表
     categories: [Category!]!
@@ -556,7 +651,7 @@ type Query {
         includeHidden: Boolean! = true
         pageIndex: Int! = 0
         pageSize: Int! = 20
-    ): PagedStores!
+    ): StorePagedList!
 
     # 获取店铺信息
     store(storeId: ID!): Store!
@@ -565,16 +660,14 @@ type Query {
     storeStat(storeId: ID!): StoreStat!
 
     # 获取商店销售排行榜
-    #
     storeLadder(
-        cateId: ID!
+        cateId: ID
         queryType: StoreLadderQueryType!
+        includeHidden: Boolean!
         limit: Int! = 100
     ): [StoreLadderItem!]!
 
     # 获取作品列表
-    #
-    # 无法查询账户下Token信息，而无法查询Art信息
     arts(
         key: String
         storeId: ID
@@ -582,7 +675,7 @@ type Query {
         ascByPrice: Boolean! = false
         pageIndex: Int! = 0
         pageSize: Int! = 20
-    ): PagedArts!
+    ): ArtPagedList!
 
     # 查询单个Art的信息
     art(artId: ID!): Art!
@@ -600,7 +693,7 @@ type Query {
         filter: OrderFilter
         pageIndex: Int! = 0
         pageSize: Int! = 20
-    ): PagedOrder!
+    ): OrderPagedList!
 
     # 获取Nft列表
     #
@@ -610,12 +703,25 @@ type Query {
     # 用户是否收藏了作品
     #
     # 1. 需要`User`
-    favExists(userId: Int!, artId: String!): Boolean!
+    favoriteExists(artId: String!): Boolean!
 
-    # 获取Favorite列表
+    # 获取`Favorite`列表
     #
     # 1. 需要`User`
-    favorites(pageIndex: Int! = 0, pageSize: Int! = 20): PagedFavorites!
+    favoriteList(pageIndex: Int! = 0, pageSize: Int! = 20): FavoritePagedList!
+
+    # 用户是否收藏了店铺
+    #
+    # 1. 需要`User`
+    storeFavoriteExists(storeId: ID!): Boolean!
+
+    # 获取`StoreFavorite`列表
+    #
+    # 1. 需要`User`
+    storeFavoriteList(
+        pageIndex: Int! = 0
+        pageSize: Int! = 20
+    ): StoreFavoritePagedList!
 
     # 查询是否启用交易
     dealEnable: Boolean!
@@ -626,11 +732,13 @@ type Query {
     # 获取NFT的交易记录
     logs(nftId: ID!): [LogInfo!]!
 
-    # 从微信支付换取`open_id`
-    wxJsapiOpenId(code: String!): JSON!
+    # `code`换取`open_id`
+    #
+    # 1. 返回`open_id`信息的同时，顺带返回了与`open_id`绑定的登录信息
+    wxJsapiOpenId(target: WxJsApiTarget!, code: String!): JSON!
 
-    # 获取`jsapi`方式需要的`支付参数`
-    wxJsapiPayParams(prepayId: String!): JSON!
+    # 构建`jsapi`方式的`支付参数`
+    wxJsapiPayParams(target: WxJsApiTarget!, prepayId: String!): JSON!
 
     # 获取`native`方式需要的`付款地址`
     #
@@ -640,12 +748,39 @@ type Query {
     wxNativeCodeUrl(orderId: String!): OrderCreateResult!
 }
 
-input SignupInput {
-    # 用户名
-    username: String!
+type SigninInfo {
+    # 用户编号
+    id: ID!
 
-    # 密码
-    password: String!
+    # 通证
+    token: String!
+}
+
+input SigninSMSInput {
+    # 用户名（手机号）
+    phoneNumber: String!
+
+    # 短信验证码
+    verificationCode: String!
+}
+
+input SigninWxInput {
+    # 用户名（手机号）
+    phoneNumber: String!
+
+    # 微信开发者内的用户标识
+    openId: String!
+
+    # 短信验证码
+    verificationCode: String!
+}
+
+input SmsValidInput {
+    # 验证动作
+    action: ValidAction!
+
+    # 手机号
+    phoneNumber: String!
 }
 
 type Store {
@@ -663,6 +798,9 @@ type Store {
     # 外部链接（如：博客，官网等）
     externalLink: String!
 
+    # 版权链接
+    copyrightLink: String!
+
     # 商店内单个账户购买限制
     holdLimit: Int!
 
@@ -671,6 +809,9 @@ type Store {
 
     # 是否为隐藏店铺
     isHidden: Boolean!
+
+    # 开店时间
+    openingTime: DateTime!
 
     # 创建时间
     createdAt: DateTime!
@@ -686,6 +827,12 @@ type Store {
 
     # 作品数量
     artCount: Int!
+
+    # 总发行量
+    totalSupply: Int!
+
+    # 最低价
+    minPrice: Decimal!
 }
 
 input StoreAddInput {
@@ -702,19 +849,42 @@ input StoreAddInput {
     description: String!
 
     # 图像
-    icon: Upload!
+    icon: Upload
 
     # 广告图片
-    banner: Upload!
+    banner: Upload
 
     # 外部链接
     externalLink: String!
+
+    # 版权链接
+    copyrightLink: String!
 
     # 店内购买限制
     holdLimit: Int!
 
     # 是否为盲盒店铺
     isBlind: Boolean!
+
+    # 开店时间
+    openingTime: DateTime!
+}
+
+type StoreFavorite {
+    # 收藏时间
+    addedAt: DateTime!
+
+    # 收藏者
+    user: UserDetail!
+
+    # 收藏店铺
+    store: Store!
+}
+
+type StoreFavoritePagedList {
+    list: [StoreFavorite!]!
+    total: Int!
+    totalPages: Int!
 }
 
 type StoreLadderItem {
@@ -763,6 +933,12 @@ enum StoreLadderQueryType {
     ALL_TIME
 }
 
+type StorePagedList {
+    list: [Store!]!
+    total: Int!
+    totalPages: Int!
+}
+
 type StoreStat {
     # 发行数量
     items: Int!
@@ -794,6 +970,14 @@ input StoreUpdateBannerInput {
     banner: Upload!
 }
 
+input StoreUpdateHiddenInput {
+    # 编号
+    id: ID!
+
+    # 是否为隐藏店铺
+    isHidden: Boolean!
+}
+
 input StoreUpdateIconInput {
     # 编号
     id: ID!
@@ -818,8 +1002,14 @@ input StoreUpdateInput {
     # 外部链接
     externalLink: String!
 
+    # 版权链接
+    copyrightLink: String!
+
     # 店内购买限制
     holdLimit: Int!
+
+    # 开店时间
+    openingTime: DateTime!
 }
 
 type TopInfo {
@@ -834,6 +1024,9 @@ type TopInfo {
 enum TradeAction {
     # 铸造
     MINT
+
+    # 随机批量铸造
+    MINT_BLIND
 
     # 购买
     BUY
@@ -853,8 +1046,8 @@ type User {
     # 编号
     id: ID!
 
-    # 用户名
-    username: String!
+    # 手机号
+    phoneNumber: String!
 
     # 角色
     role: UserRole!
@@ -900,6 +1093,12 @@ type UserExt {
     email: String
 }
 
+type UserPagedList {
+    list: [User!]!
+    total: Int!
+    totalPages: Int!
+}
+
 # 用户角色
 enum UserRole {
     # 超级管理员
@@ -910,4 +1109,18 @@ enum UserRole {
 
     # 普通用户
     USER
+}
+
+# 请求验证码动作
+enum ValidAction {
+    # 注册
+    SIGNIN
+}
+
+enum WxJsApiTarget {
+    # 微信网页
+    WEB
+
+    # 小程序
+    MINI_PROGRAM
 }

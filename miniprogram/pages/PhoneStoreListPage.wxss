@@ -1,0 +1,27 @@
+.phone-explore-list {
+    display: inline-flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 93vw;
+    margin-bottom: 16vw;
+}
+
+.item-iii {
+    position: absolute;
+    top: 0.7vw;
+}
+
+.view-border-base-layout {
+    position: relative;
+    height:83.33vw;
+    /*background: red;*/
+    display: flex;
+    flex-direction: column;
+}
+
+.fixTop {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+}

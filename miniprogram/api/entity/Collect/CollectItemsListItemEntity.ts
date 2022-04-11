@@ -18,7 +18,8 @@ export class CollectCardDataEntity {
     public isShowSupple: boolean = false;
     public isShowNumber: boolean = false;
     public supple: number = 0;
-    public maxSupply: string = "10000";
+    public maxSupply: number = 10000;
     public index: number = 0;       /// 索引
     public category: string = "";   /// 分类
+    public category_name: string = "";
 }

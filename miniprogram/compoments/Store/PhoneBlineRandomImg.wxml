@@ -1,5 +1,7 @@
 <block wx:for="{{data}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
-    <image mode="aspectFill" show-menu-by-longpress class="phone-blind-random-img"
+    <image lazy-load="true" mode="aspectFill" show-menu-by-longpress
+           class="phone-blind-random-img animate__animated animate__fadeIn animate__faster"
            id="phone-blind-random-img-id"
-           src="{{item.headerImg}}" bindload="onLoadingSuccess" data-index="{{index}}" style="{{styles[index]}}"></image>
+           src="{{item.headerImg}}" bindload="onLoadingSuccess" data-index="{{index}}"
+           style="{{styles[index]}}"></image>
 </block>

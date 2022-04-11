@@ -1,0 +1,84 @@
+<scroll-view
+        scroll-y="true"
+        enhanced
+        show-scrollbar="false"
+        bindscrolltolower="bindDownLoad"
+        id="b-base" class="base animate__animated animate__fadeInDownBig animate__faster" style="{{hotScrollHeight}}">
+    <!--    <scroll-view scroll-y="true" class="scroll">-->
+    <view wx:if="{{top.topStores.length == 0 && stores.list == 0}}" style="padding-top:20vw;">
+        <PhoneNothing></PhoneNothing>
+    </view>
+
+    <block wx:for="{{lst}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+        <view class="item" style="margin-bottom:4.17vw;"
+              bindtap="gotoStore" data-id="{{item.id}}">
+            <view style="margin-left:4.165vw; margin-top:4.165vw;">
+                <view class="store-img">
+                    <LoadingImg
+                            src="{{item.storeBanner}}"
+                            stylee="width: 87.5vw;height: 87.5vw;border-radius: 4vw;"
+                            lazy-load="true"
+                            class="store-img"
+                            anim="animate__animated animate__jackInTheBox animate__faster"
+                            mode="aspectFill">
+                    </LoadingImg>
+                    <view wx:if="{{item.buyStatus==0}}" class="now-can-buy">
+                        <image mode="aspectFill" class="now-can-buy-hot-img" src="{{hotUrl}}" lazy-load="true"></image>
+                        <view class="now-can-buy-txt">正在售卖</view>
+                    </view>
+                    <view wx:if="{{item.buyStatus==1}}" class="now-can-buy">
+                        <image mode="aspectFill" class="now-can-buy-hot-img" src="{{hotUrl}}" lazy-load="true"></image>
+                        <view class="now-can-buy-txt">即将开售 {{item.theSale}}</view>
+                    </view>
+                </view>
+                <view class="store-name" style="margin-top:4.6vw;">{{item.name}}</view>
+                <view class="line" style="margin-top:5.42vw;">
+                    <view class="xianliang">限量</view>
+                    <view class="yiwan-fen">{{item.totalSupply}}份</view>
+                </view>
+                <view class="line" style="margin-top:3.33vw; margin-bottom:4.17vw;">
+                    <LoadingImg
+                            lazy-load="true"
+                            class="header"
+                            mode="aspectFill"
+                            stylee="width: 5.6vw;height: 5.6vw;background: #000203;border: 0px solid #C7C8C8;border-radius: 2.8vw"
+                            src="{{item.storeBanner}}">
+                    </LoadingImg>
+                    <view class="small-name" style="margin-left:0.6vw;">{{item.description}}</view>
+                    <view class="hot-price-layout-flex1">
+                        <view class="hot-price-layout-1">¥</view>
+                        <view class="price" style="margin-right:4vw;">{{item.minPrice}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </block>
+
+    <view style="margin-bottom:5vw">
+        <!--    <FootMsg ></FootMsg>-->
+    </view>
+
+    <!--    <block wx:for="{{stores.list}}" wx:for-item="item" wx:for-index="index" wx:key="unique">-->
+    <!--        <view class="item" style="margin-bottom:4.17vw;" bindtap="gotoStore" data-id="{{item.id}}">-->
+    <!--            <view style="margin-left:4.165vw; margin-top:4.165vw;">-->
+    <!--                <view class="store-img">-->
+    <!--                    <image lazy-load="true" class="store-img" mode="aspectFill" src="{{storeBanner2[index]}}"></image>-->
+    <!--                </view>-->
+    <!--                <view class="store-name" style="margin-top:4.6vw;">{{item.name}}</view>-->
+    <!--                <view class="line" style="margin-top:5.42vw;">-->
+    <!--                    <view class="xianliang">限量</view>-->
+    <!--                    <view class="yiwan-fen">{{item.totalSupply}}份</view>-->
+    <!--                </view>-->
+    <!--                <view class="line" style="margin-top:3.33vw; margin-bottom:4.17vw;">-->
+    <!--                    <image lazy-load="true" class="header" mode="aspectFill" src="{{storeBanner[index]}}"></image>-->
+    <!--                    <view class="small-name" style="margin-left:0.6vw;">{{item.description}}</view>-->
+    <!--                    <view class="hot-price-layout-flex1">-->
+    <!--                        <view class="hot-price-layout-1">¥</view>-->
+    <!--                        <view class="price" style="margin-right:4vw;">{{item.minPrice}}</view>-->
+    <!--                    </view>-->
+    <!--                </view>-->
+    <!--            </view>-->
+    <!--        </view>-->
+    <!--    </block>-->
+    <!--    </scroll-view>-->
+</scroll-view>

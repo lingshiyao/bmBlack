@@ -8,5 +8,6 @@
 .phone-foot-title {
     display: inline-block;
     font-size: 3vw;
+    color: #888888;
 }
 

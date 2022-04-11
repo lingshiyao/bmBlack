@@ -1,1 +1,10 @@
+.abs {
+    position: fixed;
+    top: 0;
+    z-index: 99999999;
+}
 
+.page {
+    /*height:100vh;*/
+    background: #1f1f1f;
+}

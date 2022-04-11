@@ -17,14 +17,15 @@ export class PublicUtils {
         return true;
     }
 
-    /**
-     * 手机跳转到login页面
-     */
-    public static ifGotoLogin() {
-        wx.reLaunch({
-            url: '/pages/PhoneLogin',
-        })
-    }
+    // /**
+    //  * 手机跳转到login页面
+    //  */
+    // public static ifGotoLogin() {
+    //     WXUtils.gotoLogin();
+    //     // wx.navigateTo({
+    //     //     url: '/pages/PhoneLoginNew',
+    //     // })
+    // }
 
     /**
      * 获取uuid

@@ -1,3 +1,4 @@
+@import '/common/animate.wxss';
 
 .grid {
     display: grid;
@@ -8,5 +9,5 @@
 }
 
 .my-colleciton {
-    margin-bottom: 15vw;
+    /*margin-bottom: 15vw;*/
 }

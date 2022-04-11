@@ -1,3 +1,4 @@
+@import '/common/animate.wxss';
 
 .creation {
     background: #1f1f1f;
@@ -74,7 +75,7 @@
 .btn {
     width: 5vw;
     height: 5vw;
-    background: #FDD3A1;
+    /*background: #FDD3A1;*/
     border-radius: 2.5vw;
     margin-top: 19.8vw;
 }

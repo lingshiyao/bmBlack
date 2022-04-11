@@ -4,6 +4,7 @@
     flex-direction: column;
     width: 100vw;
     align-items: center;
+    margin-top: 10vw;
 }
 
 .area {
@@ -16,4 +17,5 @@
     padding: 5vw;
     text-align: left;
     font-size: 3.733vw;
+    color: #aaaaaa;
 }

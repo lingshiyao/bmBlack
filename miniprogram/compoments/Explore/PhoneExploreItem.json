@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
+    "LoadingImg": "/compoments/Global/LoadingImg",
     "LoadingImg": "/compoments/Global/LoadingImg"
   }
 }

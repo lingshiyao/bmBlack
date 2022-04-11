@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "PhoneTitle": "/compoments/Global/PhoneTitle",
+    "PhoneExploreItem": "/compoments/Explore/PhoneExploreItem",
+    "PhoneStoreItem": "/compoments/Store/PhoneStoreItem",
+    "PhoneNothing": "/compoments/Global/PhoneNothing"
+  }
+}

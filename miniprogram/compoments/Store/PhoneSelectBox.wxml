@@ -1,23 +1,20 @@
-<view>
     <view class="s-s-s" wx:if="{{isShowMenu === false}}" bindtap="showMenuAction" data-key="" data-id="" data-index="0">
-        <image show-menu-by-longpress wx:if="{{menuData.showImg === true}}" class="select-box-img"
-               src="{{leftImg}}"></image>
         <view class="select-box-title">
             {{fistTitle}}
         </view>
-        <image show-menu-by-longpress class="select-box-more" src="{{menuMoreImg}}"></image>
+        <image lazy-load="true" show-menu-by-longpress class="select-box-more" src="{{menuMoreImg}}"></image>
     </view>
     <view class="select-box-bg" wx:if="{{isShowMenu === true}}" onMouseleave="{{disMiss}}">
-        <view class="select-box-button" wx:for="{{menuData.menu}}" wx:for-item="item" wx:for-index="index"
+        <view class="select-box-button" wx:for="{{menuData.menu}}" wx:for-item="item" wx:for-index="index" wx:key="unique"
               bindtap="menuAction" data-item="{{item}}" data-index="{{index}}">
-            <image show-menu-by-longpress wx:if="{{menuData.showImg === true && index === 0}}"
-                   class="select-box-img"
-                   src="{{leftImg}}"></image>
+<!--            <image lazy-load="true" show-menu-by-longpress wx:if="{{menuData.showImg === true && index === 0}}"-->
+<!--                   class="select-box-img"-->
+<!--                   src="{{leftImg}}"></image>-->
             <view class="select-box-title">
                 {{ item }}
             </view>
-            <image show-menu-by-longpress class="select-box-more" src="{{menuMoreImg}}"
+<!--            <view style="margin-top:2vw;"></view>-->
+            <image lazy-load="true" show-menu-by-longpress class="select-box-more-more" src="{{menuMoreImg}}"
                    wx:if="{{index === 0}}"></image>
         </view>
     </view>
-</view>

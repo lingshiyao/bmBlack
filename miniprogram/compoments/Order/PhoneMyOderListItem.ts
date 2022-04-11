@@ -1,7 +1,7 @@
 import {PublicUtils} from "../../api/utils/PublicUtils";
 import {request} from "../../api/Api";
 import {ImgPathUtils} from "../../api/utils/ImgPathUtils";
-import {Order} from "../../api/net/gql/graphql";
+import {Order, WxJsApiTarget} from "../../api/net/gql/graphql";
 import {Utils} from "../../api/utils/Utils";
 import {WXUtils} from "../../api/utils/WXUtils";
 
@@ -12,7 +12,7 @@ Component({
         orderStatus: "",
         name: "",
         src: "",
-        date: ""
+        date: "",
     },
     methods: {
         async goToPay() {
@@ -26,8 +26,12 @@ Component({
                 }
             } else {
                 if (PublicUtils.isWeChat()) {
-                    await wx.showLoading({title: ""})
-                    const wxJsapiPayParams = await request.wxJsapiPayParams2({prepayId: this.properties.order.tradeReturn.prepay_id.toString()})
+                    await wx.showLoading({title: "加载中..."})
+                    const wxJsapiPayParams = await request.wxJsapiPayParams({
+                        prepayId: this.properties.order.tradeReturn.prepay_id.toString(),
+                        target: WxJsApiTarget.MiniProgram
+                    })
+                    console.log(wxJsapiPayParams)
                     const pay = await WXUtils.pay(wxJsapiPayParams);
                     await wx.hideLoading()
                     if (pay.success) {
@@ -51,111 +55,119 @@ Component({
             }
         }, goToInfo() {
             wx.navigateTo({
-                url: `/pages/PhoneInfoPage?id=${this.properties.order.arts[0].id}&sid=${this.properties.order.store.id}`
+                url: `/pages/PhoneInfoPage?id=${this.properties.order.arts[0].id}&sid=${this.properties.order.store.id}&isFromOrder=${this.properties.isFromOrder}`
             })
         }, getOrderStatus(tradeState: string) {
+            //console.log(tradeState)
             switch (tradeState) {
                 case "WAIT_FOR_PAYMENT_NOT_PAY":
                     let getColor_2996075e: any = this.data.getColor;
-                    getColor_2996075e = "width: 15.6vw; color: #FDD3A1";
+                    getColor_2996075e = "color: #692D0B; background:#FDD3A1;";
                     this.setData({
                         'getColor': getColor_2996075e
                     });
+                    //console.log("here")
                     return "未支付";
                 case "WAIT_FOR_PAYMENT_USER_PAYING":
                     let getColor_fb249e71: any = this.data.getColor;
-                    getColor_fb249e71 = "width: 15.6vw; color: #FDD3A1";
+                    getColor_fb249e71 = "color: #692D0B; background:#FDD3A1;";
                     this.setData({
                         'getColor': getColor_fb249e71
                     });
                     return "支付中";
                 case "WAIT_FOR_PAYMENT_PAY_ERROR":
                     let getColor_88f6d49c: any = this.data.getColor;
-                    getColor_88f6d49c = "width: 15.6vw; color: #FF4B36";
+                    getColor_88f6d49c = "color: red; background:#353535;";
                     this.setData({
                         'getColor': getColor_88f6d49c
                     });
                     return "支付失败";
                 case "WAIT_FOR_TRANSACTION_NONE":
                     let getColor_b9335954: any = this.data.getColor;
-                    getColor_b9335954 = "width: 15.6vw; color: #2081E2";
+                    getColor_b9335954 = "color: blue; background:#353535;";
                     this.setData({
                         'getColor': getColor_b9335954
                     });
                     return "等待上链";
                 case "WAIT_FOR_TRANSACTION_PENDING":
                     let getColor_c57888e8: any = this.data.getColor;
-                    getColor_c57888e8 = "width: 15.6vw; color: #2081E2";
+                    getColor_c57888e8 = "color: blue; background:#353535;";
                     this.setData({
                         'getColor': getColor_c57888e8
                     });
                     return "上链中";
                 case "WAIT_FOR_TRANSACTION_FAILED":
                     let getColor_58fc78ec: any = this.data.getColor;
-                    getColor_58fc78ec = "width: 15.6vw; color: #FF4B36";
+                    getColor_58fc78ec = "color: red; background:#353535;";
                     this.setData({
                         'getColor': getColor_58fc78ec
                     });
                     return "上链失败";
                 case "SUCCESS":
                     let getColor_9b26cfd6: any = this.data.getColor;
-                    getColor_9b26cfd6 = "width:14vw; color: #FDD3A1; background:#353535;";
+                    getColor_9b26cfd6 = "color: #FDD3A1; background:#353535;";
                     this.setData({
                         'getColor': getColor_9b26cfd6
                     });
-                    return "成功";
+                    return "已成功";
                 case "CLOSED":
                     let getColor_b93202f5: any = this.data.getColor;
-                    getColor_b93202f5 = "width:14vw; color: #666666; background:#353535;";
+                    getColor_b93202f5 = "color: #535353; background:#353535;";
                     this.setData({
                         'getColor': getColor_b93202f5
                     });
-                    return "关闭";
+                    return "订单关闭";
                 case "REFUND_PROCESSING":
                     let getColor_2f617461: any = this.data.getColor;
-                    getColor_2f617461 = "width: 15.6vw; color: #00A3FB";
+                    getColor_2f617461 = "color: blue; background:#353535;";
                     this.setData({
                         'getColor': getColor_2f617461
                     });
                     return "退款处理中";
                 case "REFUND_SUCCESS":
                     let getColor_23564f4f: any = this.data.getColor;
-                    getColor_23564f4f = "width: 15.6vw; color: #00A3FB";
+                    getColor_23564f4f = "color: blue; background:#353535;";
                     this.setData({
                         'getColor': getColor_23564f4f
                     });
                     return "退款成功";
                 case "REFUND_CLOSED":
                     let getColor_0a690e5c: any = this.data.getColor;
-                    getColor_0a690e5c = "width: 15.6vw; color: #646464;";
+                    getColor_0a690e5c = "color: #535353; background:#353535;";
                     this.setData({
                         'getColor': getColor_0a690e5c
                     });
                     return "退款关闭";
                 case "REFUND_ABNORMAL":
                     let getColor_ad01aacc: any = this.data.getColor;
-                    getColor_ad01aacc = "width: 15.6vw; color: #FF4B36";
+                    getColor_ad01aacc = "color: red; background:#353535;";
                     this.setData({
                         'getColor': getColor_ad01aacc
                     });
                     return "退款异常";
                 case "UNKNOWN":
                     let getColor_0400ee74: any = this.data.getColor;
-                    getColor_0400ee74 = "width: 15.6vw; color: #FF4B36";
+                    getColor_0400ee74 = "color: red; background:#353535;";
                     this.setData({
                         'getColor': getColor_0400ee74
                     });
                     return "未知错误";
                 default:
                     let getColor_15cab551: any = this.data.getColor;
-                    getColor_15cab551 = "width: 15.6vw; color: #646464";
+                    getColor_15cab551 = "color: red; background:#353535;";
                     this.setData({
                         'getColor': getColor_15cab551
                     });
                     return "状态";
             }
         }
-    }, properties: {order: Object}, ready() {
+    }, properties: {
+        order: Object,
+        isFromOrder: {
+            type: Boolean,
+            value: false
+        }
+    }, ready() {
         let id_a4f5b896: any = this.data.id;
         id_a4f5b896 = `phone_order_item_img${PublicUtils.generateUUID()}`;
         this.setData({

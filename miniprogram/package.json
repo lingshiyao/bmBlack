@@ -5,6 +5,7 @@
   "license": "MIT",
   "devDependencies": {},
   "dependencies": {
+    "three": "^0.139.2",
     "uuid": "^8.3.2"
   }
 }

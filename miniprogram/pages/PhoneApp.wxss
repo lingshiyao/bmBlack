@@ -1,1 +1,22 @@
+@import '/common/animate.wxss';
+
+.base-b {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.test {
+    background: blue;
+    /*height: 333vw;*/
+    flex: 1;
+}
+
+
+.abs {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    z-index: 999999;
+}
 

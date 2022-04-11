@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "FootMsg": "/compoments/Tabbar/FootMsg"
+    "FootMsg": "/compoments/Tabbar/FootMsg",
+    "PhoneTitle": "/compoments/Global/PhoneTitle"
   }
 }

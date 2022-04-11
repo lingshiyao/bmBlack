@@ -1,3 +1,4 @@
+@import '/common/animate.wxss';
 
 .phone-blind-random-img {
     width: 87.5vw;

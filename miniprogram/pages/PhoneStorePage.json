@@ -6,6 +6,8 @@
     "PhoneStoreArtList": "/compoments/Store/PhoneStoreArtList",
     "PhoneBlindBox": "/compoments/Store/PhoneBlindBox",
     "PhoneBlindBottom": "/compoments/Store/PhoneBlindBottom",
-    "PhoneTitle": "/compoments/Global/PhoneTitle"
+    "PhoneTitle": "/compoments/Global/PhoneTitle",
+    "PhoneBlindBoxBlack": "/compoments/Store/PhoneBlindBoxBlack",
+    "PhoneModelPay": "/compoments/Global/PhoneModelPay"
   }
 }

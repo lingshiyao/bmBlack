@@ -1,9 +1,22 @@
 <view class="b-b">
-    <view class="base">
-        <view class="tabbar">
-            <image data-index="0" bindtap="tabberAction" style="margin-left:12vw;" class="icon" mode="aspectFill" src="{{homeUrl}}"></image>
-            <image data-index="3" bindtap="tabberAction" style="margin-right:12vw;" class="icon" mode="aspectFill" src="{{mimeUrl}}"></image>
-        </view>
-        <image bindtap="tabberAction" data-index="2" mode="aspectFill" class="center" src="{{centerUrl}}"></image>
+<view class="base">
+    <view class="tabbar">
+        <image lazy-load="true" wx:if="{{choose==0}}" data-index="0" bindtap="tabberAction"
+               style="margin-left:12vw;" class="icon"
+               mode="aspectFill" src="{{homeUrlNoChoose}}"></image>
+        <image lazy-load="true" wx:else data-index="0" bindtap="tabberAction" style="margin-left:12vw;" class="icon"
+               mode="aspectFill" src="{{homeUrl}}"></image>
+        <image lazy-load="true" wx:if="{{choose==3}}" data-index="3" bindtap="tabberAction"
+               style="margin-right:12vw;" class="icon"
+               mode="aspectFill" src="{{mimeUrlNoChoose}}"></image>
+        <image lazy-load="true" wx:else data-index="3" bindtap="tabberAction" style="margin-right:12vw;"
+               class="icon"
+               mode="aspectFill" src="{{mimeUrl}}"></image>
     </view>
+    <image lazy-load="true" wx:if="{{choose==2}}" bindtap="tabberAction" data-index="2" mode="aspectFill"
+           class="center"
+           src="{{centerUrl}}"></image>
+    <image lazy-load="true" wx:else bindtap="tabberAction" data-index="2" mode="aspectFill" class="center"
+           src="{{centerUrlNoChoose}}"></image>
+</view>
 </view>

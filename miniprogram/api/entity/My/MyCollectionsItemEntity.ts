@@ -18,6 +18,8 @@ export class MyCollectionsItemEntity {
     /// artCount: Int!
     public artCount: string = "";
 
+    public category: string = "";
+
     public static init(banner: string, headerImg: string, name: string, description: string, artCount: string, id: string): MyCollectionsItemEntity {
         const self = new MyCollectionsItemEntity();
         self.banner = banner;

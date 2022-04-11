@@ -2,9 +2,10 @@
     <view class="phone-tabbar-item-list" wx:for="{{data}}" wx:for-item="item"
           wx:for-index="index" wx:key="unique">
         <view class="phone-tabbar-item" bindtap="tabberAction" data-index="{{index}}">
-            <image show-menu-by-longpress wx:if="{{!item.isSelect}}" class="phone-tabbar-item-img"
+            <image lazy-load="true" show-menu-by-longpress wx:if="{{!item.isSelect}}" class="phone-tabbar-item-img"
                    src="{{item.img}}"/>
-            <image show-menu-by-longpress wx:else class="phone-tabbar-item-img" src="{{item.select_img}}"/>
+            <image lazy-load="true" show-menu-by-longpress wx:else class="phone-tabbar-item-img"
+                   src="{{item.select_img}}"/>
             <view class="phone-tabbar-item-title" style="{{item.isSelect?'color:#1E1E1E':'color:#C8C8C8'}}">
                 {{ item.title }}
             </view>

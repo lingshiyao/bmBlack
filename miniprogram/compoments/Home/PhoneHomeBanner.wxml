@@ -1,6 +1,7 @@
 <view class="phone-home-banner">
     <view class="phone-home-banner-img" bindtap="goToPage" data-index="0">
-        <LoadingImg border="border-radius: 3vw 3vw 0vw 0vw;" class="phone-home-banner-img" show-menu-by-longpress id="phone-home-banner-img"
+        <LoadingImg stylee="border-radius: 3vw 3vw 0vw 0vw;" class="phone-home-banner-img" show-menu-by-longpress
+                    id="phone-home-banner-img"
                     src="{{bannerData.bannerImgUrl}}"></LoadingImg>
     </view>
     <view class="phone-home-banner-title">
@@ -18,7 +19,7 @@
         </view>
     </view>
     <view class="phone-home-banner-notif-box" style="text-align:left">
-        <image show-menu-by-longpress class="phone-home-banner-notif-img" src="{{src}}"></image>
+        <image lazy-load="true" show-menu-by-longpress class="phone-home-banner-notif-img" src="{{src}}"></image>
         <view class="phone-home-banner-notif-title">
             了解有关数字交换的更多信息
         </view>

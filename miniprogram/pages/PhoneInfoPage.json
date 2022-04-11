@@ -6,6 +6,7 @@
     "PhoneInfoAttrutie": "/compoments/Info/PhoneInfoAttrutie",
     "PhoneInfoIntroduction": "/compoments/Info/PhoneInfoIntroduction",
     "PhoneInfoBottom": "/compoments/Info/PhoneInfoBottom",
-    "PhoneTitle": "/compoments/Global/PhoneTitle"
+    "PhoneTitle": "/compoments/Global/PhoneTitle",
+    "LoadingImg": "/compoments/Global/LoadingImg"
   }
 }

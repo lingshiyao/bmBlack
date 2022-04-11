@@ -1,0 +1,29 @@
+<view>
+    <view wx:if="{{isShow}}" class="bg" bindtap="cancel"></view>
+    <view wx:if="{{isShow}}" class="pos">
+        <view class="tips">
+            <view class="title">
+                订单详情
+            </view>
+            <view class="shuliang-layout-base">
+                <view class="txt-heji">数量</view>
+                <view class="add-sub-layout-group">
+                    <image class="add-btn-b" bindtap="sub" src="{{picSub}}"></image>
+                    <view class="number-total">{{num}}</view>
+                    <image class="add-btn-b" bindtap="add" src="{{picAdd}}"></image>
+                </view>
+            </view>
+            <view class="heji-layout-base">
+                <view class="txt-heji">合计</view>
+                <view class="price-layout">
+                    <view class="price-ppp-yang">¥</view>
+                    <view class="price-ppp">{{num * price}}</view>
+                </view>
+            </view>
+            <view class="pay-btns-layout">
+                <view class="ttt-cancel-pay" bindtap="cancel">取消订单</view>
+                <view class="ttt-pay-pay" bindtap="submit">立即支付</view>
+            </view>
+        </view>
+    </view>
+</view>

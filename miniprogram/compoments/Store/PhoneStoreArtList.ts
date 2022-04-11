@@ -1,10 +1,14 @@
 import {CollectCardDataEntity} from "../../api/entity/Collect/CollectItemsListItemEntity";
 import {SelectBoxEntity} from "../../api/entity/Tools/SelectBoxEntity";
+import {CollectBannerEntity} from "../../api/entity/Collect/CollectBannerEntity";
 
 Component({
     data: {
         selectBoxData: new SelectBoxEntity()
     }, methods: {
+        async bindDownLoad() {
+
+        },
         clickCallBack(event: any) {
             const json = event.detail;
             const key: string = json.key;
@@ -29,6 +33,9 @@ Component({
     }, properties: {
         data: {
             type: Array, value: new Array<CollectCardDataEntity>()
+        },
+        bannerData: {
+            type: Object, value: new CollectBannerEntity()
         }
     }, ready() {
         let selectBoxData_c01d026c: any = this.data.selectBoxData;
@@ -36,5 +43,11 @@ Component({
         this.setData({
             'selectBoxData': selectBoxData_c01d026c
         });
-    }, observers: {}
+    }, observers: {
+        'data': function (data) {
+            //////////////console.log(data)
+        }, 'bannerData': function (bannerData) {
+            //////////////console.log(bannerData)
+        }
+    }
 });

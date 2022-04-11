@@ -1,11 +1,10 @@
 import {CollectBannerEntity} from "../api/entity/Collect/CollectBannerEntity";
 import {CollectCardDataEntity} from "../api/entity/Collect/CollectItemsListItemEntity";
 import {PublicUtils} from "../api/utils/PublicUtils";
-import {UserSet} from "../api/storage/UserSet";
 import {request} from "../api/Api";
 import {ImgPathUtils} from "../api/utils/ImgPathUtils";
 import {weiXinPayInit} from "../api/net/WeiXinPay";
-import {TradeType} from "../api/net/gql/graphql";
+import {TradeType, WxJsApiTarget} from "../api/net/gql/graphql";
 import {WXUtils} from "../api/utils/WXUtils";
 
 /////
@@ -23,16 +22,17 @@ Page({
         bannerData: new CollectBannerEntity(),
         collectData: new Array<CollectCardDataEntity>(),
         total: 0,
-        options: NULL
+        options: NULL,
+        store: NULL
     }, async initOpenId() {
         // FIXME
         // const wxCode = WxPay.getWxCode(window.location.href);
         const login = await WXUtils.login();
         const wxCode = login.code.toString();
         if (wxCode) {
-            const wxJsapiOpenId = await request.wxJsapiOpenId2({code: wxCode});
+            const wxJsapiOpenId = await request.wxJsapiOpenId({code: wxCode, target: WxJsApiTarget.MiniProgram});
             if (wxJsapiOpenId) {
-                openId = wxJsapiOpenId.openid;
+                openId = wxJsapiOpenId.response.openid;
             } else {
                 wx.showToast({
                     title: '出错', icon: 'error', duration: 2000
@@ -62,59 +62,32 @@ Page({
         const storeId = this.data.options.id;
         const store = await request.store({storeId: <string>storeId});
         if (store) {
-            let bannerData_598de07a: any = this.data.bannerData;
-            bannerData_598de07a.introduction = store.description;
             this.setData({
-                'bannerData': bannerData_598de07a
-            });
-            let bannerData_1032d5cf: any = this.data.bannerData;
-            bannerData_1032d5cf.projectName = store.name;
+                store: store
+            })
+            //////////console.log(store)
+            const bannerDataT = this.data.bannerData;
+            bannerDataT.introduction = store.description;
+            bannerDataT.projectName = store.name;
+            bannerDataT.projectAuthor = store.user.user.username;
+            bannerDataT.projectTime = store.updatedAt.toString();
+            bannerDataT.uid = store.user.user.id;
+            bannerDataT.storeId = store.id;
+            bannerDataT.url = store.externalLink;
+            bannerDataT.isBlind = store.isBlind;
+            bannerDataT.headerImg = ImgPathUtils.getSIcon(store.id);
+            bannerDataT.banner = ImgPathUtils.getSBanner(store.id);
+            if (store.user.userExt.intro)
+                bannerDataT.userExtIntro = store.user.userExt.intro;
+            if (store.user.userExt.nickname)
+                bannerDataT.userExtNickName = store.user.userExt.nickname;
             this.setData({
-                'bannerData': bannerData_1032d5cf
-            });
-            let bannerData_95e2f2c5: any = this.data.bannerData;
-            bannerData_95e2f2c5.projectAuthor = store.user.user.username;
-            this.setData({
-                'bannerData': bannerData_95e2f2c5
-            });
-            let bannerData_11331145: any = this.data.bannerData;
-
-            // FIXME
-            // bannerData_11331145.projectTime = dateFormat(store.updatedAt, "yyyy-mm-dd HH:MM:ss");
-            bannerData_11331145.projectTime = store.updatedAt.toString();
-            this.setData({
-                'bannerData': bannerData_11331145
-            });
-            let bannerData_2482fee2: any = this.data.bannerData;
-            bannerData_2482fee2.uid = store.user.user.id;
-            this.setData({
-                'bannerData': bannerData_2482fee2
-            });
-            let bannerData_dea64610: any = this.data.bannerData;
-            bannerData_dea64610.url = store.externalLink;
-            this.setData({
-                'bannerData': bannerData_dea64610
-            });
-            let bannerData_4d40f2b8: any = this.data.bannerData;
-            bannerData_4d40f2b8.isBlind = store.isBlind;
-            this.setData({
-                'bannerData': bannerData_4d40f2b8
-            });
-
+                bannerData: bannerDataT
+            })
             if (this.data.bannerData.isBlind === true) {
                 await this.initOpenId();
                 await weiXinPayInit();
             }
-            let bannerData_0863b993: any = this.data.bannerData;
-            bannerData_0863b993.headerImg = ImgPathUtils.getSIcon(store.id);
-            this.setData({
-                'bannerData': bannerData_0863b993
-            });
-            let bannerData_7541faab: any = this.data.bannerData;
-            bannerData_7541faab.banner = ImgPathUtils.getSBanner(store.id);
-            this.setData({
-                'bannerData': bannerData_7541faab
-            });
         } else {
             wx.showToast({
                 title: '出错了', icon: 'error', duration: 2000
@@ -147,6 +120,7 @@ Page({
             });
         }
     }, getStoreArts: async function (key: string, pageIndex: number) {
+        ////////////////////console.log("getStoreArts")
         const storeId = this.data.options.id;
         var ascByPrice = false;
         if (key === "false" || key === "true") {
@@ -158,14 +132,15 @@ Page({
             key = "";
         }
         const arts = await request.arts({
-            ascByPrice: ascByPrice, key: key, pageIndex: pageIndex, pageSize: 1000, storeId: storeId
+            ascByPrice: ascByPrice,
+            key: key,
+            pageIndex: pageIndex,
+            pageSize: 1000,
+            storeId: storeId,
         })
-        let collectData_7f6f2d2e: any = this.data.collectData;
-        collectData_7f6f2d2e = [];
-        this.setData({
-            'collectData': collectData_7f6f2d2e
-        });
         if (arts) {
+
+            const collectDataT = [];
             for (let index = 0; index < arts.list.length; index++) {
                 const val = new CollectCardDataEntity();
                 val.name = arts.list[index].name;
@@ -175,30 +150,26 @@ Page({
                 val.author = arts.list[index].stores[0].name;
                 val.category = arts.list[index].stores[0].category.name;
                 if (arts.list[index].supplied >= arts.list[index].maxSupply) val.isShowSupple = true;
-                val.supple = arts.list[index].maxSupply;
+                val.maxSupply = arts.list[index].maxSupply;
+                val.supple = arts.list[index].supplied;
                 val.id = arts.list[index].id;
                 val.price = arts.list[index].mintPrice;
                 val.like = arts.list[index].favCount.toString();
                 val.headerImg = ImgPathUtils.getMedia(arts.list[index].id);
-                console.log(val.price)
-                // FIXME
-                // if (!openId && Number.parseFloat(val.price) > 0 && (val.supple - arts.list[index].supplied > 0) && this.data.bannerData.isBlind && PublicUtils.isWeChat()) {
-                //     // const storeId = <string>this.data.options.id;
-                //     // location.href = WeiXinApi.getAuthorizeBlindPath({storeId});
-                //     return;
-                // }
-                let collectData_2832eca4: any = this.data.collectData;
-                collectData_2832eca4.push(val);
-                this.setData({
-                    'collectData': collectData_2832eca4
-                });
+                ////////////////////console.log(val.price)
+                collectDataT.push(val);
+
                 // if (index === 0) {
-                    this.setData({
-                        'num': 1
-                    });
+                this.setData({
+                    'num': 1
+                });
                 // }
             }
-            console.log(arts)
+            this.setData({
+                'collectData': collectDataT
+            });
+            ////////////////////console.log(this.data.collectData)
+            ////////////////////console.log(arts)
             let total_6b082abf: any = this.data.total;
             total_6b082abf = arts.total;
             this.setData({
@@ -225,29 +196,46 @@ Page({
         this.setData({
             'price': this.data.collectData[0].price
         })
-    }, getBlind() {
-        this.mintArts();
-    }, async mintArts() {
-        if (UserSet.getToken() === null) {
-            PublicUtils.ifGotoLogin();
-            return;
-        }
+    }, getBlind(event: any) {
+        const num: number = parseInt(event.detail.toString());
+        ////////////////////console.log(num);
+        this.mintArts(num);
+    }, async mintArts(num: number) {
+        // if (await StorageUtils.getStorage(AppConstant.TOKEN) == null) {
+        //     WXUtils.gotoLogin();
+        //     return;
+        // }
         const storeId = <string>this.data.options.id;
         var openID = openId;
         if (Number.parseFloat(this.data.collectData[0].price) <= 0) {
             openID = "";
         }
-        await wx.showLoading({title: ""})
-
+        await wx.showLoading({title: "加载中..."})
         const mintBlind = await request.mintBlind({
-            count: this.data.num,
+            count: num,
             openId: openID!,
             storeId: storeId,
             tradeType: TradeType.WxMiniProgram
         }, true)
+
+        if (mintBlind && typeof mintBlind === 'string') {
+            wx.showModal({
+                title: '提示', content: mintBlind, showCancel: false, success(res) {
+                    if (res.confirm) {
+                    } else if (res.cancel) {
+                    }
+                }
+            })
+            wx.hideLoading();
+            return;
+        }
+
         if (mintBlind) {
             if (!mintBlind.needPay) {
-                this.goToPage("phone/home", "3");
+                await wx.hideLoading()
+                wx.reLaunch({
+                    url: '/pages/PhoneApp?index=3',
+                });
             } else {
                 if (!PublicUtils.isWeChat()) {
                     await wx.hideLoading()
@@ -256,14 +244,18 @@ Page({
                     })
                     return;
                 }
-                await wx.showLoading({title: ""})
-                const wxJsapiPayParams = await request.wxJsapiPayParams2({prepayId: mintBlind.tradeReturn.prepay_id});
+                await wx.showLoading({title: "加载中..."})
+                const wxJsapiPayParams = await request.wxJsapiPayParams({target: WxJsApiTarget.MiniProgram,prepayId: mintBlind.tradeReturn.prepay_id});
+                console.log(wxJsapiPayParams)
                 const pay = await WXUtils.pay(wxJsapiPayParams);
                 await wx.hideLoading();
                 if (pay.success) {
                     wx.showToast({
                         title: '支付完成！', icon: 'error', duration: 2000
                     })
+                    wx.reLaunch({
+                        url: '/pages/PhoneApp?index=3',
+                    });
                 } else {
                     await wx.showModal({
                         title: '提示', content: `支付失败：${JSON.stringify(pay.res)}`, showCancel: false
@@ -294,6 +286,7 @@ Page({
         this.setData({
             'options': options
         })
+        //////////console.log(options)
         this.init();
     }, observers: {}
 });

@@ -35,6 +35,12 @@ Page({
         this.whenInput();
     },
 
+    async registerWithPhone() {
+        wx.navigateTo({
+            url: '/pages/PhoneRegWithPhone',
+        })
+    },
+
     async register() {
         const passwords: any = await this.data.phoneModalInput.show({
             inputPlaceholder: ["账号", "密码", "确认密码"],
@@ -44,7 +50,7 @@ Page({
             isPwd: [false, true, true]
         });
         if (passwords === null) return;
-        await wx.showLoading({title: ""})
+        await wx.showLoading({title: "加载中..."})
         const canSubmit = (passwords: Array<string>) => {
             return passwords[1] != "" && passwords[2] != "" && passwords[1] == passwords[2] && passwords[0] != "";
         }
@@ -111,9 +117,8 @@ Page({
             })
             return;
         }
-        UserSet.setToken(loginInfo.token);
-        StorageUtils.setStorage(AppConstant.LOGIN_KEY, loginInfo);
-        UserSet.setUserInfo(userDetail);
+        StorageUtils.setStorage(AppConstant.TOKEN, loginInfo.token);
+        StorageUtils.setStorage(AppConstant.USER, userDetail);
         await wx.reLaunch({
             url: '/pages/PhoneApp',
         })

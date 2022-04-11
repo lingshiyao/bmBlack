@@ -1,1 +1,11 @@
+@import '/common/animate.wxss';
 
+.scroll-view {
+    height: 300vw;
+}
+
+.scroll-view-layout {
+    /*margin-bottom: 20vw;*/
+    /*background: red;*/
+    /*width: 100vw;*/
+}

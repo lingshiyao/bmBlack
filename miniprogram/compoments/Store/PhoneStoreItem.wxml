@@ -1,9 +1,30 @@
-<view class="phone-store-item-content">
-    <image show-menu-by-longpress id="{{id}}" mode="aspectFill" src="{{data.headerImg}}"
-           class="phone-store-item-img-border"></image>
-    <view class="phone-store-item-title">
-        {{ data.author }}
-        <image src="{{src}}" style="width:4vw;height:4vw;margin-left:1.4vw"></image>
+<!--<view class="b-b-b-base">-->
+        <!--    <view wx:if="{{data.category=='艺术品'}}" class="style-01"></view>-->
+        <!--    <view wx:if="{{data.category=='头像'}}" class="style-02"></view>-->
+        <!--    <view wx:if="{{data.category=='音乐'}}" class="style-03"></view>-->
+        <!--    <view wx:if="{{data.category=='体育'}}" class="style-04"></view>-->
+        <!--    <view wx:if="{{data.category=='交易卡'}}" class="style-05"></view>-->
+        <!--    <view wx:if="{{data.category=='元宇宙'}}" class="style-06"></view>-->
+<view class="phone-store-item-content" id="phoneContent" style="{{style}}">
+    <view class="phone-store-item-img-border-layout">
+        <LoadingImg
+                lazy-load="true"
+                show-menu-by-longpress
+                id="{{id}}"
+                mode="aspectFill"
+                src="{{data.headerImg}}"
+                stylee="width: 40.28vw;height: 40.28vw;border-radius: 4vw"
+                anim="animate__animated animate__fadeIn animate__faster"
+                class="phone-store-item-img-border"></LoadingImg>
+        <view wx:if="{{data.maxSupply - data.supple <= 0}}" class="phone-store-item-img-border-black"></view>
+        <image wx:if="{{data.maxSupply - data.supple <= 0}}" class="phone-store-item-img-border-maiwanle"
+               lazy-load="true" mode="aspectFill" src="{{maiwanleUrl}}"></image>
+    </view>
+    <view class="phone-store-item-title-line-layout">
+        <view class="phone-store-item-title">
+            {{ data.author }}
+        </view>
+        <image lazy-load="true" src="{{src}}" style="width:4vw;height:4vw;margin-left:1.4vw;"></image>
     </view>
     <view class="phone-store-item-name">
         <view class="phone-store-item-subtitle">
@@ -29,18 +50,20 @@
     <!--            {{ data.supple }}-->
     <!--        </view>-->
     <!--    </view>-->
-    <view>
+    <view class="phone-store-item-money-layout-ll">
         <view class="phone-store-item-money">
             ¥{{ data.price }}
         </view>
+        <view style="flex:1"></view>
         <!--        <view class="phone-store-item-like">-->
-        <!--            <image src="{{src1}}" class="phone-store-item-like-img" style="width:3vw;height:3vw"></image>-->
+        <!--            <image lazy-load="true" src="{{src1}}" class="phone-store-item-like-img" style="width:3vw;height:3vw"></image>-->
         <!--            {{ data.like }}-->
         <!--        </view>-->
-        <view class="phone-store-item-name">
+        <view class="phone-store-item-name-ll">
             <view class="left">
-                剩{{ data.supple }}件
+                剩{{data.maxSupply - data.supple}}件
             </view>
         </view>
     </view>
 </view>
+        <!--</view>-->

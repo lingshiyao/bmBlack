@@ -1,14 +1,17 @@
 {
   "navigationBarTitleText": "数字火星",
   "component": true,
+  "disableScroll": true,
   "usingComponents": {
     "FootMsg": "/compoments/Tabbar/FootMsg",
     "PhoneMy": "/compoments/My/PhoneMy",
     "PhoneCreation": "/compoments/Creation/PhoneCreation",
     "PhoneHomePage": "/compoments/PhoneHomePage",
     "PhoneNavigationBar": "/compoments/NavigationBar/PhoneNavigationBar",
-    "PhoneTabbar": "/compoments/TabbarBlack/PhoneTabbarBlack",
+    "PhoneTabbar": "/compoments/TabbarBlack/PhoneTabberBlackNew",
     "PhoneExplorePage": "/compoments/PhoneExplorePage",
-    "PhoneHomeTitleBar": "/compoments/Global/PhoneHomeTitleBar"
+    "PhoneHomeTitleBar": "/compoments/Global/PhoneHomeTitleBar",
+    "PhoneClassification": "/compoments/PhoneClassification",
+    "PhoneHotCompoments": "/compoments/PhoneHotCompoments"
   }
 }

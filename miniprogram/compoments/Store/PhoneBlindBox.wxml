@@ -1,7 +1,8 @@
 <view class="phone-blind-box">
     <view class="phone-blind-box-header" wx:if="{{data.length > 0}}">
         <view class="phone-blind-gif-header">
-            <PhoneBlineRandomImg data="{{data}}" class="phone-bline-random-img"></PhoneBlineRandomImg>
+            <!--            <PhoneBlineRandomImg data="{{data}}" class="phone-bline-random-img"></PhoneBlineRandomImg>-->
+            <image lazy-load="true" mode="aspectFill" src="{{mangheImg}}" class="manghe-img"></image>
         </view>
         <view class="phone-blind-title">
             {{ bannerData.projectName }}

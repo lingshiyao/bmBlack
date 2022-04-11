@@ -2,6 +2,8 @@
   "component": true,
   "usingComponents": {
     "PhoneStoreItem": "/compoments/Store/PhoneStoreItem",
-    "PhoneSelectBox": "/compoments/Store/PhoneSelectBox"
+    "PhoneSelectBox": "/compoments/Store/PhoneSelectBox",
+    "PhoneStoreBanner": "/compoments/Store/PhoneStoreBanner",
+    "PhoneNothing": "/compoments/Global/PhoneNothing"
   }
 }

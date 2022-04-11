@@ -1,0 +1,91 @@
+.title {
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.8;
+}
+
+.title-small {
+    font-size: 2.5vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.4;
+}
+
+.line {
+    display: flex;
+}
+
+.base {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    background: #1F1F1F;
+}
+
+.image-input {
+    width: 22.22vw;
+    height: 22.22vw;
+    background: #2A2A2A;
+    border-radius: 3vw;
+}
+
+.image-choose {
+    width: 22.22vw;
+    height: 22.22vw;
+    border-radius: 3vw;
+}
+
+.border {
+    display: flex;
+    align-items: center;
+    width: 95.83vw;
+    height: 10vw;
+    background: #353535;
+    border-radius: 3vw;
+    border: 0vw;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 3.466666666666667vw;
+    font-weight: 400;
+    color: #969696;
+    transition: all 0.2s ease 0s;
+}
+
+.input {
+    margin-left: 4vw;
+}
+
+.action-sheet {
+    width: 95.83vw;
+    height: 10vw;
+    background: #2A2A2A;
+    border-radius: 3vw;
+}
+
+.base1 {
+    margin-left: 4vw;
+    margin-right: 4vw;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+}
+
+.createStore {
+    width: 92vw;
+    height: 12.22vw;
+    background: #FDD3A1;
+    border-radius: 6vw;
+
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #692D0B;
+    text-align: center;
+    line-height: 12.22vw;
+}

@@ -1,0 +1,66 @@
+<scroll-view
+        scroll-y="true"
+        enhanced="true"
+        show-scrollbar="false"
+        scroll-with-animation="true"
+        id="b-base" class="base animate__animated animate__fadeIn animate__faster" style="{{hotScrollHeight}}">
+    <view class="base">
+        <view class="grid">
+            <view class="item" bindtap="gotoStoreListPage" data-index="1">
+                <view class="bg1-ooo"></view>
+                <image lazy-load="true" mode="aspectFill" class="img" src="{{art}}"></image>
+                <view class="area">
+                    <view class="title">艺术品</view>
+                    <view class="title1">Artwork</view>
+                    <image lazy-load="true" class="right-arrow" src="{{rightArrow}}"></image>
+                </view>
+            </view>
+            <view class="item" bindtap="gotoStoreListPage" data-index="2">
+                <view class="bg2-ooo"></view>
+                <image lazy-load="true" mode="aspectFill" class="img" src="{{avatar}}"/>
+                <view class="area">
+                    <view class="title">头像</view>
+                    <view class="title1">Avatar</view>
+                    <image lazy-load="true" class="right-arrow" src="{{rightArrow}}"></image>
+                </view>
+            </view>
+            <view class="item" bindtap="gotoStoreListPage" data-index="3">
+                <view class="bg3-ooo"></view>
+                <image lazy-load="true" mode="aspectFill" class="img" src="{{music}}"/>
+                <view class="area">
+                    <view class="title">音乐</view>
+                    <view class="title1">Music</view>
+                    <image lazy-load="true" class="right-arrow" src="{{rightArrow}}"></image>
+                </view>
+            </view>
+            <view class="item" bindtap="gotoStoreListPage" data-index="4">
+                <view class="bg4-ooo"></view>
+                <image lazy-load="true" mode="aspectFill" class="img" src="{{sports}}"/>
+                <view class="area">
+                    <view class="title">体育</view>
+                    <view class="title1">Sports</view>
+                    <image lazy-load="true" class="right-arrow" src="{{rightArrow}}"></image>
+
+                </view>
+            </view>
+            <view class="item" bindtap="gotoStoreListPage" data-index="5">
+                <view class="bg5-ooo"></view>
+                <image lazy-load="true" mode="aspectFill" class="img" src="{{card}}"/>
+                <view class="area">
+                    <view class="title">交易卡</view>
+                    <view class="title1">Trading Card</view>
+                    <image lazy-load="true" class="right-arrow" src="{{rightArrow}}"></image>
+                </view>
+            </view>
+            <view class="item" bindtap="gotoStoreListPage" data-index="6">
+                <view class="bg6-ooo"></view>
+                <image lazy-load="true" mode="aspectFill" class="img" src="{{universe}}"/>
+                <view class="area">
+                    <view class="title">元宇宙</view>
+                    <view class="title1">Former Universe</view>
+                    <image lazy-load="true" class="right-arrow" src="{{rightArrow}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>

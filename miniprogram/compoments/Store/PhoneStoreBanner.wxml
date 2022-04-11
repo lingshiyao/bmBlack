@@ -1,16 +1,62 @@
 <view class="store-banner">
-    <image mode="aspectFill" class="store-banner-img-box" id="store_banner_img" style="width: 100vw;"
-           src="{{data.banner}}"></image>
-<!--    <view class="store-banner-header-img-box">-->
-<!--        <image class="store-banner-header-img" mode="aspectFill" id="store_banner_header_img"-->
-<!--               style="position: absolute;" src="{{data.headerImg}}"></image>-->
-<!--    </view>-->
-    <view class="store-banner-header-title">
-        {{ data.projectName }}
+    <view class="banner-base">
+        <LoadingImg lazy-load="true"
+                    mode="aspectFill"
+                    class="store-banner-img-box"
+                    id="store_banner_img"
+                    anim="animate__animated animate__fadeIn animate__faster"
+                    stylee="width: 100vw;height: 56vw;background: #2A2A2A;"
+                    src="{{data.banner}}"></LoadingImg>
+        <image mode="scaleToFill" class="mask" src="{{mask}}"></image>
     </view>
-    <view class="store-banner-header-subtitle">
-        {{ time }}
+    <!--    <view class="store-banner-header-img-box">-->
+    <!--        <image lazy-load="true" class="store-banner-header-img" mode="aspectFill" id="store_banner_header_img"-->
+    <!--               style="position: absolute;" src="{{data.headerImg}}"></image>-->
+    <!--    </view>-->
+    <!--    <view class="store-banner-header-title">-->
+    <!--        {{ data.projectName }}-->
+    <!--    </view>-->
+    <!--    <view class="store-banner-header-subtitle">-->
+    <!--        {{ time }}-->
+    <!--    </view>-->
+    <view class="store-header-info-layout-float">
+        <view class="store-header-info-layout">
+            <view class="store-header-info-title1">{{ data.projectName }}</view>
+            <view class="store-header-info-title1-layout">
+                <view class="store-header-info-icon-border">
+                    <LoadingImg
+                            src="{{icon}}"
+                            stylee="width: 6.2vw;height: 6.2vw;background: #000000;border-radius: 3.1vw;"
+                            class="store-header-info-icon-img">
+                    </LoadingImg>
+                </view>
+                <view class="dianpumingcheng-layout">{{data.userExtNickName}}</view>
+            </view>
+            <view bindtap="unzip" id="dianpumingcheng-layout" class="store-header-info-msg" style="{{style}}">
+                <view wx:if="{{data.isBlind}}">{{data.userExtIntro}}</view>
+                <view wx:else>{{data.introduction}}</view>
+                <view wx:if="{{showzip && logic}}" class="container-ggg" bindtap="unzip">
+                    <view class="chevron-ggg"></view>
+                    <view class="chevron-ggg"></view>
+                    <view class="chevron-ggg"></view>
+                </view>
+            </view>
+
+        </view>
     </view>
+
+    <!--    <view class="store-header-info-layout-float-blind" wx:if="{{data.isBlind}}">-->
+    <!--        <view class="store-header-info-layout">-->
+    <!--            <view class="store-header-info-title1-layout">-->
+    <!--                <view class="store-header-info-icon-border">-->
+    <!--                    <image src="{{icon}}" class="store-header-info-icon-img"></image>-->
+    <!--                </view>-->
+    <!--                <view class="store-header-info-title1">{{ data.projectName }}</view>-->
+    <!--            </view>-->
+    <!--            &lt;!&ndash;                <view class="store-header-info-msg">{{data.introduction}}</view>&ndash;&gt;-->
+    <!--        </view>-->
+    <!--    </view>-->
+
     <view class="store-banner-statistical" wx:if="{{!data.isBlind}}">
         <view class="store-banner-statistical-item" wx:for="{{data.contents}}" wx:for-item="item">
             <view class="store-banner-statistical-item-num">

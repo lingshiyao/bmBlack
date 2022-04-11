@@ -1,0 +1,46 @@
+<view>
+    <PhoneTitle></PhoneTitle>
+    <view class="login">
+        <view class="title-border">
+            <view class="title">欢迎来到无界</view>
+        </view>
+        <view class="border" style="margin-top:11.466666666666667vw">
+            <input bindinput="nameInput" class="input" placeholder="手机号码"></input>
+        </view>
+        <view class="line-line"></view>
+        <view class="border" style="margin-top:10vw">
+            <input type="password" bindinput="pwdInput" class="input" placeholder="短信验证码"></input>
+            <view wx:if="{{yanzhengmaStatus==0}}" class="huoquyanzhengma-cant-click">立即获取</view>
+            <view wx:if="{{yanzhengmaStatus==1}}" class="huoquyanzhengma" bindtap="duanxinyanzhengma">立即获取</view>
+            <view wx:if="{{yanzhengmaStatus==2}}" class="huoquyanzhengma-cooling-time">{{timeLeft}}s</view>
+        </view>
+        <view class="line-line"></view>
+        <!--        <view style="{{loginBtnStyle}}" class="login-btn" bindtap="duanxinyanzhengma">-->
+        <!--            短信验证码-->
+        <!--        </view>-->
+        <view style="{{loginBtnStyle}}" class="login-btn" bindtap="clickLogin">
+            登录
+        </view>
+        <!--        <view class="line">-->
+        <!--            <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>-->
+        <!--        </view>-->
+        <!--        <view class="line">-->
+        <!--            <view class="s-txt" bindtap="register">-->
+        <!--                注册账号-->
+        <!--            </view>-->
+        <!--        </view>-->
+        <!--        <view class="line">-->
+        <!--            <view class="s-txt" bindtap="registerWithPhone">-->
+        <!--                短信注册账号-->
+        <!--            </view>-->
+        <!--        </view>-->
+        <view style="flex:1"></view>
+        <view class="other-login" wx:if="{{loginStatus == 0}}">-- 其他登录方式 --</view>
+        <view class="other-login" wx:if="{{loginStatus == 1}}">-- 首次登录请绑定手机号 --</view>
+        <!--        <view class="weixin-login-layout">-->
+        <image wx:if="{{loginStatus == 0}}" lazy-load="true" mode="aspectFill" class="weixin-logo" src="{{wechatIcon}}"
+               bindtap="changeToWeixinLogin"></image>
+        <!--        </view>-->
+    </view>
+    <PhoneModalInput id="phoneModalInput"></PhoneModalInput>
+</view>

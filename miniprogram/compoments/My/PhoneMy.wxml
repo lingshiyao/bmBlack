@@ -1,39 +1,61 @@
 <!--PASS-->
-<view class="my">
-    <PhoneSettingTitle></PhoneSettingTitle>
-    <!--    <view class="top-line">-->
-    <!--        <image show-menu-by-longpress src="{{settingUrl}}" class="setting" bindtap="gotoSetting"></image>-->
-    <!--    </view>-->
-    <view class="banner">
-        <image show-menu-by-longpress src="{{userBGUrl}}" class="banner-bg"></image>
-        <view class="banner-area">
-            <image show-menu-by-longpress mode="aspectFill" src="{{headerUrl}}"
-                   class="header-border" binderror="headerLoadFail"/>
-            <view class="name">
-                {{ userName }}
-            </view>
-            <view class="right-border">
-                <image show-menu-by-longpress mode="aspectFill" src="{{rightBtnUrl}}"
-                       style="width: 5vw;height: 5vw;margin-right:8.33vw;"/>
+<view class="my animate__animated animate__fadeIn animate__faster">
+    <view class="header-base" id="header-base-id">
+        <PhoneSettingTitle></PhoneSettingTitle>
+        <!--    <view class="top-line">-->
+        <!--        <image lazy-load="true" show-menu-by-longpress src="{{settingUrl}}" class="setting" bindtap="gotoSetting"></image>-->
+        <!--    </view>-->
+        <view class="banner" bindtap="gotoSetting">
+            <LoadingImg
+                    lazy-load="true"
+                    show-menu-by-longpress
+                    src="{{userBGUrl}}"
+                    class="banner-bg"></LoadingImg>
+            <view class="banner-area">
+                <view class="header-border-layout-border">
+                    <LoadingImg
+                            lazy-load="true"
+                            show-menu-by-longpress
+                            mode="aspectFill"
+                            src="{{headerUrl}}"
+                            class="header-border"
+                            binderror="headerLoadFail"
+                            stylee="width:13.6vw; height:13.6vw; background:#444444; border-radius:6.8vw;"/>
+                </view>
+                <view class="lll-layout">
+                    <view class="name">
+                        {{ userName }}
+                    </view>
+                    <view class="id-id-id">
+                        ID: {{userId}}
+                    </view>
+                </view>
+                <view class="right-border">
+                    <image lazy-load="true" show-menu-by-longpress mode="aspectFill" src="{{rightBtnUrl}}"
+                           style="width: 5vw;height: 5vw;margin-right:4.17vw;"/>
+                </view>
             </view>
         </view>
+        <view class="select1">
+            <header-item1 selected="{{selected1[0]}}" name="订单" bindtap="onSelect1" data-index="0"></header-item1>
+            <header-item1 selected="{{selected1[1]}}" name="藏品" bindtap="onSelect1" data-index="1"></header-item1>
+            <header-item1 selected="{{selected1[2]}}" name="喜欢" bindtap="onSelect1" data-index="2"></header-item1>
+            <header-item1 selected="{{selected1[3]}}" name="创作" bindtap="onSelect1" data-index="3"></header-item1>
+            <!--        <view wx:if="{{selected1[0] == true}}" class="select2">-->
+            <!--            <PhoneSelectBox menuData="{{selectBoxData}}" class="store-art-select-box"-->
+            <!--                            bind:clickCallBack="clickCallBack"/>-->
+            <!--        </view>-->
+            <!--        <view class="select2">-->
+            <view wx:if="{{!selected1[0]}}" class="store-art-select-box-1"></view>
+            <PhoneSelectBox wx:if="{{selected1[0]}}" menuData="{{selectBoxData}}"
+                            bind:clickCallBack="clickCallBack" class="store-art-select-box-1"/>
+            <!--        </view>-->
+        </view>
     </view>
-    <view class="select1">
-        <header-item1 selected="{{selected1[0]}}" name="订单" bindtap="onSelect1" data-index="0"></header-item1>
-        <header-item1 selected="{{selected1[1]}}" name="藏品" bindtap="onSelect1" data-index="1"></header-item1>
-        <header-item1 selected="{{selected1[2]}}" name="喜欢" bindtap="onSelect1" data-index="2"></header-item1>
-        <header-item1 selected="{{selected1[3]}}" name="创作" bindtap="onSelect1" data-index="3"></header-item1>
-        <!--        <view wx:if="{{selected1[0] == true}}" class="select2">-->
-        <!--            <PhoneSelectBox menuData="{{selectBoxData}}" class="store-art-select-box"-->
-        <!--                            bind:clickCallBack="clickCallBack"/>-->
-        <!--        </view>-->
-<!--        <view class="select2">-->
-            <PhoneSelectBox menuData="{{selectBoxData}}" class="store-art-select-box"
-                            bind:clickCallBack="clickCallBack"/>
-<!--        </view>-->
+    <view class="content-base">
+        <PhoneMyOrder headerHeight="{{headerHeight}}" wx:if="{{selected1[0]}}" orderFilter="{{filter}}"></PhoneMyOrder>
+        <PhoneMyCollection headerHeight="{{headerHeight}}" wx:if="{{selected1[1]}}"></PhoneMyCollection>
+        <PhoneMyFavorite headerHeight="{{headerHeight}}" wx:if="{{selected1[2]}}"></PhoneMyFavorite>
+        <PhoneMyCreation headerHeight="{{headerHeight}}" wx:if="{{selected1[3]}}"/>
     </view>
-    <PhoneMyFavorite wx:if="{{selected1[2]}}"></PhoneMyFavorite>
-    <PhoneMyCollection wx:if="{{selected1[1]}}"></PhoneMyCollection>
-    <PhoneMyOrder wx:if="{{selected1[0]}}" orderFilter="{{filter}}"></PhoneMyOrder>
-    <PhoneMyCreation wx:if="{{selected1[3]}}"/>
 </view>

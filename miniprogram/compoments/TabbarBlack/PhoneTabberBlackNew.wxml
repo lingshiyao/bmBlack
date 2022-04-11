@@ -1,0 +1,24 @@
+<view class="b-b">
+    <view class="tabbar" style="{{stylee}}">
+        <view class="tabbar-inner-layout">
+            <view class="item" bindtap="tabberAction" data-index="0" >
+                <image wx:if="{{choose==0}}" class="img" src="{{homeUrl}}"></image>
+                <image wx:else class="img" src="{{homeUrlNoChoose}}"></image>
+                <view wx:if="{{choose==0}}" class="txt">首页</view>
+                <view wx:else class="txt-no-choose">首页</view>
+            </view>
+            <view class="item" bindtap="tabberAction" data-index="99" >
+                <image wx:if="{{choose==99}}" class="img" src="{{collectionSelectedUrl}}"></image>
+                <image wx:else class="img" src="{{collectionUrl}}"></image>
+                <view wx:if="{{choose==99}}" class="txt">藏品</view>
+                <view wx:else class="txt-no-choose">藏品</view>
+            </view>
+            <view class="item" bindtap="tabberAction" data-index="3" >
+                <image wx:if="{{choose==3}}" class="img" src="{{mimeUrlNoChoose}}"></image>
+                <image wx:else class="img" src="{{mimeUrl}}"></image>
+                <view wx:if="{{choose==3}}" class="txt">我的</view>
+                <view wx:else class="txt-no-choose">我的</view>
+            </view>
+        </view>
+    </view>
+</view>

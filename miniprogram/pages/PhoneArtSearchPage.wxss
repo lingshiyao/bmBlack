@@ -1,0 +1,65 @@
+.base {
+    width: 100vw;
+    height: 100vh;
+    background: #1F1F1F;
+}
+
+.border {
+    display: flex;
+    align-items: center;
+    width: 78vw;
+    height: 10vw;
+    background: #353535;
+    border-radius: 5vw;
+    border: 0vw;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.8;
+}
+
+.input {
+    margin-left: 4vw;
+    flex: 1;
+    margin-right: 4vw;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /*margin-bottom: 6vw;*/
+}
+
+.searchTxt {
+    font-size: 5vw;
+    font-weight: bold;
+    color: #FDD3A1;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 44vw);
+    grid-column-gap: 3vw;
+    grid-row-gap: 3vw;
+    padding-left: 4.5vw;
+    /*margin-top: 1vw;*/
+    background: #1F1F1F;
+    padding-bottom: 4vw;
+}
+
+.abs {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    z-index: 999999;
+}
+
+.delete-icon-layout {
+    width: 5vw;
+    height: 5vw;
+    margin-right: 3.6vw;
+}

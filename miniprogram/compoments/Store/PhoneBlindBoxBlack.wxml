@@ -1,0 +1,70 @@
+<view class="base-base-base">
+    <view>
+        <PhoneStoreBanner data="{{bannerData}}"></PhoneStoreBanner>
+    </view>
+    <view class="b-b-b-b-b">
+        <view class="base-b">
+            <view class="b-area1-layout">
+                <view class="b-area1-layout-center">
+                    <!--            <image class="b-area1-layout-gif"></image>-->
+                    <view class="b-area1-layout-gif-border">
+                        <PhoneBlineRandomImg data="{{data}}" class="b-area1-layout-gif"></PhoneBlineRandomImg>
+                    </view>
+                    <view class="b-area1-layout-title">{{bannerData.projectName}}</view>
+                    <view class="b-area1-layout-llll">
+                        <view class="b-area1-layout-xianliang-layout">
+                            <view class="b-area1-layout-xianliang">限量</view>
+                            <view class="b-area1-layout-10000">{{data.length}}份</view>
+                        </view>
+                        <view style="flex:1"></view>
+                        <view class="b-area1-layout-yang-layout">
+                            <view class="b-area1-layout-yang">¥</view>
+                            <view class="b-area1-layout-price">{{data[0].price}}</view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="description">
+                <rich-text class="description-rich" nodes="{{bannerData.introduction}}"/>
+            </view>
+
+            <view class="goumaixuzhi">
+                <view class="goumaixuzhi-txt1">购买须知</view>
+                <view class="goumaixuzhi-txt2">
+                    数字藏品为虚拟数字商品，而非实物，仅限实名认证为年满14周岁的中国大陆用户购买。数字藏品的版权由发行方或原创者拥有，除另行取得版权拥有者书面同意外，用户不得将数字藏品用于任何商业用途。本商品一经售出，不支持退换。本商品源文件不支持本地下载。请勿对数字藏进行炒作、场外交易、欺诈，或以任何其他非法方式进行使用。
+                </view>
+            </view>
+
+            <view class="phone-blind-bottom-area"></view>
+            <view class="phone-blind-bottom">
+                <view class="phone-blind-bottom-background">
+                    <view class="phone-blind-bottom-price-layout">
+                        <view class="phone-blind-bottom-price-yang">¥</view>
+                        <view class="phone-blind-bottom-price">
+                            {{data[0].price}}
+                        </view>
+                    </view>
+                    <view style="flex:1"></view>
+                    <view wx:if="{{buyStatus==0}}" class="pay-button" bindtap="getBlind">
+                        立即购买
+                    </view>
+                    <view wx:if="{{buyStatus==2}}" class="pay-button-maiwanle" bindtap="getBlind">
+                        已售罄
+                    </view>
+                    <view wx:if="{{buyStatus==1}}" class="pay-button-haimeimai-layout">
+                        <view class="pay-button-haimeimai" bindtap="getBlind">
+                            即将开售
+                        </view>
+                        <view class="pay-button-haimeimai-time">
+                            {{theSale}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+</view>
+
+
+<PhoneModelPay price="{{price}}" id="phoneModelPay"></PhoneModelPay>

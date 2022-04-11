@@ -1,0 +1,8 @@
+{
+  "disableScroll": true,
+  "usingComponents": {
+    "PhoneExploreItem": "/compoments/Explore/PhoneExploreItem",
+    "PhoneTitle": "/compoments/Global/PhoneTitle",
+    "PhoneNothing": "/compoments/Global/PhoneNothing"
+  }
+}

@@ -103,7 +103,7 @@ const main = async () => {
 
         let type;
         let param;
-        if (getType(gql) === "query") {
+        if (getType(gql) == "query") {
             type = `G.QueryRoot`;
             param = `params: G.QueryRoot${capitalizeFirstLetter(name)}Args, needauth: boolean = false`
         } else {

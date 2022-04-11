@@ -1,12 +1,20 @@
-<view style="background:#1f1f1f">
-    <scroll-view style="height" id="scroll-view">
-<!--        <PhoneNavigationBar wx:if="{{!showViews[3]}}"/>-->
+<view style="background:#1f1f1f" class="base-b" >
+    <view class="abs" id="phoneHomeTitleBar">
         <PhoneHomeTitleBar bind:taBarIndex="taBarIndex" wx:if="{{showViews[0] || showViews[1]}}"></PhoneHomeTitleBar>
-        <PhoneHomePage wx:if="{{showViews[0]}}" bind:goToExplore="goToExplore"/>
-        <PhoneExplorePage wx:if="{{showViews[1]}}" index="{{toolsIndex}}"/>
-        <PhoneCreation wx:if="{{showViews[2]}}"/>
-        <PhoneMy wx:if="{{showViews[3]}}"/>
-        <FootMsg bind:goToVHtml="goToVHtml"/>
-        <PhoneTabbar safeHeight="{{bottomSafe}}" tabbarData="{{tabbarData}}" bind:taBarIndex="taBarIndex"/>
-    </scroll-view>
+    </view>
+    <view wx:if="{{showViews[0] || showViews[1]}}" style="{{hotScrollHeight}}"></view>
+    <!--        <view style="background:red; height:20vw;"></view>-->
+    <!--        <view class="test"></view>-->
+    <!--        <PhoneNavigationBar wx:if="{{!showViews[3]}}"/>-->
+    <!--    <view style="width:100vw;height:44vw;background:red;"></view>-->
+    <!--        <PhoneHomePage wx:if="{{showViews[0]}}" bind:goToExplore="goToExplore""/>-->
+    <PhoneHotCompoments bindtouchcancel="handleTouchEnd" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" hotScrollHeight="{{hotScrollHeight}}" wx:if="{{showViews[0]}}"></PhoneHotCompoments>
+    <PhoneClassification bindtouchcancel="handleTouchEnd" bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" hotScrollHeight="{{hotScrollHeight}}" wx:if="{{showViews[1]}}"></PhoneClassification>
+    <!--    <PhoneExplorePage wx:if="{{showViews[1]}}" index="{{toolsIndex}}"/>-->
+    <PhoneCreation wx:if="{{showViews[2]}}"/>
+    <PhoneMy bindtouchstart="handleTouchStart" bindtouchend="handleTouchEnd" id="phone-my-id" wx:if="{{showViews[3]}}" bind:taBarIndex="taBarIndexMy"/>
+    <!--    <FootMsg bind:goToVHtml="goToVHtml"/>-->
+<!--    <PhoneTabbar wx:if="{{tabbarStatus==0}}" id="phoneTabbar" bind:taBarIndex="taBarIndex" class="animate__animated animate__fadeOut"/>-->
+<!--    <PhoneTabbar wx:if="{{tabbarStatus==1}}" id="phoneTabbar" bind:taBarIndex="taBarIndex" class="animate__animated animate__fadeIn"/>-->
+    <PhoneTabbar id="phoneTabbar" bind:taBarIndex="taBarIndex" class="{{tabbarAnimation}}"/>
 </view>

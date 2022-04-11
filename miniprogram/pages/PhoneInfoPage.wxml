@@ -1,8 +1,93 @@
 <view class="phone-info-page">
-    <PhoneTitle title=""></PhoneTitle>
-    <PhoneInfoHeader nft="{{nft}}" bind:goToStore="goToStore"/>
-    <PhoneInfoAttrutie wx:if="{{(JSON.stringify(attributes) != '{}')}}"
-                       attributes="{{attributes}}"/>
-    <PhoneInfoIntroduction intr="{{description}}"/>
-    <PhoneInfoBottom nft="{{nft}}" bind:action="bottomAction"/>
+    <view>
+        <view class="phone-nft-info">
+            <image lazy-load="true" mode="aspectFill" class="header-border" src="{{headerBorder}}"/>
+            <LoadingImg
+                    lazy-load="true"
+                    mode="aspectFill"
+                    class="phone-nft-info-img"
+                    stylee="width: 73vw;height: 73vw;"
+                    anim="animate__animated animate__fadeIn animate__faster"
+                    src="{{nft.imgs.headerImg}}"></LoadingImg>
+        </view>
+        <view class="black-header" style="margin-top:9vw;">
+            <view class="header-black-name-layout">
+                <image lazy-load="true" class="header-black-name-flower-left" src="{{flower}}"></image>
+                <view class="header-black-name-txt">{{nft.artName}}</view>
+                <image lazy-load="true" class="header-black-name-flower-right" src="{{flower}}"></image>
+            </view>
+            <view class="header-black-attr-base" style="margin-top:4vw">
+                <view class="header-black-attr-xianliang-layer">
+                    <view class="header-black-attr-xianliang1">限量</view>
+                    <view class="header-black-attr-xianliang2">10000份</view>
+                </view>
+                <block wx:for="{{attrLst}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+                    <view class="header-black-attr">{{item}}</view>
+                </block>
+            </view>
+            <view class="header-black-name-lock-layout" style="margin-top:1.5vw;">
+                <image lazy-load="true" src="{{lockLight}}" class="header-black-name-lock"></image>
+                <image lazy-load="true" src="{{lock}}" class="header-black-name-lock-img"></image>
+                <view class="header-black-name-lock-txt">购买可体验内容</view>
+            </view>
+        </view>
+        <view class="guanzhu-layout">
+            <view class="guanzhu-layout-img-border">
+                <LoadingImg
+                        stylee="width: 9.5vw;height: 9.5vw;background: #000203;border-radius: 4.75vw;"
+                        src="{{guanzhuHeader}}" mode="aspectFill" lazy-load="true"
+                        class="guanzhu-layout-img"></LoadingImg>
+            </view>
+            <view class="guanzhu-layout-y" style="margin-left:2.78vw;">
+                <view class="guanzhu-layout-txt1">变形金刚数字典藏旗舰店</view>
+                <!--                <view class="guanzhu-layout-txt2">作品20</view>-->
+            </view>
+            <view class="guanzhu-layout-flex1">
+                <view class="guanzhu-layout-btn" bindtap="guanzhu">关注</view>
+            </view>
+        </view>
+
+        <view class="description">
+            <rich-text class="description-rich" nodes="{{art.description}}"/>
+        </view>
+        <view class="goumaixuzhi">
+            <view class="goumaixuzhi-txt1">购买须知</view>
+            <view class="goumaixuzhi-txt2">
+                数字藏品为虚拟数字商品，而非实物，仅限实名认证为年满14周岁的中国大陆用户购买。数字藏品的版权由发行方或原创者拥有，除另行取得版权拥有者书面同意外，用户不得将数字藏品用于任何商业用途。本商品一经售出，不支持退换。本商品源文件不支持本地下载。请勿对数字藏进行炒作、场外交易、欺诈，或以任何其他非法方式进行使用。
+            </view>
+        </view>
+    </view>
+    <view class="zhanwei" style="{{marginBottomStyle}}"></view>
+    <view class="phone-info-bottom-layout" style="{{marginBottomStyle}}">
+        <view class="phone-info-bottom-price-layout">
+            <view class="phone-info-bottom-price-layout-i1">
+                <view class="phone-info-bottom-price-txt1">¥</view>
+                <view class="phone-info-bottom-price-txt2">{{art.mintPrice}}</view>
+            </view>
+        </view>
+        <view class="phone-info-bottom-layout-flex1">
+            <view wx:if="{{buyStatus == 0}}" class="phone-info-bottom-buy">
+                <view class="phone-info-bottom-buy-addto-fav" bindtap="setFav">{{favTxt}}</view>
+                <view wx:if="{{zaimayifen==false}}" class="phone-info-bottom-buy-buy" bindtap="mintArts">立即购买</view>
+                <view wx:else class="phone-info-bottom-buy-buy" bindtap="gotoStore1">再买一份</view>
+            </view>
+            <view wx:if="{{buyStatus == 1}}" class="phone-info-bottom-buy-1">
+                <view class="phone-info-bottom-buy-addto-fav-1" bindtap="setFav">{{favTxt}}</view>
+                <view class="phone-info-bottom-buy-line-1"></view>
+                <view class="phone-info-bottom-buy-buy-layout-1">
+                    <view class="jijiangkaishou">即将开售</view>
+                    <view class="kaishoushijian">{{theSale}}</view>
+                </view>
+            </view>
+            <view wx:if="{{buyStatus == 2}}" class="phone-info-bottom-buy-1">
+                <view class="phone-info-bottom-buy-addto-fav-1" bindtap="setFav">{{favTxt}}</view>
+                <view class="phone-info-bottom-buy-line-1"></view>
+                <view class="yishouqing">已售罄</view>
+            </view>
+        </view>
+    </view>
+    <image lazy-load="true" mode="aspectFill" src="{{light}}" class="light"></image>
+    <view class="title-tt">
+        <PhoneTitle title="" status="1"></PhoneTitle>
+    </view>
 </view>

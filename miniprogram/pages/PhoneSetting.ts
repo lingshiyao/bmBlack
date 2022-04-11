@@ -5,6 +5,8 @@ import {UserSet} from "../api/storage/UserSet";
 import {request} from "../api/Api";
 import {WXUtils} from "../api/utils/WXUtils";
 import {PublicUtils} from "../api/utils/PublicUtils";
+import {StorageUtils} from "../api/utils/StorageUtils";
+import {AppConstant} from "../api/AppConstant";
 
 const NULL: any = null;
 
@@ -16,11 +18,19 @@ Page({
         phoneModalLoading: NULL,
         phoneModalTips: NULL,
         userDetail: NULL
-    }, methods: {}, properties: {}, onLoad() {
+    },
+    async initTitle() {
+        const rect = await WXUtils.getRect2("#phone-title", this);
+        this.setData({
+            scrollStyle: `height:${WXUtils.getScreenHeight() - WXUtils.getStatusBarHeight() - rect[0].height}px`
+        })
+    },
+    onLoad() {
         this.setData({
             phoneModalInput: this.selectComponent("#phoneModalInput"),
         })
         this.init();
+        this.initTitle()
     }, async init() {
         const userDetail: UserDetail | null = await UserSet.getUserInfoIfFailedGoLogin();
         if (userDetail != null) {
@@ -32,9 +42,8 @@ Page({
             })
         }
     }, observers: {},
-
     chooseImg: async function () {
-        await wx.showLoading({title: ""})
+        await wx.showLoading({title: "加载中..."})
         const image = await WXUtils.chooseImage();
         if (image) {
             const tempFilePaths = image.tempFilePaths[0];
@@ -44,7 +53,7 @@ Page({
             const userUpdate = await request._userUpdate({
                 email: email, intro: intro, nickname: nickname, face: null
             }, tempFilePaths, true);
-            await wx.showLoading({title: ""})
+            await wx.showLoading({title: "加载中..."})
             if (userUpdate != null) {
                 wx.showToast({
                     title: '修改成功', icon: 'success', duration: 2000
@@ -58,7 +67,7 @@ Page({
                 })
             }
         } else {
-            await wx.showLoading({title: ""})
+            await wx.showLoading({title: "加载中..."})
             wx.showToast({
                 title: '出错', icon: 'error', duration: 2000
             })
@@ -66,10 +75,10 @@ Page({
     }, back() {
         wx.navigateBack({});
     }, logout() {
-        UserSet.cleanUserSet();
-        wx.reLaunch({
-            url: '/pages/PhoneApp',
-        })
+        // UserSet.cleanUserSet();
+        // wx.reLaunch({
+        //     url: '/pages/PhoneApp',
+        // })
     }, async changUserInfo() {
         if (!this.data.userDetail) return;
         const userInfos: Array<string> | null = await this.data.phoneModalInput.show({
@@ -80,12 +89,13 @@ Page({
             isPwd: [false, false, false]
         });
         if (userInfos === null) return;
-        await wx.showLoading({title: ""})
+        await wx.showLoading({title: "加载中..."})
         let nickname: string = userInfos[0] == null ? "" : userInfos[0];
         let intro: string = userInfos[1] == null ? "" : userInfos[1];
         let email: string = userInfos[2] == null ? "" : userInfos[2];
 
         const userUpdateResult = await request.userUpdate({email: email, intro: intro, nickname: nickname}, true)
+        //console.log(userUpdateResult)
         if (userUpdateResult == null) {
             wx.hideLoading({});
             wx.showModal({
@@ -96,8 +106,11 @@ Page({
                 }
             })
         } else {
-            const userDetail = await request.user({userId: userUpdateResult})
-            UserSet.setUserInfo(userDetail);
+            const user = await StorageUtils.getStorage(AppConstant.USER);
+            const userDetail = await request.user({userId: user.id})
+            //console.log(userDetail)
+            // UserSet.setUserInfo(userDetail);
+            StorageUtils.setStorage(AppConstant.USER, userDetail);
             this.setData({
                 'userDetail': userDetail
             });
@@ -115,7 +128,7 @@ Page({
             isPwd: [true, true]
         });
         if (passwords === null) return;
-        await wx.showLoading({title: ""})
+        await wx.showLoading({title: "加载中..."})
         const canSubmit = (passwords: Array<string>) => {
             return passwords[0] != "" && passwords[1] != "" && passwords[0] == passwords[1];
         };
@@ -141,6 +154,18 @@ Page({
     }, headerLoadFail() {
         this.setData({
             defaultUrl: PicCDNUtils.getPicUrl("pic_user.png")
+        })
+    }, liaojiewomen() {
+        wx.navigateTo({
+            url: `/pages/PhoneVHTML?key=nft_intro`
+        })
+    }, guanyuwomen() {
+        wx.navigateTo({
+            url: `/pages/PhoneVHTML?key=nft_how_get`
+        })
+    }, lianxiwomen() {
+        wx.navigateTo({
+            url: `/pages/PhoneVHTML?key=nft_how_buy`
         })
     }
 });

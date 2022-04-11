@@ -1,4 +1,4 @@
 <view class="title-box" style="{{marginTop}}">
     <view class="title">{{title}}</view>
-    <image src="{{back}}" class="back" bindtap="clickBack"></image>
+    <image lazy-load="true" src="{{back}}" class="back" bindtap="clickBack"></image>
 </view>

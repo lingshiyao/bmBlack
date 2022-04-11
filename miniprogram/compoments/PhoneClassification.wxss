@@ -1,0 +1,116 @@
+@import '/common/animate.wxss';
+
+.item {
+    width: 45.83vw;
+    height: 45.83vw;
+    /*opacity: 0.04;*/
+    position: relative;
+}
+
+.bg1-ooo {
+    width: 45.83vw;
+    height: 45.83vw;
+    border: 0.8vw solid #8660CA;
+    background: linear-gradient(0deg, #7076DB);
+    border-radius: 6vw;
+}
+
+.bg2-ooo {
+    width: 45.83vw;
+    height: 45.83vw;
+    border: 0.8vw solid #C89438;
+    background: linear-gradient(0deg, #C89438);
+    border-radius: 6vw;
+}
+
+.bg3-ooo {
+    width: 45.83vw;
+    height: 45.83vw;
+    border: 0.8vw solid #10966E;
+    background: linear-gradient(0deg, #10966E);
+    border-radius: 6vw;
+}
+
+.bg4-ooo {
+    width: 45.83vw;
+    height: 45.83vw;
+    border: 0.8vw solid #2B6EC5;
+    background: linear-gradient(0deg, #2B6EC5);
+    border-radius: 6vw;
+}
+
+.bg5-ooo {
+    width: 45.83vw;
+    height: 45.83vw;
+    border: 0.8vw solid #A83536;
+    background: linear-gradient(0deg, #A83536);
+    border-radius: 6vw;
+}
+
+.bg6-ooo {
+    width: 45.83vw;
+    height: 45.83vw;
+    border: 0.8vw solid #0FA0B8;
+    background: linear-gradient(0deg, #0FA0B8);
+    border-radius: 6vw;
+}
+
+
+
+.img {
+    width: 47.33vw;
+    height: 47.33vw;
+    background: #292922;
+    background: linear-gradient(0deg, #C89438);
+    border-radius: 6vw;
+    position: absolute;
+    top: 0.9vw;
+    /*left: 0.05vw;*/
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 45.83vw);
+    grid-column-gap: 4.17vw;
+    grid-row-gap: 4.17vw;
+    margin-bottom: 8vw;
+}
+
+.base {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*margin-top: 46.5vw;*/
+}
+
+.title {
+    font-size: 6.67vw;
+    font-weight: bold;
+    color: #FDD3A1;
+    margin-top: 4.3vw;
+    margin-left: 4vw;
+}
+
+.title1 {
+    font-size: 3.33vw;
+    font-weight: 500;
+    color: #FDD3A1;
+    opacity: 0.2;
+    margin-top: 2.2vw;
+    margin-left: 4.17vw;
+}
+
+.area {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-arrow {
+    width: 5vw;
+    height: 5vw;
+    margin-left: 4.17vw;
+    margin-top: 17.5vw;
+}

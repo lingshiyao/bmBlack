@@ -1,0 +1,152 @@
+
+.back-arrow {
+    width: 5.466666666666667vw;
+    height: 4.666666666666667vw;
+    position: absolute;
+    left: 4vw;
+}
+
+.title {
+    font-size: 6.67vw;
+    color: #FFFFFF;
+    margin-top: 20vw;
+}
+
+.top {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 11.733333333333333vw;
+}
+
+.girl-bg {
+    width: 61.5vw;
+    height: 20vw;
+    margin-top: 8.27vw;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    min-height: 88vh;
+    background: #1F1F1F;
+}
+
+.border {
+    display: flex;
+    align-items: center;
+    width: 77.33333333333333vw;
+    height: 11.733333333333333vw;
+    /*background: red;*/
+    border-radius: 2.6666666666666665vw;
+    border: 0vw;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 3.466666666666667vw;
+    font-weight: 400;
+    color: #969696;
+    transition: all 0.2s ease 0s;
+    /*background: blue;*/
+}
+
+.input {
+    margin-left: 1vw;
+    /*background: red;*/
+    flex: 1
+}
+
+.login-btn {
+    width: 84.73333333333333vw;
+    height: 11.733333333333333vw;
+    line-height: 11.733333333333333vw;
+    background: #FDD3A1;
+    /*opacity: 0.3;*/
+    border-radius: 6vw;
+    font-size: 4vw;
+    font-weight: 400;
+    color: #692D0B;
+    text-align: center;
+    margin-top: 15vw;
+}
+
+.line {
+    width: 84.33333333333333vw;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12.08vw;
+}
+
+.s-txt {
+    font-size: 3.2vw;
+    font-weight: 400;
+    color: #FDD3A1;
+}
+
+.title-border {
+    width: 77vw;
+    /*margin-left: 23vw;*/
+    /*background: red;*/
+}
+
+.line-line {
+    width: 81vw;
+    height: 0.28vw;
+    background: #E6E6E6;
+    margin-left: 9.58vw;
+    margin-right: 9.58vw;
+    opacity: 0.2;
+}
+
+.huoquyanzhengma {
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FDD3A1;
+    line-height: 9.72vw;
+}
+
+.huoquyanzhengma-cant-click {
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #987F61;
+    line-height: 9.72vw;
+}
+
+.huoquyanzhengma-cooling-time {
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 9.72vw;
+    opacity: 0.4;
+}
+
+.other-login {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 9.72vw;
+    opacity: 0.8;
+    margin-bottom: 1vw;
+}
+
+.weixin-login-layout {
+    width: 13.89vw;
+    height: 13.89vw;
+    border: 0.3vw solid #FDD3A1;
+    border-radius: 7vw;
+}
+
+.weixin-logo {
+    width: 14vw;
+    height: 14vw;
+    margin-bottom: 19vw;
+    /*background: blue;*/
+}

@@ -13,4 +13,20 @@
 
 page {
     font-family: "PingFangSC-Medium";
+    background: #1F1F1F;
 }
+
+/*::-webkit-scrollbar {*/
+/*    width: 0;*/
+/*    height: 0;*/
+/*    color: transparent;*/
+/*}*/
+
+/*scroll-view{*/
+/*    padding: 0;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*scroll-view ::-webkit-scrollbar {*/
+/*    width: 0;*/
+/*}*/

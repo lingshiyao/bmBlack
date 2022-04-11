@@ -1,0 +1,146 @@
+@import '/common/animate.wxss';
+
+.base {
+    /*min-height: 100vh;*/
+    background: #1F1F1F;
+    width: 100vw;
+    /*margin-top: 44vw;*/
+}
+
+.hot-price-layout-flex1 {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.hot-price-layout-1 {
+    font-size: 5vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FDD3A1;
+    margin-right: 1.94vw;
+}
+
+.item {
+    width: 95.83vw;
+    background: #2A2A2A;
+    border-radius: 6vw;
+    display: flex;
+    margin-left: 2.1vw;
+    flex-direction: column;
+}
+
+.store-img {
+    width: 87.5vw;
+    height: 87.5vw;
+    /*background: #151515;*/
+    border-radius: 4vw;
+    position: relative;
+}
+
+.header {
+    width: 5.6vw;
+    height: 5.6vw;
+    background: #000203;
+    border: 0px solid #C7C8C8;
+    border-radius: 2.8vw;
+}
+
+.store-name {
+    font-size: 6.67vw;
+    font-weight: 800;
+    color: #FFFFFF;
+    opacity: 0.8;
+}
+
+.line {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.xianliang {
+    width: 14.72vw;
+    background: #FDD3A1;
+    border-radius: 1vw 0vw 0vw 1vw;
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #692D0B;
+    text-align: center;
+    line-height: 6.94vw;
+}
+
+.yiwan-fen {
+    height: 6.94vw;
+    background: #353535;
+    border-radius: 1vw;
+
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FDD3A1;
+    line-height: 6.94vw;
+    padding-left: 3.6vw;
+    padding-right: 3.6vw;
+}
+
+.small-name {
+    font-size: 3.61vw;
+    line-height: 3.61vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.4;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 53vw;
+}
+
+.price {
+    font-size: 10vw;
+    line-height: 10vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FDD3A1;
+}
+
+.scroll {
+    height: 140vw;
+    padding-left: 2.085vw;
+    margin-top: 4.17vw;
+}
+
+.now-can-buy {
+    position: absolute;
+    top: 2.78vw;
+    left: 2.92vw;
+
+    height: 6.39vw;
+    background: #2C2C2C;
+    border-radius: 3vw;
+
+
+    display: flex;
+    align-items: center;
+}
+
+.now-can-buy-hot-img {
+    width: 2.78vw;
+    height: 3.89vw;
+    margin-left: 2.78vw;
+}
+
+.now-can-buy-txt {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FDD3A1;
+    line-height: 6.39vw;
+    margin-left: 0.8vw;
+    margin-right: 3.33vw;
+}

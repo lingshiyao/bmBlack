@@ -1,4 +1,4 @@
-import { Utils } from "../../api/utils/Utils";
+import {Utils} from "../../api/utils/Utils";
 import {PicCDNUtils} from "../../api/net/PicCDNUtils";
 
 Component({
@@ -6,6 +6,12 @@ Component({
         title: {
             type: String,
             value: "登录"
+        },
+        status: {
+            type: Number,
+            // 0 toPhoneAPP
+            // 1 navBack
+            value: 0
         }
     },
     data: {
@@ -14,15 +20,23 @@ Component({
     },
     methods: {
         clickBack() {
-            wx.reLaunch({
-                url: '/pages/PhoneApp',
-            });
+            // ////////////////////console.log(this.properties.status)
+            switch (this.properties.status) {
+                case 0:
+                    wx.reLaunch({
+                        url: '/pages/PhoneApp',
+                    });
+                    break;
+                case 1:
+                    wx.navigateBack()
+                    break;
+            }
         }
     },
     ready() {
         this.setData({
-            'marginTop': "margin-top:" + Utils.getSafestatusBarHeight() + "px"
+            'marginTop': "padding-top:" + Utils.getSafestatusBarHeight() + "px"
         })
-        console.log(wx.getSystemInfoSync())
+        // ////////////////////console.log(wx.getSystemInfoSync())
     }
 });

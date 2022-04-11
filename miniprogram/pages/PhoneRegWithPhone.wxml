@@ -1,0 +1,9 @@
+<view class="base">
+    <PhoneTitle title=""></PhoneTitle>
+    <view class="title" style="margin-top:21vw; margin-left:9.7vw;">请输入手机号</view>
+    <view class="border" style="margin-top:21vw; margin-left: 9.87vw">
+        <input bindinput="nameInput" class="input" placeholder="手机号"></input>
+    </view>
+    <view class="line-line"></view>
+    <view class="btn" style="margin-top:13.6vw;margin-left:9.58vw">发送验证码</view>
+</view>

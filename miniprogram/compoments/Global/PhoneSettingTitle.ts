@@ -1,11 +1,11 @@
-import { Utils } from "../../api/utils/Utils";
+import {Utils} from "../../api/utils/Utils";
 import {PicCDNUtils} from "../../api/net/PicCDNUtils";
 
 Component({
     properties: {
         title: {
             type: String,
-            value: "数字火星"
+            value: "无界"
         }
     },
     data: {
@@ -28,6 +28,6 @@ Component({
         this.setData({
             'marginTop': "margin-top:" + Utils.getSafestatusBarHeight() + "px"
         })
-        console.log(wx.getSystemInfoSync())
+        // ////////////////////console.log(wx.getSystemInfoSync())
     }
 });

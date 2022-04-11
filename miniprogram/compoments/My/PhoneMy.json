@@ -8,6 +8,8 @@
     "PhoneMyCreation": "/compoments/My/PhoneMyCreation",
     "PhoneSelectBox": "/compoments/Store/PhoneSelectBox",
     "LoadingImg": "/compoments/Global/LoadingImg",
-    "PhoneSettingTitle": "/compoments/Global/PhoneSettingTitle"
+    "PhoneSettingTitle": "/compoments/Global/PhoneSettingTitle",
+    "LoadingImg": "/compoments/Global/LoadingImg",
+    "LoadingImg": "/compoments/Global/LoadingImg"
   }
 }

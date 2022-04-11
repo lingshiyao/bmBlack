@@ -26,7 +26,7 @@ export class Log {
     public i(...args: any[]): Function {
         if (this.saveHistory) {
             let lst: Array<Array<any>> | undefined = Log.logHistory.get(this.title);
-            if (lst === undefined) {
+            if (lst == undefined) {
                 lst = [];
             }
             lst.push(args);
@@ -101,7 +101,7 @@ export class Log {
      * @returns
      */
     private getCss(type: string): string {
-        if (type === "random") {
+        if (type == "random") {
             return "color:" + this.getRandomColor() + ";";
         } else {
             return "";

@@ -44,9 +44,11 @@ Component({
          **/
         async selectToolIndex(event: any) {
             const index = event.detail;
+            // ////////////////////console.log(index);
             this.setData({
                 'exploreItemData': [],
             })
+            // ////////////////////console.log(this.data.toolBarData[index].id)
             await this.createdExploreData(this.data.toolBarData[index].id);
         }, /**
          *  进入商店

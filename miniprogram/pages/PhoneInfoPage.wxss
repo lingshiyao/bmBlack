@@ -3,3 +3,504 @@
     display: flex;
     flex-direction: column;
 }
+
+.light {
+    width: 100vw;
+    height: 78.8vw;
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+}
+
+
+.phone-nft-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.header-border {
+    width: 81vw;
+    height: 81vw;
+    margin-top: 36vw;
+}
+
+.header-black-attr-xianliang-layer {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-black-attr {
+    /*width: 18.06vw;*/
+    height: 5vw;
+    background: #363636;
+    border-radius: 1vw;
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FDD3A1;
+    line-height: 5vw;
+    text-align: center;
+    margin-left: 2.78vw;
+    margin-bottom: 2.78vw;
+    padding-left: 2.36vw;
+    padding-right: 2.36vw;
+    padding-top: 0.2vw;
+    padding-bottom: 0.2vw;
+}
+
+.header-black-name-flower-left {
+    width: 12.5vw;
+    height: 4.17vw;
+    /*-webkit-transform: scaleX(-1);*/
+    /*transform: scaleX(-1);*/
+}
+
+.header-black-name-flower-right {
+    width: 12.5vw;
+    height: 4.17vw;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.header-black-name-lock {
+    width: 84.16vw;
+    height: 0.56vw;
+}
+
+.header-black-name-lock-layout {
+    width: 84.16vw;
+    position: relative;
+    /*margin-left: 7.92vw;*/
+}
+
+.header-black-name-lock-txt {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    opacity: 0.4;
+    position: absolute;
+    left: 32.5vw;
+    top: 2vw;
+}
+
+.black-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.header-black-name-lock-img {
+    width: 2.36vw;
+    height: 3.19vw;
+    position: absolute;
+    top: 0;
+    left: 28.5vw;
+    top: 2.5vw;
+}
+
+.header-black-attr-xianliang1 {
+    width: 11.11vw;
+    height: 5vw;
+    background: #FDD3A1;
+    border-radius: 1vw 0vw 0vw 1vw;
+
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #692D0B;
+    line-height: 5vw;
+    text-align: center;
+}
+
+.header-black-attr-xianliang2 {
+    width: 16.67vw;
+    height: 5vw;
+    background: #363636;
+    border-radius: 0vw 1vw 1vw 0vw;
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FDD3A1;
+    line-height: 5vw;
+    text-align: center;
+}
+
+.header-black-name-layout {
+    display: flex;
+    align-items: center;
+}
+
+.header-black-name-txt {
+    font-size: 6.67vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.8;
+    margin-left: 2.92vw;
+    margin-right: 2.92vw;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 62vw;
+}
+
+.header-black-attr-base {
+    width: 94vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.phone-nft-info-img {
+    width: 73vw;
+    height: 73vw;
+    background: #0B0B0B;
+    position: absolute;
+    top: 38.8vw;
+}
+
+.phone-nft-info-price-background {
+    width: 92vw;
+    height: 31.2vw;
+    background: #ffffff;
+    border-radius: 3vw;
+    margin: 4vw;
+    text-align: left;
+}
+
+.phone-nft-info-price {
+    height: 7vw;
+    font-size: 7vw;
+    line-height: 7vw;
+    font-weight: bold;
+    color: #000219;
+    display: inline-block;
+    margin: 4vw;
+}
+
+.phone-nft-info-price-sell {
+    float: right;
+    height: 4vw;
+    font-size: 4vw;
+    line-height: 4vw;
+    font-weight: 400;
+    color: #646464;
+    margin-top: 6vw;
+    margin-right: 6vw;
+}
+
+.phone-nft-info-pj-number {
+    display: inline-block;
+    height: 4vw;
+    font-size: 4vw;
+    line-height: 4vw;
+    font-weight: 400;
+    color: #646464;
+    margin-left: 4vw;
+}
+
+.img-supply {
+    position: absolute;
+    z-index: 10;
+    background-color: #FDD3A1;
+    font-weight: 400;
+    font-size: 4vw;
+    padding: 1vw 3vw;
+    color: #ffffff;
+    border-radius: 3vw 0vw 3vw 0vw;
+    margin-top: 5.8vw;
+    margin-left: 4.9vw;
+}
+
+.img-supply-img {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 4vw;
+    width: 4vw;
+}
+
+.img-supply-title {
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.description-rich {
+    width: 87.5vw;
+}
+
+.description {
+    width: 87.5vw;
+    background: #2A2A2A;
+    border-radius: 6vw;
+    margin-left: 2.385vw;
+    margin-top: 4.17vw;
+
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    opacity: 0.6;
+    padding: 4vw;
+}
+
+.goumaixuzhi {
+    width: 95.83vw;
+    background: #2A2A2A;
+    border-radius: 6vw;
+    margin-left: 2.085vw;
+    margin-top: 4.17vw;
+    margin-bottom: 4.17vw;
+}
+
+.goumaixuzhi-txt1 {
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.8;
+    padding-top: 4vw;
+    padding-left: 4vw;
+}
+
+.goumaixuzhi-txt2 {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    opacity: 0.6;
+    padding-left: 4vw;
+    padding-top: 5vw;
+    padding-bottom: 5vw;
+    padding-right: 4vw;
+}
+
+.guanzhu-layout-img-border {
+    width: 10vw;
+    height: 10vw;
+    background: #FFFFFF;
+    border-radius: 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4.1vw;
+}
+
+.guanzhu-layout {
+    width: 95.83vw;
+    height: 16.67vw;
+    background: #2A2A2A;
+    border-radius: 6vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 2.085vw;
+    margin-top: 7.22vw;
+}
+
+.guanzhu-layout-btn {
+    width: 21.11vw;
+    height: 8.33vw;
+    background: #FDD3A1;
+    border-radius: 4vw;
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #692D0B;
+    line-height: 8.33vw;
+    text-align: center;
+    margin-right: 4.17vw;
+}
+
+.guanzhu-layout-flex1 {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.guanzhu-layout-txt1 {
+    font-size: 3.89vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.8;
+}
+
+.guanzhu-layout-txt2 {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.4;
+}
+
+.guanzhu-layout-y {
+
+}
+
+.guanzhu-layout-img {
+    width: 9.5vw;
+    height: 9.5vw;
+    background: #000203;
+    border-radius: 4.75vw;
+}
+
+.phone-info-bottom-layout {
+    width: 100vw;
+    height: 13.61vw;
+    background: #353535;
+    position: fixed;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+}
+
+.phone-info-bottom-price-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.phone-info-bottom-price-layout-i1 {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    /*background: red;*/
+}
+
+.phone-info-bottom-price-txt1 {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FDD3A1;
+    margin-bottom: 0.9vw;
+    margin-left: 4.17vw;
+}
+
+.phone-info-bottom-price-txt2 {
+    font-size: 6.67vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FDD3A1;
+    margin-left: 1.6vw;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 32vw;
+}
+
+.phone-info-bottom-buy {
+    display: flex;
+    flex-direction: row;
+}
+
+.phone-info-bottom-buy-1 {
+    width: 55.56vw;
+    height: 8.33vw;
+    border-radius: 4vw;
+    background: #5D5D5D;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.phone-info-bottom-buy-buy-layout-1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.jijiangkaishou {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #8c8c8c;
+}
+
+.yishouqing {
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #8c8c8c;
+}
+
+.kaishoushijian {
+    font-size: 2.22vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #8c8c8c;
+}
+
+.phone-info-bottom-buy-line-1 {
+    width: 0.14vw;
+    height: 3.61vw;
+    background: #F9F9F9;
+    border: 0px solid #FFFFFF;
+    opacity: 0.4;
+    margin-left: 5.42vw;
+    margin-right: 5.42vw;
+}
+
+.phone-info-bottom-buy-addto-fav-1 {
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FDD3A1;
+    margin-left: 5.69vw;
+}
+
+.phone-info-bottom-buy-addto-fav {
+    width: 27.78vw;
+    height: 8.33vw;
+    background: #4A4A4A;
+    border-radius: 4vw 0vw 0vw 4vw;
+
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FDD3A1;
+
+    line-height: 8.33vw;
+    text-align: center;
+}
+
+.phone-info-bottom-layout-flex1 {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 4vw;
+}
+
+.phone-info-bottom-buy-buy {
+    width: 27.78vw;
+    height: 8.33vw;
+    background: #FDD3A1;
+    border-radius: 0vw 4vw 4vw 0vw;
+
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #692D0B;
+
+    line-height: 8.33vw;
+    text-align: center;
+}
+
+.zhanwei {
+    height: 13.61vw;
+}
+
+.title-tt {
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+}

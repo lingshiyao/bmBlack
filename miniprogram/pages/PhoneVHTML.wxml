@@ -1,8 +1,9 @@
 <view>
+    <PhoneTitle title="" status="1"></PhoneTitle>
     <view class="v-html">
         <view class="area">
             <rich-text class="text" nodes="{{text}}" />
         </view>
     </view>
-    <FootMsg style="margin-top: 10vw;" bind:goToVHtml="goToVHtml"></FootMsg>
+    <!--    <FootMsg style="margin-top: 10vw;"></FootMsg>-->
 </view>

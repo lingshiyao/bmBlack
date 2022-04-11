@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     background: #1f1f1f;
-    min-height: 100vh;
+    /*min-height: 100vh;*/
 }
 
 .top {
@@ -48,18 +48,13 @@
 .header-box {
     width: 12.8vw;
     height: 12.8vw;
-    overflow: hidden;
     border-radius: 6.4vw;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    z-index: 2;
-    background: #131c43;
+    background: #444444;
 }
 
 .header {
     position: absolute;
-    background: #131c43;
+    background: #444444;
     border-radius: 6.4vw;
 }
 
@@ -115,6 +110,7 @@
     color: #F33838;
     line-height: 11.73vw;
     text-align: center;
+    margin-bottom: 12vw;
 }
 
 .file-ele {
@@ -130,4 +126,9 @@
 
 .hidden {
     visibility: hidden;
+}
+
+.base {
+    height: 100vh;
+    background: #1f1f1f;
 }

@@ -1,11 +1,20 @@
-<view>
+<view class="animate__animated animate__fadeIn animate__faster">
     <PhoneNothing wx:if="{{order.length == 0}}" text="亲，您还没有相关订单哦~"></PhoneNothing>
-    <view style="margin-bottom: 20vw;">
+    <scroll-view
+            scroll-y="true"
+            enhanced="true"
+            show-scrollbar="{{false}}"
+            bindscrolltolower="bindDownLoad"
+            class="scroll-view-layout"
+            style="{{scrollStyle}}">
         <block wx:for="{{order}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+            <view class="animate__animated animate__fadeInLeft animate__faster">
             <PhoneMyOderListItem
+                    isFromOrder="true"
                     order="{{item}}"
-                    class="animate__animated animate__bounceIn animate__faster"
                     style="margin-top: 2.67vw"/>
+            </view>
         </block>
-    </view>
+        <!--        <view style="height:26vw;"/>-->
+    </scroll-view>
 </view>

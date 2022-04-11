@@ -2,13 +2,18 @@ import {request} from "../api/Api";
 import {InfoHeaderEntity} from "../api/entity/Info/InfoHeaderEntity";
 import {UserSet} from "../api/storage/UserSet";
 import {PublicUtils} from "../api/utils/PublicUtils";
-import {TradeType} from "../api/net/gql/graphql";
+import {TradeType, WxJsApiTarget} from "../api/net/gql/graphql";
 import {ImgPathUtils} from "../api/utils/ImgPathUtils";
 import {weiXinPayInit} from "../api/net/WeiXinPay";
 import {WXUtils} from "../api/utils/WXUtils";
+import {PicCDNUtils} from "../api/net/PicCDNUtils";
+import {Utils} from "../api/utils/Utils";
+import {StorageUtils} from "../api/utils/StorageUtils";
+import {AppConstant} from "../api/AppConstant";
 
 var openId: string | null = null;
 const NULL: any = null;
+const ARRAY: any = [];
 
 Page({
     data: {
@@ -18,25 +23,88 @@ Page({
         attributes: {},
         attributesNumber: "",
         description: "",
-        options: NULL
+
+
+        ////----------------------------
+        attrLst: ARRAY,
+        options: NULL,
+        light: PicCDNUtils.getPicUrl("pic_light.png", false),
+        src: PicCDNUtils.getPicUrl('icon_fire_normal.png'),
+        src1: PicCDNUtils.getPicUrl('icon_flower.png'),
+        headerBorder: PicCDNUtils.getPicUrl('pic_pictureframe.png', false),
+        flower: PicCDNUtils.getPicUrl('pic_left.png', false),
+        lockLight: PicCDNUtils.getPicUrl('ic_light.png', false),
+        lock: PicCDNUtils.getPicUrl('pic_lock.png', false),
+        /**
+         * 0: 立即购买
+         * 1: 即将开售
+         * 2: 已售罄
+         */
+        buyStatus: 0,
+        theSale: "",
+        marginBottomStyle: "",
+        art: NULL,
+        guanzhuHeader: "",
+        favTxt: "...",
+        zaimayifen: false
     }, async init() {
-        await this.initOpenId();
-        await weiXinPayInit();
-        await this.getArt();
-    }, onLoad(options) {
+        this.initOpenId();
+        weiXinPayInit();
+        this.getArt();
+        this.setIsFav(this.data.options.id);
+    }, async setIsFav(artId: string) {
+        //////////////console.log("setIsFav", artId)
+        const result: any = await request.favoriteExists({artId: artId}, true)
+        //////////////console.log(result)
+        ////////////console.log(result)
+        if (result != null) {
+            if (result == true) {
+                this.setData({
+                    favTxt: "取消收藏"
+                })
+            } else {
+                this.setData({
+                    favTxt: "加入收藏"
+                })
+            }
+        }
+    },
+    gotoStore1() {
+        //////////console.log(this.data.options)
+        wx.redirectTo({
+            url: `/pages/PhoneStorePage?id=${this.data.options.sid}`,
+        })
+    },
+    onLoad(options) {
+        const height = Utils.getBottomSafeAreaPxHeight()
+        this.setData({
+            marginBottomStyle: `padding-bottom:${height}px;`
+        })
         this.setData({
             'options': options
         })
+
+        //////////console.log(options)
+
+        if (options.isFromOrder != undefined && options.isFromOrder != null &&
+            options.isFromOrder) {
+            this.setData({
+                zaimayifen: true
+            })
+        }
+        //////////////////console.log(options)
+
+
+
         this.init()
     }, async initOpenId() {
-        // FIXME
-        // const wxCode = WxPay.getWxCode(window.location.href);
         const login = await WXUtils.login();
         const wxCode = login.code.toString();
         if (wxCode) {
-            const wxJsapiOpenId = await request.wxJsapiOpenId2({code: wxCode});
+            const wxJsapiOpenId = await request.wxJsapiOpenId({code: wxCode, target: WxJsApiTarget.MiniProgram});
+            //console.log(wxJsapiOpenId)
             if (wxJsapiOpenId) {
-                openId = wxJsapiOpenId.openid;
+                openId = wxJsapiOpenId.response.openid;
             } else {
                 wx.showToast({
                     title: '出错', icon: 'error', duration: 2000
@@ -44,11 +112,60 @@ Page({
             }
         }
     }, async getArt() {
+        //////////////////console.log(this.data.options.id)
         const artId = this.data.options.id;
-        const user = await UserSet.getUserInfo();
+        const user = await UserSet.getUserInfoIfFailedGoLogin();
         if (artId) {
             const art = await request.art({artId: <string>artId});
+            //console.log(art)
             if (art) {
+                //console.log(art.stores[0].id)
+                this.setData({
+                    guanzhuHeader: ImgPathUtils.getSIcon(art.stores[0].id)
+                })
+                this.setData({
+                    art: art
+                })
+                const arrtJson = art.attrs;
+                const attrLstT = [];
+                for (let k in arrtJson) {
+                    attrLstT.push(`${k}:${arrtJson[k]}`)
+                }
+                this.setData({
+                    attrLst: attrLstT
+                })
+
+                if (new Date(art.stores[0].openingTime).getTime() - new Date().getTime() > 0) {
+                    // ////////////////////console.log("// 即将开售")
+                    this.setData({
+                        theSale: Utils.formatDate(new Date(art.stores[0].openingTime), "MM-dd HH:mm")
+                    })
+                    Utils.formatDate(new Date(art.stores[0].openingTime), "MM-dd HH:mm")
+                    // 即将开售
+                    this.setData({
+                        buyStatus: 1
+                    })
+                } else {
+                    if (art.maxSupply - art.supplied > 0) {
+                        // ////////////////////console.log("// 立即购买")
+                        // 立即购买
+                        this.setData({
+                            buyStatus: 0
+                        })
+                    } else {
+                        // ////////////////////console.log("// 已售罄")
+                        // 已售罄
+                        this.setData({
+                            buyStatus: 2
+                        })
+                    }
+                }
+
+                ////////////////////console.log(new Date(art.stores[0].openingTime).getTime() - new Date().getTime());
+
+                ////////////////////console.log(new Date().getTime(), Utils.formatDate(new Date(art.stores[0].openingTime), "yyyy-MM-dd HH:mm:ss"));
+
+
                 let nft_1df4a3ab: any = this.data.nft;
                 nft_1df4a3ab.infoID = art.id;
                 this.setData({
@@ -120,7 +237,7 @@ Page({
                     'description': description_b030c23d
                 });
                 if (user) {
-                    this.favExists();
+                    // this.favExists();
                 }
             }
         }
@@ -144,17 +261,37 @@ Page({
         }
     }, async likeAction(nftId: string) {
         const favoriteToggle = await request.favoriteToggle({artId: nftId}, true);
+        ////////////////console.log(favoriteToggle)
         if (favoriteToggle != null) {
+            if (favoriteToggle) {
+                wx.showToast({
+                    title: '已收藏', icon: 'success', duration: 1000
+                })
+                this.setData({
+                    favTxt: "取消收藏"
+                })
+            } else {
+                wx.showToast({
+                    title: '取消收藏', icon: 'success', duration: 1000
+                })
+                this.setData({
+                    favTxt: "加入收藏"
+                })
+            }
             let nft_80a04f69: any = this.data.nft;
             nft_80a04f69.isLike = !this.data.nft.isLike;
             this.setData({
                 'nft': nft_80a04f69
             });
         } else {
-            PublicUtils.navigationBar.showLoginAction();
+            WXUtils.gotoLogin();
+            // wx.reLaunch({
+            //     url: '/pages/PhoneLoginNew',
+            // })
+            // PublicUtils.navigationBar.showLoginAction();
         }
     }, async favExists() {
-        const favoriteExists = await request.favoriteExists({artId: this.data.nft.infoID});
+        const favoriteExists = await request.favoriteExists({artId: this.data.nft.infoID}, true);
         if (favoriteExists) {
             let nft_794bb59b: any = this.data.nft;
             nft_794bb59b.isLike = favoriteExists;
@@ -176,10 +313,14 @@ Page({
                 break;
         }
     }, async mintArts() {
-        if (UserSet.getToken() === null) {
-            PublicUtils.ifGotoLogin();
-            return;
-        }
+        // wx.reLaunch({
+        //     url: '/pages/PhoneApp?index=3',
+        // });
+        // return;
+        // if (await StorageUtils.getStorage(AppConstant.TOKEN) == null) {
+        //     WXUtils.gotoLogin();
+        //     return;
+        // }
         const artId = this.data.nft.infoID;
         const storeId = <string>this.options.sid;
         var openID = openId;
@@ -187,7 +328,7 @@ Page({
         if (Number.parseFloat(this.data.nft.price) <= 0) {
             openID = "";
         }
-        await wx.showLoading({title: ""})
+        await wx.showLoading({title: "加载中..."})
         // FIXME
         // if (!PublicUtils.isWeChat()) {
         //     payType = TradeType.WxNative;
@@ -199,9 +340,27 @@ Page({
             openId: <string>openID,
             storeId: storeId,
             tradeType: payType}, true)
+        //////////////////console.log(mint)
+        ////////////console.log(mint)
+        if (mint && typeof mint === 'string') {
+            wx.showModal({
+                title: '提示', content: mint, showCancel: false, success(res) {
+                    if (res.confirm) {
+                    } else if (res.cancel) {
+                    }
+                }
+            })
+            wx.hideLoading();
+            return;
+        }
+
         if (mint) {
             if (!mint.needPay) {
-                this.goToPage("phone/home", "3");
+                await wx.hideLoading()
+                wx.reLaunch({
+                    url: '/pages/PhoneApp?index=3',
+                });
+                // this.goToPage("phone/home", "3");
             } else {
                 if (!PublicUtils.isWeChat()) {
                     await wx.hideLoading()
@@ -210,25 +369,22 @@ Page({
                     })
                     return;
                 }
-                const wxJsapiPayParams = await request.wxJsapiPayParams2({prepayId: mint.tradeReturn.prepay_id});
+                const wxJsapiPayParams = await request.wxJsapiPayParams({target: WxJsApiTarget.MiniProgram,prepayId: mint.tradeReturn.prepay_id});
+                console.log(wxJsapiPayParams)
                 const pay = await WXUtils.pay(wxJsapiPayParams);
                 if (pay.success) {
                     wx.showToast({
-                        title: '支付完成！',
-                        icon: 'error',
-                        duration: 2000
+                        title: '支付完成！', icon: 'error', duration: 2000
                     })
+                    wx.reLaunch({
+                        url: '/pages/PhoneApp?index=3',
+                    });
                 } else {
+                    //////////console.log(pay)
                     await wx.showModal({
-                        title: '提示', content: `支付失败：${JSON.stringify(pay.res)}`, showCancel: false
+                        title: '提示', content: `支付失败：${JSON.stringify(pay.res.errMsg)}`, showCancel: false
                     })
                 }
-                // TODO
-                // await _window.___weixinPay(wxJsapiPayParams.appId, wxJsapiPayParams.timeStamp, wxJsapiPayParams.nonceStr.toString(), wxJsapiPayParams.package, wxJsapiPayParams.signType, wxJsapiPayParams.paySign, function (r: any) {
-                //     if (r.err_msg == "get_brand_wcpay_request:ok") {
-                //         goToPage("phone/home", "3");
-                //     }
-                // });
                 await wx.hideLoading()
             }
         } else {
@@ -283,9 +439,20 @@ Page({
             default:
                 break;
         }
+    }, setFav() {
+        ////////////////console.log("setFav")
+        this.likeAction(<string>this.options.id);
     }, goToStore() {
         wx.navigateTo({
             url: `/pages/PhoneStorePage?id=${this.data.nft.storeid}`,
         });
-    },
+    }, guanzhu() {
+        wx.showModal({
+            title: '提示', content: '功能建设中，敬请期待', showCancel: false, success(res) {
+                if (res.confirm) {
+                } else if (res.cancel) {
+                }
+            }
+        })
+    }
 });

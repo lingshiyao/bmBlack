@@ -1,15 +1,32 @@
-<view class="phone-my-explore-item">
-    <image mode="aspectFill" show-menu-by-longpress class="phone-my-explore-item-background-img-box"
-           id="{{'phone_my_explore_img' + data.id}}"
-           src="{{data.banner}}"></image>
-    <image mode="aspectFill" class="phone-my-explore-item-header-img-box" show-menu-by-longpress src="{{data.headerImg}}"></image>
+<view class="phone-my-explore-item" style="{{style}}">
+    <LoadingImg
+            stylee="width: 40.28vw;height: 40.28vw;background: #4C91CA;border-radius: 4vw;"
+            lazy-load="true"
+            mode="aspectFill"
+            show-menu-by-longpress
+            anim="animate__animated animate__fadeIn animate__faster"
+            class="phone-my-explore-item-background-img-box"
+            src="{{data.banner}}"></LoadingImg>
+    <view class="phone-my-explore-item-header-img-box-border-layout">
+        <LoadingImg
+                lazy-load="true"
+                mode="aspectFill"
+                class="phone-my-explore-item-header-img-box"
+                anim="animate__animated animate__bounceIn animate__faster"
+                stylee="width: 14vw;height: 14vw;border-radius: 7vw;"
+                show-menu-by-longpress
+                src="{{data.headerImg}}"></LoadingImg>
+    </view>
     <view class="phone-my-explore-item-title">
         {{ data.name }}
     </view>
     <view class="phone-my-explore-item-des">
         {{ data.description }}
     </view>
+    <view style="flex:1">
+
+    </view>
     <view class="phone-my-explore-item-bottom">
-        {{ data.artCount }} 个项目
+        {{ data.artCount }} 个作品
     </view>
 </view>

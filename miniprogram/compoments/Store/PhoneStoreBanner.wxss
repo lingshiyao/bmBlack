@@ -1,20 +1,25 @@
+@import '/common/animate.wxss';
 
 .store-banner {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 
 .store-banner-img-box {
     width: 100vw;
-    height: 33.4vw;
-    background: #ffaa01;
-    overflow: hidden;
+    height: 56vw;
+    background: #2A2A2A;
+    /*overflow: hidden;*/
 }
 
 .store-banner-header-img {
     width: 22vw;
     height: 22vw;
     border-radius: 50%;
-    background: #ffaa01;
+    background: #2A2A2A;
 }
 
 .store-banner-header-img-box {
@@ -49,8 +54,8 @@
     position: relative;
     height: 18vw;
     width: 92vw;
-    margin-left: 4vw;
-    margin-top: 2vw;
+    /*margin-left: 4vw;*/
+    margin-top: 4vw;
 }
 
 .store-banner-statistical-item {
@@ -72,4 +77,207 @@
     font-size: 5vw;
     color: #FDD3A1;
     margin-top: 2.6vw;
+}
+
+.store-header-info-layout {
+    width: 91.83vw;
+    background: #2A2A2A;
+    border-radius: 6vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /*position: absolute;*/
+    z-index: 888899;
+    /*top: 40vw;*/
+    position: relative;
+}
+
+.store-header-info-layout-float {
+    display: inline;
+    float: top;
+    margin-top: -12vw;
+    z-index: 999999;
+}
+
+.store-header-info-layout-float-blind {
+    display: inline;
+    float: top;
+    margin-top: -10vw;
+    z-index: 9999999;
+}
+
+.store-header-info-title1-layout {
+    display: flex;
+    flex-direction: row;
+    /*margin-top: 4vw;*/
+    margin-left: 5.8vw;
+    margin-top: 2.6vw;
+}
+
+.store-header-info-title1 {
+    font-size: 5.56vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.8;
+    margin-left: 6vw;
+    margin-top: 4.1vw;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    /*width: 75vw;*/
+}
+
+.store-header-info-ll {
+    display: flex;
+    align-items: center;
+    margin-left: 4.17vw;
+    margin-top: 2.64vw;
+}
+
+.store-header-info-title2 {
+    font-size: 3.89vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    opacity: 0.8;
+    margin-left: 1.39vw;
+}
+
+.store-header-info-msg {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    opacity: 0.6;
+    margin-left: 5.17vw;
+    margin-top: 3.75vw;
+    margin-right: 5.17vw;
+    margin-bottom: 4.31vw;
+    text-align: left;
+
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*display: -webkit-box;*/
+    /*-webkit-line-clamp: 4; !* number of lines to show *!*/
+    /*-webkit-box-orient: vertical;*/
+}
+
+.dianpumingcheng-layout {
+    font-size: 3.89vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    line-height: 6.94vw;
+    opacity: 0.8;
+    margin-left: 2vw;
+}
+
+.store-header-info-icon-border {
+    width: 6.94vw;
+    height: 6.94vw;
+    background: #FFFFFF;
+    border-radius: 3.47vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.store-header-info-icon-img {
+    width: 6.2vw;
+    height: 6.2vw;
+    background: #000000;
+    border-radius: 3.1vw;
+}
+
+.mask {
+    width: 100vw;
+    height: 16vw;
+    position: absolute;
+    top: 42vw;
+    left: 0;
+    z-index: 9999;
+}
+
+.banner-base {
+    width: 100vw;
+    height: 56vw;
+    position: relative;
+}
+
+/*////*/
+
+.container-ggg {
+    /*display: inline;*/
+    /*float: top;*/
+    /*margin-top:-12vw;*/
+    /*z-index: 999999;*/
+    margin-left: 39vw;
+}
+
+.chevron-ggg {
+    position: absolute;
+    width: 3.77vw;
+    height: 1.06vw;
+    opacity: 0;
+    transform: scale3d(0.5, 0.5, 0.5);
+    animation: move 3s ease-out infinite;
+}
+
+.chevron-ggg:first-child {
+    animation: move 3s ease-out 1s infinite;
+}
+
+.chevron-ggg:nth-child(2) {
+    animation: move 3s ease-out 2s infinite;
+}
+
+.chevron-ggg:before,
+.chevron-ggg:after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 51%;
+    background: #fff;
+}
+
+.chevron-ggg:before {
+    left: 0;
+    transform: skew(0deg, 30deg);
+}
+
+.chevron-ggg:after {
+    right: 0;
+    width: 50%;
+    transform: skew(0deg, -30deg);
+}
+
+@keyframes move {
+    25% {
+        opacity: 1;
+
+    }
+    33% {
+        opacity: 1;
+        transform: translateY(4vw);
+    }
+    67% {
+        opacity: 1;
+        transform: translateY(5.22vw);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(7.333vw) scale3d(0.5, 0.5, 0.5);
+    }
+}
+
+@keyframes pulse {
+    to {
+        opacity: 1;
+    }
 }

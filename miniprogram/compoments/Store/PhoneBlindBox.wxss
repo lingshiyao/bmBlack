@@ -21,12 +21,11 @@
 }
 
 .phone-blind-title {
-    font-size: 4.8vw;
-    line-height: 4.8vw;
+    font-size: 6.67vw;
+    font-family: PingFang SC;
     font-weight: 800;
-    color: #1e1e1e;
-    text-align: left;
-    margin: 4vw 3vw 0vw 3vw;
+    color: #FFFFFF;
+    opacity: 0.8;
 }
 
 .phone-blind-type-title {
@@ -134,4 +133,9 @@
     font-size: 6vw;
     text-align: center;
     line-height: 6.4vw;
+}
+
+.manghe-img {
+    width: 87.5vw;
+    height: 87.5vw;
 }

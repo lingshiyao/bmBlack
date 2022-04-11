@@ -1,0 +1,36 @@
+<view class="base">
+    <!--    ic_delete-->
+    <view id="search-top-area-id">
+        <!--        <view class="abs">-->
+        <PhoneTitle title="搜索" status="1"></PhoneTitle>
+        <!--        </view>-->
+        <view class="line" style="margin-top:6.5vw; padding-bottom:6.5vw;">
+            <view class="border" style="margin-left:4.17vw;">
+                <input type="{{type[index]}}" data-index="{{index}}" bindinput="myInput" value="{{search}}"
+                       placeholder="请输入作品名"
+                       class="input"></input>
+                <image wx:if="{{deleteIconShow}}" bindtap="clearInput" class="delete-icon-layout"
+                       src="{{deleteSrc}}"></image>
+            </view>
+            <view bindtap="clickSearch" class="searchTxt" style="margin-left:2.78vw;">搜索</view>
+        </view>
+    </view>
+    <scroll-view
+            scroll-y="true"
+            enhanced="true"
+            show-scrollbar="{{false}}"
+            bindscrolltolower="bindDownLoad"
+            style="{{scrollStyle}}">
+        <view wx:if="{{arts.length > 0}}" class="grid">
+            <block wx:for="{{arts}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+                <PhoneStoreItem class="phone-store-item animate__animated animate__fadeInUp animate__faster"
+                                bindtap="goToInfo" data-index="{{index}}"
+                                data="{{item}}"
+                                storeName="{{item.category}}"></PhoneStoreItem>
+            </block>
+        </view>
+        <view wx:else style="margin-top:20vw;">
+            <PhoneNothing></PhoneNothing>
+        </view>
+    </scroll-view>
+</view>

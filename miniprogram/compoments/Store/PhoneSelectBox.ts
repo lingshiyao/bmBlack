@@ -1,8 +1,8 @@
 import {SelectBoxEntity} from "../../api/entity/Tools/SelectBoxEntity";
-import {ImgPathUtils} from "../../api/utils/ImgPathUtils";
+import {PicCDNUtils} from "../../api/net/PicCDNUtils";
 
-const more_normal = ImgPathUtils.getImgPath("pic_down");
-const more_selected = ImgPathUtils.getImgPath("pic_up");
+const more_normal = PicCDNUtils.getPicUrl("pic_p_down.png", false);
+const more_selected = PicCDNUtils.getPicUrl("pic_p_up.png", false);
 
 Component({
     data: {

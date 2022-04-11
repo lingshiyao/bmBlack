@@ -1,10 +1,28 @@
 <view class="title-box" style="{{marginTop}}">
+<!--    <image src="/assets/pic_logo.png" class="pic_logo_img"></image>-->
     <view class="title">{{title}}</view>
     <view class="line">
-        <view data-index="0" bindtap="tabberAction" class="item">热门</view>
-        <view data-index="1" bindtap="tabberAction" class="item" style="margin-left:7.3vw;">分类</view>
-        <view class="search-box">
-            <view class="search"></view>
+        <view wx:if="{{choose==0}}" class="select-area">
+            <view data-index="0" bindtap="tabberAction" class="item">热门</view>
+            <view class="point"></view>
+        </view>
+        <view style="margin-bottom:2vw;" wx:else data-index="0" bindtap="tabberAction" class="no-select">
+            热门
+        </view>
+        <view style="margin-left:7.36vw;" wx:if="{{choose==1}}" class="select-area">
+            <view data-index="1" bindtap="tabberAction" class="item">分类</view>
+            <view class="point"></view>
+        </view>
+        <view style="margin-bottom:2vw; margin-left:7.36vw;" wx:else data-index="1" bindtap="tabberAction"
+              class="no-select">
+            分类
+        </view>
+        <view style="flex:1"></view>
+        <view class="search-box" bindtap="gotoSearch">
+            <view class="search">
+                <image lazy-load="true" src="{{searchIcon}}" class="search-box-icon"/>
+                <view class="search-box-txt">搜索</view>
+            </view>
         </view>
     </view>
 </view>

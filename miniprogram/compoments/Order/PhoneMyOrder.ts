@@ -1,12 +1,22 @@
 import {OrderFilter, UserDetail} from "../../api/net/gql/graphql";
 import {UserSet} from "../../api/storage/UserSet";
 import {request} from "../../api/Api";
+import {WXUtils} from "../../api/utils/WXUtils";
 
 const ARRAY: any = [];
+let nowIndex = 0;
+let _total = 0;
 
 Component({
-    data: {order: ARRAY}, methods: {
-        async init() {
+    data: {
+        order: ARRAY, scrollStyle: ""
+    }, methods: {
+        async bindDownLoad() {
+            //////////console.log("bindDownLoad")
+            nowIndex++;
+            this.init();
+        }, async init() {
+            if (this.data.order.length == _total && _total != 0) return;
             const userDetail: UserDetail | null = await UserSet.getUserInfoIfFailedGoLogin();
             if (!userDetail) return;
             let _filter;
@@ -21,23 +31,49 @@ Component({
             } else if (this.properties.orderFilter === 'REFUND') {
                 _filter = OrderFilter.Refund
             }
+            //////////console.log("text")
             let queryRootOrdersArgs: any = {
-                pageIndex: 0, pageSize: 1000
+                pageIndex: nowIndex, pageSize: 4
             }
+            //////////console.log("text")
             if (this.properties.orderFilter && this.properties.orderFilter != "") {
                 queryRootOrdersArgs['filter'] = _filter
             }
+            //////////console.log("text")
+            wx.showLoading({title: "加载中..."})
+            //////////console.log("text")
             const ordersResult = await request.orders(queryRootOrdersArgs, true);
+            _total = ordersResult.total;
+            //////////console.log("text", ordersResult)
+            wx.hideLoading()
+            //////////console.log("text", ordersResult)
             if (ordersResult == null) return;
-            this.setData({
-                'order': ordersResult.list
-            });
+            //////////console.log(ordersResult.list.length)
+            //////////console.log(this.data.order)
+            for (let i = 0; i < ordersResult.list.length; i++) {
+                const orderT = this.data.order;
+                orderT.push(ordersResult.list[i]);
+                this.setData({
+                    order: orderT
+                })
+                //////////console.log(this.data.order)
+                await new Promise(r => setTimeout(r, 200));
+            }
+
         }
-    }, properties: {orderFilter: {type: String, value: ""}}, ready() {
-        this.init();
+    }, properties: {
+        orderFilter: {type: String, value: ""}, headerHeight: Number
+    }, ready() {
+        // this.init();
     }, observers: {
         'orderFilter': function () {
+            nowIndex = 0;
+            _total = 0;
             this.init();
+        }, 'headerHeight': function (data) {
+            this.setData({
+                scrollStyle: `height:${WXUtils.getScreenHeight() - data}px`
+            })
         }
     }
 });

@@ -18,7 +18,7 @@
                     支付方式：
                 </view>
                 <view class="qrcode-weixin">
-                    <image class="weixn-img" src="../../assets/ic_wechat.png"></image>
+                    <image lazy-load="true" class="weixn-img" src="../../assets/ic_wechat.png"></image>
                     微信支付
                 </view>
             </view>
@@ -26,7 +26,7 @@
                 <view>
                     <!--                    FIXME-->
                     <!--                    <qrcode-vue class="qr-code-vue" value="{{qrCodeIDString}}" size="{{600}}" level="H"></qrcode-vue>-->
-                    <image class="imgs" src="../../assets/pic_phone.png"></image>
+                    <image lazy-load="true" class="imgs" src="../../assets/pic_phone.png"></image>
                 </view>
             </view>
         </view>

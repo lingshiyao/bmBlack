@@ -20,6 +20,11 @@
                 注册账号
             </view>
         </view>
+        <view class="line">
+            <view class="s-txt" bindtap="registerWithPhone">
+                短信注册账号
+            </view>
+        </view>
     </view>
     <PhoneModalInput id="phoneModalInput"></PhoneModalInput>
 </view>

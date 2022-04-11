@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/PhoneApp",
+    "pages/PhoneLoginNew",
     "pages/TestPage",
     "pages/PhoneLogin",
     "pages/PhoneSetting",
@@ -8,7 +9,11 @@
     "pages/PhoneStorePage",
     "pages/PhoneChangePwd",
     "pages/PhoneInfoPage",
-    "pages/PhoneVHTML"
+    "pages/PhoneVHTML",
+    "pages/PhoneStoreListPage",
+    "pages/PhoneRegWithPhone",
+    "pages/PhoneCreateStore",
+    "pages/PhoneArtSearchPage"
   ],
   "window": {
     "backgroundTextStyle": "light",

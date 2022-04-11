@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "PhoneNothing": "/compoments/Global/PhoneNothing",
+    "LoadingImg": "/compoments/Global/LoadingImg",
+    "FootMsg": "/compoments/Tabbar/FootMsg"
+  }
+}

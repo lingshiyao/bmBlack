@@ -1,0 +1,51 @@
+<view class="base">
+    <PhoneTitle title="创建店铺"></PhoneTitle>
+    <view class="base1">
+        <view class="line" style="margin-top:5.9vw;">
+            <view class="title">店铺图标</view>
+            <view class="title-small">推荐上传350 X 350尺寸的图片</view>
+        </view>
+        <view class="image-input" style="margin-top:2.6vw;" bindtap="chooseIcon">
+            <image lazy-load="true" mode="aspectFill" src="{{iconSrc}}" class="image-choose"></image>
+        </view>
+        <view class="line" style="margin-top:5.9vw;">
+            <view class="title">店铺横幅</view>
+            <view class="title-small">将在店铺首页展示，推荐上传1400 X 400尺寸的图片</view>
+        </view>
+        <view class="image-input" style="margin-top:2.6vw;" bindtap="chooseBanner">
+            <image lazy-load="true" mode="aspectFill" src="{{bannerSrc}}" class="image-choose"></image>
+        </view>
+        <view class="line" style="margin-top:5.9vw;">
+            <view class="title">创建店铺</view>
+            <view class="title-small">选择所属分类</view>
+        </view>
+        <view class="action-sheet" style="margin-top:2.6vw;" bindtap="showActionSheet"></view>
+        <view class="title" style="margin-top:5.9vw;">店铺名称 (必填)</view>
+        <view class="border" style="margin-top:2.6vw;">
+            <input bindinput="myInput" value="{{inputs[index]}}"
+                   placeholder="请填写店铺的中文或英文名称"
+                   class="input"></input>
+        </view>
+        <view class="line" style="margin-top:5.9vw;">
+            <view class="title">企业官网</view>
+            <view class="title-small">可以填写你的官网、官方博客和微博地址</view>
+        </view>
+        <view class="border" style="margin-top:2.6vw;">
+            <input bindinput="myInput" value="{{inputs[index]}}"
+                   placeholder="请填写店铺的中文或英文名称"
+                   class="input"></input>
+        </view>
+        <view class="line" style="margin-top:5.9vw;">
+            <view class="title">店铺介绍 (必填)</view>
+            <view class="title-small">不能超过500个汉字</view>
+        </view>
+        <view class="border" style="margin-top:2.6vw;">
+            <input bindinput="myInput" value="{{inputs[index]}}"
+                   placeholder="请填写店铺的中文或英文名称"
+                   class="input"></input>
+        </view>
+        <view class="createStore" style="margin-top:4.1vw;margin-bottom:10vw;">
+            创建店铺
+        </view>
+    </view>
+</view>

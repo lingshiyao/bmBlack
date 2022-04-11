@@ -1,10 +1,19 @@
-<view class="my-colleciton" style="margin-bottom: 20vw;">
+<scroll-view
+        scroll-y="true"
+        class="my-colleciton animate__animated animate__fadeIn animate__faster"
+        style="{{scrollStyle}}"
+        refresher-enabled="true"
+        enhanced="true"
+        show-scrollbar="{{false}}"
+        bindrefresherrefresh="refresh"
+        refresher-triggered="{{triggered}}">
     <PhoneNothing wx:if="{{favList.length === 0}}" text="亲，您还没有铸造哦~"/>
     <view class="grid">
         <block wx:for="{{favList}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
             <PhoneStoreItem data="{{item}}"
-                            class="animate__animated animate__bounceIn animate__faster" bindtap="goToInfo"
+                            class="animate__animated animate__fadeInUp animate__faster" bindtap="goToInfo"
                             data-index="{{index}}"></PhoneStoreItem>
         </block>
     </view>
-</view>
+    <view style="height:26vw;"/>
+</scroll-view>

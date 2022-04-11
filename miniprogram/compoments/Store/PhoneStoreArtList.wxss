@@ -1,6 +1,8 @@
+@import '/common/animate.wxss';
 
 .store-art-list {
-    margin-top: 3.87vw;
+    background: #1F1F1F;
+    margin-top: 4vw;
 }
 
 .store-art-input-box {
@@ -34,12 +36,13 @@
     border-radius: 6vw;
     height: 9.5vw;
     width: 44.67vw;
+    line-height: 7.8vw;
 }
 
 .phone-store-item-box {
     text-align: left;
     width: 96vw;
-    margin: 1.5vw;
+    margin-left: 4vw;
     display: grid;
     grid-template-columns: repeat(2, 44vw);
     grid-column-gap: 4vw;

@@ -49,7 +49,7 @@ export class PicCDNUtils {
         } else {
             return "/assets/" + picName;
         }
-        // console.log(PicCDNUtils.getInstance().getBaseUrl() + picName)
+        // ////////////////////console.log(PicCDNUtils.getInstance().getBaseUrl() + picName)
         // return PicCDNUtils.getInstance().getBaseUrl() + picName;
     }
 
@@ -79,7 +79,7 @@ export class PicCDNUtils {
     public getBaseUrl(): string | null {
         for (let i = 0; i < this.CDNList.length; i++) {
             const item = this.CDNList[i];
-            if (item.name === this.chooseCDN) {
+            if (item.name == this.chooseCDN) {
                 return item.url;
             }
         }

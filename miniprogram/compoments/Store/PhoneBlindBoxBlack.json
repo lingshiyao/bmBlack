@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "PhoneBlineRandomImg": "/compoments/Store/PhoneBlineRandomImg",
+    "PhoneStoreBanner": "/compoments/Store/PhoneStoreBanner",
+    "PhoneModelPay": "/compoments/Global/PhoneModelPay"
+  }
+}

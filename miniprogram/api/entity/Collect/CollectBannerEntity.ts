@@ -56,6 +56,10 @@ export class CollectBannerEntity {
     //// 是否是盲盒店铺
     public isBlind: boolean = false;
 
+    public userExtIntro: string = ""
+
+    public userExtNickName: string = ""
+
     constructor() {
         this.items.push(CollectBannerItemEntity.init(pic_web_normal, pic_web_selected));
         this.items.push(CollectBannerItemEntity.init(pic_more_selected, pic_more_selected));

@@ -1,8 +1,9 @@
 <!--<view class="base">-->
         <!--    <view wx:if="{{loading === true}}" class="loading animate__animated animate__fadeOut animate__faster"></view>-->
-        <!--    <image class="{{imgClass}}" show-menu-by-longpress lazy-load bindload="onLoadingSuccess" binderror="onLoadingError"-->
+        <!--    <image lazy-load="true" class="{{imgClass}}" show-menu-by-longpress lazy-load bindload="onLoadingSuccess" binderror="onLoadingError"-->
         <!--           mode="aspectFill" src="{{src}}" style="{{border}}"/>-->
         <!--</view>-->
 
-<image class="{{imgClass}}" show-menu-by-longpress bindload="onLoadingSuccess" binderror="onLoadingError"
-       mode="aspectFill" src="{{src}}" style="{{border}}"/>
+<image lazy-load="true" class="{{imgClass}}" show-menu-by-longpress bindload="onLoadingSuccess"
+       binderror="onLoadingError"
+       mode="aspectFill" src="{{newSrc}}" style="{{stylee}}"/>

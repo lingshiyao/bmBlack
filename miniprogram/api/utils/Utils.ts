@@ -1,16 +1,20 @@
 export class Utils {
 
-    public static getSafestatusBarHeight():number {
+    public static getSafestatusBarHeight(): number {
         return wx.getSystemInfoSync().statusBarHeight;
+    }
+
+    public static getBottomSafeAreaRpxHeight(): number {
+        // ////////////////////console.log(JSON.stringify(wx.getSystemInfoSync()));
+        return (wx.getSystemInfoSync().safeArea.bottom - wx.getSystemInfoSync().safeArea.height) / wx.getSystemInfoSync().windowWidth * wx.getSystemInfoSync().windowHeight;
     }
 
     public static getScreenRpxHeight(): number {
         return 750 / wx.getSystemInfoSync().windowWidth * wx.getSystemInfoSync().windowHeight;
     }
 
-    public static getBottomSafeAreaRpxHeight(): number {
-        console.log(JSON.stringify(wx.getSystemInfoSync()));
-        return (wx.getSystemInfoSync().safeArea.bottom - wx.getSystemInfoSync().safeArea.height) / wx.getSystemInfoSync().windowWidth * wx.getSystemInfoSync().windowHeight;
+    public static sleep(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     public static getBottomSafeAreaPxHeight(): number {

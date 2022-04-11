@@ -1,13 +1,13 @@
 <view class="phone-nft-info-bottom">
     <view class="phone-nft-info-bottom-collection" bindtap="action" data-index="1">
-        <image show-menu-by-longpress class="phone-nft-info-bottom-img"
+        <image lazy-load="true" show-menu-by-longpress class="phone-nft-info-bottom-img"
                src="{{src}}" style="width: 4.8vw; height: 4.8vw;"></image>
         <view class="phone-nft-info-bottom-title">
             收藏
         </view>
     </view>
     <view class="phone-nft-info-bottom-collection" bindtap="action" data-index="2">
-        <image show-menu-by-longpress class="phone-nft-info-bottom-img" src="{{src1}}"
+        <image lazy-load="true" show-menu-by-longpress class="phone-nft-info-bottom-img" src="{{src1}}"
                style="width: 4.8vw; height: 4.8vw;"></image>
         <view class="phone-nft-info-bottom-title">
             修改

@@ -1,22 +1,146 @@
 
 .phone-nft-info {
-    width: 92vw;
-    background: white;
-    height: 97vw;
-    margin: 4vw;
-    border-radius: 3vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 
-.phone-nft-info-img {
-    display: inline-flex;
-    justify-content: center;
-    overflow: hidden;
-    margin: 6vw 5vw;
-    background-color: darkorange;
+.header-border {
     width: 81vw;
-    height: 84vw;
-    border-radius: 3vw;
-    z-index: 2;
+    height: 81vw;
+    margin-top: 14vw;
+}
+
+.header-black-attr-xianliang-layer {
+    display: flex;
+    flex-direction: row;
+}
+
+.header-black-attr {
+    width: 18.06vw;
+    height: 5vw;
+    background: #363636;
+    border-radius: 1vw;
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FDD3A1;
+    line-height: 5vw;
+    text-align: center;
+    margin-left: 2.78vw;
+    margin-bottom: 2.78vw;
+}
+
+.header-black-name-flower-left {
+    width: 12.5vw;
+    height: 4.17vw;
+    /*-webkit-transform: scaleX(-1);*/
+    /*transform: scaleX(-1);*/
+}
+
+.header-black-name-flower-right {
+    width: 12.5vw;
+    height: 4.17vw;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.header-black-name-lock {
+    width: 84.16vw;
+    height: 0.56vw;
+}
+
+.header-black-name-lock-layout {
+    width: 84.16vw;
+    position: relative;
+    /*margin-left: 7.92vw;*/
+}
+
+.header-black-name-lock-txt {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    opacity: 0.4;
+    position: absolute;
+    left: 32.5vw;
+    top: 2vw;
+}
+
+.black-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.header-black-name-lock-img {
+    width: 2.36vw;
+    height: 3.19vw;
+    position: absolute;
+    top: 0;
+    left: 28.5vw;
+    top: 2.5vw;
+}
+
+.header-black-attr-xianliang1 {
+    width: 11.11vw;
+    height: 5vw;
+    background: #FDD3A1;
+    border-radius: 1vw 0vw 0vw 1vw;
+
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #692D0B;
+    line-height: 5vw;
+    text-align: center;
+}
+
+.header-black-attr-xianliang2 {
+    width: 16.67vw;
+    height: 5vw;
+    background: #363636;
+    border-radius: 0vw 1vw 1vw 0vw;
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FDD3A1;
+    line-height: 5vw;
+    text-align: center;
+}
+
+.header-black-name-layout {
+    display: flex;
+    align-items: center;
+}
+
+.header-black-name-txt {
+    font-size: 6.67vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.8;
+    margin-left: 2.92vw;
+    margin-right: 2.92vw;
+}
+
+.header-black-attr-base {
+    width: 94vw;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.phone-nft-info-img {
+    width: 73vw;
+    height: 73vw;
+    background: #0B0B0B;
+    position: absolute;
+    top: 16.5vw;
 }
 
 .phone-nft-info-price-background {
@@ -84,3 +208,106 @@
     margin-left: 4px;
     vertical-align: middle;
 }
+
+.description {
+    width: 95.83vw;
+    background: #2A2A2A;
+    border-radius: 6vw;
+    margin-left: 2.085vw;
+    margin-top: 4.17vw;
+}
+
+.goumaixuzhi {
+    width: 95.83vw;
+    background: #2A2A2A;
+    border-radius: 6vw;
+    margin-left: 2.085vw;
+    margin-top: 4.17vw;
+}
+
+.goumaixuzhi-txt1 {
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.8;
+    padding-top: 4vw;
+    padding-left: 4vw;
+}
+
+.goumaixuzhi-txt2 {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    opacity: 0.6;
+    padding-left: 4vw;
+    padding-top: 5vw;
+    padding-bottom: 5vw;
+    padding-right: 4vw;
+}
+
+
+.guanzhu-layout {
+    width: 95.83vw;
+    height: 16.67vw;
+    background: #2A2A2A;
+    border-radius: 6vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 2.085vw;
+    margin-top: 7.22vw;
+}
+
+.guanzhu-layout-btn {
+    width: 21.11vw;
+    height: 8.33vw;
+    background: #FDD3A1;
+    border-radius: 4vw;
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #692D0B;
+    line-height: 8.33vw;
+    text-align: center;
+    margin-right: 4.17vw;
+}
+
+.guanzhu-layout-flex1 {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.guanzhu-layout-txt1 {
+    font-size: 3.89vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 6.94vw;
+    opacity: 0.8;
+}
+
+.guanzhu-layout-txt2 {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    line-height: 6.94vw;
+    opacity: 0.4;
+}
+
+.guanzhu-layout-y {
+
+}
+
+.guanzhu-layout-img {
+    width: 9.72vw;
+    height: 9.72vw;
+    background: #000203;
+    border: 0px solid #E0E0E0;
+    border-radius: 5vw;
+}
+
+

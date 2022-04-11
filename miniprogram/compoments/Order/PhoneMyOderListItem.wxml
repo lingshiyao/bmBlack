@@ -9,7 +9,7 @@
             </view>
         </view>
         <view class="bottom">
-            <LoadingImg border="border-radius: 3vw;" src="{{src}}" class="img-border"/>
+            <LoadingImg stylee="border-radius: 3vw;" src="{{src}}" class="img-border"/>
             <view class="content">
                 <view class="id">
                     # {{name}}

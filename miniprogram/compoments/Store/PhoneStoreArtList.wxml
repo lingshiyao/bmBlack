@@ -1,19 +1,29 @@
+<scroll-view
+        scroll-y="true"
+        enhanced="true"
+        bindscrolltolower="bindDownLoad"
+        show-scrollbar="{{false}}"
+        style="height:100vh;">
+<PhoneStoreBanner data="{{bannerData}}" data1="{{data}}"></PhoneStoreBanner>
 <view class="store-art-list">
     <view class="store-art-list-content">
         <view class="store-art-input-box">
-            <image class="store-art-input-img" src="/assets/ic_search.png"></image>
+            <image lazy-load="true" class="store-art-input-img" src="/assets/ic_search.png"></image>
             <input placeholder="输入名称" bindinput="searchInput" value="" class="store-art-input"></input>
         </view>
         <PhoneSelectBox menuData="{{selectBoxData}}"
                         class="store-art-select-box"
                         bind:clickCallBack="clickCallBack"/>
     </view>
-
+    <PhoneNothing wx:if="{{data.length == 0}}"></PhoneNothing>
     <view class="phone-store-item-box">
-        <block wx:for="{{data}}" wx:for-item="item" wx:for-index="index">
+        <view wx:for="{{data}}" wx:for-item="item" wx:for-index="index">
+            <view class="animate__animated animate__fadeIn animate__faster">
             <PhoneStoreItem class="phone-store-item"
                             bindtap="goToInfo" data-index="{{index}}"
                             data="{{item}}"></PhoneStoreItem>
-        </block>
+            </view>
+        </view>
     </view>
 </view>
+</scroll-view>

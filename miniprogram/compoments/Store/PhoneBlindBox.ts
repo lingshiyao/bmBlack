@@ -1,9 +1,12 @@
 import {CollectBannerEntity} from "../../api/entity/Collect/CollectBannerEntity";
 import {CollectCardDataEntity} from "../../api/entity/Collect/CollectItemsListItemEntity";
+import {PicCDNUtils} from "../../api/net/PicCDNUtils";
 
 Component({
     data: {
-        text: "", num: 0
+        text: "",
+        num: 0,
+        mangheImg: PicCDNUtils.getPicUrl("pic_gif.png", false)
     }, methods: {
         changeNum(event: any) {
             const n = parseInt(event.currentTarget.dataset.n.toString());

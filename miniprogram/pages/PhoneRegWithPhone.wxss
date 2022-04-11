@@ -1,0 +1,62 @@
+.base {
+    background: #1F1F1F;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.border {
+    display: flex;
+    align-items: center;
+    width: 77.33333333333333vw;
+    height: 11.733333333333333vw;
+    /*background: red;*/
+    border-radius: 2.6666666666666665vw;
+    border: 0vw;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 3.466666666666667vw;
+    font-weight: 400;
+    color: #969696;
+    transition: all 0.2s ease 0s;
+}
+
+.input {
+    margin-left: 1vw;
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.line-line {
+    width: 85vw;
+    height: 0.28vw;
+    background: #E6E6E6;
+    opacity: 0.2;
+    margin-left: 7.5vw;
+}
+
+.title {
+    font-size: 6.67vw;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.8;
+}
+
+.btn {
+    width: 84.72vw;
+    height: 12.22vw;
+    background: #FDD3A1;
+    border-radius: 6vw;
+
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #692D0B;
+    text-align: center;
+    line-height: 12.22vw;
+    /*font-weight: bold;*/
+
+}
