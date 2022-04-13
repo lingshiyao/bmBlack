@@ -45,9 +45,9 @@ Component({
         });
     }, observers: {
         'data': function (data) {
-            //////////////console.log(data)
+            ////////////////////////console.log(data)
         }, 'bannerData': function (bannerData) {
-            //////////////console.log(bannerData)
+            ////////////////////////console.log(bannerData)
         }
     }
 });

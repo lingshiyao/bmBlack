@@ -1,14 +1,30 @@
+<scroll-view
+        scroll-y="true"
+        enhanced="true"
+        style="height:100vh;"
+        show-scrollbar="{{false}}">
 <view class="phone-info-page">
     <view>
         <view class="phone-nft-info">
             <image lazy-load="true" mode="aspectFill" class="header-border" src="{{headerBorder}}"/>
             <LoadingImg
+                    wx:if="{{art.kind == 'IMAGE'}}"
                     lazy-load="true"
                     mode="aspectFill"
                     class="phone-nft-info-img"
                     stylee="width: 73vw;height: 73vw;"
                     anim="animate__animated animate__fadeIn animate__faster"
                     src="{{nft.imgs.headerImg}}"></LoadingImg>
+            <canvas
+                    wx:if="{{art.kind == 'MODEL'}}"
+                    type="webgl"
+                    id="webgl"
+                    canvas-id="webgl"
+                    class="phone-nft-info-3d"
+            ></canvas>
+            <view
+                    wx:if="{{art.kind == 'MODEL'}}"
+            ></view>
         </view>
         <view class="black-header" style="margin-top:9vw;">
             <view class="header-black-name-layout">
@@ -49,6 +65,28 @@
 
         <view class="description">
             <rich-text class="description-rich" nodes="{{art.description}}"/>
+            <view class="description-rich-new-msg-area-layout">
+                <view bindtap='copyAddressText' class="description-rich-new-msg-area-layout-line">
+                    <view class="description-rich-new-msg-area-layout-line-txt1">合约地址</view>
+                    <view class="description-rich-new-msg-area-layout-line-txt2">{{address}}</view>
+                </view>
+                <view class="description-rich-new-msg-area-layout-line-line"></view>
+                <view bindtap='copyAuthorizationText' class="description-rich-new-msg-area-layout-line">
+                    <view class="description-rich-new-msg-area-layout-line-txt1">授权文件</view>
+                    <view class="description-rich-new-msg-area-layout-line-txt2">{{authAddress}}</view>
+                </view>
+                <view class="description-rich-new-msg-area-layout-line-line"></view>
+                <view class="description-rich-new-msg-area-layout-line">
+                    <view class="description-rich-new-msg-area-layout-line-txt1">认证标准</view>
+                    <view class="description-rich-new-msg-area-layout-line-txt2">REC-721</view>
+                </view>
+                <view class="description-rich-new-msg-area-layout-line-line"></view>
+                <view class="description-rich-new-msg-area-layout-line">
+                    <view class="description-rich-new-msg-area-layout-line-txt1">认证网络</view>
+                    <view class="description-rich-new-msg-area-layout-line-txt2">树图链（Conflux）</view>
+                </view>
+                <view style="height:4.58vw;"></view>
+            </view>
         </view>
         <view class="goumaixuzhi">
             <view class="goumaixuzhi-txt1">购买须知</view>
@@ -91,3 +129,4 @@
         <PhoneTitle title="" status="1"></PhoneTitle>
     </view>
 </view>
+</scroll-view>

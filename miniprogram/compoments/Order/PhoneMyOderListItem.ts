@@ -31,7 +31,7 @@ Component({
                         prepayId: this.properties.order.tradeReturn.prepay_id.toString(),
                         target: WxJsApiTarget.MiniProgram
                     })
-                    console.log(wxJsapiPayParams)
+                    //////////console.log(wxJsapiPayParams)
                     const pay = await WXUtils.pay(wxJsapiPayParams);
                     await wx.hideLoading()
                     if (pay.success) {
@@ -58,7 +58,7 @@ Component({
                 url: `/pages/PhoneInfoPage?id=${this.properties.order.arts[0].id}&sid=${this.properties.order.store.id}&isFromOrder=${this.properties.isFromOrder}`
             })
         }, getOrderStatus(tradeState: string) {
-            //console.log(tradeState)
+            ////////////console.log(tradeState)
             switch (tradeState) {
                 case "WAIT_FOR_PAYMENT_NOT_PAY":
                     let getColor_2996075e: any = this.data.getColor;
@@ -66,7 +66,7 @@ Component({
                     this.setData({
                         'getColor': getColor_2996075e
                     });
-                    //console.log("here")
+                    ////////////console.log("here")
                     return "未支付";
                 case "WAIT_FOR_PAYMENT_USER_PAYING":
                     let getColor_fb249e71: any = this.data.getColor;

@@ -20,7 +20,7 @@ Component({
     },
     methods: {
         clickBack() {
-            // ////////////////////console.log(this.properties.status)
+            // //////////////////////////////console.log(this.properties.status)
             switch (this.properties.status) {
                 case 0:
                     wx.reLaunch({
@@ -37,6 +37,6 @@ Component({
         this.setData({
             'marginTop': "padding-top:" + Utils.getSafestatusBarHeight() + "px"
         })
-        // ////////////////////console.log(wx.getSystemInfoSync())
+        // //////////////////////////////console.log(wx.getSystemInfoSync())
     }
 });

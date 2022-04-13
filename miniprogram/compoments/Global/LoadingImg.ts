@@ -1,6 +1,5 @@
 import {ImageCache} from "../../api/ImageCache";
-
-const debug = false;
+import {DownloadTask} from "../../api/DownloadTask";
 
 Component({
     properties: {
@@ -27,39 +26,25 @@ Component({
         }, onLoadingError() {
         },
         async setImage(src: string) {
-            this.setData({
-                newSrc: src
-            })
-            /*
             if (src == "") return
             let cacheImagePath = await ImageCache.getImg(src);
             if (cacheImagePath == null) {
-                cacheImagePath = await ImageCache.setImg(src);
-            }
-            if (cacheImagePath != null) {
+                cacheImagePath = await ImageCache.setImg(src)
+                if (cacheImagePath != null) {
+                    this.setData({
+                        newSrc: cacheImagePath
+                    })
+                } else {
+                    this.setData({
+                        newSrc: src
+                    })
+                }
+            } else {
                 this.setData({
                     newSrc: cacheImagePath
                 })
-            } else {
-                this.setData({
-                    newSrc: src
-                })
+                DownloadTask.addImg(src);
             }
-
-            ImageCache.getImgTime(src).then(res => {
-                ////console.log(res);
-                ////console.log(res - new Date().getTime())
-                if (res != null && res - new Date().getTime() > this.properties.cacheTime) {
-                    ImageCache.updata(src, cacheImagePath).then(res => {
-                        ////console.log(res)
-                        if (res != null) {
-                            this.setData({
-                                newSrc: res
-                            })
-                        }
-                    });
-                }
-            })*/
         }
     }, observers: {
         'src': function (src) {

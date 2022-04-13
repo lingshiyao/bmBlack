@@ -1,0 +1,14 @@
+.main {
+    width: 100vw;
+    height: 100vh;
+}
+
+.nav {
+    margin: 40rpx;
+    padding: 20rpx;
+    box-sizing: border-box;
+    border-radius: 20rpx;
+    background-color: #01ca9e;
+    color: white;
+    text-align: center;
+}

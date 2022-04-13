@@ -101,13 +101,13 @@ Page({
                         exploreItemData: exploreItemDataT
                     })
                     await Utils.sleep(200);
-                    ////////console.log(this.data.exploreItemData)
+                    //////////////////console.log(this.data.exploreItemData)
                 }
             }
         }
     }, goToStore(event: any) {
         const index = parseInt(event.currentTarget.dataset.index.toString());
-        ////////////////////console.log(index);
+        //////////////////////////////console.log(index);
         wx.navigateTo({
             url: `/pages/PhoneStorePage?id=${this.data.exploreItemData[index].id}`,
         })

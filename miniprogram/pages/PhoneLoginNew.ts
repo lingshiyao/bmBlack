@@ -141,10 +141,10 @@ Page({
         const input: SmsValidInput = {action: ValidAction.Signin, phoneNumber: this.data.name}
         const res = await request.smsRequestVerificationCode({input: input});
         const that = this;
-        //console.log(res)
+        ////////////console.log(res)
         if (res != null && res == true) {
             let timeleft = 60;
-            //console.log("here")
+            ////////////console.log("here")
             this.setData({
                 yanzhengmaStatus: 2
             })
@@ -178,15 +178,15 @@ Page({
     },
 
     async getPhoneNumber(e) {
-        ////console.log(e.detail.code)
+        //////////////console.log(e.detail.code)
     },
 
     async clickLogin() {
-        //console.log(this.data.loginStatus)
+        ////////////console.log(this.data.loginStatus)
         if (this.data.loginStatus == 0) {
             const input: SigninSmsInput = {phoneNumber: this.data.name, verificationCode: this.data.pwd};
             const res = await request.signinSms({input: input});
-            //console.log(res)
+            ////////////console.log(res)
             if (res != null) {
                 let userDetail: UserDetail = await request.user({userId: res.id})
                 if (userDetail == null) {
@@ -204,14 +204,14 @@ Page({
         } else {
             const login = await WXUtils.login();
             const wxCode = login.code.toString();
-            //console.log(wxCode)
+            ////////////console.log(wxCode)
             if (wxCode) {
                 const wxJsapiOpenId = await request.wxJsapiOpenId({code: wxCode, target: WxJsApiTarget.MiniProgram});
-                //console.log(wxJsapiOpenId)
+                ////////////console.log(wxJsapiOpenId)
                 if (wxJsapiOpenId && wxJsapiOpenId.response.openid) {
                     const input:SigninWxInput = {openId: wxJsapiOpenId.response.openid, phoneNumber: this.data.name, verificationCode: this.data.pwd};
                     const res = await request.signinWx({input: input});
-                    //console.log(res);
+                    ////////////console.log(res);
                     if (res != null) {
                         let userDetail: UserDetail = await request.user({userId: res.id})
                         if (userDetail == null) {

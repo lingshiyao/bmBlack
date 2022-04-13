@@ -49,7 +49,7 @@ Component({
                 this.setData({
                     'favList': favList_fccdbec4
                 });
-                ////////console.log(this.data.favList)
+                //////////////////console.log(this.data.favList)
                 await Utils.sleep(200);
             }
         }, async init() {
@@ -66,7 +66,7 @@ Component({
                 wx.showLoading({title: "加载中..."});
                 let nftsResult = await request.nfts({userId: userDetail.user.id});
                 wx.hideLoading();
-                ////////console.log(nftsResult);
+                //////////////////console.log(nftsResult);
                 if (nftsResult) {
                     StorageUtils.setStorage("nfts", nftsResult)
                     this.setData({
@@ -91,7 +91,7 @@ Component({
             this.setData({
                 scrollStyle: `height:${WXUtils.getScreenHeight() - data}px`
             })
-            //////////console.log(this.data.scrollStyle)
+            ////////////////////console.log(this.data.scrollStyle)
         }
     }
 });

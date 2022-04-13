@@ -23,3 +23,9 @@
     height: 8.89vw;
     margin-right: 25.5vw;
 }
+
+.logo {
+    width: 15.8vw;
+    height: 8vw;
+    /*margin-top: 1vw;*/
+}

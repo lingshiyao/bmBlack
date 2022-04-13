@@ -1,4 +1,6 @@
 // app.ts
+import {DownloadTask} from "./api/DownloadTask";
+
 App<IAppOption>({
     globalData: {},
     onLaunch() {
@@ -15,3 +17,5 @@ App<IAppOption>({
         // })
     },
 })
+
+DownloadTask.run()

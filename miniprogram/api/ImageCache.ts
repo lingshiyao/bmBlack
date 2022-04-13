@@ -1,3 +1,6 @@
+import {WXUtils} from "./utils/WXUtils";
+import {DownloadTask} from "./DownloadTask";
+
 const MD5 = require('/spark-md5.js')
 
 export class Data {
@@ -8,145 +11,137 @@ export class Data {
 export class ImageCache {
     public static async updata(src: string, cache: string) {
         const cacheMD5 = await this.getMD5(cache);
-        if (cacheMD5 == null || cacheMD5 == undefined) {
-            return new Promise(resolve => resolve(null))
+        if (cacheMD5 == null || cacheMD5 == undefined)
+            return null;
+        const downloadFile: any = await WXUtils.runner(wx.downloadFile, {
+            url: src
+        });
+        if (downloadFile == null) return null;
+        if (downloadFile.statusCode != 200)  return null;
+        const newCacheMD5 = await ImageCache.getMD5(downloadFile.tempFilePath);
+        if (newCacheMD5 == null) return null;
+        if (cacheMD5 == newCacheMD5) return null;
+        const fs = wx.getFileSystemManager();
+        const saveFile: any = await WXUtils.runner(fs.saveFile, {
+            tempFilePath: downloadFile.tempFilePath
+        });
+        if (saveFile == null) return null;
+        const setStorage: any = await WXUtils.runner(wx.setStorage, {
+            key: src, data: saveFile.savedFilePath,
+        });
+        if (setStorage == null) return null;
+        const setStorage1: any = await WXUtils.runner(wx.setStorage, {
+            key: `${src}###Time__==`, data: new Date().getTime(),
+        });
+        if (setStorage1 == null) return null;
+        return saveFile.savedFilePath;
+    }
+
+    public static async getMD5(path: string) {
+        const fs = wx.getFileSystemManager();
+        const readFile: any = await WXUtils.runner(fs.readFile, {
+            filePath: path
+        });
+        if (readFile == null) return null;
+        let spark = new MD5.ArrayBuffer();
+        spark.append(readFile.data);
+        let hexHash = spark.end(false);
+        return hexHash
+    }
+
+    public static downImg(path: string) {
+        const options = {
+            url: path,
+            async success(downloadFile: any) {
+                if (downloadFile == null) return;
+                if (downloadFile.statusCode != 200) return;
+                // 保存文件
+                const fs = wx.getFileSystemManager()
+                const saveFile: any = await WXUtils.runner(fs.saveFile, {
+                    tempFilePath: downloadFile.tempFilePath
+                });
+                if (saveFile == null) return;
+
+                // 存储缓存
+                const setStorage: any = await WXUtils.runner(wx.setStorage, {
+                    key: path, data: saveFile.savedFilePath,
+                });
+                if (setStorage == null) return;
+                const setStorage1: any = await WXUtils.runner(wx.setStorage, {
+                    key: `${path}###Time__==`, data: new Date().getTime(),
+                });
+                if (setStorage1 == null) return;
+                //console.log("success:", saveFile.savedFilePath);
+                // return saveFile.savedFilePath;
+            },
+            fail(res: any) {
+                return
+            }
         }
-        return new Promise(resolve => {
-            wx.downloadFile({
-                url: src, success: async function (downloadRes) {
-                    if (downloadRes.statusCode == 200) {
-                        const newCacheMD5 = await ImageCache.getMD5(downloadRes.tempFilePath);
-                        ////console.log(newCacheMD5, cacheMD5)
-                        if (cacheMD5 != newCacheMD5) {
-                            const fs = wx.getFileSystemManager()
-                            fs.saveFile({
-                                tempFilePath: downloadRes.tempFilePath, success(saveFileRes) {
-                                    wx.setStorage({
-                                        key: src, data: saveFileRes.savedFilePath, success() {
-                                            wx.setStorage({
-                                                key: `${src}###Time__==`, data: new Date().getTime(), success() {
-                                                    resolve(saveFileRes.savedFilePath)
-                                                }, fail() {
-                                                    resolve(null)
-                                                }
-                                            })
-                                        }, fail() {
-                                            resolve(null)
-                                        }
-                                    })
-                                }, fail() {
-                                    resolve(null)
-                                }
-                            })
-                        } else {
-                            resolve(null)
-                        }
-                    } else {
-                        resolve(null)
-                    }
-                }, fail() {
-                    resolve(null)
-                }
-            });
+        DownloadTask.addTask(options);
+    }
+
+    public static async setImg(path: string) {
+        // 下载文件
+        const downloadFile: any = await WXUtils.downloadFile({
+            url: path
         });
-    }
+        ////console.log(downloadFile)
+        if (downloadFile == null) return null;
+        if (downloadFile.statusCode != 200) return null;
 
-    public static getMD5(path: string) {
-        return new Promise(resolve => {
-            wx.getFileSystemManager().readFile({
-                filePath: path, success: res => {
-                    //////console.log(res)
-                    let spark = new MD5.ArrayBuffer();
-                    //////console.log(spark)
-                    spark.append(res.data);
-                    let hexHash = spark.end(false);
-                    ////console.log(hexHash)
-                    resolve(hexHash)
-                }, fail(res) {
-                    ////console.log(res)
-                    resolve(null)
-                }
-            })
-        })
-    }
-
-    public static setImg(path: string) {
-        ////console.log("setImg")
-        return new Promise(resolve => {
-            wx.downloadFile({
-                url: path, success: function (resDownloadFile) {
-                    if (resDownloadFile.statusCode == 200) {
-                        const fs = wx.getFileSystemManager()
-                        fs.saveFile({
-                            tempFilePath: resDownloadFile.tempFilePath, // 传入一个临时文件路径
-                            success(resSaveFile) {
-                                wx.setStorage({
-                                    key: path, data: resSaveFile.savedFilePath, success() {
-                                        ////console.log(`${path}###Time__==`)
-                                        wx.setStorage({
-                                            key: `${path}###Time__==`, data: new Date().getTime(), success() {
-                                                resolve(resSaveFile.savedFilePath);
-                                            }, fail() {
-                                                resolve(null);
-                                            }
-                                        })
-                                    }, fail() {
-                                        resolve(null);
-                                    }
-                                })
-                            }, fail() {
-                                resolve(null);
-                            }
-                        })
-                    } else {
-                        resolve(null);
-                    }
-                }, fail() {
-                    resolve(null);
-                }
-            });
-
+        // 保存文件
+        const fs = wx.getFileSystemManager()
+        const saveFile: any = await WXUtils.runner(fs.saveFile, {
+            tempFilePath: downloadFile.tempFilePath
         });
+        if (saveFile == null) {
+            await wx.clearStorage();
+            await WXUtils.removeAllSaveFile();
+            return null;
+        }
+
+        // 存储缓存
+        const setStorage: any = await WXUtils.runner(wx.setStorage, {
+            key: path, data: saveFile.savedFilePath,
+        });
+        if (setStorage == null) return null;
+        // const setStorage1: any = await WXUtils.runner(wx.setStorage, {
+        //     key: `${path}###Time__==`, data: new Date().getTime(),
+        // });
+        // if (setStorage1 == null) return null;
+        return saveFile.savedFilePath;
     }
 
-    public static getImgTime(path: any) {
-        return new Promise(resolve => {
-            wx.getStorage({
-                key: `${path}###Time__==`, success(resGetStorage) {
-                    ////console.log(resGetStorage)
-                    if (resGetStorage.data == null || resGetStorage.data == undefined) {
-                        resolve(null)
-                    }
-                    resolve(resGetStorage.data)
-                }, fail() {
-                    resolve(null);
-                }
-            })
+    /**
+     * 获取图片缓存时间
+     * @param path
+     */
+    public static async getImgTime(path: any) {
+        const getStorage: any = await WXUtils.runner(wx.getStorage, {
+            key: `${path}###Time__==`
         })
+        if (getStorage == null) return null;
+        if (getStorage.data == null || getStorage.data == undefined) return null;
+        return getStorage.data
     }
 
-    public static getImg(path: any) {
-        return new Promise(resolve => {
-            wx.getStorage({
-                key: path, success(resGetStorage) {
-                    if (resGetStorage.data.toString().length == 0) {
-                        resolve(null)
-                    } else {
-                        wx.getFileSystemManager().readFile({
-                            filePath: resGetStorage.data, success: resReadFile => {
-                                if (resReadFile.data.byteLength > 0)
-                                    resolve(resGetStorage.data)
-                                else
-                                    resolve(null)
-                            }, fail() {
-                                resolve(null)
-                            }
-                        })
-                    }
-                }, fail() {
-                    resolve(null);
-                }
-            })
+    /**
+     * 获取图片缓存
+     * @param path
+     */
+    public static async getImg(path: any) {
+        const getStorage: any = await WXUtils.runner(wx.getStorage, {
+            key: path
         })
+        if (getStorage == null) return null;
+        if (getStorage.data.toString().length == 0) return null;
+        const fs = wx.getFileSystemManager();
+        const readFile: any = await WXUtils.runner(fs.readFile, {
+            filePath: getStorage.data
+        })
+        if (readFile == null) return null;
+        if (readFile.data.byteLength == 0) return null;
+        return getStorage.data;
     }
 }

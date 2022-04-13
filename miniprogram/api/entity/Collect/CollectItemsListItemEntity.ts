@@ -11,7 +11,7 @@ export class CollectCardDataEntity {
     public tokenId: string = "";
     public price: string = "10022222";
     public time: string = "Last";
-    public headerImg: string = testImg;
+    public headerImg: string = "";
     public lastPrice: string = "";            //// 暂时删除
     public like: string = "99999";
     public isSelected: boolean = false;
@@ -22,4 +22,5 @@ export class CollectCardDataEntity {
     public index: number = 0;       /// 索引
     public category: string = "";   /// 分类
     public category_name: string = "";
+    public kind: string = "";
 }

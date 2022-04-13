@@ -49,7 +49,7 @@ export class PicCDNUtils {
         } else {
             return "/assets/" + picName;
         }
-        // ////////////////////console.log(PicCDNUtils.getInstance().getBaseUrl() + picName)
+        // //////////////////////////////console.log(PicCDNUtils.getInstance().getBaseUrl() + picName)
         // return PicCDNUtils.getInstance().getBaseUrl() + picName;
     }
 

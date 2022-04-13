@@ -7,17 +7,38 @@ import {WXUtils} from "../api/utils/WXUtils";
 import {PublicUtils} from "../api/utils/PublicUtils";
 import {StorageUtils} from "../api/utils/StorageUtils";
 import {AppConstant} from "../api/AppConstant";
+import {Utils} from "../api/utils/Utils";
 
 const NULL: any = null;
 
 Page({
+    async copyAddressText() {
+        wx.setClipboardData({
+            data: this.data.userDetail.userExt.address,
+            success: function (res) {
+                wx.getClipboardData({
+                    success: function (res) {
+                        wx.showToast({
+                            title: '复制成功'
+                        })
+                    }
+                })
+            }
+        })
+    },
     data: {
         defaultUrl: PicCDNUtils.getPicUrl("pic_user.png"),
         rightArrowUrl: PicCDNUtils.getPicUrl("pic_arrow.png"),
         phoneModalInput: NULL,
         phoneModalLoading: NULL,
         phoneModalTips: NULL,
-        userDetail: NULL
+        userDetail: NULL,
+        footStyle: "",
+    },
+    async initFooter() {
+        this.setData({
+            footStyle: `margin-bottom: ${Utils.getBottomSafeAreaPxHeight()}px;`
+        })
     },
     async initTitle() {
         const rect = await WXUtils.getRect2("#phone-title", this);
@@ -30,7 +51,8 @@ Page({
             phoneModalInput: this.selectComponent("#phoneModalInput"),
         })
         this.init();
-        this.initTitle()
+        this.initTitle();
+        this.initFooter();
     }, async init() {
         const userDetail: UserDetail | null = await UserSet.getUserInfoIfFailedGoLogin();
         if (userDetail != null) {
@@ -95,7 +117,7 @@ Page({
         let email: string = userInfos[2] == null ? "" : userInfos[2];
 
         const userUpdateResult = await request.userUpdate({email: email, intro: intro, nickname: nickname}, true)
-        //console.log(userUpdateResult)
+        ////////////console.log(userUpdateResult)
         if (userUpdateResult == null) {
             wx.hideLoading({});
             wx.showModal({
@@ -108,7 +130,7 @@ Page({
         } else {
             const user = await StorageUtils.getStorage(AppConstant.USER);
             const userDetail = await request.user({userId: user.id})
-            //console.log(userDetail)
+            ////////////console.log(userDetail)
             // UserSet.setUserInfo(userDetail);
             StorageUtils.setStorage(AppConstant.USER, userDetail);
             this.setData({
@@ -167,5 +189,24 @@ Page({
         wx.navigateTo({
             url: `/pages/PhoneVHTML?key=nft_how_buy`
         })
+    }, async clearCache() {
+        await wx.clearStorage();
+        await new Promise(resolve => {
+            wx.getSavedFileList({  // 获取文件列表
+                success(res) {
+                    res.fileList.forEach((val, key) => { // 遍历文件列表里的数据
+                        // 删除存储的垃圾数据
+                        //console.log(val.filePath)
+                        wx.removeSavedFile({
+                            filePath: val.filePath
+                        });
+                    })
+                    resolve(null)
+                }, fail() {
+                    resolve(null)
+                }
+            })
+        })
+        wx.showToast({title: "已经清空缓存"})
     }
 });

@@ -28,6 +28,6 @@ Component({
         this.setData({
             'marginTop': "margin-top:" + Utils.getSafestatusBarHeight() + "px"
         })
-        // ////////////////////console.log(wx.getSystemInfoSync())
+        // //////////////////////////////console.log(wx.getSystemInfoSync())
     }
 });

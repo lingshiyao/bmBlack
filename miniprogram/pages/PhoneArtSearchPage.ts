@@ -37,7 +37,7 @@ Page({
         this.setData({
             scrollStyle: `height:${WXUtils.getScreenHeight() - WXUtils.getStatusBarHeight() - rect[0].height}px`
         })
-        //////////console.log(rect)
+        ////////////////////console.log(rect)
     },
     onLoad: function (options) {
         _pageIndex = 0;
@@ -46,7 +46,7 @@ Page({
         this.search();
     },
     goToInfo(event: any) {
-        // ////////////////////console.log(event, this.data);
+        // //////////////////////////////console.log(event, this.data);
         const index = parseInt(event.currentTarget.dataset.index.toString());
 
         wx.navigateTo({
@@ -57,7 +57,7 @@ Page({
         this.setData({
             search: e.detail.value.toString()
         })
-        //////////console.log(e.detail.value.toString() == "")
+        ////////////////////console.log(e.detail.value.toString() == "")
         if (e.detail.value.toString() == "") {
 
             this.setData({
@@ -68,7 +68,7 @@ Page({
                 deleteIconShow: true
             })
         }
-        //////////////////console.log(e.detail, e.detail.value.toString(), this.data.search)
+        ////////////////////////////console.log(e.detail, e.detail.value.toString(), this.data.search)
     },
     async clickSearch() {
         this.setData({
@@ -78,7 +78,7 @@ Page({
     },
     async search() {
         const key = this.data.search;
-        ////////////////console.log(key)
+        //////////////////////////console.log(key)
         await wx.showLoading({title: "加载中..."})
         const arts = await request.arts({
             ascByPrice: true,
@@ -105,7 +105,7 @@ Page({
                 arts: artsT
             })
             await Utils.sleep(200);
-            // ////////console.log(this.data.arts)
+            // //////////////////console.log(this.data.arts)
         }
     }
 });

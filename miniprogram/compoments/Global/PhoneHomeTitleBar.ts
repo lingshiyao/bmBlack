@@ -12,7 +12,8 @@ Component({
         marginTop: "margin-top:0px;",
         setting: PicCDNUtils.getPicUrl("btn_set.png", false),
         choose: 0,
-        searchIcon: PicCDNUtils.getPicUrl("ic_search.png", false)
+        searchIcon: PicCDNUtils.getPicUrl("ic_search.png", false),
+        logo: PicCDNUtils.getPicUrl("pic_logo.png", false),
     },
     methods: {
         clickBack() {
@@ -42,6 +43,6 @@ Component({
         this.setData({
             'marginTop': "padding-top:" + Utils.getSafestatusBarHeight() + "px"
         })
-        // ////////////////////console.log(wx.getSystemInfoSync())
+        // //////////////////////////////console.log(wx.getSystemInfoSync())
     }
 });

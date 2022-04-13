@@ -10,12 +10,51 @@ export class PayResult {
 
 export class WXUtils {
 
+    public static removeAllSaveFile() {
+        return new Promise(resolve => {
+            wx.getSavedFileList({  // 获取文件列表
+                success(res) {
+                    res.fileList.forEach((val) => { // 遍历文件列表里的数据
+                        // 删除存储的垃圾数据
+                        wx.removeSavedFile({
+                            filePath: val.filePath
+                        });
+                    })
+                    resolve(null)
+                }, fail() {
+                    resolve(null)
+                }
+            })
+        });
+    }
+
+    public static shakeToDebugPage() {
+        wx.onAccelerometerChange(function (e) {
+            //////////console.log(e)
+            if (Math.abs(e.x) > 1 && Math.abs(e.y) > 1) {
+                wx.vibrateShort({
+                    type: "heavy"
+                })
+                wx.showModal({
+                    title: '提示', content: "是否跳转3d调试页面", showCancel: true, success(res) {
+                        if (res.confirm) {
+                            wx.navigateTo({
+                                url: "/pages/PhoneThreeTestIndexPage"
+                            })
+                        } else if (res.cancel) {
+                        }
+                    }
+                })
+            }
+        })
+    }
+
     public static async gotoLogin() {
         const login = await WXUtils.login();
         const wxCode = login.code.toString();
         if (wxCode) {
             const wxJsapiOpenId = await request.wxJsapiOpenId({code: wxCode, target: WxJsApiTarget.MiniProgram});
-            //console.log(wxJsapiOpenId)
+            ////////////console.log(wxJsapiOpenId)
             if (wxJsapiOpenId == null || wxJsapiOpenId == undefined || wxJsapiOpenId.signin_info == null) {
                 wx.reLaunch({
                     url: '/pages/PhoneLoginNew',
@@ -45,6 +84,10 @@ export class WXUtils {
         return wx.getSystemInfoSync().screenHeight;
     }
 
+    public static getScreenWidth() {
+        return wx.getSystemInfoSync().screenWidth;
+    }
+
     public static getStatusBarHeight() {
         return wx.getSystemInfoSync().statusBarHeight;
     }
@@ -57,6 +100,37 @@ export class WXUtils {
                 resolve(res);
             })
         });
+    }
+
+
+    public static async runner(fun: any, option: any) {
+        return new Promise(resolve => {
+            option.success = (res: any) => {
+                resolve(res);
+            }
+
+            option.fail = (res: any) => {
+                //console.log(res)
+                resolve(null);
+            }
+            fun(option);
+        })
+    }
+
+    public static async downloadFile(option: any) {
+        return new Promise(resolve => {
+            option.success = (res: any) => {
+                resolve(res);
+            }
+
+            option.fail = (res: any) => {
+                ////console.log(res)
+                resolve(null);
+            }
+            const task = wx.downloadFile(option);
+            task.abort();
+            ////console.log(task)
+        })
     }
 
     public static async getRect2(id: string, thiz: any): Promise<any> {

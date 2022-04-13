@@ -3,12 +3,20 @@
     <view class="abs">
         <PhoneTitle title="" status="1"></PhoneTitle>
     </view>
-    <view wx:if="{{!bannerData.isBlind}}">
-        <PhoneStoreArtList data="{{collectData}}" bannerData="{{bannerData}}"
-                           bind:search="searchAction" bind:goToInfo="goToInfo"/>
-    </view>
-    <view wx:else>
-        <PhoneBlindBoxBlack store="{{store}}" data="{{collectData}}" bannerData="{{bannerData}}" bind:getBlind="getBlind">
-        </PhoneBlindBoxBlack>
-    </view>
+    <scroll-view
+            scroll-y="true"
+            enhanced="true"
+            show-scrollbar="{{false}}"
+                style="height:100vh;">
+        <view wx:if="{{!bannerData.isBlind}}">
+            <PhoneStoreArtList data="{{collectData}}" bannerData="{{bannerData}}"
+                               bind:search="searchAction" bind:goToInfo="goToInfo"/>
+        </view>
+        <view wx:else>
+            <PhoneBlindBoxBlack store="{{store}}" data="{{collectData}}" bannerData="{{bannerData}}"
+                                bind:getBlind="getBlind">
+            </PhoneBlindBoxBlack>
+        </view>
+    </scroll-view>
+
 </view>

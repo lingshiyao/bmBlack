@@ -1,7 +1,8 @@
 <view class="title-box" style="{{marginTop}}">
 <!--    <image src="/assets/pic_logo.png" class="pic_logo_img"></image>-->
-    <view class="title">{{title}}</view>
-    <view class="line">
+    <image lazy-load="true" mode="aspectFill" src="{{logo}}" class="logo"></image>
+<!--    <view class="title">{{title}}</view>-->
+    <view class="line">`
         <view wx:if="{{choose==0}}" class="select-area">
             <view data-index="0" bindtap="tabberAction" class="item">热门</view>
             <view class="point"></view>

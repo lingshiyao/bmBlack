@@ -1,4 +1,5 @@
 <view class="title-box" style="{{marginTop}}">
-    <view class="title">{{title}}</view>
+<!--    <view class="title">{{title}}</view>-->
+    <image lazy-load="true" mode="aspectFill" src="{{logo}}" class="logo"></image>
     <image lazy-load="true" bindtap="gotoSetting" src="{{setting}}" class="setting"></image>
 </view>

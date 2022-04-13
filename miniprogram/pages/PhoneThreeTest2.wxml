@@ -1,0 +1,14 @@
+<view class="intro">
+    <!--创建canvas标签用于WebGL-->
+    <!-- <canvas type="2d" id="canvas" style="width:{{canvasWidth}}px;height:{{canvasHeight}}px;"> -->
+    <canvas
+            type="webgl"
+            id="webgl"
+            canvas-id="webgl"
+            style="width:{{canvasWidth}}px;height:{{canvasHeight}}px;"
+            bindtouchstart="onTouchStart"
+            bindtouchmove="onTouchMove"
+            bindtouchend="onTouchEnd"
+            bindlongtap="onTouchTap"
+    ></canvas>
+</view>

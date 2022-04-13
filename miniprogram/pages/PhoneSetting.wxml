@@ -88,7 +88,7 @@
                 </view>
             </view>
             <view class="line-h" style="margin-top: 6.67vw;"></view>
-            <view class="line" style="margin-top: 7.07vw;">
+            <view bindtap="copyAddressText" class="line" style="margin-top: 7.07vw;">
                 <view class="text">
                     钱包地址
                 </view>
@@ -129,9 +129,17 @@
                     <image lazy-load="true" src="{{rightArrowUrl}}" class="right-arrow"></image>
                 </view>
             </view>
-            <view class="line" style="margin-top: 10.27vw; margin-bottom:10vw" bindtap="lianxiwomen">
+            <view class="line" style="margin-top: 10.27vw;" bindtap="lianxiwomen">
                 <view class="text">
                     联系我们
+                </view>
+                <view class="input-line">
+                    <image lazy-load="true" src="{{rightArrowUrl}}" class="right-arrow"></image>
+                </view>
+            </view>
+            <view class="line" style="margin-top: 10.27vw; margin-bottom:10vw" bindtap="clearCache">
+                <view class="text">
+                    清空缓存
                 </view>
                 <view class="input-line">
                     <image lazy-load="true" src="{{rightArrowUrl}}" class="right-arrow"></image>
@@ -140,6 +148,8 @@
             <!--            <view class="login-out" style="margin-top: 12.67vw;" bindtap="logout">-->
             <!--                退出登录-->
             <!--            </view>-->
+
+            <view style="{{footStyle}}"></view>
         </view>
     </scroll-view>
     <PhoneModalInput id="phoneModalInput"></PhoneModalInput>

@@ -25,7 +25,7 @@ Component({
             this.triggerEvent('taBarIndex', index);
         }, choose(event: any) {
             if (event == 0 || event == 3 || event == 99) this.setData({choose: event})
-            //////////////////console.log(event)
+            ////////////////////////////console.log(event)
         }
     }, ready() {
         this.setData({

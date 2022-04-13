@@ -45,11 +45,11 @@ Component({
         lst: [],
     }, methods: {
         bindDownLoad() {
-            //////////console.log("bindDownLoad")
+            ////////////////////console.log("bindDownLoad")
             const lstLength = this.data.lst.length;
             const top_topStoresLength = top_topStores.length;
             // 3, 2
-            //////////console.log(top_topStoresLength, lstLength)
+            ////////////////////console.log(top_topStoresLength, lstLength)
             if (top_topStoresLength > lstLength) {
                 const lstT = this.data.lst;
                 lstT.push(top_topStores[lstLength])
@@ -61,7 +61,7 @@ Component({
         async initTop() {
             wx.showLoading({title: "加载中..."});
             const top = await request.top();
-            console.log(top)
+            //////////console.log(top)
             wx.hideLoading();
 
             // const buyStatusT = [];
@@ -70,15 +70,15 @@ Component({
             for (let i = 0; i < top.topStores.length; i++) {
                 const item: any = top.topStores[i];
                 item.storeBanner = ImgPathUtils.getSIcon(item.id);
-                //////////////console.log(top.topStores[i].openingTime, new Date(top.topStores[i].openingTime).getTime(), new Date().getTime())
+                ////////////////////////console.log(top.topStores[i].openingTime, new Date(top.topStores[i].openingTime).getTime(), new Date().getTime())
                 if (new Date(top.topStores[i].openingTime).getTime() - new Date().getTime() > 0) {
-                    //////////////console.log("即将开售")
+                    ////////////////////////console.log("即将开售")
                     item.buyStatus = 1;
                     item.theSale = Utils.formatDate(new Date(top.topStores[i].openingTime), "MM-dd HH:mm");
                     // buyStatusT.push(1)
                     // theSaleT.push(Utils.formatDate(new Date(top.topStores[i].openingTime), "MM-dd HH:mm"))
                 } else {
-                    //////////////console.log("正再卖")
+                    ////////////////////////console.log("正再卖")
                     item.theSale = "";
                     // theSaleT.push("");
                     if (top.topStores[i].totalSupply - 0 > 0) {
@@ -96,8 +96,8 @@ Component({
             //     'theSale': theSaleT
             // })
 
-            // ////////////////////console.log(top);
-            //////////////console.log(top)
+            // //////////////////////////////console.log(top);
+            ////////////////////////console.log(top)
             if (top) {
                 this.setData({
                     top: top
@@ -151,7 +151,7 @@ Component({
             this.setData({
                 storeBanner2: storeBanner2T
             })
-            // ////////////////////console.log(stores)
+            // //////////////////////////////console.log(stores)
 
             wx.pageScrollTo({
                 scrollTop: 1000,
@@ -161,19 +161,19 @@ Component({
         },
 
         async getStoreBanner() {
-            // ////////////////////console.log("getStoreBanner")
+            // //////////////////////////////console.log("getStoreBanner")
         },
 
         async gotoStore(event: any) {
             const id = event.currentTarget.dataset.id;
-            // ////////////////////console.log(id);
+            // //////////////////////////////console.log(id);
             wx.navigateTo({
                 url: `/pages/PhoneStorePage?id=${id}`,
             })
 
         },
         dragging(event: any) {
-            ////////////////console.log(event)
+            //////////////////////////console.log(event)
         }
     }, ready() {
         top_topStores = [];
@@ -181,7 +181,7 @@ Component({
             lst: [],
         })
         this.initTop();
-        ////////////////console.log("initTop")
+        //////////////////////////console.log("initTop")
         // this.initStore();
 
         // wx.createSelectorQuery()

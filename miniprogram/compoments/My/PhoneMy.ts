@@ -22,7 +22,7 @@ Component({
         headerHeight: 0
     }, methods: {
         chooseOrder() {
-            ////////console.log("chooseCollected")
+            //////////////////console.log("chooseCollected")
             let selectedTmp = [false, false, false, false];
             selectedTmp[0] = true;
             this.setData({
@@ -30,7 +30,7 @@ Component({
             });
         },
         chooseCollected() {
-            ////////console.log("chooseCollected")
+            //////////////////console.log("chooseCollected")
             let selectedTmp = [false, false, false, false];
             selectedTmp[1] = true;
             this.setData({
@@ -112,7 +112,7 @@ Component({
             });
         }, async init() {
             const userInfo = await UserSet.getUserInfoIfFailedGoLogin();
-            console.log(userInfo)
+            //////////console.log(userInfo)
             let selectBoxData_0a20b37c: any = this.data.selectBoxData;
             selectBoxData_0a20b37c.menu = ["全部", "待付款", "待确认", "已成功", "已关闭", "退款订单"];
             this.setData({
@@ -138,7 +138,7 @@ Component({
             this.setData({
                 headerHeight: rect[0].height
             })
-            // //////////console.log(rect[0].height)
+            // ////////////////////console.log(rect[0].height)
         }, headerLoadFail() {
             this.setData({
                 headerUrl: PicCDNUtils.getPicUrl("pic_user.png")

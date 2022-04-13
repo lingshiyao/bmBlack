@@ -20,7 +20,7 @@ Component({
             const pagedFavorites = await request.favoriteList({
                 pageIndex: _pageIndex, pageSize: 6
             }, true);
-            //////////console.log(pagedFavorites)
+            ////////////////////console.log(pagedFavorites)
             wx.hideLoading();
             _total = pagedFavorites.total;
             if (pagedFavorites != null) {
@@ -62,7 +62,7 @@ Component({
             this.setData({
                 scrollStyle: `height:${WXUtils.getScreenHeight() - data}px;`
             })
-            //////////console.log(this.data.scrollStyle)
+            ////////////////////console.log(this.data.scrollStyle)
         }
 
     }

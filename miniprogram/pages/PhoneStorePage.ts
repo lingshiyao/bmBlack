@@ -61,11 +61,12 @@ Page({
     }, async getStoreInfo() {
         const storeId = this.data.options.id;
         const store = await request.store({storeId: <string>storeId});
+        //////////console.log("store", store)
         if (store) {
             this.setData({
                 store: store
             })
-            //////////console.log(store)
+            ////////////////////console.log(store)
             const bannerDataT = this.data.bannerData;
             bannerDataT.introduction = store.description;
             bannerDataT.projectName = store.name;
@@ -120,7 +121,7 @@ Page({
             });
         }
     }, getStoreArts: async function (key: string, pageIndex: number) {
-        ////////////////////console.log("getStoreArts")
+        //////////////////////////////console.log("getStoreArts")
         const storeId = this.data.options.id;
         var ascByPrice = false;
         if (key === "false" || key === "true") {
@@ -138,8 +139,8 @@ Page({
             pageSize: 1000,
             storeId: storeId,
         })
+        //////console.log(arts)
         if (arts) {
-
             const collectDataT = [];
             for (let index = 0; index < arts.list.length; index++) {
                 const val = new CollectCardDataEntity();
@@ -155,9 +156,22 @@ Page({
                 val.id = arts.list[index].id;
                 val.price = arts.list[index].mintPrice;
                 val.like = arts.list[index].favCount.toString();
-                val.headerImg = ImgPathUtils.getMedia(arts.list[index].id);
-                ////////////////////console.log(val.price)
+                if (arts.list[index].kind == "MODEL") {
+                    val.headerImg = ImgPathUtils.getSuoluetu(arts.list[index].id);
+                } else {
+                    val.headerImg = ImgPathUtils.getMedia(arts.list[index].id);
+                }
+                val.kind = arts.list[index].kind;
+                //////////////////////////////console.log(val.price)
                 collectDataT.push(val);
+
+                if (arts.list[index].kind == "MODEL") {
+                    //////////console.log(arts.list[index].kind)
+                    //////////console.log(ImgPathUtils.getMedia(arts.list[index].id))
+                    //////////console.log(ImgPathUtils.getObj(arts.list[index].id))
+                    //////////console.log(ImgPathUtils.getMtl(arts.list[index].id))
+                    //////////console.log(ImgPathUtils.getJpg(arts.list[index].id))
+                }
 
                 // if (index === 0) {
                 this.setData({
@@ -168,8 +182,8 @@ Page({
             this.setData({
                 'collectData': collectDataT
             });
-            ////////////////////console.log(this.data.collectData)
-            ////////////////////console.log(arts)
+            //////////////////////////////console.log(this.data.collectData)
+            //////////////////////////////console.log(arts)
             let total_6b082abf: any = this.data.total;
             total_6b082abf = arts.total;
             this.setData({
@@ -198,7 +212,7 @@ Page({
         })
     }, getBlind(event: any) {
         const num: number = parseInt(event.detail.toString());
-        ////////////////////console.log(num);
+        //////////////////////////////console.log(num);
         this.mintArts(num);
     }, async mintArts(num: number) {
         // if (await StorageUtils.getStorage(AppConstant.TOKEN) == null) {
@@ -246,7 +260,7 @@ Page({
                 }
                 await wx.showLoading({title: "加载中..."})
                 const wxJsapiPayParams = await request.wxJsapiPayParams({target: WxJsApiTarget.MiniProgram,prepayId: mintBlind.tradeReturn.prepay_id});
-                console.log(wxJsapiPayParams)
+                //////////console.log(wxJsapiPayParams)
                 const pay = await WXUtils.pay(wxJsapiPayParams);
                 await wx.hideLoading();
                 if (pay.success) {
@@ -286,7 +300,7 @@ Page({
         this.setData({
             'options': options
         })
-        //////////console.log(options)
+        ////////////////////console.log(options)
         this.init();
     }, observers: {}
 });

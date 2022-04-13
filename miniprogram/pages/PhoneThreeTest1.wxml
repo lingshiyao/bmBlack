@@ -1,0 +1,5 @@
+<view class="intro">
+    <!--创建canvas标签用于WebGL-->
+    <canvas type="webgl" id="canvas" canvas-id="webgl" style="width:{{canvasWidth}}px;height:{{canvasHeight}}px;">
+    </canvas>
+</view>
