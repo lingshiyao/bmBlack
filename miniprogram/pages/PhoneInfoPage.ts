@@ -8,7 +8,7 @@ import {weiXinPayInit} from "../api/net/WeiXinPay";
 import {WXUtils} from "../api/utils/WXUtils";
 import {PicCDNUtils} from "../api/net/PicCDNUtils";
 import {Utils} from "../api/utils/Utils";
-import useThree from './PhoneInfoPageUseThree'
+import useThree from './PhoneInfoPageUseThree2'
 
 var openId: string | null = null;
 const NULL: any = null;
@@ -46,8 +46,10 @@ Page({
         guanzhuHeader: "",
         favTxt: "...",
         zaimayifen: false,
-        address: "cfxtest:acdk7r6rzc1u9yr039mf3t1hsk1r4km4rekdzc7m4b",
-        authAddress: ""
+        address: "https://testnet.confluxscan.io/address/cfxtest:acdk7r6rzc1u9yr039mf3t1hsk1r4km4rekdzc7m4b",
+        taiziUrl: PicCDNUtils.getPicUrl("pic_taizi.png", false),
+        loading3d: true,
+        ipfsAddress: ""
     }, async copyAddressText() {
         wx.setClipboardData({
             data: this.data.address,
@@ -63,7 +65,20 @@ Page({
         })
     }, async copyAuthorizationText() {
         wx.setClipboardData({
-            data: this.data.authAddress,
+            data: this.data.art.copyrightLink,
+            success: function (res) {
+                wx.getClipboardData({
+                    success: function (res) {
+                        wx.showToast({
+                            title: '复制成功'
+                        })
+                    }
+                })
+            }
+        })
+    }, async copyIpfsAddressText() {
+        wx.setClipboardData({
+            data: this.data.ipfsAddress,
             success: function (res) {
                 wx.getClipboardData({
                     success: function (res) {
@@ -75,16 +90,23 @@ Page({
             }
         })
     },
+    async initAcc() {
+        wx.onAccelerometerChange(function (e) {
+            //console.log(e)
+        });
+    },
+
     async init() {
         this.initOpenId();
         weiXinPayInit();
         this.getArt();
         this.setIsFav(this.data.options.id);
+        this.initAcc()
     }, async setIsFav(artId: string) {
-        ////////////////////////console.log("setIsFav", artId)
+        //////////////////////////console.log("setIsFav", artId)
         const result: any = await request.favoriteExists({artId: artId}, true)
+        //////////////////////////console.log(result)
         ////////////////////////console.log(result)
-        //////////////////////console.log(result)
         if (result != null) {
             if (result == true) {
                 this.setData({
@@ -98,13 +120,13 @@ Page({
         }
     },
     gotoStore1() {
-        ////////////////////console.log(this.data.options)
+        //////////////////////console.log(this.data.options)
         wx.redirectTo({
             url: `/pages/PhoneStorePage?id=${this.data.options.sid}`,
         })
     },
     onLoad(options) {
-        //////console.log(options)
+        ////////console.log(options)
         const height = Utils.getBottomSafeAreaPxHeight()
         this.setData({
             marginBottomStyle: `padding-bottom:${height}px;`
@@ -113,7 +135,7 @@ Page({
             'options': options
         })
 
-        ////////////////////console.log(options)
+        //////////////////////console.log(options)
 
         if (options.isFromOrder != undefined && options.isFromOrder != null &&
             options.isFromOrder) {
@@ -121,8 +143,7 @@ Page({
                 zaimayifen: true
             })
         }
-        ////////////////////////////console.log(options)
-
+        //////////////////////////////console.log(options)
 
 
         this.init()
@@ -131,7 +152,7 @@ Page({
         const wxCode = login.code.toString();
         if (wxCode) {
             const wxJsapiOpenId = await request.wxJsapiOpenId({code: wxCode, target: WxJsApiTarget.MiniProgram});
-            ////////////console.log(wxJsapiOpenId)
+            //////////////console.log(wxJsapiOpenId)
             if (wxJsapiOpenId) {
                 openId = wxJsapiOpenId.response.openid;
             } else {
@@ -141,18 +162,18 @@ Page({
             }
         }
     }, async getArt() {
-        ////////////////////////////console.log(this.data.options.id)
+        //////////////////////////////console.log(this.data.options.id)
         const artId = this.data.options.id;
         const user = await UserSet.getUserInfoIfFailedGoLogin();
         if (artId) {
             const art = await request.art({artId: <string>artId});
-            //////console.log(art)
+            console.log(art)
             if (art) {
-                ////////////console.log(art.stores[0].id)
+                //////////////console.log(art.stores[0].id)
                 this.setData({
                     guanzhuHeader: ImgPathUtils.getSIcon(art.stores[0].id)
                 })
-                ////console.log(art.kind)
+                //////console.log(art.kind)
                 if (art.kind == "MODEL") {
                     this.initWebGLCanvas(art.id);
                 } else {
@@ -170,7 +191,7 @@ Page({
                 })
 
                 if (new Date(art.stores[0].openingTime).getTime() - new Date().getTime() > 0) {
-                    // //////////////////////////////console.log("// 即将开售")
+                    // ////////////////////////////////console.log("// 即将开售")
                     this.setData({
                         theSale: Utils.formatDate(new Date(art.stores[0].openingTime), "MM-dd HH:mm")
                     })
@@ -181,13 +202,13 @@ Page({
                     })
                 } else {
                     if (art.maxSupply - art.supplied > 0) {
-                        // //////////////////////////////console.log("// 立即购买")
+                        // ////////////////////////////////console.log("// 立即购买")
                         // 立即购买
                         this.setData({
                             buyStatus: 0
                         })
                     } else {
-                        // //////////////////////////////console.log("// 已售罄")
+                        // ////////////////////////////////console.log("// 已售罄")
                         // 已售罄
                         this.setData({
                             buyStatus: 2
@@ -195,9 +216,9 @@ Page({
                     }
                 }
 
-                //////////////////////////////console.log(new Date(art.stores[0].openingTime).getTime() - new Date().getTime());
+                ////////////////////////////////console.log(new Date(art.stores[0].openingTime).getTime() - new Date().getTime());
 
-                //////////////////////////////console.log(new Date().getTime(), Utils.formatDate(new Date(art.stores[0].openingTime), "yyyy-MM-dd HH:mm:ss"));
+                ////////////////////////////////console.log(new Date().getTime(), Utils.formatDate(new Date(art.stores[0].openingTime), "yyyy-MM-dd HH:mm:ss"));
 
 
                 let nft_1df4a3ab: any = this.data.nft;
@@ -273,6 +294,10 @@ Page({
                 if (user) {
                     // this.favExists();
                 }
+
+                this.setData({
+                    ipfsAddress: `https://dweb.link/ipfs/${art.mediaIpfs}`
+                })
             }
         }
     }, async getArtStat() {
@@ -295,7 +320,7 @@ Page({
         }
     }, async likeAction(nftId: string) {
         const favoriteToggle = await request.favoriteToggle({artId: nftId}, true);
-        //////////////////////////console.log(favoriteToggle)
+        ////////////////////////////console.log(favoriteToggle)
         if (favoriteToggle != null) {
             if (favoriteToggle) {
                 wx.showToast({
@@ -375,8 +400,8 @@ Page({
             storeId: storeId,
             tradeType: payType
         }, true)
-        ////////////////////////////console.log(mint)
-        //////////////////////console.log(mint)
+        //////////////////////////////console.log(mint)
+        ////////////////////////console.log(mint)
         if (mint && typeof mint === 'string') {
             wx.showModal({
                 title: '提示', content: mint, showCancel: false, success(res) {
@@ -404,8 +429,11 @@ Page({
                     })
                     return;
                 }
-                const wxJsapiPayParams = await request.wxJsapiPayParams({target: WxJsApiTarget.MiniProgram,prepayId: mint.tradeReturn.prepay_id});
-                //////////console.log(wxJsapiPayParams)
+                const wxJsapiPayParams = await request.wxJsapiPayParams({
+                    target: WxJsApiTarget.MiniProgram,
+                    prepayId: mint.tradeReturn.prepay_id
+                });
+                ////////////console.log(wxJsapiPayParams)
                 const pay = await WXUtils.pay(wxJsapiPayParams);
                 if (pay.success) {
                     wx.showToast({
@@ -415,7 +443,7 @@ Page({
                         url: '/pages/PhoneApp?index=3',
                     });
                 } else {
-                    ////////////////////console.log(pay)
+                    //////////////////////console.log(pay)
                     await wx.showModal({
                         title: '提示', content: `支付失败：${JSON.stringify(pay.res.errMsg)}`, showCancel: false
                     })
@@ -475,7 +503,7 @@ Page({
                 break;
         }
     }, setFav() {
-        //////////////////////////console.log("setFav")
+        ////////////////////////////console.log("setFav")
         this.likeAction(<string>this.options.id);
     }, goToStore() {
         wx.navigateTo({
@@ -490,6 +518,7 @@ Page({
             }
         })
     }, async initWebGLCanvas(id: string) {
+        const that = this;
         const swidth = WXUtils.getScreenWidth()
         const width = swidth * 0.73;
         const height = swidth * 0.73;
@@ -504,7 +533,11 @@ Page({
                 })
                 if (res != null && res[0]) {
                     const canvas = res[0].node;
-                    useThree(canvas, id, width, height)
+                    useThree(canvas, id, width, height, ()=>{
+                        that.setData({
+                            loading3d: false
+                        })
+                    })
                     break;
                 }
             }

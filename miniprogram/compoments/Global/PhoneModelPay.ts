@@ -25,7 +25,7 @@ Component({
             })
             return new Promise<any>((resolve) => {
                 listener = {
-                    onConfirm: (data:number): void => {
+                    onConfirm: (data: number): void => {
                         resolve(data);
                     }, onCancel: (): void => {
                         resolve(null);
@@ -50,7 +50,7 @@ Component({
             let numT = this.data.num;
             numT++;
             this.setData({
-                num:numT
+                num: numT
             })
         }, sub() {
             let numT = this.data.num;
@@ -58,7 +58,7 @@ Component({
             if (numT < 1)
                 numT = 1
             this.setData({
-                num:numT
+                num: numT
             })
         }
     }

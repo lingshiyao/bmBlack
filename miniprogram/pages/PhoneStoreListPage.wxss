@@ -13,7 +13,7 @@
 
 .view-border-base-layout {
     position: relative;
-    height:83.33vw;
+    height: 83.33vw;
     /*background: red;*/
     display: flex;
     flex-direction: column;

@@ -1,15 +1,16 @@
 <view class="page">
-<!--    <PhoneStoreBanner data="{{bannerData}}"></PhoneStoreBanner>-->
+    <!--    <PhoneStoreBanner data="{{bannerData}}"></PhoneStoreBanner>-->
     <view class="abs">
         <PhoneTitle title="" status="1"></PhoneTitle>
     </view>
     <scroll-view
             scroll-y="true"
             enhanced="true"
+            bindscrolltolower="bindDownLoad"
             show-scrollbar="{{false}}"
-                style="height:100vh;">
+            style="height:100vh;">
         <view wx:if="{{!bannerData.isBlind}}">
-            <PhoneStoreArtList data="{{collectData}}" bannerData="{{bannerData}}"
+            <PhoneStoreArtList store="{{store}}" data="{{collectData}}" bannerData="{{bannerData}}"
                                bind:search="searchAction" bind:goToInfo="goToInfo"/>
         </view>
         <view wx:else>

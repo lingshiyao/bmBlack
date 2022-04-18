@@ -22,7 +22,7 @@
     font-size: 5vw;
     font-weight: bold;
     color: #000219;
-    word-break:break-all;
+    word-break: break-all;
     line-height: 7vw;
     margin-bottom: 10vw;
     border-radius: 3vw;

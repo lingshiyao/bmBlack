@@ -9,5 +9,6 @@ Page({
         pageNamesArr,
     },
 
-    onReady() {},
+    onReady() {
+    },
 });

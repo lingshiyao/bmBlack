@@ -43,7 +43,7 @@
     </view>
     <view class="v-html">
         <view class="area">
-            <rich-text class="text" nodes="{{bannerData.introduction}}" />
+            <rich-text class="text" nodes="{{bannerData.introduction}}"/>
         </view>
     </view>
 </view>

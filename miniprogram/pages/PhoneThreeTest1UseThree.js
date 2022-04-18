@@ -1,6 +1,6 @@
 import * as THREE from "../api/three/three.min"
 
-const { windowWidth, windowHeight, pixelRatio, } = wx.getSystemInfoSync();
+const {windowWidth, windowHeight, pixelRatio,} = wx.getSystemInfoSync();
 let canvas, scene, renderer, camera;
 let cube;
 export default (_canvas) => {
@@ -69,7 +69,7 @@ export default (_canvas) => {
     function initGeometrys() {
         const cubeGeo = new THREE.BoxGeometry(30, 30, 30);
         //创建材质，设置材质为基本材质（不会反射光线，设置材质颜色为绿色）
-        const mat = new THREE.MeshBasicMaterial({ color: 0xfca745 });
+        const mat = new THREE.MeshBasicMaterial({color: 0xfca745});
         //创建Cube的Mesh对象
         cube = new THREE.Mesh(cubeGeo, mat);
         //设置Cube对象的位置
@@ -91,7 +91,7 @@ export default (_canvas) => {
     function render() {
         animation()
         renderer.render(scene, camera)
-        ////console.log("render")
+        //////console.log("render")
         // canvas.requestAnimationFrame(()=>{
         //     render()
         // });

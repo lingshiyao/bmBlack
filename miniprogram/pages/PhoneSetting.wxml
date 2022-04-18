@@ -17,6 +17,7 @@
                     <!--                       :bindchange="getImage">-->
                     <!--                </input>-->
                     <image
+                            mode="aspectFill"
                             src="{{defaultUrl}}"
                             class="header-box"
                             binderror="headerLoadFail"

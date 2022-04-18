@@ -1,12 +1,8 @@
 import * as THREE from '../api/three/three.min'
-import { OBJLoader } from '../api/three/jsm/loaders/OBJLoader.js';
-import { OrbitControls } from '../api/three/jsm/controls/OrbitControls'
-import {ModalCache} from "../api/ModalCache";
-import {ImgPathUtils} from "../api/utils/ImgPathUtils";
+import {OBJLoader} from '../api/three/jsm/loaders/OBJLoader.js';
+import {OrbitControlsOld} from '../api/three/jsm/controls/OrbitControlsOld'
 
-const RESOURCE_URL = 'https://cdn.zhisonggang.com/threejs/examples/models/obj/cerberus/'
-
-const { windowWidth, windowHeight, pixelRatio, } = wx.getSystemInfoSync();
+const {windowWidth, windowHeight, pixelRatio,} = wx.getSystemInfoSync();
 let canvas, scene, renderer, camera, controls;
 let cube;
 
@@ -58,7 +54,7 @@ export default (_canvas) => {
             1000
         );
         camera.position.set(100, 100, 100);
-        camera.lookAt(0,0,0);
+        camera.lookAt(0, 0, 0);
     }
 
     /**
@@ -72,7 +68,7 @@ export default (_canvas) => {
      * 渲染控制器
      */
     function initControl() {
-        controls = new OrbitControls(camera, renderer.domElement);
+        controls = new OrbitControlsOld(camera, renderer.domElement);
         //是否可以缩放
         // controls.enableZoom = true;
         controls.autoRotate = true;
@@ -87,7 +83,7 @@ export default (_canvas) => {
     function initaxesHelper() {
         //辅助线 红色x轴 蓝色z轴 绿色y轴
         const axesHelper = new THREE.AxesHelper(100);
-        scene.add( axesHelper );
+        scene.add(axesHelper);
     }
 
     /**
@@ -95,40 +91,24 @@ export default (_canvas) => {
      */
     async function initGeometrys() {
         const material = new THREE.MeshStandardMaterial();
-        // let obj = await ModalCache.getRes(ImgPathUtils.getObj("5b44c7f078104e9fa3ac129cf87c5780"));
-        // let obj = ImgPathUtils.getObj("5b44c7f078104e9fa3ac129cf87c5780");
-        // let obj = "https://cdn.jsdelivr.net/gh/lingshiyao/shutulian/1511/1511.obj"
-
-        //b5333420b52e413f9966ae28e1d103f4
-        const model = await ModalCache.getModel(ImgPathUtils.getMedia("b5333420b52e413f9966ae28e1d103f4"), "b5333420b52e413f9966ae28e1d103f4");
-        console.log(model)
-
-        let obj = await ModalCache.getRes2("https://cdn.jsdelivr.net/gh/lingshiyao/shutulian/1511/1511.obj", "obj");
-        //console.log("a1", obj)
-        // let jpg = await ModalCache.getRes(ImgPathUtils.getJpg("5b44c7f078104e9fa3ac129cf87c5780"));
-        // let jpg = ImgPathUtils.getJpg("5b44c7f078104e9fa3ac129cf87c5780");
-        // let jpg = "https://cdn.jsdelivr.net/gh/lingshiyao/shutulian/1511/1Image1.jpg"
-        let jpg = await ModalCache.getRes("https://cdn.jsdelivr.net/gh/lingshiyao/shutulian/1511/1Image1.jpg", "jpg");
-        //console.log("b", jpg)
         new OBJLoader()
-            .load("https://cdn.jsdelivr.net/gh/lingshiyao/shutulian/1511/1511.obj", ( group ) => {
-                //console.log("load success")
+            .load("https://cdn.jsdelivr.net/gh/lingshiyao/shutulian/1511/1511.obj", (group) => {
+                ////console.log("load success")
                 const textureLoader = new THREE.TextureLoader(undefined, canvas)
                 material.roughness = 1;
                 material.metalness = 1;
                 material.map = textureLoader.load(
-                    model.jpg,
+                    "https://cdn.jsdelivr.net/gh/lingshiyao/shutulian/1511/1Image1.jpg",
                     render
                 );
                 material.map.encoding = THREE.sRGBEncoding;
                 material.map.wrapS = THREE.RepeatWrapping;
 
-                group.traverse( function ( child ) {
-                    ////console.log('child', child.isMesh)
-                    if ( child.isMesh ) {
+                group.traverse(function (child) {
+                    if (child.isMesh) {
                         child.material = material;
                     }
-                } );
+                });
                 scene.add(group);
             })
     }
@@ -150,8 +130,7 @@ export default (_canvas) => {
     function render() {
         renderer.render(scene, camera)
         controls.update()
-        // ////console.log("render")
-        canvas.requestAnimationFrame(()=>{
+        canvas.requestAnimationFrame(() => {
             render()
         });
     }
@@ -159,7 +138,7 @@ export default (_canvas) => {
     function initGeometrys1() {
         const cubeGeo = new THREE.BoxGeometry(30, 30, 30);
         //创建材质，设置材质为基本材质（不会反射光线，设置材质颜色为绿色）
-        const mat = new THREE.MeshBasicMaterial({ color: 0xfca745 });
+        const mat = new THREE.MeshBasicMaterial({color: 0xfca745});
         //创建Cube的Mesh对象
         cube = new THREE.Mesh(cubeGeo, mat);
         //设置Cube对象的位置

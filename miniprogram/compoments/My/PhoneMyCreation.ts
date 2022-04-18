@@ -17,7 +17,7 @@ Component({
             this.init();
         },
         async init() {
-            ////////////////////console.log(_init, _total, _lst.length)
+            //////////////////////console.log(_init, _total, _lst.length)
             if (_total != 0 && _total == this.data.lst.length)
                 return;
             let userDetail: UserDetail | null = await UserSet.getUserInfoIfFailedGoLogin();
@@ -57,6 +57,9 @@ Component({
     }, ready() {
         _pageIndex = 0;
         _total = 0;
+        this.setData({
+            lst: []
+        })
         this.init();
     }, observers: {
         'headerHeight': function (data) {

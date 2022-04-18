@@ -1,20 +1,19 @@
 import * as THREE from '../api/three/three.min'
-import { OBJLoader } from '../api/three/jsm/loaders/OBJLoader.js';
-import { OrbitControls } from '../api/three/jsm/controls/OrbitControls'
+import {OBJLoader} from '../api/three/jsm/loaders/OBJLoader.js';
+import {OrbitControlsOld} from '../api/three/jsm/controls/OrbitControlsOld'
 import {ModalCache} from "../api/ModalCache";
 import {ImgPathUtils} from "../api/utils/ImgPathUtils";
-import {WXUtils} from "../api/utils/WXUtils";
 
 const RESOURCE_URL = 'https://cdn.zhisonggang.com/threejs/examples/models/obj/cerberus/'
 
-const { pixelRatio, } = wx.getSystemInfoSync();
+const {pixelRatio,} = wx.getSystemInfoSync();
 let canvas, scene, renderer, camera, controls;
 let cube;
 
 export default (_canvas, id, width, height) => {
     canvas = _canvas;
 
-    //console.log(pixelRatio)
+    ////console.log(pixelRatio)
 
     canvas.width = width * pixelRatio;
     canvas.height = height * pixelRatio;
@@ -42,7 +41,7 @@ export default (_canvas, id, width, height) => {
         renderer = new THREE.WebGLRenderer({
             canvas,
         });
-        renderer.setClearColor(0x000000, 1)
+        renderer.setClearColor(0x000000, 0)
         renderer.outputEncoding = THREE.sRGBEncoding; //
         renderer.toneMapping = THREE.ReinhardToneMapping; // 色彩映射
         renderer.toneMappingExposure = 3; // 色调映射的曝光级别
@@ -58,9 +57,9 @@ export default (_canvas, id, width, height) => {
             1,
             1000
         );
-        const length = 40;
-        camera.position.set(1 * length, 1 * length, 1 * length);
-        camera.lookAt(0,0,0);
+        const length = 55;
+        camera.position.set(1 * length, 0.2 * length, 1 * length);
+        camera.lookAt(0, 0, 0);
     }
 
     /**
@@ -74,7 +73,7 @@ export default (_canvas, id, width, height) => {
      * 渲染控制器
      */
     function initControl() {
-        controls = new OrbitControls(camera, renderer.domElement);
+        controls = new OrbitControlsOld(camera, renderer.domElement);
         controls.autoRotate = true;
         controls.autoRotateSpeed = 0.3;
         controls.enableRotate = false;
@@ -82,72 +81,39 @@ export default (_canvas, id, width, height) => {
 
     async function initGeometrys() {
         const material = new THREE.MeshStandardMaterial();
-        //b5333420b52e413f9966ae28e1d103f4
-        // console.log(id)
-        // const model = await ModalCache.getModel(ImgPathUtils.getMedia(id), id);
-        // console.log(model)
 
-        // const downloadFile = await WXUtils.runner(wx.downloadFile, {
-        //     url: ImgPathUtils.getMedia(id),
-        // })
-        // console.log(downloadFile, ImgPathUtils.getMedia(id))
-        // if (downloadFile.statusCode == 200) {
-        //     console.log(downloadFile)
-        // }
+        let jpgPath = ImgPathUtils.getJpg(id);
+        let objPath = ImgPathUtils.getObj(id);
+        let jpgCachePath = await ModalCache.getPath(jpgPath);
+        if (jpgCachePath == null)
+            jpgCachePath = jpgPath
+        const objCachePath = await ModalCache.getPath(objPath);
 
-        // wx.downloadFile({
-        //     url: ImgPathUtils.getMedia(id),
-        //     success: function (res) {
-        //         //console.log(res.tempFilePath)
-        //         //把路径传过去
-        //         const fs = wx.getFileSystemManager()
-        //         fs.unzip({
-        //             zipFilePath: res.tempFilePath,
-        //             targetPath: `${wx.env.USER_DATA_PATH}`,
-        //             success: function (res) {
-        //                 //console.log(`${wx.env.USER_DATA_PATH}`)
-        //                 //console.log(res)
-        //                 //解压成功之后读取文件
-        //                 that.readdir()
-        //             },
-        //             fail: function ({ errMsg }) {
-        //                 //console.log('fail, err is:', errMsg)},
-        //             complete: function () { }
-        //         })
-        //     },
-        //     fail: function ({ errMsg }) {
-        //         //console.log('downloadFile fail, err is:', errMsg)
-        //     },
-        //     complete: function () { }
-        // })
+        const onLoad = (group) => {
+            const textureLoader = new THREE.TextureLoader(undefined, canvas)
+            material.roughness = 1;
+            material.metalness = 1;
+            material.map = textureLoader.load(
+                jpgCachePath,
+                render
+            );
+            material.map.encoding = THREE.sRGBEncoding;
+            material.map.wrapS = THREE.RepeatWrapping;
+            group.traverse(function (child) {
+                if (child.isMesh) {
+                    child.material = material;
+                }
+            });
+            scene.add(group);
+        }
 
-        let obj = ImgPathUtils.getObj(id);
-        console.log(obj)
-        let jpg = ImgPathUtils.getJpg(id);
-        console.log(jpg)
-        new OBJLoader()
-            .load(ImgPathUtils.getObj(id), ( group ) => {
-                console.log("load success")
-                const textureLoader = new THREE.TextureLoader(undefined, canvas)
-                material.roughness = 1;
-                material.metalness = 1;
-                material.map = textureLoader.load(
-                    jpg,
-                    render
-                );
-                material.map.encoding = THREE.sRGBEncoding;
-                material.map.wrapS = THREE.RepeatWrapping;
-
-                group.traverse( function ( child ) {
-                    ////console.log('child', child.isMesh)
-                    if ( child.isMesh ) {
-                        child.material = material;
-                    }
-                } );
-                scene.add(group);
-            }, (progress) => {
-                console.log(progress)
-            })
+        if (objCachePath == null) {
+            new OBJLoader()
+                .load(objPath, onLoad)
+        } else {
+            new OBJLoader()
+                .loadLocal(objCachePath, onLoad)
+        }
     }
 
     /**
@@ -167,8 +133,8 @@ export default (_canvas, id, width, height) => {
     function render() {
         renderer.render(scene, camera)
         controls.update()
-        // ////console.log("render")
-        canvas.requestAnimationFrame(()=>{
+        // //////console.log("render")
+        canvas.requestAnimationFrame(() => {
             render()
         });
     }

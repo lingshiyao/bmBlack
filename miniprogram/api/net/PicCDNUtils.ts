@@ -49,7 +49,7 @@ export class PicCDNUtils {
         } else {
             return "/assets/" + picName;
         }
-        // //////////////////////////////console.log(PicCDNUtils.getInstance().getBaseUrl() + picName)
+        // ////////////////////////////////console.log(PicCDNUtils.getInstance().getBaseUrl() + picName)
         // return PicCDNUtils.getInstance().getBaseUrl() + picName;
     }
 
@@ -59,16 +59,6 @@ export class PicCDNUtils {
      */
     public static getBackgroundUrlCode(picName: string): string {
         return `url('${PicCDNUtils.getPicUrl(picName)}')`;
-    }
-
-    /**
-     * 添加CDN
-     *
-     * @param cdn
-     * @private
-     */
-    private addCDN(cdn: PicCDNType): void {
-        this.CDNList.push(cdn);
     }
 
     /**
@@ -84,6 +74,16 @@ export class PicCDNUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * 添加CDN
+     *
+     * @param cdn
+     * @private
+     */
+    private addCDN(cdn: PicCDNType): void {
+        this.CDNList.push(cdn);
     }
 }
   

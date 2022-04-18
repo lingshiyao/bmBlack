@@ -44,7 +44,7 @@
                             stylee="width: 5.6vw;height: 5.6vw;background: #000203;border: 0px solid #C7C8C8;border-radius: 2.8vw"
                             src="{{item.storeBanner}}">
                     </LoadingImg>
-                    <view class="small-name" style="margin-left:0.6vw;">{{item.description}}</view>
+                    <view class="small-name" style="margin-left:0.6vw;">{{item.user.userExt.nickname}}</view>
                     <view class="hot-price-layout-flex1">
                         <view class="hot-price-layout-1">¥</view>
                         <view class="price" style="margin-right:4vw;">{{item.minPrice}}</view>

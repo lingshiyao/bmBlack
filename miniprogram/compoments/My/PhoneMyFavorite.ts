@@ -2,7 +2,7 @@ import {CollectCardDataEntity} from "../../api/entity/Collect/CollectItemsListIt
 import {ImgPathUtils} from "../../api/utils/ImgPathUtils";
 import {request} from "../../api/Api";
 import {WXUtils} from "../../api/utils/WXUtils";
-import { Utils } from "../../api/utils/Utils";
+import {Utils} from "../../api/utils/Utils";
 
 // TODO 当wx:if切换的时候此处有数据
 const ARRAY: any = [];
@@ -20,14 +20,18 @@ Component({
             const pagedFavorites = await request.favoriteList({
                 pageIndex: _pageIndex, pageSize: 6
             }, true);
-            ////////////////////console.log(pagedFavorites)
+            //////////////////////console.log(pagedFavorites)
             wx.hideLoading();
             _total = pagedFavorites.total;
             if (pagedFavorites != null) {
                 for (let i = 0; i < pagedFavorites.list.length; i++) {
                     const favorite = pagedFavorites.list[i];
                     const collectCardDataEntity: CollectCardDataEntity = new CollectCardDataEntity();
-                    collectCardDataEntity.headerImg = ImgPathUtils.getMedia(favorite.art.id);
+                    if(favorite.art.kind == "MODEL") {
+                        collectCardDataEntity.headerImg = ImgPathUtils.getJpg(favorite.art.id);
+                    } else {
+                        collectCardDataEntity.headerImg = ImgPathUtils.getMedia(favorite.art.id);
+                    }
                     collectCardDataEntity.name = favorite.art.name;
                     collectCardDataEntity.author = favorite.art.stores[0].name;
                     collectCardDataEntity.id = favorite.art.id;
@@ -55,14 +59,17 @@ Component({
         headerHeight: Number
     }, ready() {
         _pageIndex = 0;
-        _total = 0
+        _total = 0;
+        this.setData({
+            favList: []
+        })
         this.init();
     }, observers: {
         'headerHeight': function (data) {
             this.setData({
                 scrollStyle: `height:${WXUtils.getScreenHeight() - data}px;`
             })
-            ////////////////////console.log(this.data.scrollStyle)
+            //////////////////////console.log(this.data.scrollStyle)
         }
 
     }

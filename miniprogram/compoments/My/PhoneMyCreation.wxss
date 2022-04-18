@@ -1,4 +1,5 @@
 @import '/common/animate.wxss';
+
 .grid {
     display: grid;
     grid-template-columns: repeat(2, 45.83vw);

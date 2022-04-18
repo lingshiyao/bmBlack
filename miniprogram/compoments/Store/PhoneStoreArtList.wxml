@@ -1,10 +1,10 @@
 <!--<scroll-view-->
-<!--        scroll-y="true"-->
-<!--        enhanced="true"-->
-<!--        bindscrolltolower="bindDownLoad"-->
-<!--        show-scrollbar="{{false}}"-->
-<!--        style="height:100vh;">-->
-<PhoneStoreBanner data="{{bannerData}}" data1="{{data}}"></PhoneStoreBanner>
+        <!--        scroll-y="true"-->
+        <!--        enhanced="true"-->
+        <!--        bindscrolltolower="bindDownLoad"-->
+        <!--        show-scrollbar="{{false}}"-->
+        <!--        style="height:100vh;">-->
+<PhoneStoreBanner store="{{store}}" data="{{bannerData}}" data1="{{data}}"></PhoneStoreBanner>
 <view class="store-art-list">
     <view class="store-art-list-content">
         <view class="store-art-input-box">
@@ -19,11 +19,11 @@
     <view class="phone-store-item-box">
         <view wx:for="{{data}}" wx:for-item="item" wx:for-index="index">
             <view class="animate__animated animate__fadeIn animate__faster">
-            <PhoneStoreItem class="phone-store-item"
-                            bindtap="goToInfo" data-index="{{index}}"
-                            data="{{item}}"></PhoneStoreItem>
+                <PhoneStoreItem class="phone-store-item"
+                                bindtap="goToInfo" data-index="{{index}}"
+                                data="{{item}}"></PhoneStoreItem>
             </view>
         </view>
     </view>
 </view>
-<!--</scroll-view>-->
+        <!--</scroll-view>-->

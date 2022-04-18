@@ -17,7 +17,7 @@ Component({
         rightArrow: PicCDNUtils.getPicUrl("pic_in.png", false)
     },
     methods: {
-        gotoStoreListPage(event:any) {
+        gotoStoreListPage(event: any) {
             const index = event.currentTarget.dataset.index.toString();
             wx.navigateTo({
                 url: `/pages/PhoneStoreListPage?id=${index}`,

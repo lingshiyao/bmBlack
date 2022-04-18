@@ -16,7 +16,7 @@
                             style="margin-top: 2.67vw"/>
                 </view>
             </block>
-<!--            <view style="{{footStyle}}"></view>-->
+            <!--            <view style="{{footStyle}}"></view>-->
         </view>
         <view style="height:26vw;"/>
     </scroll-view>

@@ -1,13 +1,12 @@
 import * as THREE from '../api/three/three.min'
-import { OBJLoader } from '../api/three/jsm/loaders/OBJLoader.js';
-import { OrbitControls } from '../api/three/jsm/controls/OrbitControls'
+import {OBJLoader} from '../api/three/jsm/loaders/OBJLoader.js';
+import {OrbitControlsOld} from '../api/three/jsm/controls/OrbitControlsOld'
 import {ModalCache} from "../api/ModalCache";
-import {ImageCache} from "../api/ImageCache";
 import {ImgPathUtils} from "../api/utils/ImgPathUtils";
 
 const RESOURCE_URL = 'https://cdn.zhisonggang.com/threejs/examples/models/obj/cerberus/'
 
-const { windowWidth, windowHeight, pixelRatio, } = wx.getSystemInfoSync();
+const {windowWidth, windowHeight, pixelRatio,} = wx.getSystemInfoSync();
 let canvas, scene, renderer, camera, controls;
 let cube;
 
@@ -60,7 +59,7 @@ export default (_canvas) => {
         );
         camera.up.set(0, 1, 0); // 设置相机对象的上方向是哪个轴
         camera.position.set(-50, 0, -100);
-        camera.lookAt(0,0,0);
+        camera.lookAt(0, 0, 0);
     }
 
     /**
@@ -74,7 +73,7 @@ export default (_canvas) => {
      * 渲染控制器
      */
     function initControl() {
-        controls = new OrbitControls(camera, renderer.domElement);
+        controls = new OrbitControlsOld(camera, renderer.domElement);
         //是否可以缩放
         controls.enableZoom = true;
         controls.addEventListener('change', render);
@@ -86,7 +85,7 @@ export default (_canvas) => {
     function initaxesHelper() {
         //辅助线 红色x轴 蓝色z轴 绿色y轴
         const axesHelper = new THREE.AxesHelper(100);
-        scene.add( axesHelper );
+        scene.add(axesHelper);
     }
 
     /**
@@ -104,7 +103,7 @@ export default (_canvas) => {
         new OBJLoader()
             // .setPath(RESOURCE_URL)
             // .load( 'Cerberus.obj',  ( group ) => {
-            .load( Cerberus_obj,  ( group ) => {
+            .load(Cerberus_obj, (group) => {
                 const textureLoader = new THREE.TextureLoader(undefined, canvas)
                     .setPath(RESOURCE_URL);
 
@@ -126,16 +125,16 @@ export default (_canvas) => {
                 material.metalnessMap.wrapS = THREE.RepeatWrapping;
                 material.normalMap.wrapS = THREE.RepeatWrapping;
 
-                group.traverse( function ( child ) {
-                    ////console.log('child', child.isMesh)
-                    if ( child.isMesh ) {
+                group.traverse(function (child) {
+                    //////console.log('child', child.isMesh)
+                    if (child.isMesh) {
                         child.material = material;
                     }
-                } );
+                });
                 group.rotation.y = Math.PI / 2;
                 group.position.x += 10;
                 group.position.y += 0;
-                group.scale.set(30,30,30)
+                group.scale.set(30, 30, 30)
                 // group.children[0].material.color.set(0xFFB6C1);//设置材质颜色
                 cube = group
                 scene.add(group);
@@ -148,22 +147,24 @@ export default (_canvas) => {
      * 初始化灯光
      */
     function initLight() {
-        const hemiLight = new THREE.HemisphereLight(  0x443333, 0x222233, 4 );
+        const hemiLight = new THREE.HemisphereLight(0x443333, 0x222233, 4);
         hemiLight.position.set(100, 100, 100)
-        scene.add( hemiLight );
-        const hemiLightHelper = new THREE.HemisphereLightHelper( hemiLight, 30 );
-        scene.add( hemiLightHelper );
+        scene.add(hemiLight);
+        const hemiLightHelper = new THREE.HemisphereLightHelper(hemiLight, 30);
+        scene.add(hemiLightHelper);
     }
 
     /**
      * 设置其它参数
      */
-    function initOthers() {}
+    function initOthers() {
+    }
 
     /**
      * 设置动画
      */
-    function animation() {}
+    function animation() {
+    }
 
     /**
      * 渲染函数

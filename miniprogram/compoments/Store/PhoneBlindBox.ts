@@ -32,7 +32,5 @@ Component({
         this.setData({
             'text': text_22f70dda
         });
-    }, observers: {
-
-    }
+    }, observers: {}
 });

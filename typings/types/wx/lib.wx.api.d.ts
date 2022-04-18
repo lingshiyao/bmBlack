@@ -6284,7 +6284,7 @@ declare namespace WechatMiniprogram {
     //   "scope.userInfo": true,
     //   "scope.userLocation": true
     // }
-    //////////////////////////////console.log(res.subscriptionsSetting)
+    ////////////////////////////////console.log(res.subscriptionsSetting)
     // res.subscriptionsSetting = {
     //   mainSwitch: true, // 订阅消息总开关
     //   itemSettings: {   // 每一项开关
@@ -7662,7 +7662,7 @@ declare namespace WechatMiniprogram {
          * ```js
          const context = wx.createCameraContext()
          const listener = context.onCameraFrame((frame) => {
-  //////////////////////////////console.log(frame.data instanceof ArrayBuffer, frame.width, frame.height)
+  ////////////////////////////////console.log(frame.data instanceof ArrayBuffer, frame.width, frame.height)
 })
          listener.start()
          ```
@@ -9343,7 +9343,7 @@ declare namespace WechatMiniprogram {
             ...args: any[]
         ): void
 
-        /** [//////////////////////////////console.log()](https://developers.weixin.qq.com/miniprogram/dev/api/base/debug/console.log.html)
+        /** [////////////////////////////////console.log()](https://developers.weixin.qq.com/miniprogram/dev/api/base/debug/console.log.html)
          *
          * 向调试面板中打印 log 日志 */
         log(
@@ -11507,7 +11507,7 @@ declare namespace WechatMiniprogram {
          Page({
   getContext () {
     wx.createSelectorQuery().select('.the-video-class').context(function(res){
-      //////////////////////////////console.log(res.context) // 节点对应的 Context 对象。如：选中的节点是 <video> 组件，那么此处即返回 VideoContext 对象
+      ////////////////////////////////console.log(res.context) // 节点对应的 Context 对象。如：选中的节点是 <video> 组件，那么此处即返回 VideoContext 对象
     }).exec()
   }
 })
@@ -11574,7 +11574,7 @@ declare namespace WechatMiniprogram {
          Page({
   getNode() {
     wx.createSelectorQuery().select('.canvas').node(function(res){
-      //////////////////////////////console.log(res.node) // 节点对应的 Canvas 实例。
+      ////////////////////////////////console.log(res.node) // 节点对应的 Canvas 实例。
     }).exec()
   }
 })
@@ -12559,9 +12559,9 @@ declare namespace WechatMiniprogram {
          *
          * ```js
          const accountInfo = wx.getAccountInfoSync();
-         //////////////////////////////console.log(accountInfo.miniProgram.appId) // 小程序 appId
-         //////////////////////////////console.log(accountInfo.plugin.appId) // 插件 appId
-         //////////////////////////////console.log(accountInfo.plugin.version) // 插件版本号， 'a.b.c' 这样的形式
+         ////////////////////////////////console.log(accountInfo.miniProgram.appId) // 小程序 appId
+         ////////////////////////////////console.log(accountInfo.plugin.appId) // 插件 appId
+         ////////////////////////////////console.log(accountInfo.plugin.version) // 插件版本号， 'a.b.c' 这样的形式
          ```
          *
          * 最低基础库： `2.2.2` */
@@ -12619,7 +12619,7 @@ declare namespace WechatMiniprogram {
          *
          * ```js
          let extConfig = wx.getExtConfigSync? wx.getExtConfigSync(): {}
-         //////////////////////////////console.log(extConfig)
+         ////////////////////////////////console.log(extConfig)
          ```
          *
          * 最低基础库： `1.1.0` */
@@ -12667,9 +12667,9 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getStorageInfo({
   success (res) {
-    //////////////////////////////console.log(res.keys)
-    //////////////////////////////console.log(res.currentSize)
-    //////////////////////////////console.log(res.limitSize)
+    ////////////////////////////////console.log(res.keys)
+    ////////////////////////////////console.log(res.currentSize)
+    ////////////////////////////////console.log(res.limitSize)
   }
 })
          ```
@@ -12677,9 +12677,9 @@ declare namespace WechatMiniprogram {
          * ```js
          try {
   const res = wx.getStorageInfoSync()
-  //////////////////////////////console.log(res.keys)
-  //////////////////////////////console.log(res.currentSize)
-  //////////////////////////////console.log(res.limitSize)
+  ////////////////////////////////console.log(res.keys)
+  ////////////////////////////////console.log(res.currentSize)
+  ////////////////////////////////console.log(res.limitSize)
 } catch (e) {
   // Do something when catch error
 }
@@ -12696,13 +12696,13 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getSystemInfo({
   success (res) {
-    //////////////////////////////console.log(res.model)
-    //////////////////////////////console.log(res.pixelRatio)
-    //////////////////////////////console.log(res.windowWidth)
-    //////////////////////////////console.log(res.windowHeight)
-    //////////////////////////////console.log(res.language)
-    //////////////////////////////console.log(res.version)
-    //////////////////////////////console.log(res.platform)
+    ////////////////////////////////console.log(res.model)
+    ////////////////////////////////console.log(res.pixelRatio)
+    ////////////////////////////////console.log(res.windowWidth)
+    ////////////////////////////////console.log(res.windowHeight)
+    ////////////////////////////////console.log(res.language)
+    ////////////////////////////////console.log(res.version)
+    ////////////////////////////////console.log(res.platform)
   }
 })
          ```
@@ -12710,13 +12710,13 @@ declare namespace WechatMiniprogram {
          * ```js
          try {
   const res = wx.getSystemInfoSync()
-  //////////////////////////////console.log(res.model)
-  //////////////////////////////console.log(res.pixelRatio)
-  //////////////////////////////console.log(res.windowWidth)
-  //////////////////////////////console.log(res.windowHeight)
-  //////////////////////////////console.log(res.language)
-  //////////////////////////////console.log(res.version)
-  //////////////////////////////console.log(res.platform)
+  ////////////////////////////////console.log(res.model)
+  ////////////////////////////////console.log(res.pixelRatio)
+  ////////////////////////////////console.log(res.windowWidth)
+  ////////////////////////////////console.log(res.windowHeight)
+  ////////////////////////////////console.log(res.language)
+  ////////////////////////////////console.log(res.version)
+  ////////////////////////////////console.log(res.platform)
 } catch (e) {
   // Do something when catch error
 }
@@ -12897,7 +12897,7 @@ declare namespace WechatMiniprogram {
     // 添加播放器音频来源
     mediaAudioPlayer.addAudioSource(videoDecoder).then(res => {
       videoDecoder.getFrameData() // 建议在 requestAnimationFrame 里获取每一帧视频数据
-      //////////////////////////////console.log(res)
+      ////////////////////////////////console.log(res)
     })
 
     // 移除播放器音频来源
@@ -12988,7 +12988,7 @@ declare namespace WechatMiniprogram {
          * ```js
          const performance = wx.getPerformance()
          const observer = performance.createObserver((entryList) => {
-  //////////////////////////////console.log(entryList.getEntries())
+  ////////////////////////////////console.log(entryList.getEntries())
 })
          observer.observe({ entryTypes: ['render', 'script'] })
          ```
@@ -13046,7 +13046,7 @@ declare namespace WechatMiniprogram {
     'content-type': 'application/json' // 默认值
   },
   success (res) {
-    //////////////////////////////console.log(res.data)
+    ////////////////////////////////console.log(res.data)
   }
 })
          ``` */
@@ -13206,7 +13206,7 @@ declare namespace WechatMiniprogram {
          wx.getStorage({
   key: 'key',
   success (res) {
-    //////////////////////////////console.log(res.data)
+    ////////////////////////////////console.log(res.data)
   }
 })
          ```
@@ -13307,7 +13307,7 @@ declare namespace WechatMiniprogram {
     }
   ],
   success (res) {
-    //////////////////////////////console.log(res.cardList) // 卡券添加结果
+    ////////////////////////////////console.log(res.cardList) // 卡券添加结果
   }
 })
          ```
@@ -13355,7 +13355,7 @@ declare namespace WechatMiniprogram {
          wx.authPrivateMessage({
   shareTicket: 'xxxxxx',
   success(res) {
-    //////////////////////////////console.log('authPrivateMessage success', res)
+    ////////////////////////////////console.log('authPrivateMessage success', res)
     // res
     // {
     //   errMsg: 'authPrivateMessage:ok'
@@ -13365,7 +13365,7 @@ declare namespace WechatMiniprogram {
     // }
   },
   fail(res) {
-    //////////////////////////////console.log('authPrivateMessage fail', res)
+    ////////////////////////////////console.log('authPrivateMessage fail', res)
   }
 })
          ```
@@ -13440,10 +13440,10 @@ declare namespace WechatMiniprogram {
   width: 100,
   height: 100,
   success(res) {
-    //////////////////////////////console.log(res.width) // 100
-    //////////////////////////////console.log(res.height) // 100
-    //////////////////////////////console.log(res.data instanceof Uint8ClampedArray) // true
-    //////////////////////////////console.log(res.data.length) // 100 * 100 * 4
+    ////////////////////////////////console.log(res.width) // 100
+    ////////////////////////////////console.log(res.height) // 100
+    ////////////////////////////////console.log(res.data instanceof Uint8ClampedArray) // true
+    ////////////////////////////////console.log(res.data.length) // 100 * 100 * 4
   }
 })
          ```
@@ -13495,7 +13495,7 @@ declare namespace WechatMiniprogram {
          wx.checkIsSoterEnrolledInDevice({
   checkAuthMode: 'fingerPrint',
   success(res) {
-    //////////////////////////////console.log(res.isEnrolled)
+    ////////////////////////////////console.log(res.isEnrolled)
   }
 })
          ```
@@ -13564,14 +13564,14 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.chooseAddress({
   success (res) {
-    //////////////////////////////console.log(res.userName)
-    //////////////////////////////console.log(res.postalCode)
-    //////////////////////////////console.log(res.provinceName)
-    //////////////////////////////console.log(res.cityName)
-    //////////////////////////////console.log(res.countyName)
-    //////////////////////////////console.log(res.detailInfo)
-    //////////////////////////////console.log(res.nationalCode)
-    //////////////////////////////console.log(res.telNumber)
+    ////////////////////////////////console.log(res.userName)
+    ////////////////////////////////console.log(res.postalCode)
+    ////////////////////////////////console.log(res.provinceName)
+    ////////////////////////////////console.log(res.cityName)
+    ////////////////////////////////console.log(res.countyName)
+    ////////////////////////////////console.log(res.detailInfo)
+    ////////////////////////////////console.log(res.nationalCode)
+    ////////////////////////////////console.log(res.telNumber)
   }
 })
          ```
@@ -13659,8 +13659,8 @@ declare namespace WechatMiniprogram {
   maxDuration: 30,
   camera: 'back',
   success(res) {
-    //////////////////////////////console.log(res.tempFiles.tempFilePath)
-    //////////////////////////////console.log(res.tempFiles.size)
+    ////////////////////////////////console.log(res.tempFiles.tempFilePath)
+    ////////////////////////////////console.log(res.tempFiles.size)
   }
 })
          ```
@@ -13705,7 +13705,7 @@ declare namespace WechatMiniprogram {
   maxDuration: 60,
   camera: 'back',
   success(res) {
-    //////////////////////////////console.log(res.tempFilePath)
+    ////////////////////////////////console.log(res.tempFilePath)
   }
 })
          ``` */
@@ -13767,7 +13767,7 @@ declare namespace WechatMiniprogram {
          wx.closeBLEConnection({
   deviceId,
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
          ```
@@ -13788,7 +13788,7 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.closeBluetoothAdapter({
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
          ```
@@ -13818,7 +13818,7 @@ declare namespace WechatMiniprogram {
 })
 
          wx.onSocketClose(function(res) {
-  //////////////////////////////console.log('WebSocket 已关闭！')
+  ////////////////////////////////console.log('WebSocket 已关闭！')
 })
          ``` */
         closeSocket<T extends CloseSocketOption = CloseSocketOption>(
@@ -13865,7 +13865,7 @@ declare namespace WechatMiniprogram {
   SSID: '',
   password: '',
   success (res) {
-    //////////////////////////////console.log(res.errMsg)
+    ////////////////////////////////console.log(res.errMsg)
   }
 })
          ```
@@ -13897,7 +13897,7 @@ declare namespace WechatMiniprogram {
   // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接
   deviceId,
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
          ```
@@ -13963,7 +13963,7 @@ declare namespace WechatMiniprogram {
   // 这里的 serviceId 需要在 getBLEDeviceServices 接口中获取
   serviceId,
   success (res) {
-    //////////////////////////////console.log('device getBLEDeviceCharacteristics:', res.characteristics)
+    ////////////////////////////////console.log('device getBLEDeviceCharacteristics:', res.characteristics)
   }
 })
          ```
@@ -13995,7 +13995,7 @@ declare namespace WechatMiniprogram {
   // 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接
   deviceId,
   success (res) {
-    //////////////////////////////console.log('device services:', res.services)
+    ////////////////////////////////console.log('device services:', res.services)
   }
 })
          ```
@@ -14074,7 +14074,7 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getBluetoothAdapterState({
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
          ```
@@ -14106,9 +14106,9 @@ declare namespace WechatMiniprogram {
 }
          wx.getBluetoothDevices({
   success: function (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
     if (res.devices[0]) {
-      //////////////////////////////console.log(ab2hex(res.devices[0].advertisData))
+      ////////////////////////////////console.log(ab2hex(res.devices[0].advertisData))
     }
   }
 })
@@ -14135,7 +14135,7 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getClipboardData({
   success (res){
-    //////////////////////////////console.log(res.data)
+    ////////////////////////////////console.log(res.data)
   }
 })
          ```
@@ -14156,7 +14156,7 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getConnectedBluetoothDevices({
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
          ```
@@ -14190,7 +14190,7 @@ declare namespace WechatMiniprogram {
          if (wx.getExtConfig) {
   wx.getExtConfig({
     success (res) {
-      //////////////////////////////console.log(res.extConfig)
+      ////////////////////////////////console.log(res.extConfig)
     }
   })
 }
@@ -14211,8 +14211,8 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getFileInfo({
   success (res) {
-    //////////////////////////////console.log(res.size)
-    //////////////////////////////console.log(res.digest)
+    ////////////////////////////////console.log(res.size)
+    ////////////////////////////////console.log(res.digest)
   }
 })
          ```
@@ -14273,7 +14273,7 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getHCEState({
   success (res) {
-    //////////////////////////////console.log(res.errCode)
+    ////////////////////////////////console.log(res.errCode)
   }
 })
          ```
@@ -14296,8 +14296,8 @@ declare namespace WechatMiniprogram {
          wx.getImageInfo({
   src: 'images/a.jpg',
   success (res) {
-    //////////////////////////////console.log(res.width)
-    //////////////////////////////console.log(res.height)
+    ////////////////////////////////console.log(res.width)
+    ////////////////////////////////console.log(res.height)
   }
 })
 
@@ -14306,8 +14306,8 @@ declare namespace WechatMiniprogram {
     wx.getImageInfo({
       src: res.tempFilePaths[0],
       success (res) {
-        //////////////////////////////console.log(res.width)
-        //////////////////////////////console.log(res.height)
+        ////////////////////////////////console.log(res.width)
+        ////////////////////////////////console.log(res.height)
       }
     })
   }
@@ -14374,7 +14374,7 @@ declare namespace WechatMiniprogram {
          wx.getRandomValues({
   length: 6 // 生成 6 个字节长度的随机数,
   success: res => {
-    //////////////////////////////console.log(wx.arrayBufferToBase64(res.randomValues)) // 转换为 base64 字符串后打印
+    ////////////////////////////////console.log(wx.arrayBufferToBase64(res.randomValues)) // 转换为 base64 字符串后打印
   }
 })
          ```
@@ -14394,7 +14394,7 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getSavedFileList({
   success (res) {
-    //////////////////////////////console.log(res.fileList)
+    ////////////////////////////////console.log(res.fileList)
   }
 })
          ``` */
@@ -14412,7 +14412,7 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getSavedFileList({
   success (res) {
-    //////////////////////////////console.log(res.fileList)
+    ////////////////////////////////console.log(res.fileList)
   }
 })
          ``` */
@@ -14444,7 +14444,7 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getSelectedTextRange({
   complete: res => {
-    //////////////////////////////console.log('getSelectedTextRange res', res.start, res.end)
+    ////////////////////////////////console.log('getSelectedTextRange res', res.start, res.end)
   }
 })
          ```
@@ -14464,7 +14464,7 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getSetting({
   success (res) {
-    //////////////////////////////console.log(res.authSetting)
+    ////////////////////////////////console.log(res.authSetting)
     // res.authSetting = {
     //   "scope.userInfo": true,
     //   "scope.userLocation": true
@@ -14477,12 +14477,12 @@ declare namespace WechatMiniprogram {
          wx.getSetting({
   withSubscriptions: true,
   success (res) {
-    //////////////////////////////console.log(res.authSetting)
+    ////////////////////////////////console.log(res.authSetting)
     // res.authSetting = {
     //   "scope.userInfo": true,
     //   "scope.userLocation": true
     // }
-    //////////////////////////////console.log(res.subscriptionsSetting)
+    ////////////////////////////////console.log(res.subscriptionsSetting)
     // res.subscriptionsSetting = {
     //   mainSwitch: true, // 订阅消息总开关
     //   itemSettings: {   // 每一项开关
@@ -14539,7 +14539,7 @@ declare namespace WechatMiniprogram {
          wx.getStorage({
   key: 'key',
   success (res) {
-    //////////////////////////////console.log(res.data)
+    ////////////////////////////////console.log(res.data)
   }
 })
          ```
@@ -14569,9 +14569,9 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getStorageInfo({
   success (res) {
-    //////////////////////////////console.log(res.keys)
-    //////////////////////////////console.log(res.currentSize)
-    //////////////////////////////console.log(res.limitSize)
+    ////////////////////////////////console.log(res.keys)
+    ////////////////////////////////console.log(res.currentSize)
+    ////////////////////////////////console.log(res.limitSize)
   }
 })
          ```
@@ -14579,9 +14579,9 @@ declare namespace WechatMiniprogram {
          * ```js
          try {
   const res = wx.getStorageInfoSync()
-  //////////////////////////////console.log(res.keys)
-  //////////////////////////////console.log(res.currentSize)
-  //////////////////////////////console.log(res.limitSize)
+  ////////////////////////////////console.log(res.keys)
+  ////////////////////////////////console.log(res.currentSize)
+  ////////////////////////////////console.log(res.limitSize)
 } catch (e) {
   // Do something when catch error
 }
@@ -14600,13 +14600,13 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getSystemInfo({
   success (res) {
-    //////////////////////////////console.log(res.model)
-    //////////////////////////////console.log(res.pixelRatio)
-    //////////////////////////////console.log(res.windowWidth)
-    //////////////////////////////console.log(res.windowHeight)
-    //////////////////////////////console.log(res.language)
-    //////////////////////////////console.log(res.version)
-    //////////////////////////////console.log(res.platform)
+    ////////////////////////////////console.log(res.model)
+    ////////////////////////////////console.log(res.pixelRatio)
+    ////////////////////////////////console.log(res.windowWidth)
+    ////////////////////////////////console.log(res.windowHeight)
+    ////////////////////////////////console.log(res.language)
+    ////////////////////////////////console.log(res.version)
+    ////////////////////////////////console.log(res.platform)
   }
 })
          ```
@@ -14614,13 +14614,13 @@ declare namespace WechatMiniprogram {
          * ```js
          try {
   const res = wx.getSystemInfoSync()
-  //////////////////////////////console.log(res.model)
-  //////////////////////////////console.log(res.pixelRatio)
-  //////////////////////////////console.log(res.windowWidth)
-  //////////////////////////////console.log(res.windowHeight)
-  //////////////////////////////console.log(res.language)
-  //////////////////////////////console.log(res.version)
-  //////////////////////////////console.log(res.platform)
+  ////////////////////////////////console.log(res.model)
+  ////////////////////////////////console.log(res.pixelRatio)
+  ////////////////////////////////console.log(res.windowWidth)
+  ////////////////////////////////console.log(res.windowHeight)
+  ////////////////////////////////console.log(res.language)
+  ////////////////////////////////console.log(res.version)
+  ////////////////////////////////console.log(res.platform)
 } catch (e) {
   // Do something when catch error
 }
@@ -14639,13 +14639,13 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.getSystemInfoAsync({
   success (res) {
-    //////////////////////////////console.log(res.model)
-    //////////////////////////////console.log(res.pixelRatio)
-    //////////////////////////////console.log(res.windowWidth)
-    //////////////////////////////console.log(res.windowHeight)
-    //////////////////////////////console.log(res.language)
-    //////////////////////////////console.log(res.version)
-    //////////////////////////////console.log(res.platform)
+    ////////////////////////////////console.log(res.model)
+    ////////////////////////////////console.log(res.pixelRatio)
+    ////////////////////////////////console.log(res.windowWidth)
+    ////////////////////////////////console.log(res.windowHeight)
+    ////////////////////////////////console.log(res.language)
+    ////////////////////////////////console.log(res.version)
+    ////////////////////////////////console.log(res.platform)
   }
 })
          ```
@@ -14726,7 +14726,7 @@ declare namespace WechatMiniprogram {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success: function(res) {
-              //////////////////////////////console.log(res.userInfo)
+              ////////////////////////////////console.log(res.userInfo)
             }
           })
         }
@@ -14734,7 +14734,7 @@ declare namespace WechatMiniprogram {
     })
   },
   bindGetUserInfo (e) {
-    //////////////////////////////console.log(e.detail.userInfo)
+    ////////////////////////////////console.log(e.detail.userInfo)
   }
 })
          ``` */
@@ -14842,7 +14842,7 @@ declare namespace WechatMiniprogram {
          * ```js
          wx.hideKeyboard({
   complete: res => {
-    //////////////////////////////console.log('hideKeyboard res', res)
+    ////////////////////////////////console.log('hideKeyboard res', res)
   }
 })
          ```
@@ -14974,7 +14974,7 @@ declare namespace WechatMiniprogram {
         }
       })
     } else {
-      //////////////////////////////console.log('登录失败！' + res.errMsg)
+      ////////////////////////////////console.log('登录失败！' + res.errMsg)
     }
   }
 })
@@ -15054,10 +15054,10 @@ success(res) {
   events: {
     // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
     acceptDataFromOpenedPage: function(data) {
-      //////////////////////////////console.log(data)
+      ////////////////////////////////console.log(data)
     },
     someEvent: function(data) {
-      //////////////////////////////console.log(data)
+      ////////////////////////////////console.log(data)
     }
     ...
   },
@@ -15072,13 +15072,13 @@ success(res) {
          //test.js
          Page({
   onLoad: function(option){
-    //////////////////////////////console.log(option.query)
+    ////////////////////////////////console.log(option.query)
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.emit('acceptDataFromOpenedPage', {data: 'test'});
     eventChannel.emit('someEvent', {data: 'test'});
     // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
     eventChannel.on('acceptDataFromOpenerPage', function(data) {
-      //////////////////////////////console.log(data)
+      ////////////////////////////////console.log(data)
     })
   }
 })
@@ -15193,7 +15193,7 @@ success(res) {
   // 这里的 characteristicId 需要在 getBLEDeviceCharacteristics 接口中获取
   characteristicId,
   success (res) {
-    //////////////////////////////console.log('notifyBLECharacteristicValueChange success', res.errMsg)
+    ////////////////////////////////console.log('notifyBLECharacteristicValueChange success', res.errMsg)
   }
 })
          ```
@@ -15656,8 +15656,8 @@ success(res) {
   return hexArr.join('');
 }
          wx.onBLECharacteristicValueChange(function(res) {
-  //////////////////////////////console.log(`characteristic ${res.characteristicId} has changed, now is ${res.value}`)
-  //////////////////////////////console.log(ab2hex(res.value))
+  ////////////////////////////////console.log(`characteristic ${res.characteristicId} has changed, now is ${res.value}`)
+  ////////////////////////////////console.log(ab2hex(res.value))
 })
          ```
          *
@@ -15678,7 +15678,7 @@ success(res) {
          * ```js
          wx.onBLEConnectionStateChange(function(res) {
   // 该方法回调中可以用于处理连接意外断开等异常情况
-  //////////////////////////////console.log(`device ${res.deviceId} state has changed, connected: ${res.connected}`)
+  ////////////////////////////////console.log(`device ${res.deviceId} state has changed, connected: ${res.connected}`)
 })
          ```
          *
@@ -15768,7 +15768,7 @@ success(res) {
          * [在微信开发者工具中查看示例](https://developers.weixin.qq.com/s/pQU51zmz7a3K)
          * ```js
          wx.onBluetoothAdapterStateChange(function (res) {
-  //////////////////////////////console.log('adapterState changed, now is', res)
+  ////////////////////////////////console.log('adapterState changed, now is', res)
 })
          ```
          *
@@ -15805,9 +15805,9 @@ success(res) {
 }
          wx.onBluetoothDeviceFound(function(res) {
   var devices = res.devices;
-  //////////////////////////////console.log('new device list has founded')
+  ////////////////////////////////console.log('new device list has founded')
   console.dir(devices)
-  //////////////////////////////console.log(ab2hex(devices[0].advertisData))
+  ////////////////////////////////console.log(ab2hex(devices[0].advertisData))
 })
          ```
          *
@@ -15916,7 +15916,7 @@ success(res) {
          *
          * ```js
          wx.onKeyboardHeightChange(res => {
-  //////////////////////////////console.log(res.height)
+  ////////////////////////////////console.log(res.height)
 })
          ```
          *
@@ -15972,7 +15972,7 @@ success(res) {
          *
          * ```js
          const _locationChangeFn = function(res) {
-  //////////////////////////////console.log('location change', res)
+  ////////////////////////////////console.log('location change', res)
  }
          wx.onLocationChange(_locationChangeFn)
          wx.offLocationChange(_locationChangeFn)
@@ -15995,7 +15995,7 @@ success(res) {
          *
          * ```js
          * wx.onMemoryWarning(function () {
-         *   //////////////////////////////console.log('onMemoryWarningReceive')
+         *   ////////////////////////////////console.log('onMemoryWarningReceive')
          * })
          * ``
          *
@@ -16014,8 +16014,8 @@ success(res) {
          *
          * ```js
          wx.onNetworkStatusChange(function (res) {
-  //////////////////////////////console.log(res.isConnected)
-  //////////////////////////////console.log(res.networkType)
+  ////////////////////////////////console.log(res.isConnected)
+  ////////////////////////////////console.log(res.networkType)
 })
          ```
          *
@@ -16114,7 +16114,7 @@ success(res) {
          *
          * ```js
          wx.onUserCaptureScreen(function (res) {
-  //////////////////////////////console.log('用户截屏了')
+  ////////////////////////////////console.log('用户截屏了')
 })
          ```
          *
@@ -16212,7 +16212,7 @@ success(res) {
          * ```js
          wx.openBluetoothAdapter({
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
          ```
@@ -16293,7 +16293,7 @@ success(res) {
          * ```js
          wx.openSetting({
   success (res) {
-    //////////////////////////////console.log(res.authSetting)
+    ////////////////////////////////console.log(res.authSetting)
     // res.authSetting = {
     //   "scope.userInfo": true,
     //   "scope.userLocation": true
@@ -16473,7 +16473,7 @@ success(res) {
          * // test
          * Page({
          *   onLoad (option) {
-         *     //////////////////////////////console.log(option.query)
+         *     ////////////////////////////////console.log(option.query)
          *   }
          * })
          * ```
@@ -16500,7 +16500,7 @@ success(res) {
          * ```js
          // 必须在这里的回调才能获取
          wx.onBLECharacteristicValueChange(function(characteristic) {
-  //////////////////////////////console.log('characteristic value comed:', characteristic)
+  ////////////////////////////////console.log('characteristic value comed:', characteristic)
 })
 
          wx.readBLECharacteristicValue({
@@ -16511,7 +16511,7 @@ success(res) {
   // 这里的 characteristicId 需要在 getBLEDeviceCharacteristics 接口中获取
   characteristicId,
   success (res) {
-    //////////////////////////////console.log('readBLECharacteristicValue:', res.errCode)
+    ////////////////////////////////console.log('readBLECharacteristicValue:', res.errCode)
   }
 })
          ```
@@ -16551,7 +16551,7 @@ success(res) {
      wx.removeSavedFile({
        filePath: res.fileList[0].filePath,
        complete (res) {
-         //////////////////////////////console.log(res)
+         ////////////////////////////////console.log(res)
        }
      })
    }
@@ -16573,7 +16573,7 @@ success(res) {
          wx.removeStorage({
   key: 'key',
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
          ```
@@ -16600,7 +16600,7 @@ success(res) {
          wx.removeStorage({
   key: 'key',
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
          ```
@@ -16763,7 +16763,7 @@ success(res) {
     wx.requestPayment({
       ...payment,
       success (res) {
-        //////////////////////////////console.log('pay success', res)
+        ////////////////////////////////console.log('pay success', res)
       },
       fail (err) {
         console.error('pay fail', err)
@@ -16885,7 +16885,7 @@ success(res) {
          wx.saveVideoToPhotosAlbum({
   filePath: 'wxfile://xxx',
   success (res) {
-    //////////////////////////////console.log(res.errMsg)
+    ////////////////////////////////console.log(res.errMsg)
   }
 })
          ```
@@ -16906,7 +16906,7 @@ success(res) {
          // 允许从相机和相册扫码
          wx.scanCode({
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
 
@@ -16914,7 +16914,7 @@ success(res) {
          wx.scanCode({
   onlyFromCamera: true,
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
          ``` */
@@ -17076,7 +17076,7 @@ success(res) {
   success (res) {
     wx.getClipboardData({
       success (res) {
-        //////////////////////////////console.log(res.data) // data
+        ////////////////////////////////console.log(res.data) // data
       }
     })
   }
@@ -17376,10 +17376,10 @@ success(res) {
          wx.showActionSheet({
   itemList: ['A', 'B', 'C'],
   success (res) {
-    //////////////////////////////console.log(res.tapIndex)
+    ////////////////////////////////console.log(res.tapIndex)
   },
   fail (res) {
-    //////////////////////////////console.log(res.errMsg)
+    ////////////////////////////////console.log(res.errMsg)
   }
 })
          ```
@@ -17434,9 +17434,9 @@ success(res) {
   content: '这是一个模态弹窗',
   success (res) {
     if (res.confirm) {
-      //////////////////////////////console.log('用户点击确定')
+      ////////////////////////////////console.log('用户点击确定')
     } else if (res.cancel) {
-      //////////////////////////////console.log('用户点击取消')
+      ////////////////////////////////console.log('用户点击取消')
     }
   }
 })
@@ -17598,7 +17598,7 @@ success(res) {
          wx.startBluetoothDevicesDiscovery({
   services: ['FEE7'],
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
          ```
@@ -17653,7 +17653,7 @@ success(res) {
          wx.startHCE({
   aid_list: ['F222222222'],
   success (res) {
-    //////////////////////////////console.log(res.errMsg)
+    ////////////////////////////////console.log(res.errMsg)
   }
 })
          ```
@@ -17811,7 +17811,7 @@ success(res) {
          * ```js
          wx.startWifi({
   success (res) {
-    //////////////////////////////console.log(res.errMsg)
+    ////////////////////////////////console.log(res.errMsg)
   }
 })
          ```
@@ -17873,7 +17873,7 @@ success(res) {
          * ```js
          wx.stopBluetoothDevicesDiscovery({
   success (res) {
-    //////////////////////////////console.log(res)
+    ////////////////////////////////console.log(res)
   }
 })
          ```
@@ -17927,7 +17927,7 @@ success(res) {
          * ```js
          wx.stopHCE({
   success (res) {
-    //////////////////////////////console.log(res.errMsg)
+    ////////////////////////////////console.log(res.errMsg)
   }
 })
          ```
@@ -18033,7 +18033,7 @@ success(res) {
          * ```js
          wx.stopWifi({
   success (res) {
-    //////////////////////////////console.log(res.errMsg)
+    ////////////////////////////////console.log(res.errMsg)
   }
 })
          ```
@@ -18179,7 +18179,7 @@ success(res) {
   // 这里的value是ArrayBuffer类型
   value: buffer,
   success (res) {
-    //////////////////////////////console.log('writeBLECharacteristicValue success', res.errMsg)
+    ////////////////////////////////console.log('writeBLECharacteristicValue success', res.errMsg)
   }
 })
          ```

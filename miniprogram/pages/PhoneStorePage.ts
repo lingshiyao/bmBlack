@@ -12,6 +12,10 @@ var openId: string | null = null;
 
 const NULL: any = null;
 
+let _pageIndex = 0;
+let _total = 0;
+let _searchKey = ""
+
 Page({
     data: {
         phoneModalLoading: NULL,
@@ -24,7 +28,12 @@ Page({
         total: 0,
         options: NULL,
         store: NULL
-    }, async initOpenId() {
+    },
+    async bindDownLoad() {
+        console.log("bindDownLoad")
+        await this.getStoreArts(_searchKey)
+    },
+    async initOpenId() {
         // FIXME
         // const wxCode = WxPay.getWxCode(window.location.href);
         const login = await WXUtils.login();
@@ -57,18 +66,19 @@ Page({
             })
         }
     }, getPage(index: string) {
-        this.getStoreArts("", Number(index) - 1);
+        this.getStoreArts(_searchKey);
     }, async getStoreInfo() {
         const storeId = this.data.options.id;
         const store = await request.store({storeId: <string>storeId});
-        //////////console.log("store", store)
+        console.log("store", store)
         if (store) {
             this.setData({
                 store: store
             })
-            ////////////////////console.log(store)
+            //////////////////////console.log(store)
             const bannerDataT = this.data.bannerData;
-            bannerDataT.introduction = store.description;
+            // bannerDataT.introduction = store.description;
+            bannerDataT.introduction = store.descriptionEx;
             bannerDataT.projectName = store.name;
             bannerDataT.projectAuthor = store.user.user.username;
             bannerDataT.projectTime = store.updatedAt.toString();
@@ -81,7 +91,7 @@ Page({
             if (store.user.userExt.intro)
                 bannerDataT.userExtIntro = store.user.userExt.intro;
             if (store.user.userExt.nickname)
-                bannerDataT.userExtNickName = store.user.userExt.nickname;
+                bannerDataT.userExtNickName = store.description;
             this.setData({
                 bannerData: bannerDataT
             })
@@ -120,8 +130,9 @@ Page({
                 'bannerData': bannerData_92d167d1
             });
         }
-    }, getStoreArts: async function (key: string, pageIndex: number) {
-        //////////////////////////////console.log("getStoreArts")
+    }, getStoreArts: async function (key: string) {
+        ////////////////////////////////console.log("getStoreArts")
+        if (_total != 0 && this.data.collectData.length == _total) return;
         const storeId = this.data.options.id;
         var ascByPrice = false;
         if (key === "false" || key === "true") {
@@ -132,16 +143,19 @@ Page({
             }
             key = "";
         }
+        wx.showLoading({title: "加载中..."})
         const arts = await request.arts({
             ascByPrice: ascByPrice,
             key: key,
-            pageIndex: pageIndex,
-            pageSize: 1000,
+            pageIndex: _pageIndex,
+            pageSize: 8,
             storeId: storeId,
         })
-        //////console.log(arts)
+        console.log(arts)
+        wx.hideLoading();
+        _total = arts.total;
         if (arts) {
-            const collectDataT = [];
+            const collectDataT = this.data.collectData;
             for (let index = 0; index < arts.list.length; index++) {
                 const val = new CollectCardDataEntity();
                 val.name = arts.list[index].name;
@@ -162,15 +176,15 @@ Page({
                     val.headerImg = ImgPathUtils.getMedia(arts.list[index].id);
                 }
                 val.kind = arts.list[index].kind;
-                //////////////////////////////console.log(val.price)
+                ////////////////////////////////console.log(val.price)
                 collectDataT.push(val);
 
                 if (arts.list[index].kind == "MODEL") {
-                    //////////console.log(arts.list[index].kind)
-                    //////////console.log(ImgPathUtils.getMedia(arts.list[index].id))
-                    //////////console.log(ImgPathUtils.getObj(arts.list[index].id))
-                    //////////console.log(ImgPathUtils.getMtl(arts.list[index].id))
-                    //////////console.log(ImgPathUtils.getJpg(arts.list[index].id))
+                    ////////////console.log(arts.list[index].kind)
+                    ////////////console.log(ImgPathUtils.getMedia(arts.list[index].id))
+                    ////////////console.log(ImgPathUtils.getObj(arts.list[index].id))
+                    ////////////console.log(ImgPathUtils.getMtl(arts.list[index].id))
+                    ////////////console.log(ImgPathUtils.getJpg(arts.list[index].id))
                 }
 
                 // if (index === 0) {
@@ -182,8 +196,8 @@ Page({
             this.setData({
                 'collectData': collectDataT
             });
-            //////////////////////////////console.log(this.data.collectData)
-            //////////////////////////////console.log(arts)
+            ////////////////////////////////console.log(this.data.collectData)
+            ////////////////////////////////console.log(arts)
             let total_6b082abf: any = this.data.total;
             total_6b082abf = arts.total;
             this.setData({
@@ -194,9 +208,16 @@ Page({
                 title: '出错了', icon: 'error', duration: 2000
             })
         }
+        _pageIndex++;
     }, searchAction(event: any) {
         const searchKey = event.detail;
-        this.getStoreArts(searchKey, this.data.pageIndex);
+        _searchKey = searchKey;
+        _total = 0;
+        _pageIndex = 0
+        this.setData({
+            collectData: []
+        })
+        this.getStoreArts(_searchKey);
     }, goToInfo(event: any) {
         const index = event.detail;
         this.goToPage("pages/PhoneInfoPage", this.data.collectData[index].id, <string>this.data.options.id);
@@ -212,7 +233,7 @@ Page({
         })
     }, getBlind(event: any) {
         const num: number = parseInt(event.detail.toString());
-        //////////////////////////////console.log(num);
+        ////////////////////////////////console.log(num);
         this.mintArts(num);
     }, async mintArts(num: number) {
         // if (await StorageUtils.getStorage(AppConstant.TOKEN) == null) {
@@ -259,8 +280,11 @@ Page({
                     return;
                 }
                 await wx.showLoading({title: "加载中..."})
-                const wxJsapiPayParams = await request.wxJsapiPayParams({target: WxJsApiTarget.MiniProgram,prepayId: mintBlind.tradeReturn.prepay_id});
-                //////////console.log(wxJsapiPayParams)
+                const wxJsapiPayParams = await request.wxJsapiPayParams({
+                    target: WxJsApiTarget.MiniProgram,
+                    prepayId: mintBlind.tradeReturn.prepay_id
+                });
+                ////////////console.log(wxJsapiPayParams)
                 const pay = await WXUtils.pay(wxJsapiPayParams);
                 await wx.hideLoading();
                 if (pay.success) {
@@ -295,12 +319,23 @@ Page({
     }, async init() {
         await this.getStoreInfo();
         await this.getStoreStat();
-        await this.getStoreArts("", this.data.pageIndex);
+        _total = 0;
+        _pageIndex = 0
+        this.setData({
+            collectData: []
+        })
+        await this.getStoreArts(_searchKey);
     }, properties: {}, onLoad(options) {
+        _pageIndex = 0;
+        _total = 0;
+        _searchKey = "";
+        this.setData({
+            collectData: []
+        })
         this.setData({
             'options': options
         })
-        ////////////////////console.log(options)
+        //////////////////////console.log(options)
         this.init();
     }, observers: {}
 });

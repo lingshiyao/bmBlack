@@ -9,7 +9,7 @@ Component({
         }
     },
     data: {
-        marginTop:"margin-top:0px;",
+        marginTop: "margin-top:0px;",
         setting: PicCDNUtils.getPicUrl("btn_set.png", false),
     },
     methods: {
@@ -28,6 +28,6 @@ Component({
         this.setData({
             'marginTop': "margin-top:" + Utils.getSafestatusBarHeight() + "px"
         })
-        // //////////////////////////////console.log(wx.getSystemInfoSync())
+        // ////////////////////////////////console.log(wx.getSystemInfoSync())
     }
 });

@@ -3,4 +3,5 @@
     <navigator class="nav" url="/pages/PhoneThreeTest2">PhoneThreeTest2</navigator>
     <navigator class="nav" url="/pages/PhoneThreeTest3">PhoneThreeTest3</navigator>
     <navigator class="nav" url="/pages/PhoneThreeTest4">PhoneThreeTest4</navigator>
+    <navigator class="nav" url="/pages/PhoneThreeTest5">PhoneThreeTest5</navigator>
 </view>

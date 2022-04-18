@@ -38,7 +38,7 @@
     height: 40.28vw;
     border-radius: 4vw;
     position: absolute;
-    top:0;
+    top: 0;
     left: 0;
     z-index: 4444;
     background: black;

@@ -3,6 +3,11 @@
     font-weight: 400;
     color: #FDD3A1;
     margin-left: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
 }
 
 .select-box-title:hover {
@@ -12,15 +17,13 @@
 .select-box-more {
     width: 3vw;
     height: 2vw;
-    margin-right: 2vw;
+    margin-right: 1vw;
 }
 
 .select-box-more-more {
     width: 3vw;
     height: 2vw;
-    position: absolute;
-    top: 1.7vw;
-    right: 2.4vw;
+    margin-right: 4vw;
 }
 
 .select-box-img {

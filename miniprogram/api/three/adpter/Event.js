@@ -1,4 +1,4 @@
-import { noop } from './util/index.js'
+import {noop} from './util/index.js'
 
 export default class Event {
     constructor(type) {

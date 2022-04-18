@@ -16,7 +16,8 @@ Page({
         search: "",
         deleteSrc: PicCDNUtils.getPicUrl("ic_delete.png", false),
         deleteIconShow: false,
-        scrollStyle: ""
+        scrollStyle: "",
+        oarts: [],
     },
     bindDownLoad() {
         _pageIndex++;
@@ -37,16 +38,19 @@ Page({
         this.setData({
             scrollStyle: `height:${WXUtils.getScreenHeight() - WXUtils.getStatusBarHeight() - rect[0].height}px`
         })
-        ////////////////////console.log(rect)
+        //////////////////////console.log(rect)
     },
     onLoad: function (options) {
         _pageIndex = 0;
         _total = 0;
+        this.setData({
+            arts: []
+        })
         this.initTopArea()
         this.search();
     },
     goToInfo(event: any) {
-        // //////////////////////////////console.log(event, this.data);
+        // ////////////////////////////////console.log(event, this.data);
         const index = parseInt(event.currentTarget.dataset.index.toString());
 
         wx.navigateTo({
@@ -57,7 +61,7 @@ Page({
         this.setData({
             search: e.detail.value.toString()
         })
-        ////////////////////console.log(e.detail.value.toString() == "")
+        //////////////////////console.log(e.detail.value.toString() == "")
         if (e.detail.value.toString() == "") {
 
             this.setData({
@@ -68,7 +72,7 @@ Page({
                 deleteIconShow: true
             })
         }
-        ////////////////////////////console.log(e.detail, e.detail.value.toString(), this.data.search)
+        //////////////////////////////console.log(e.detail, e.detail.value.toString(), this.data.search)
     },
     async clickSearch() {
         this.setData({
@@ -78,7 +82,7 @@ Page({
     },
     async search() {
         const key = this.data.search;
-        //////////////////////////console.log(key)
+        ////////////////////////////console.log(key)
         await wx.showLoading({title: "加载中..."})
         const arts = await request.arts({
             ascByPrice: true,
@@ -87,17 +91,25 @@ Page({
             pageSize: 6,
             storeId: null,
         })
+        this.setData({
+            oarts: arts.list
+        })
+        //console.log(arts)
         wx.hideLoading();
         _total = arts.total;
         for (let i = 0; i < arts.list.length; i++) {
             const item: CollectCardDataEntity = new CollectCardDataEntity();
-            item.name = arts.list[i].description;
-            item.author = arts.list[i].name;
+            item.name = arts.list[i].name;
+            item.author = arts.list[i].stores[0].name;
             item.price = arts.list[i].mintPrice;
             item.supple = 999;
             item.sId = arts.list[i].stores[0].id;
             item.id = arts.list[i].id;
-            item.headerImg = ImgPathUtils.getMedia(arts.list[i].id)
+            if (arts.list[i].kind == "MODEL") {
+                item.headerImg = ImgPathUtils.getJpg(arts.list[i].id)
+            } else {
+                item.headerImg = ImgPathUtils.getMedia(arts.list[i].id)
+            }
             item.category = arts.list[i].stores[0].category.name;
             const artsT = this.data.arts;
             artsT.push(item);
@@ -105,7 +117,7 @@ Page({
                 arts: artsT
             })
             await Utils.sleep(200);
-            // //////////////////console.log(this.data.arts)
+            // ////////////////////console.log(this.data.arts)
         }
     }
 });

@@ -117,7 +117,7 @@ Page({
         let email: string = userInfos[2] == null ? "" : userInfos[2];
 
         const userUpdateResult = await request.userUpdate({email: email, intro: intro, nickname: nickname}, true)
-        ////////////console.log(userUpdateResult)
+        //////////////console.log(userUpdateResult)
         if (userUpdateResult == null) {
             wx.hideLoading({});
             wx.showModal({
@@ -130,7 +130,7 @@ Page({
         } else {
             const user = await StorageUtils.getStorage(AppConstant.USER);
             const userDetail = await request.user({userId: user.id})
-            ////////////console.log(userDetail)
+            //////////////console.log(userDetail)
             // UserSet.setUserInfo(userDetail);
             StorageUtils.setStorage(AppConstant.USER, userDetail);
             this.setData({
@@ -196,7 +196,7 @@ Page({
                 success(res) {
                     res.fileList.forEach((val, key) => { // 遍历文件列表里的数据
                         // 删除存储的垃圾数据
-                        //console.log(val.filePath)
+                        ////console.log(val.filePath)
                         wx.removeSavedFile({
                             filePath: val.filePath
                         });

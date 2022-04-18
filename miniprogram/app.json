@@ -2,7 +2,6 @@
   "pages": [
     "pages/PhoneApp",
     "pages/PhoneThreeTestIndexPage",
-
     "pages/PhoneLoginNew",
     "pages/TestPage",
     "pages/PhoneLogin",
@@ -16,11 +15,11 @@
     "pages/PhoneRegWithPhone",
     "pages/PhoneCreateStore",
     "pages/PhoneArtSearchPage",
-
     "pages/PhoneThreeTest1",
     "pages/PhoneThreeTest2",
     "pages/PhoneThreeTest3",
-    "pages/PhoneThreeTest4"
+    "pages/PhoneThreeTest4",
+    "pages/PhoneThreeTest5"
   ],
   "window": {
     "backgroundTextStyle": "light",

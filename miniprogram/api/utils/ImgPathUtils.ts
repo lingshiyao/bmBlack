@@ -36,7 +36,7 @@ export class ImgPathUtils {
 
     // art_media
     public static getMedia = (id: string) => {
-        return AppConstant.FILE_URL + "?type=4&id="+id;
+        return AppConstant.FILE_URL + "?type=4&id=" + id;
     }
 
     // art用的
@@ -53,8 +53,6 @@ export class ImgPathUtils {
     public static getJpg = (id: string) => {
         return `${AppConstant.FILE_URL}?type=4&id=${id}&tag=2`;
     }
-
-
 
 
 }

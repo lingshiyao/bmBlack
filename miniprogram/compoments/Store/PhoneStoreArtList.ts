@@ -7,7 +7,7 @@ Component({
         selectBoxData: new SelectBoxEntity()
     }, methods: {
         async bindDownLoad() {
-
+            console.log("bindDownLoad")
         },
         clickCallBack(event: any) {
             const json = event.detail;
@@ -36,7 +36,8 @@ Component({
         },
         bannerData: {
             type: Object, value: new CollectBannerEntity()
-        }
+        },
+        store: Object
     }, ready() {
         let selectBoxData_c01d026c: any = this.data.selectBoxData;
         selectBoxData_c01d026c.menu = ["价格: 从高到低", "价格: 从低到高",];
@@ -45,9 +46,9 @@ Component({
         });
     }, observers: {
         'data': function (data) {
-            ////////////////////////console.log(data)
+            //////////////////////////console.log(data)
         }, 'bannerData': function (bannerData) {
-            ////////////////////////console.log(bannerData)
+            //////////////////////////console.log(bannerData)
         }
     }
 });

@@ -1,6 +1,5 @@
 import {PicCDNUtils} from "../api/net/PicCDNUtils";
 import {LoginInfo, UserDetail} from "../api/net/gql/graphql";
-import {UserSet} from "../api/storage/UserSet";
 import {StorageUtils} from "../api/utils/StorageUtils";
 import {AppConstant} from "../api/AppConstant";
 import {request} from "../api/Api";

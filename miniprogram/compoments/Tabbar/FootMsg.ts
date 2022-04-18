@@ -1,7 +1,7 @@
 Component({
     data: {}, methods: {
         goToVHtml(event: any) {
-            ////////////////////console.log("goToVHtml:", event)
+            //////////////////////console.log("goToVHtml:", event)
             const index = parseInt(event.currentTarget.dataset.index.toString());
             switch (index) {
                 case 1: {

@@ -30,7 +30,7 @@ Component({
 
     observers: {
         'data': function (data) {
-            //////////////////////////console.log(data.category)
+            ////////////////////////////console.log(data.category)
             if (data.category == '艺术品') {
                 this.setData({
                     style: "border: 1vw solid #7076DB; border-width: 0.5vw 0vw 0vw 0vw;"
@@ -56,7 +56,7 @@ Component({
                     style: "border: 1vw solid #0FA0B8; border-width: 0.5vw 0vw 0vw 0vw;"
                 })
             }
-            //////////////////////////console.log(data)
+            ////////////////////////////console.log(data)
         }
     }
 });

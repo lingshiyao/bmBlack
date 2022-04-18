@@ -1,6 +1,6 @@
 <view class="base-base-base">
     <view>
-        <PhoneStoreBanner data="{{bannerData}}"></PhoneStoreBanner>
+        <PhoneStoreBanner data="{{bannerData}}" store="{{store}}"></PhoneStoreBanner>
     </view>
     <view class="b-b-b-b-b">
         <view class="base-b">
@@ -25,7 +25,29 @@
                 </view>
             </view>
             <view class="description">
-                <rich-text class="description-rich" nodes="{{bannerData.introduction}}"/>
+                <rich-text class="description-rich" nodes="{{store.descriptionEx}}"/>
+                <view class="description-rich-new-msg-area-layout">
+                    <view bindtap='copyAddressText' class="description-rich-new-msg-area-layout-line">
+                        <view class="description-rich-new-msg-area-layout-line-txt1">合约地址</view>
+                        <view class="description-rich-new-msg-area-layout-line-txt2">{{address}}</view>
+                    </view>
+                    <!--                    <view class="description-rich-new-msg-area-layout-line-line"></view>-->
+                    <!--                    <view bindtap='copyAuthorizationText' class="description-rich-new-msg-area-layout-line">-->
+                    <!--                        <view class="description-rich-new-msg-area-layout-line-txt1">授权文件</view>-->
+                    <!--                        <view class="description-rich-new-msg-area-layout-line-txt2">{{art.copyrightLink}}</view>-->
+                    <!--                    </view>-->
+                    <view class="description-rich-new-msg-area-layout-line-line"></view>
+                    <view class="description-rich-new-msg-area-layout-line">
+                        <view class="description-rich-new-msg-area-layout-line-txt1">认证标准</view>
+                        <view class="description-rich-new-msg-area-layout-line-txt2">REC-721</view>
+                    </view>
+                    <view class="description-rich-new-msg-area-layout-line-line"></view>
+                    <view class="description-rich-new-msg-area-layout-line">
+                        <view class="description-rich-new-msg-area-layout-line-txt1">认证网络</view>
+                        <view class="description-rich-new-msg-area-layout-line-txt2">树图链（Conflux）</view>
+                    </view>
+                    <view style="height:4.58vw;"></view>
+                </view>
             </view>
 
             <view class="goumaixuzhi">
@@ -35,8 +57,8 @@
                 </view>
             </view>
 
-            <view class="phone-blind-bottom-area"></view>
-            <view class="phone-blind-bottom">
+            <view class="phone-blind-bottom-area" style="{{safeArea}}"></view>
+            <view class="phone-blind-bottom" style="{{safeArea}}">
                 <view class="phone-blind-bottom-background">
                     <view class="phone-blind-bottom-price-layout">
                         <view class="phone-blind-bottom-price-yang">¥</view>

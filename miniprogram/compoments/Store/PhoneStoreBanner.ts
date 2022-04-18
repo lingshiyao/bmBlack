@@ -25,13 +25,14 @@ Component({
             type: Object,
             value: new CollectBannerEntity()
         },
-        data1: Object
+        data1: Object,
+        store: Object
     },
     ready() {
     },
     observers: {
         'data': async function (data: CollectBannerEntity) {
-            ////////////////////console.log(data, ImgPathUtils.getSIcon(data.storeId))
+            //////////////////////console.log(data, ImgPathUtils.getSIcon(data.storeId))
             this.setData({
                 time: Utils.formatDate(new Date(data.projectTime), "yyyy-MM-dd HH:mm:ss"),
                 icon: ImgPathUtils.getSIcon(data.storeId)
@@ -50,7 +51,7 @@ Component({
 
         },
         'data1': async function (data: any) {
-            ////////////////////console.log(data)
+            //////////////////////console.log(data)
         }
     }
 });

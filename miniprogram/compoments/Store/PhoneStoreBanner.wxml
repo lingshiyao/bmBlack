@@ -30,18 +30,17 @@
                             class="store-header-info-icon-img">
                     </LoadingImg>
                 </view>
-                <view class="dianpumingcheng-layout">{{data.userExtNickName}}</view>
+                <view class="dianpumingcheng-layout">{{store.user.userExt.nickname}}</view>
             </view>
             <view bindtap="unzip" id="dianpumingcheng-layout" class="store-header-info-msg" style="{{style}}">
-                <view wx:if="{{data.isBlind}}">{{data.userExtIntro}}</view>
-                <view wx:else>{{data.introduction}}</view>
+                <view wx:if="{{data.isBlind}}">{{store.description}}</view>
+                <view wx:else>{{store.description}}</view>
                 <view wx:if="{{showzip && logic}}" class="container-ggg" bindtap="unzip">
                     <view class="chevron-ggg"></view>
                     <view class="chevron-ggg"></view>
                     <view class="chevron-ggg"></view>
                 </view>
             </view>
-
         </view>
     </view>
 

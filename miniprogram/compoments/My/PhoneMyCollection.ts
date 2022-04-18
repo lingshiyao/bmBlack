@@ -36,7 +36,11 @@ Component({
                 collectCardDataEntity.author = nft.art.stores[0].name;
                 collectCardDataEntity.id = nft.art.id;
                 collectCardDataEntity.name = nft.art.name;
-                collectCardDataEntity.headerImg = ImgPathUtils.getMedia(nft.art.id);
+                if(nft.art.kind == "MODEL") {
+                    collectCardDataEntity.headerImg = ImgPathUtils.getJpg(nft.art.id);
+                } else {
+                    collectCardDataEntity.headerImg = ImgPathUtils.getMedia(nft.art.id);
+                }
                 collectCardDataEntity.isShowNumber = true;
                 collectCardDataEntity.index = nft.index + 1;
                 collectCardDataEntity.price = nft.art.mintPrice;
@@ -49,7 +53,7 @@ Component({
                 this.setData({
                     'favList': favList_fccdbec4
                 });
-                //////////////////console.log(this.data.favList)
+                ////////////////////console.log(this.data.favList)
                 await Utils.sleep(200);
             }
         }, async init() {
@@ -66,7 +70,7 @@ Component({
                 wx.showLoading({title: "加载中..."});
                 let nftsResult = await request.nfts({userId: userDetail.user.id});
                 wx.hideLoading();
-                //////////////////console.log(nftsResult);
+                ////////////////////console.log(nftsResult);
                 if (nftsResult) {
                     StorageUtils.setStorage("nfts", nftsResult)
                     this.setData({
@@ -91,7 +95,7 @@ Component({
             this.setData({
                 scrollStyle: `height:${WXUtils.getScreenHeight() - data}px`
             })
-            ////////////////////console.log(this.data.scrollStyle)
+            //////////////////////console.log(this.data.scrollStyle)
         }
     }
 });

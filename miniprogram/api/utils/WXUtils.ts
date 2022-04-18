@@ -30,7 +30,7 @@ export class WXUtils {
 
     public static shakeToDebugPage() {
         wx.onAccelerometerChange(function (e) {
-            //////////console.log(e)
+            ////////////console.log(e)
             if (Math.abs(e.x) > 1 && Math.abs(e.y) > 1) {
                 wx.vibrateShort({
                     type: "heavy"
@@ -54,7 +54,7 @@ export class WXUtils {
         const wxCode = login.code.toString();
         if (wxCode) {
             const wxJsapiOpenId = await request.wxJsapiOpenId({code: wxCode, target: WxJsApiTarget.MiniProgram});
-            ////////////console.log(wxJsapiOpenId)
+            //////////////console.log(wxJsapiOpenId)
             if (wxJsapiOpenId == null || wxJsapiOpenId == undefined || wxJsapiOpenId.signin_info == null) {
                 wx.reLaunch({
                     url: '/pages/PhoneLoginNew',
@@ -110,7 +110,7 @@ export class WXUtils {
             }
 
             option.fail = (res: any) => {
-                //console.log(res)
+                ////console.log(res)
                 resolve(null);
             }
             fun(option);
@@ -124,12 +124,12 @@ export class WXUtils {
             }
 
             option.fail = (res: any) => {
-                ////console.log(res)
+                // console.log(res, option)
                 resolve(null);
             }
             const task = wx.downloadFile(option);
             task.abort();
-            ////console.log(task)
+            //////console.log(task)
         })
     }
 

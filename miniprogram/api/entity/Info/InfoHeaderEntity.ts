@@ -56,6 +56,8 @@ export class InfoHeaderEntity {
 
     public isBlind: false = false;
 
+    public copyRightLink: string = "";
+
     constructor() {
         this.items.push(InfoHeaderItemsEntity.init("", "", "", ""));
         this.items.push(InfoHeaderItemsEntity.init("", "", "", ""));

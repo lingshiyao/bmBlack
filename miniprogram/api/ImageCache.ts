@@ -17,7 +17,7 @@ export class ImageCache {
             url: src
         });
         if (downloadFile == null) return null;
-        if (downloadFile.statusCode != 200)  return null;
+        if (downloadFile.statusCode != 200) return null;
         const newCacheMD5 = await ImageCache.getMD5(downloadFile.tempFilePath);
         if (newCacheMD5 == null) return null;
         if (cacheMD5 == newCacheMD5) return null;
@@ -71,7 +71,7 @@ export class ImageCache {
                     key: `${path}###Time__==`, data: new Date().getTime(),
                 });
                 if (setStorage1 == null) return;
-                //console.log("success:", saveFile.savedFilePath);
+                ////console.log("success:", saveFile.savedFilePath);
                 // return saveFile.savedFilePath;
             },
             fail(res: any) {
@@ -86,7 +86,7 @@ export class ImageCache {
         const downloadFile: any = await WXUtils.downloadFile({
             url: path
         });
-        ////console.log(downloadFile)
+        //console.log(downloadFile)
         if (downloadFile == null) return null;
         if (downloadFile.statusCode != 200) return null;
 

@@ -158,6 +158,54 @@
     width: 87.5vw;
 }
 
+
+.description-rich-new-msg-area-layout {
+    width: 87.5vw;
+    background: #353535;
+    border-radius: 6vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3.75vw;
+}
+
+.description-rich-new-msg-area-layout-line {
+    display: flex;
+    flex-direction: row;
+    margin-top: 4.58vw;
+    width: 79.03vw;
+    justify-content: space-between;
+}
+
+.description-rich-new-msg-area-layout-line-txt1 {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FFFFFF;
+    opacity: 0.4;
+}
+
+.description-rich-new-msg-area-layout-line-txt2 {
+    font-size: 3.33vw;
+    font-family: PingFang SC;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 0.8;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 60vw;
+}
+
+.description-rich-new-msg-area-layout-line-line {
+    width: 79.03vw;
+    height: 0.14vw;
+    background: #FFFFFF;
+    border: 0px solid #FFFFFF;
+    opacity: 0.2;
+    margin-top: 4.58vw;
+}
+
 .description {
     width: 87.5vw;
     background: #2A2A2A;
@@ -177,6 +225,7 @@
     position: fixed;
     z-index: 2;
     bottom: 0vw;
+    background: #353535;
 }
 
 .phone-blind-bottom-background {
@@ -252,7 +301,7 @@
 }
 
 .pay-button-maiwanle {
-    background-color:#5D5D5D;
+    background-color: #5D5D5D;
     width: 27.78vw;
     height: 8.33vw;
     display: inline-block;
@@ -272,6 +321,7 @@
     color: #FFFFFF;
     opacity: 0.3;
 }
+
 .pay-button-haimeimai-time {
     font-size: 2.33vw;
     font-family: PingFang SC;
@@ -281,7 +331,7 @@
 }
 
 .pay-button-haimeimai-layout {
-    background-color:#5D5D5D;
+    background-color: #5D5D5D;
     width: 27.78vw;
     height: 8.33vw;
     border-radius: 4vw 4vw 4vw 4vw;

@@ -1,7 +1,7 @@
 import * as THREE from '../api/three/three.min'
-import { OrbitControls } from '../api/three/jsm/controls/OrbitControls'
+import {OrbitControlsOld} from '../api/three/jsm/controls/OrbitControlsOld'
 
-const { windowWidth, windowHeight, pixelRatio, } = wx.getSystemInfoSync();
+const {windowWidth, windowHeight, pixelRatio,} = wx.getSystemInfoSync();
 let canvas, scene, renderer, camera, controls;
 
 export default (_canvas) => {
@@ -49,8 +49,8 @@ export default (_canvas) => {
             1000
         );
         camera.up.set(0, 1, 0); // 设置相机对象的上方向是哪个轴
-        camera.position.set(100,100,100);
-        camera.lookAt(0,0,0);
+        camera.position.set(100, 100, 100);
+        camera.lookAt(0, 0, 0);
     }
 
     /**
@@ -64,7 +64,7 @@ export default (_canvas) => {
      * 渲染控制器
      */
     function initControl() {
-        controls = new OrbitControls(camera, renderer.domElement);
+        controls = new OrbitControlsOld(camera, renderer.domElement);
         //是否可以缩放
         controls.enableZoom = true;
         controls.addEventListener('change', render);
@@ -73,7 +73,8 @@ export default (_canvas) => {
     /**
      * 初始化灯光
      */
-    function initLight() {}
+    function initLight() {
+    }
 
     /**
      * 初始化辅助坐标
@@ -81,7 +82,7 @@ export default (_canvas) => {
     function initaxesHelper() {
         //辅助线 红色x轴 蓝色z轴 绿色y轴
         const axesHelper = new THREE.AxesHelper(100);
-        scene.add( axesHelper );
+        scene.add(axesHelper);
     }
 
     /**
@@ -89,11 +90,11 @@ export default (_canvas) => {
      */
     function initGeometrys() {
         const cubeGeo = new THREE.BoxGeometry(20, 20, 20);
-        const texture = new THREE.TextureLoader(undefined, canvas).load( '../api/three/textures/crate.gif' );
-        const mat = new THREE.MeshBasicMaterial({ map: texture });
+        const texture = new THREE.TextureLoader(undefined, canvas).load('../api/three/textures/crate.gif');
+        const mat = new THREE.MeshBasicMaterial({map: texture});
         const cube = new THREE.Mesh(cubeGeo, mat);
         cube.position.set(0, 0, 0);
-        scene.add( cube );
+        scene.add(cube);
         // 异步
         setTimeout(() => {
             render()
@@ -103,12 +104,14 @@ export default (_canvas) => {
     /**
      * 设置其它参数
      */
-    function initOthers() {}
+    function initOthers() {
+    }
 
     /**
      * 设置动画
      */
-    function animation() {}
+    function animation() {
+    }
 
     /**
      * 渲染函数

@@ -19,10 +19,10 @@ Component({
             })
             this.triggerEvent('taBarIndex', index);
         },
-        choose(event:any) {
+        choose(event: any) {
             if (event == 0 || event == 3 || event == 2)
                 this.setData({choose: event})
-            ////////////////////////////console.log(event)
+            //////////////////////////////console.log(event)
         }
     }
 });
