@@ -16,6 +16,16 @@ Component({
     },
     methods: {
         async goToPay() {
+            wx.showModal(
+                {
+                    title: '提示', content: "小程序暂不支持购买，请用浏览器访问wu-jie.art", showCancel: false, success(res) {
+                        if (res.confirm) {
+                        } else if (res.cancel) {
+                        }
+                    }
+                }
+            )
+            return;
             if (this.properties.order.tradeType === "WX_NATIVE") {
                 const wxNativeCodeUrl = await request.wxNativeCodeUrl({orderId: this.properties.order.id.toString()})
                 if (wxNativeCodeUrl) {
@@ -31,7 +41,6 @@ Component({
                         prepayId: this.properties.order.tradeReturn.prepay_id.toString(),
                         target: WxJsApiTarget.MiniProgram
                     })
-                    ////////////console.log(wxJsapiPayParams)
                     const pay = await WXUtils.pay(wxJsapiPayParams);
                     await wx.hideLoading()
                     if (pay.success) {
@@ -58,7 +67,6 @@ Component({
                 url: `/pages/PhoneInfoPage?id=${this.properties.order.arts[0].id}&sid=${this.properties.order.store.id}&isFromOrder=${this.properties.isFromOrder}`
             })
         }, getOrderStatus(tradeState: string) {
-            //////////////console.log(tradeState)
             switch (tradeState) {
                 case "WAIT_FOR_PAYMENT_NOT_PAY":
                     let getColor_2996075e: any = this.data.getColor;
@@ -66,7 +74,6 @@ Component({
                     this.setData({
                         'getColor': getColor_2996075e
                     });
-                    //////////////console.log("here")
                     return "未支付";
                 case "WAIT_FOR_PAYMENT_USER_PAYING":
                     let getColor_fb249e71: any = this.data.getColor;
@@ -197,8 +204,6 @@ Component({
                     'src': ImgPathUtils.getMedia(data.arts[0].id)
                 })
             }
-            console.log(this.data.src)
-
             this.setData({
                 'date': Utils.formatDate(new Date(data.createdAt), "yyyy-MM-dd HH:mm:ss")
             })

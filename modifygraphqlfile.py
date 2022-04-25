@@ -1,5 +1,5 @@
 print("aa")
-filename = "./miniprogram/api/gql/graphql.ts"
+filename = "./miniprogram/api/net/gql/graphql.ts"
 with open(filename, encoding='utf-8', mode = 'r') as f:
     lines = f.readlines()
     print(lines)

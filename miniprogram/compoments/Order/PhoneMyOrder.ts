@@ -7,6 +7,7 @@ import {Utils} from "../../api/utils/Utils";
 const ARRAY: any = [];
 let nowIndex = 0;
 let _total = 0;
+let _loading = false;
 
 Component({
     data: {
@@ -14,14 +15,13 @@ Component({
         footStyle: "",
     }, methods: {
         async initFooter() {
-            // //console.log(this.data.footStyle)
             this.setData({
                 footStyle: `height: ${Utils.getBottomSafeAreaPxHeight() + 80}px;`
             })
-            // //console.log(this.data.footStyle)
         },
         async bindDownLoad() {
-            //////////////////////console.log("bindDownLoad")
+            if (_loading)
+                return;
             nowIndex++;
             this.init();
         }, async init() {
@@ -40,34 +40,25 @@ Component({
             } else if (this.properties.orderFilter === 'REFUND') {
                 _filter = OrderFilter.Refund
             }
-            //////////////////////console.log("text")
             let queryRootOrdersArgs: any = {
                 pageIndex: nowIndex, pageSize: 4
             }
-            //////////////////////console.log("text")
             if (this.properties.orderFilter && this.properties.orderFilter != "") {
                 queryRootOrdersArgs['filter'] = _filter
             }
-            //////////////////////console.log("text")
             wx.showLoading({title: "加载中..."})
-            //////////////////////console.log("text")
+            _loading = true;
             const ordersResult = await request.orders(queryRootOrdersArgs, true);
-            //console.log(ordersResult)
-
             _total = ordersResult.total;
-            //////////////////////console.log("text", ordersResult)
+            _loading = false;
             wx.hideLoading()
-            //////////////////////console.log("text", ordersResult)
             if (ordersResult == null) return;
-            //////////////////////console.log(ordersResult.list.length)
-            //////////////////////console.log(this.data.order)
             for (let i = 0; i < ordersResult.list.length; i++) {
                 const orderT = this.data.order;
                 orderT.push(ordersResult.list[i]);
                 this.setData({
                     order: orderT
                 })
-                //////////////////////console.log(this.data.order)
                 await new Promise(r => setTimeout(r, 200));
             }
 
@@ -79,6 +70,7 @@ Component({
         this.initFooter();
         _total = 0;
         nowIndex = 0;
+        _loading = false;
         this.setData({
             order: []
         })

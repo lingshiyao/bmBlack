@@ -25,7 +25,6 @@ Page({
         const res2 = await ModalCache.getRes("https://cdn.zhisonggang.com/threejs/examples/models/obj/cerberus/Cerberus_A.jpg");
         const res3 = await ModalCache.getRes("https://cdn.zhisonggang.com/threejs/examples/models/obj/cerberus/Cerberus_RM.jpg");
         const res4 = await ModalCache.getRes("https://cdn.zhisonggang.com/threejs/examples/models/obj/cerberus/Cerberus_N.jpg");
-        //////console.log(res1, res2, res3, res4)
 
         //获取页面上的标签id为webgl的对象，从而获取到canvas对象
         const query = wx.createSelectorQuery();

@@ -10,10 +10,6 @@ export class DownloadTask {
         setTimeout(() => {
             DownloadTask.loop();
             DownloadTask.run();
-            // //console.log("optionMap:", DownloadTask.optionMap.size,
-            //     "taskMap:", DownloadTask.taskMap.size,
-            //     "runningOptionMap:", DownloadTask.runningOptionMap.size,
-            //     DownloadTask.taskMap)
         }, 1000);
     }
 
@@ -29,14 +25,12 @@ export class DownloadTask {
             url: path,
             async success(downloadFile: any) {
                 if (downloadFile == null) {
-                    ////console.log("--------------------------------downloadFile == null")
                     DownloadTask.runningOptionMap.delete(path);
                     DownloadTask.optionMap.delete(path);
                     DownloadTask.taskMap.delete(path);
                     return;
                 }
                 if (downloadFile.statusCode != 200) {
-                    ////console.log("--------------------------------downloadFile.statusCode != 200")
                     DownloadTask.runningOptionMap.delete(path);
                     DownloadTask.optionMap.delete(path);
                     DownloadTask.taskMap.delete(path);
@@ -48,7 +42,6 @@ export class DownloadTask {
                     tempFilePath: downloadFile.tempFilePath
                 });
                 if (saveFile == null) {
-                    ////console.log("--------------------------------saveFile == null")
                     await wx.clearStorage();
                     await WXUtils.removeAllSaveFile();
                     DownloadTask.runningOptionMap.delete(path);
@@ -62,19 +55,16 @@ export class DownloadTask {
                     key: path, data: saveFile.savedFilePath,
                 });
                 if (setStorage == null) {
-                    ////console.log("--------------------------------setStorage == null")
                     DownloadTask.runningOptionMap.delete(path);
                     DownloadTask.optionMap.delete(path);
                     DownloadTask.taskMap.delete(path);
                     return;
                 }
-                ////console.log("success:", saveFile.savedFilePath);
                 DownloadTask.runningOptionMap.delete(path);
                 DownloadTask.optionMap.delete(path);
                 DownloadTask.taskMap.delete(path);
             },
-            fail(res: any) {
-                ////console.log(res)
+            fail() {
                 DownloadTask.runningOptionMap.delete(path);
                 DownloadTask.optionMap.delete(path);
                 DownloadTask.taskMap.delete(path);
@@ -85,7 +75,6 @@ export class DownloadTask {
 
     public static addTask(option: any) {
         const _option = DownloadTask.optionMap.get(option.url);
-        ////console.log("_option:", _option)
         if (!_option) {
             DownloadTask.optionMap.set(option.url, option);
         }
@@ -112,7 +101,6 @@ export class DownloadTask {
         }
         for (let i = 0; i < allKey.length; i++) {
             DownloadTask.taskMap.get(allKey[i]).abort();
-            ////console.log("----------stop:", allKey[i])
             DownloadTask.taskMap.delete(allKey[i]);
             const options = DownloadTask.runningOptionMap.get(allKey[i]);
             DownloadTask.optionMap.set(options.url, options);

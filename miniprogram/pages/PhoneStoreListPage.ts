@@ -4,8 +4,8 @@ import {MyCollectionsItemEntity} from "../api/entity/My/MyCollectionsItemEntity"
 import {WXUtils} from "../api/utils/WXUtils";
 import {Utils} from "../api/utils/Utils";
 
-const ARRAY: any = null;
 let _pageIndex = 0;
+let _loading = false;
 const NULL: any = null;
 
 Page({
@@ -17,6 +17,8 @@ Page({
         options: NULL
     },
     async bindDownLoad() {
+        if (_loading)
+            return;
         _pageIndex++;
         this.createdExploreData(this.data.options.id);
     },
@@ -28,6 +30,7 @@ Page({
     },
     onLoad: function (options) {
         _pageIndex = 0
+        _loading = false;
         this.setData({
             exploreItemData: []
         })
@@ -76,12 +79,14 @@ Page({
     async createdExploreData(id: string) {
         ///// 获取 user
         wx.showLoading({title: "加载中..."})
+        _loading = true;
         const stores = await request.stores({
             pageIndex: _pageIndex,
             cateId: id,
             includeHidden: true,
             pageSize: 6
         }, true)
+        _loading = false;
         wx.hideLoading();
         if (stores) {
             for (const key in stores.list) {
@@ -105,13 +110,11 @@ Page({
                         exploreItemData: exploreItemDataT
                     })
                     await Utils.sleep(200);
-                    ////////////////////console.log(this.data.exploreItemData)
                 }
             }
         }
     }, goToStore(event: any) {
         const index = parseInt(event.currentTarget.dataset.index.toString());
-        ////////////////////////////////console.log(index);
         wx.navigateTo({
             url: `/pages/PhoneStorePage?id=${this.data.exploreItemData[index].id}`,
         })

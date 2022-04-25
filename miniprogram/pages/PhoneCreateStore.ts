@@ -31,10 +31,8 @@ Page({
         wx.showActionSheet({
             itemList: ['艺术品', '头像', '音乐', '体育', '交易卡', '元宇宙'],
             success: function (res) {
-                // ////////////////////////////////console.log(res.tapIndex)
             },
             fail: function (res) {
-                // ////////////////////////////////console.log(res.errMsg)
             }
         })
     }

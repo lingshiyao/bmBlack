@@ -3,7 +3,6 @@ import {OBJLoader} from '../api/three/jsm/loaders/OBJLoader.js';
 // import {OrbitControls} from '../api/three/jsm/controls/OrbitControls'
 import {OrbitControlsOld} from "../api/three/jsm/controls/OrbitControlsOld";
 
-//console.log(OBJLoader)
 
 const {windowWidth, windowHeight, pixelRatio,} = wx.getSystemInfoSync();
 let canvas, scene, renderer, camera, controls;
@@ -81,7 +80,6 @@ export default (_canvas) => {
         const material = new THREE.MeshStandardMaterial();
         new OBJLoader()
             .load("https://cdn.jsdelivr.net/gh/lingshiyao/shutulian/1511/1511.obj", (group) => {
-                ////console.log("load success")
                 const textureLoader = new THREE.TextureLoader(undefined, canvas)
                 material.roughness = 1;
                 material.metalness = 1;

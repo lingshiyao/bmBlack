@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "PhoneExploreItem": "/compoments/Explore/PhoneExploreItem",
+    "PhoneNothing": "/compoments/Global/PhoneNothing"
+  }
+}

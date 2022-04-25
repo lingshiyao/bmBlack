@@ -73,7 +73,6 @@ export default (_canvas, id, width, height, func) => {
             jpgCachePath = jpgPath
         const mtlCachePath = await ModalCache.getPath(mtlPath);
         const objCachePath = await ModalCache.getPath(objPath);
-        console.log(jpgCachePath, mtlCachePath, objCachePath)
         const onMTLLoad = async (material) => {
             material.preload();
             const onObjLoad = (object) => {
@@ -115,7 +114,6 @@ export default (_canvas, id, width, height, func) => {
     function render() {
         renderer.render(scene, camera)
         controls.update()
-        // //////console.log("render")
         canvas.requestAnimationFrame(() => {
             render()
         });

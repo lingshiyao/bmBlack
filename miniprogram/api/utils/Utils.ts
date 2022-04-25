@@ -5,7 +5,6 @@ export class Utils {
     }
 
     public static getBottomSafeAreaRpxHeight(): number {
-        // ////////////////////////////////console.log(JSON.stringify(wx.getSystemInfoSync()));
         return (wx.getSystemInfoSync().safeArea.bottom - wx.getSystemInfoSync().safeArea.height) / wx.getSystemInfoSync().windowWidth * wx.getSystemInfoSync().windowHeight;
     }
 

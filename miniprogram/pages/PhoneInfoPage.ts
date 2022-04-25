@@ -1,6 +1,5 @@
 import {request} from "../api/Api";
 import {InfoHeaderEntity} from "../api/entity/Info/InfoHeaderEntity";
-import {UserSet} from "../api/storage/UserSet";
 import {PublicUtils} from "../api/utils/PublicUtils";
 import {TradeType, WxJsApiTarget} from "../api/net/gql/graphql";
 import {ImgPathUtils} from "../api/utils/ImgPathUtils";
@@ -49,13 +48,13 @@ Page({
         address: "https://testnet.confluxscan.io/address/cfxtest:acdk7r6rzc1u9yr039mf3t1hsk1r4km4rekdzc7m4b",
         taiziUrl: PicCDNUtils.getPicUrl("pic_taizi.png", false),
         loading3d: true,
-        ipfsAddress: ""
+        ipfsAddress: "",
+        isFavStore: false
     }, async copyAddressText() {
         wx.setClipboardData({
-            data: this.data.address,
-            success: function (res) {
+            data: this.data.address, success: function () {
                 wx.getClipboardData({
-                    success: function (res) {
+                    success: function () {
                         wx.showToast({
                             title: '复制成功'
                         })
@@ -65,10 +64,9 @@ Page({
         })
     }, async copyAuthorizationText() {
         wx.setClipboardData({
-            data: this.data.art.copyrightLink,
-            success: function (res) {
+            data: this.data.art.copyrightLink, success: function () {
                 wx.getClipboardData({
-                    success: function (res) {
+                    success: function () {
                         wx.showToast({
                             title: '复制成功'
                         })
@@ -78,10 +76,9 @@ Page({
         })
     }, async copyIpfsAddressText() {
         wx.setClipboardData({
-            data: this.data.ipfsAddress,
-            success: function (res) {
+            data: this.data.ipfsAddress, success: function () {
                 wx.getClipboardData({
-                    success: function (res) {
+                    success: function () {
                         wx.showToast({
                             title: '复制成功'
                         })
@@ -89,24 +86,13 @@ Page({
                 })
             }
         })
-    },
-    async initAcc() {
-        wx.onAccelerometerChange(function (e) {
-            //console.log(e)
-        });
-    },
-
-    async init() {
+    }, async init() {
         this.initOpenId();
         weiXinPayInit();
         this.getArt();
         this.setIsFav(this.data.options.id);
-        this.initAcc()
     }, async setIsFav(artId: string) {
-        //////////////////////////console.log("setIsFav", artId)
-        const result: any = await request.favoriteExists({artId: artId}, true)
-        //////////////////////////console.log(result)
-        ////////////////////////console.log(result)
+        const result: any = await request.artFavoriteExists({artId: artId}, true)
         if (result != null) {
             if (result == true) {
                 this.setData({
@@ -118,15 +104,11 @@ Page({
                 })
             }
         }
-    },
-    gotoStore1() {
-        //////////////////////console.log(this.data.options)
+    }, gotoStore1() {
         wx.redirectTo({
             url: `/pages/PhoneStorePage?id=${this.data.options.sid}`,
         })
-    },
-    onLoad(options) {
-        ////////console.log(options)
+    }, onLoad(options) {
         const height = Utils.getBottomSafeAreaPxHeight()
         this.setData({
             marginBottomStyle: `padding-bottom:${height}px;`
@@ -134,25 +116,18 @@ Page({
         this.setData({
             'options': options
         })
-
-        //////////////////////console.log(options)
-
-        if (options.isFromOrder != undefined && options.isFromOrder != null &&
-            options.isFromOrder) {
+        if (options.isFromOrder != undefined && options.isFromOrder != null && options.isFromOrder) {
             this.setData({
                 zaimayifen: true
             })
         }
-        //////////////////////////////console.log(options)
-
-
         this.init()
     }, async initOpenId() {
         const login = await WXUtils.login();
         const wxCode = login.code.toString();
         if (wxCode) {
             const wxJsapiOpenId = await request.wxJsapiOpenId({code: wxCode, target: WxJsApiTarget.MiniProgram});
-            //////////////console.log(wxJsapiOpenId)
+            console.log(wxJsapiOpenId)
             if (wxJsapiOpenId) {
                 openId = wxJsapiOpenId.response.openid;
             } else {
@@ -162,18 +137,15 @@ Page({
             }
         }
     }, async getArt() {
-        //////////////////////////////console.log(this.data.options.id)
         const artId = this.data.options.id;
-        const user = await UserSet.getUserInfoIfFailedGoLogin();
         if (artId) {
             const art = await request.art({artId: <string>artId});
+
             console.log(art)
             if (art) {
-                //////////////console.log(art.stores[0].id)
                 this.setData({
                     guanzhuHeader: ImgPathUtils.getSIcon(art.stores[0].id)
                 })
-                //////console.log(art.kind)
                 if (art.kind == "MODEL") {
                     this.initWebGLCanvas(art.id);
                 } else {
@@ -181,6 +153,7 @@ Page({
                 this.setData({
                     art: art
                 })
+                this.guanzhuInit();
                 const arrtJson = art.attrs;
                 const attrLstT = [];
                 for (let k in arrtJson) {
@@ -191,7 +164,6 @@ Page({
                 })
 
                 if (new Date(art.stores[0].openingTime).getTime() - new Date().getTime() > 0) {
-                    // ////////////////////////////////console.log("// 即将开售")
                     this.setData({
                         theSale: Utils.formatDate(new Date(art.stores[0].openingTime), "MM-dd HH:mm")
                     })
@@ -202,25 +174,17 @@ Page({
                     })
                 } else {
                     if (art.maxSupply - art.supplied > 0) {
-                        // ////////////////////////////////console.log("// 立即购买")
                         // 立即购买
                         this.setData({
                             buyStatus: 0
                         })
                     } else {
-                        // ////////////////////////////////console.log("// 已售罄")
                         // 已售罄
                         this.setData({
                             buyStatus: 2
                         })
                     }
                 }
-
-                ////////////////////////////////console.log(new Date(art.stores[0].openingTime).getTime() - new Date().getTime());
-
-                ////////////////////////////////console.log(new Date().getTime(), Utils.formatDate(new Date(art.stores[0].openingTime), "yyyy-MM-dd HH:mm:ss"));
-
-
                 let nft_1df4a3ab: any = this.data.nft;
                 nft_1df4a3ab.infoID = art.id;
                 this.setData({
@@ -246,13 +210,6 @@ Page({
                 this.setData({
                     'nft': nft_304df291
                 });
-                // // FIXME
-                // if (!openId && Number.parseFloat(art.mintPrice) > 0 && (art.maxSupply - art.supplied > 0) && PublicUtils.isWeChat() && !<string>this.options.type) {
-                //     // const artId = art.id;
-                //     // const storeId = <string>this.options.sid;
-                //     // location.href = WeiXinApi.getAuthorizePath({artId, storeId});
-                //     return;
-                // }
                 let nft_af2bc534: any = this.data.nft;
                 nft_af2bc534.uid = art.stores[0].user.id;
                 this.setData({
@@ -291,10 +248,6 @@ Page({
                 this.setData({
                     'description': description_b030c23d
                 });
-                if (user) {
-                    // this.favExists();
-                }
-
                 this.setData({
                     ipfsAddress: `https://dweb.link/ipfs/${art.mediaIpfs}`
                 })
@@ -319,12 +272,11 @@ Page({
             }
         }
     }, async likeAction(nftId: string) {
-        const favoriteToggle = await request.favoriteToggle({artId: nftId}, true);
-        ////////////////////////////console.log(favoriteToggle)
+        const favoriteToggle = await request.artFavoriteToggle({artId: nftId}, true);
         if (favoriteToggle != null) {
             if (favoriteToggle) {
                 wx.showToast({
-                    title: '已收藏', icon: 'success', duration: 1000
+                    title: '已收藏', icon: '11', duration: 1000
                 })
                 this.setData({
                     favTxt: "取消收藏"
@@ -344,21 +296,6 @@ Page({
             });
         } else {
             WXUtils.gotoLogin();
-            // wx.reLaunch({
-            //     url: '/pages/PhoneLoginNew',
-            // })
-            // PublicUtils.navigationBar.showLoginAction();
-        }
-    }, async favExists() {
-        const favoriteExists = await request.favoriteExists({artId: this.data.nft.infoID}, true);
-        if (favoriteExists) {
-            let nft_794bb59b: any = this.data.nft;
-            nft_794bb59b.isLike = favoriteExists;
-            this.setData({
-                'nft': nft_794bb59b
-            });
-        } else {
-            PublicUtils.navigationBar.showLoginAction();
         }
     }, btnAction(type: number) {
         switch (type) {
@@ -372,14 +309,17 @@ Page({
                 break;
         }
     }, async mintArts() {
-        // wx.reLaunch({
-        //     url: '/pages/PhoneApp?index=3',
-        // });
-        // return;
-        // if (await StorageUtils.getStorage(AppConstant.TOKEN) == null) {
-        //     WXUtils.gotoLogin();
-        //     return;
-        // }
+        wx.showModal(
+            {
+                title: '提示', content: "小程序暂不支持购买，请用浏览器访问wu-jie.art", showCancel: false, success(res) {
+                    if (res.confirm) {
+                    } else if (res.cancel) {
+                    }
+                }
+            }
+        )
+        return;
+
         const artId = this.data.nft.infoID;
         const storeId = <string>this.options.sid;
         var openID = openId;
@@ -395,13 +335,8 @@ Page({
         // }
         payType = TradeType.WxMiniProgram;
         const mint = await request.mint({
-            artId: artId,
-            openId: <string>openID,
-            storeId: storeId,
-            tradeType: payType
+            artId: artId, openId: <string>openID, storeId: storeId, tradeType: payType
         }, true)
-        //////////////////////////////console.log(mint)
-        ////////////////////////console.log(mint)
         if (mint && typeof mint === 'string') {
             wx.showModal({
                 title: '提示', content: mint, showCancel: false, success(res) {
@@ -430,10 +365,8 @@ Page({
                     return;
                 }
                 const wxJsapiPayParams = await request.wxJsapiPayParams({
-                    target: WxJsApiTarget.MiniProgram,
-                    prepayId: mint.tradeReturn.prepay_id
+                    target: WxJsApiTarget.MiniProgram, prepayId: mint.tradeReturn.prepay_id
                 });
-                ////////////console.log(wxJsapiPayParams)
                 const pay = await WXUtils.pay(wxJsapiPayParams);
                 if (pay.success) {
                     wx.showToast({
@@ -443,7 +376,6 @@ Page({
                         url: '/pages/PhoneApp?index=3',
                     });
                 } else {
-                    //////////////////////console.log(pay)
                     await wx.showModal({
                         title: '提示', content: `支付失败：${JSON.stringify(pay.res.errMsg)}`, showCancel: false
                     })
@@ -503,20 +435,31 @@ Page({
                 break;
         }
     }, setFav() {
-        ////////////////////////////console.log("setFav")
         this.likeAction(<string>this.options.id);
     }, goToStore() {
         wx.navigateTo({
             url: `/pages/PhoneStorePage?id=${this.data.nft.storeid}`,
         });
-    }, guanzhu() {
-        wx.showModal({
-            title: '提示', content: '功能建设中，敬请期待', showCancel: false, success(res) {
-                if (res.confirm) {
-                } else if (res.cancel) {
-                }
-            }
+    }, async guanzhuInit() {
+        const storeFavoriteExists = await request.storeFavoriteExists({storeId: this.data.art.stores[0].id}, true)
+        this.setData({
+            isFavStore: storeFavoriteExists
         })
+    }, async guanzhu() {
+        const storeFavoriteToggle = await request.storeFavoriteToggle({storeId: this.data.art.stores[0].id}, true)
+        this.setData({
+            isFavStore: storeFavoriteToggle
+        })
+        if (storeFavoriteToggle) {
+            wx.showToast({
+                title: '关注店铺', icon: 'success',
+            })
+        } else {
+            wx.showToast({
+                title: '取消关注', icon: 'success',
+            })
+        }
+        console.log(storeFavoriteToggle);
     }, async initWebGLCanvas(id: string) {
         const that = this;
         const swidth = WXUtils.getScreenWidth()
@@ -526,14 +469,14 @@ Page({
             const query = wx.createSelectorQuery().in(this);
             const node = query.select('#webgl').node();
             if (node != null) {
-                const res = await new Promise(resolve => {
+                const res: any = await new Promise(resolve => {
                     node.exec((res) => {
                         resolve(res)
                     })
                 })
                 if (res != null && res[0]) {
                     const canvas = res[0].node;
-                    useThree(canvas, id, width, height, ()=>{
+                    useThree(canvas, id, width, height, () => {
                         that.setData({
                             loading3d: false
                         })

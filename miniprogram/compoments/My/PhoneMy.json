@@ -10,6 +10,7 @@
     "LoadingImg": "/compoments/Global/LoadingImg",
     "PhoneSettingTitle": "/compoments/Global/PhoneSettingTitle",
     "LoadingImg": "/compoments/Global/LoadingImg",
-    "LoadingImg": "/compoments/Global/LoadingImg"
+    "LoadingImg": "/compoments/Global/LoadingImg",
+    "PhoneMyFavStore": "/compoments/My/PhoneMyFavStore"
   }
 }

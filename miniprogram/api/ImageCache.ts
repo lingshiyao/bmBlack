@@ -71,10 +71,8 @@ export class ImageCache {
                     key: `${path}###Time__==`, data: new Date().getTime(),
                 });
                 if (setStorage1 == null) return;
-                ////console.log("success:", saveFile.savedFilePath);
-                // return saveFile.savedFilePath;
             },
-            fail(res: any) {
+            fail() {
                 return
             }
         }
@@ -86,7 +84,6 @@ export class ImageCache {
         const downloadFile: any = await WXUtils.downloadFile({
             url: path
         });
-        //console.log(downloadFile)
         if (downloadFile == null) return null;
         if (downloadFile.statusCode != 200) return null;
 

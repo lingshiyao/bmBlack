@@ -123,6 +123,6 @@ const main = async () => {
 
     code += `}`;
 
-    await write("./miniprogram/api/gql/RequestG.ts", code);
+    await write("./miniprogram/api/net/gql/RequestG.ts", code);
 }
 main();

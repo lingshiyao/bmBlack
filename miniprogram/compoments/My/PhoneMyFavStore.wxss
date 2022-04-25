@@ -1,0 +1,8 @@
+@import '/common/animate.wxss';
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 45.83vw);
+    grid-column-gap: 2.27vw;
+    grid-row-gap: 2.67vw;
+}

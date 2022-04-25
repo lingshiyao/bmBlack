@@ -1,4 +1,4 @@
-import {UserDetail} from "../api/net/gql/graphql";
+import {User} from "../api/net/gql/graphql";
 import {ImgPathUtils} from "../api/utils/ImgPathUtils";
 import {PicCDNUtils} from "../api/net/PicCDNUtils";
 import {UserSet} from "../api/storage/UserSet";
@@ -14,10 +14,9 @@ const NULL: any = null;
 Page({
     async copyAddressText() {
         wx.setClipboardData({
-            data: this.data.userDetail.userExt.address,
-            success: function (res) {
+            data: this.data.userDetail.userExt.address, success: function () {
                 wx.getClipboardData({
-                    success: function (res) {
+                    success: function () {
                         wx.showToast({
                             title: '复制成功'
                         })
@@ -25,8 +24,7 @@ Page({
                 })
             }
         })
-    },
-    data: {
+    }, data: {
         defaultUrl: PicCDNUtils.getPicUrl("pic_user.png"),
         rightArrowUrl: PicCDNUtils.getPicUrl("pic_arrow.png"),
         phoneModalInput: NULL,
@@ -34,19 +32,16 @@ Page({
         phoneModalTips: NULL,
         userDetail: NULL,
         footStyle: "",
-    },
-    async initFooter() {
+    }, async initFooter() {
         this.setData({
             footStyle: `margin-bottom: ${Utils.getBottomSafeAreaPxHeight()}px;`
         })
-    },
-    async initTitle() {
+    }, async initTitle() {
         const rect = await WXUtils.getRect2("#phone-title", this);
         this.setData({
             scrollStyle: `height:${WXUtils.getScreenHeight() - WXUtils.getStatusBarHeight() - rect[0].height}px`
         })
-    },
-    onLoad() {
+    }, onLoad() {
         this.setData({
             phoneModalInput: this.selectComponent("#phoneModalInput"),
         })
@@ -54,7 +49,7 @@ Page({
         this.initTitle();
         this.initFooter();
     }, async init() {
-        const userDetail: UserDetail | null = await UserSet.getUserInfoIfFailedGoLogin();
+        const userDetail: User | null = await UserSet.getUserInfoIfFailedGoLogin();
         if (userDetail != null) {
             this.setData({
                 'userDetail': userDetail
@@ -63,15 +58,14 @@ Page({
                 'defaultUrl': ImgPathUtils.getUserFace(userDetail.id)
             })
         }
-    }, observers: {},
-    chooseImg: async function () {
+    }, observers: {}, chooseImg: async function () {
         await wx.showLoading({title: "加载中..."})
         const image = await WXUtils.chooseImage();
         if (image) {
             const tempFilePaths = image.tempFilePaths[0];
-            const nickname: string = this.data.userDetail.userExt.nickname == undefined ? "" : this.data.userDetail.userExt.nickname;
-            const intro: string = this.data.userDetail.userExt.intro == undefined ? "" : this.data.userDetail.userExt.intro;
-            const email: string = this.data.userDetail.userExt.email == undefined ? "" : this.data.userDetail.userExt.email;
+            const nickname: string = this.data.userDetail.ext.nickname == undefined ? "" : this.data.userDetail.ext.nickname;
+            const intro: string = this.data.userDetail.ext.intro == undefined ? "" : this.data.userDetail.ext.intro;
+            const email: string = this.data.userDetail.ext.email == undefined ? "" : this.data.userDetail.ext.email;
             const userUpdate = await request._userUpdate({
                 email: email, intro: intro, nickname: nickname, face: null
             }, tempFilePaths, true);
@@ -96,18 +90,13 @@ Page({
         }
     }, back() {
         wx.navigateBack({});
-    }, logout() {
-        // UserSet.cleanUserSet();
-        // wx.reLaunch({
-        //     url: '/pages/PhoneApp',
-        // })
     }, async changUserInfo() {
         if (!this.data.userDetail) return;
         const userInfos: Array<string> | null = await this.data.phoneModalInput.show({
             inputPlaceholder: ["昵称", "个性签名", "Email"],
             submitContent: "确定",
             title: "修改用户信息",
-            defaultValue: [this.data.userDetail.userExt.nickname, this.data.userDetail.userExt.intro, this.data.userDetail.userExt.email],
+            defaultValue: [this.data.userDetail.ext.nickname, this.data.userDetail.ext.intro, this.data.userDetail.ext.email],
             isPwd: [false, false, false]
         });
         if (userInfos === null) return;
@@ -117,7 +106,6 @@ Page({
         let email: string = userInfos[2] == null ? "" : userInfos[2];
 
         const userUpdateResult = await request.userUpdate({email: email, intro: intro, nickname: nickname}, true)
-        //////////////console.log(userUpdateResult)
         if (userUpdateResult == null) {
             wx.hideLoading({});
             wx.showModal({
@@ -128,10 +116,8 @@ Page({
                 }
             })
         } else {
-            const user = await StorageUtils.getStorage(AppConstant.USER);
-            const userDetail = await request.user({userId: user.id})
-            //////////////console.log(userDetail)
-            // UserSet.setUserInfo(userDetail);
+            const user: User = await StorageUtils.getStorage(AppConstant.USER);
+            const userDetail: User = await request.user({userId: user.id})
             StorageUtils.setStorage(AppConstant.USER, userDetail);
             this.setData({
                 'userDetail': userDetail
@@ -139,38 +125,6 @@ Page({
             wx.hideLoading({});
             wx.showToast({
                 title: '修改成功', icon: 'success', duration: 1500
-            })
-        }
-    }, async changePwd() {
-        const passwords: Array<string> | null = await this.data.phoneModalInput.show({
-            inputPlaceholder: ["设置登录密码", "确认登录密码"],
-            submitContent: "确定",
-            title: "修改登录密码",
-            defaultValue: ["", ""],
-            isPwd: [true, true]
-        });
-        if (passwords === null) return;
-        await wx.showLoading({title: "加载中..."})
-        const canSubmit = (passwords: Array<string>) => {
-            return passwords[0] != "" && passwords[1] != "" && passwords[0] == passwords[1];
-        };
-        if (canSubmit(passwords)) {
-            const userUpdatePasswordResult = await request.userUpdatePassword({newPassword: passwords[0]}, true);
-            if (userUpdatePasswordResult === null) {
-                await wx.hideLoading()
-                wx.showToast({
-                    title: '出错了！', icon: 'error', duration: 2000
-                })
-            } else {
-                await wx.hideLoading()
-                wx.showToast({
-                    title: '修改成功！', icon: 'success', duration: 2000
-                })
-            }
-        } else {
-            await wx.hideLoading()
-            wx.showToast({
-                title: '密码设置错误', icon: 'error', duration: 2000
             })
         }
     }, headerLoadFail() {
@@ -194,9 +148,8 @@ Page({
         await new Promise(resolve => {
             wx.getSavedFileList({  // 获取文件列表
                 success(res) {
-                    res.fileList.forEach((val, key) => { // 遍历文件列表里的数据
+                    res.fileList.forEach((val) => { // 遍历文件列表里的数据
                         // 删除存储的垃圾数据
-                        ////console.log(val.filePath)
                         wx.removeSavedFile({
                             filePath: val.filePath
                         });

@@ -4,6 +4,7 @@ import {ImgPathUtils} from "../../api/utils/ImgPathUtils";
 import {UserSet} from "../../api/storage/UserSet";
 import {PublicUtils} from "../../api/utils/PublicUtils";
 import {WXUtils} from "../../api/utils/WXUtils";
+import {User} from "../../api/net/gql/graphql";
 
 const NULL: any = null;
 
@@ -22,7 +23,6 @@ Component({
         headerHeight: 0
     }, methods: {
         chooseOrder() {
-            ////////////////////console.log("chooseCollected")
             let selectedTmp = [false, false, false, false];
             selectedTmp[0] = true;
             this.setData({
@@ -30,7 +30,6 @@ Component({
             });
         },
         chooseCollected() {
-            ////////////////////console.log("chooseCollected")
             let selectedTmp = [false, false, false, false];
             selectedTmp[1] = true;
             this.setData({
@@ -58,7 +57,6 @@ Component({
         }, clickCallBack(event: any) {
             const detail: any = event.detail;
             const index: number = parseInt(detail.index.toString());
-            //console.log(index)
             switch (index) {
                 case 0:
                     let filter_ec2e808a: any = this.data.filter;
@@ -112,8 +110,7 @@ Component({
                 'headerUrl': headerUrl_96da8c3d
             });
         }, async init() {
-            const userInfo = await UserSet.getUserInfoIfFailedGoLogin();
-            ////////////console.log(userInfo)
+            const userInfo: User | null = await UserSet.getUserInfoIfFailedGoLogin();
             let selectBoxData_0a20b37c: any = this.data.selectBoxData;
             selectBoxData_0a20b37c.menu = ["全部", "待付款", "待确认", "已成功", "已关闭", "退款订单"];
             this.setData({
@@ -126,20 +123,19 @@ Component({
                     'headerUrl': headerUrl_70e5435a
                 });
                 let userName_69cadb77: any = this.data.userName;
-                userName_69cadb77 = userInfo.userExt.nickname;
+                userName_69cadb77 = userInfo.ext.nickname;
                 this.setData({
                     'userName': userName_69cadb77
                 });
 
                 this.setData({
-                    userId: userInfo.user.id
+                    userId: userInfo.id
                 })
             }
             const rect = await WXUtils.getRect2('#header-base-id', this);
             this.setData({
                 headerHeight: rect[0].height
             })
-            // //////////////////////console.log(rect[0].height)
         }, headerLoadFail() {
             this.setData({
                 headerUrl: PicCDNUtils.getPicUrl("pic_user.png")

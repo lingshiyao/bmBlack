@@ -1,12 +1,5 @@
 import {PicCDNUtils} from "../api/net/PicCDNUtils";
-import {
-    SigninSmsInput,
-    SigninWxInput,
-    SmsValidInput,
-    UserDetail,
-    ValidAction,
-    WxJsApiTarget
-} from "../api/net/gql/graphql";
+import {SigninSmsInput, SigninWxInput, SmsValidInput, User, ValidAction, WxJsApiTarget} from "../api/net/gql/graphql";
 import {StorageUtils} from "../api/utils/StorageUtils";
 import {AppConstant} from "../api/AppConstant";
 import {request} from "../api/Api";
@@ -65,54 +58,6 @@ Page({
         }
     },
 
-    async register() {
-        const passwords: any = await this.data.phoneModalInput.show({
-            inputPlaceholder: ["账号", "密码", "确认密码"],
-            submitContent: "确定",
-            title: "注册",
-            defaultValue: ["", "", ""],
-            isPwd: [false, true, true]
-        });
-        if (passwords === null) return;
-        await wx.showLoading({title: "加载中..."})
-        const canSubmit = (passwords: Array<string>) => {
-            return passwords[1] != "" && passwords[2] != "" && passwords[1] == passwords[2] && passwords[0] != "";
-        }
-        if (canSubmit(passwords)) {
-            const signup = await request.signup({
-                input: {
-                    username: passwords[0], password: passwords[1]
-                }
-            })
-            if (signup == null) {
-                await wx.hideLoading()
-                wx.showModal({
-                    title: '错误', content: 'signup fail', showCancel: false, success(res) {
-                        if (res.confirm) {
-                        } else if (res.cancel) {
-                        }
-                    }
-                })
-            } else {
-                await wx.hideLoading()
-                await wx.showModal({
-                    title: '提示', content: '注册成功', showCancel: false
-                })
-                // 自动登录
-                this.setData({
-                    name: passwords[0],
-                    pwd: passwords[1]
-                })
-                this.clickLogin();
-            }
-        } else {
-            await wx.hideLoading()
-            await wx.showModal({
-                title: '提示', content: '账号密码设置错误', showCancel: false
-            })
-        }
-    },
-
     whenInput(): void {
         if (this.data.name != "" && this.data.yanzhengmaStatus != 2) {
             this.setData({
@@ -140,10 +85,8 @@ Page({
         const input: SmsValidInput = {action: ValidAction.Signin, phoneNumber: this.data.name}
         const res = await request.smsRequestVerificationCode({input: input});
         const that = this;
-        //////////////console.log(res)
         if (res != null && res == true) {
             let timeleft = 60;
-            //////////////console.log("here")
             this.setData({
                 yanzhengmaStatus: 2
             })
@@ -176,18 +119,12 @@ Page({
         }
     },
 
-    async getPhoneNumber(e) {
-        ////////////////console.log(e.detail.code)
-    },
-
     async clickLogin() {
-        //////////////console.log(this.data.loginStatus)
         if (this.data.loginStatus == 0) {
             const input: SigninSmsInput = {phoneNumber: this.data.name, verificationCode: this.data.pwd};
             const res = await request.signinSms({input: input});
-            //////////////console.log(res)
             if (res != null) {
-                let userDetail: UserDetail = await request.user({userId: res.id})
+                let userDetail: User = await request.user({userId: res.id})
                 if (userDetail == null) {
                     await wx.showModal({
                         title: '提示', content: '获取用户信息出错，请联系管理员！', showCancel: false
@@ -203,10 +140,8 @@ Page({
         } else {
             const login = await WXUtils.login();
             const wxCode = login.code.toString();
-            //////////////console.log(wxCode)
             if (wxCode) {
                 const wxJsapiOpenId = await request.wxJsapiOpenId({code: wxCode, target: WxJsApiTarget.MiniProgram});
-                //////////////console.log(wxJsapiOpenId)
                 if (wxJsapiOpenId && wxJsapiOpenId.response.openid) {
                     const input: SigninWxInput = {
                         openId: wxJsapiOpenId.response.openid,
@@ -214,9 +149,8 @@ Page({
                         verificationCode: this.data.pwd
                     };
                     const res = await request.signinWx({input: input});
-                    //////////////console.log(res);
                     if (res != null) {
-                        let userDetail: UserDetail = await request.user({userId: res.id})
+                        let userDetail: User = await request.user({userId: res.id})
                         if (userDetail == null) {
                             await wx.showModal({
                                 title: '提示', content: '获取用户信息出错，请联系管理员！', showCancel: false
@@ -227,6 +161,10 @@ Page({
                         StorageUtils.setStorage(AppConstant.USER, userDetail);
                         await wx.reLaunch({
                             url: '/pages/PhoneApp',
+                        })
+                    } else {
+                        await wx.showModal({
+                            title: '提示', content: '验证码错误，请确认验证码正确', showCancel: false
                         })
                     }
                 }

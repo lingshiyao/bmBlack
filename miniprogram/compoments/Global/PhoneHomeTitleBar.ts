@@ -43,6 +43,5 @@ Component({
         this.setData({
             'marginTop': "padding-top:" + Utils.getSafestatusBarHeight() + "px"
         })
-        // ////////////////////////////////console.log(wx.getSystemInfoSync())
     }
 });

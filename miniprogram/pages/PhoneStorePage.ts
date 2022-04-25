@@ -14,7 +14,7 @@ const NULL: any = null;
 
 let _pageIndex = 0;
 let _total = 0;
-let _searchKey = ""
+let _searchKey = "";
 
 Page({
     data: {
@@ -30,7 +30,6 @@ Page({
         store: NULL
     },
     async bindDownLoad() {
-        console.log("bindDownLoad")
         await this.getStoreArts(_searchKey)
     },
     async initOpenId() {
@@ -65,32 +64,28 @@ Page({
                 url: `${l_path}`,
             })
         }
-    }, getPage(index: string) {
-        this.getStoreArts(_searchKey);
     }, async getStoreInfo() {
         const storeId = this.data.options.id;
         const store = await request.store({storeId: <string>storeId});
-        console.log("store", store)
         if (store) {
             this.setData({
                 store: store
             })
-            //////////////////////console.log(store)
             const bannerDataT = this.data.bannerData;
             // bannerDataT.introduction = store.description;
             bannerDataT.introduction = store.descriptionEx;
             bannerDataT.projectName = store.name;
-            bannerDataT.projectAuthor = store.user.user.username;
+            bannerDataT.projectAuthor = store.user.base.phoneNumber;
             bannerDataT.projectTime = store.updatedAt.toString();
-            bannerDataT.uid = store.user.user.id;
+            bannerDataT.uid = store.user.id;
             bannerDataT.storeId = store.id;
             bannerDataT.url = store.externalLink;
             bannerDataT.isBlind = store.isBlind;
             bannerDataT.headerImg = ImgPathUtils.getSIcon(store.id);
             bannerDataT.banner = ImgPathUtils.getSBanner(store.id);
-            if (store.user.userExt.intro)
-                bannerDataT.userExtIntro = store.user.userExt.intro;
-            if (store.user.userExt.nickname)
+            if (store.user.ext.intro)
+                bannerDataT.userExtIntro = store.user.ext.intro;
+            if (store.user.ext.nickname)
                 bannerDataT.userExtNickName = store.description;
             this.setData({
                 bannerData: bannerDataT
@@ -103,7 +98,6 @@ Page({
             wx.showToast({
                 title: '出错了', icon: 'error', duration: 2000
             })
-            // PublicUtils.alertView.showAlertView(res.error);
         }
     }, async getStoreStat() {
         const storeId = this.data.options.id;
@@ -131,7 +125,6 @@ Page({
             });
         }
     }, getStoreArts: async function (key: string) {
-        ////////////////////////////////console.log("getStoreArts")
         if (_total != 0 && this.data.collectData.length == _total) return;
         const storeId = this.data.options.id;
         var ascByPrice = false;
@@ -151,7 +144,6 @@ Page({
             pageSize: 8,
             storeId: storeId,
         })
-        console.log(arts)
         wx.hideLoading();
         _total = arts.total;
         if (arts) {
@@ -176,28 +168,17 @@ Page({
                     val.headerImg = ImgPathUtils.getMedia(arts.list[index].id);
                 }
                 val.kind = arts.list[index].kind;
-                ////////////////////////////////console.log(val.price)
                 collectDataT.push(val);
 
                 if (arts.list[index].kind == "MODEL") {
-                    ////////////console.log(arts.list[index].kind)
-                    ////////////console.log(ImgPathUtils.getMedia(arts.list[index].id))
-                    ////////////console.log(ImgPathUtils.getObj(arts.list[index].id))
-                    ////////////console.log(ImgPathUtils.getMtl(arts.list[index].id))
-                    ////////////console.log(ImgPathUtils.getJpg(arts.list[index].id))
                 }
-
-                // if (index === 0) {
                 this.setData({
                     'num': 1
                 });
-                // }
             }
             this.setData({
                 'collectData': collectDataT
             });
-            ////////////////////////////////console.log(this.data.collectData)
-            ////////////////////////////////console.log(arts)
             let total_6b082abf: any = this.data.total;
             total_6b082abf = arts.total;
             this.setData({
@@ -223,23 +204,26 @@ Page({
         this.goToPage("pages/PhoneInfoPage", this.data.collectData[index].id, <string>this.data.options.id);
     }, getNumber(event: any) {
         const n = parseInt(event.detail.toString());
-        // let num_976bd9db: any = this.data.num;
-        // num_976bd9db = Math.floor(parseFloat(this.data.collectData[0].price) * n * 100) / 100;
         this.setData({
             'num': n
         });
         this.setData({
-            'price': this.data.collectData[0].price
+            price: this.data.collectData[0].price
         })
     }, getBlind(event: any) {
+        wx.showModal(
+            {
+                title: '提示', content: "小程序暂不支持购买，请用浏览器访问wu-jie.art", showCancel: false, success(res) {
+                    if (res.confirm) {
+                    } else if (res.cancel) {
+                    }
+                }
+            }
+        )
+        return;
         const num: number = parseInt(event.detail.toString());
-        ////////////////////////////////console.log(num);
         this.mintArts(num);
     }, async mintArts(num: number) {
-        // if (await StorageUtils.getStorage(AppConstant.TOKEN) == null) {
-        //     WXUtils.gotoLogin();
-        //     return;
-        // }
         const storeId = <string>this.data.options.id;
         var openID = openId;
         if (Number.parseFloat(this.data.collectData[0].price) <= 0) {
@@ -284,7 +268,6 @@ Page({
                     target: WxJsApiTarget.MiniProgram,
                     prepayId: mintBlind.tradeReturn.prepay_id
                 });
-                ////////////console.log(wxJsapiPayParams)
                 const pay = await WXUtils.pay(wxJsapiPayParams);
                 await wx.hideLoading();
                 if (pay.success) {
@@ -299,14 +282,6 @@ Page({
                         title: '提示', content: `支付失败：${JSON.stringify(pay.res)}`, showCancel: false
                     })
                 }
-                // FIXME
-                // const wxJsapiPayParams = await request.wxJsapiPayParams({prepayId: mintBlind.tradeReturn.prepay_id});
-                // const _window: any = window;
-                // await _window.___weixinPay(wxJsapiPayParams.appId, wxJsapiPayParams.timeStamp, wxJsapiPayParams.nonceStr.toString(), wxJsapiPayParams.package, wxJsapiPayParams.signType, wxJsapiPayParams.paySign, function (r: any) {
-                //     if (r.err_msg == "get_brand_wcpay_request:ok") {
-                //         goToPage("phone/home", "3");
-                //     }
-                // });
                 await wx.hideLoading()
             }
         } else {
@@ -317,10 +292,10 @@ Page({
         }
     }, async shareAction() {
     }, async init() {
+        _total = 0;
+        _pageIndex = 0;
         await this.getStoreInfo();
         await this.getStoreStat();
-        _total = 0;
-        _pageIndex = 0
         this.setData({
             collectData: []
         })
@@ -335,7 +310,6 @@ Page({
         this.setData({
             'options': options
         })
-        //////////////////////console.log(options)
         this.init();
     }, observers: {}
 });

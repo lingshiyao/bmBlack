@@ -22,7 +22,6 @@ class MTLLoader extends Loader {
         super(manager);
         this._canvas = canvas;
         this._mapPath = mapPath;
-        //console.log(this._canvas)
     }
 
     loadLocal(url, onLoad, onProgress, onError) {
@@ -34,7 +33,6 @@ class MTLLoader extends Loader {
             success(res) {
                 onLoad(scope.parse(res.data));
             }, fail(res) {
-                //console.log(res)
             }
         })
     }
@@ -65,7 +63,6 @@ class MTLLoader extends Loader {
         loader.load(url, function (text) {
 
             try {
-                //console.log(text)
                 onLoad(scope.parse(text, path));
 
             } catch (e) {
@@ -73,11 +70,8 @@ class MTLLoader extends Loader {
                 if (onError) {
 
                     onError(e);
-
                 } else {
-
                     console.error(e);
-
                 }
 
                 scope.manager.itemError(url);
@@ -368,7 +362,6 @@ class MaterialCreator {
             if (params[mapType]) return; // Keep the first encountered texture
 
             const texParams = scope.getTextureParams(value, params);
-            //console.log(scope.baseUrl, texParams.url)
 
             let map;
             if (mapPath == "") {
@@ -429,7 +422,6 @@ class MaterialCreator {
                 case 'map_kd':
 
                     // Diffuse texture map
-                    //console.log(this._mapPath)
                     setMapForType('map', value, this._mapPath);
 
                     break;
@@ -566,8 +558,6 @@ class MaterialCreator {
     }
 
     loadTexture(url, mapping, onLoad, onProgress, onError) {
-        //console.log(url);
-        //console.log(this._canvas);
         const manager = (this.manager !== undefined) ? this.manager : DefaultLoadingManager;
         let loader = manager.getHandler(url);
 

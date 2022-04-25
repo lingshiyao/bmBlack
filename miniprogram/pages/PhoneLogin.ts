@@ -1,5 +1,5 @@
 import {PicCDNUtils} from "../api/net/PicCDNUtils";
-import {LoginInfo, UserDetail} from "../api/net/gql/graphql";
+import {LoginInfo, User} from "../api/net/gql/graphql";
 import {StorageUtils} from "../api/utils/StorageUtils";
 import {AppConstant} from "../api/AppConstant";
 import {request} from "../api/Api";
@@ -109,7 +109,7 @@ Page({
             })
             return;
         }
-        let userDetail: UserDetail = await request.user({userId: loginInfo.id})
+        let userDetail: User = await request.user({userId: loginInfo.id})
         if (userDetail == null) {
             await wx.showModal({
                 title: '提示', content: '获取用户信息出错，请联系管理员！', showCancel: false

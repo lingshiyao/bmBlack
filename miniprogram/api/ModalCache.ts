@@ -11,10 +11,8 @@ export class ModalCache {
 
     public static async getPath(path: string) {
         let cacheImagePath = await ImageCache.getImg(path);
-        console.log(path, cacheImagePath)
         if (cacheImagePath == null) {
             cacheImagePath = await ImageCache.setImg(path)
-            console.log(path, cacheImagePath)
             if (cacheImagePath != null) {
                 return cacheImagePath
             } else {
@@ -26,7 +24,6 @@ export class ModalCache {
     }
 
     public static async getModel(path: string, name: string) {
-        //console.log("zip path", path)
         const getStorage: any = await WXUtils.runner(wx.getStorage, {
             key: path
         })
@@ -42,7 +39,6 @@ export class ModalCache {
                 return null;
             return downLoadModel
         } else {
-            //console.log(getStorage)
             const fs = wx.getFileSystemManager();
             const readFile: any = await WXUtils.runner(fs.readFile, {
                 filePath: getStorage.data.obj
@@ -108,15 +104,6 @@ export class ModalCache {
 
         const result = new ModalEntity();
         for (let i = 0; i < readdir.files.length; i++) {
-            //console.log("------", readdir.files[i])
-            const part = readdir.files[i].split(".");
-            // if (part && part.length >= 2) {
-            //     if (part[part.length - 1] == "obj") {
-            //         result.obj = `${Model3DDir}/${readdir.files[i]}`
-            //     } else if (part[part.length - 1] == "jpg" || part[part.length - 1] == "jpeg" || part[part.length - 1] == "png") {
-            //         result.jpg = `${Model3DDir}/${readdir.files[i]}`
-            //     }
-            // }
         }
         return result;
     }

@@ -91,10 +91,6 @@ export default (_canvas) => {
     function render() {
         animation()
         renderer.render(scene, camera)
-        //////console.log("render")
-        // canvas.requestAnimationFrame(()=>{
-        //     render()
-        // });
     }
 
     render()

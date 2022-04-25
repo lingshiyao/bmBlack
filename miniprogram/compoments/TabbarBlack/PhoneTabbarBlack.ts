@@ -22,7 +22,6 @@ Component({
         choose(event: any) {
             if (event == 0 || event == 3 || event == 2)
                 this.setData({choose: event})
-            //////////////////////////////console.log(event)
         }
     }
 });

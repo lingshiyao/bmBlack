@@ -1,5 +1,5 @@
 import {request} from "../Api";
-import {UserDetail, WxJsApiTarget} from "../net/gql/graphql";
+import {User, WxJsApiTarget} from "../net/gql/graphql";
 import {StorageUtils} from "./StorageUtils";
 import {AppConstant} from "../AppConstant";
 
@@ -30,7 +30,6 @@ export class WXUtils {
 
     public static shakeToDebugPage() {
         wx.onAccelerometerChange(function (e) {
-            ////////////console.log(e)
             if (Math.abs(e.x) > 1 && Math.abs(e.y) > 1) {
                 wx.vibrateShort({
                     type: "heavy"
@@ -54,14 +53,13 @@ export class WXUtils {
         const wxCode = login.code.toString();
         if (wxCode) {
             const wxJsapiOpenId = await request.wxJsapiOpenId({code: wxCode, target: WxJsApiTarget.MiniProgram});
-            //////////////console.log(wxJsapiOpenId)
             if (wxJsapiOpenId == null || wxJsapiOpenId == undefined || wxJsapiOpenId.signin_info == null) {
                 wx.reLaunch({
                     url: '/pages/PhoneLoginNew',
                 })
                 return null;
             } else {
-                let userDetail: UserDetail = await request.user({userId: wxJsapiOpenId.signin_info.id})
+                let userDetail: User = await request.user({userId: wxJsapiOpenId.signin_info.id})
                 if (userDetail == null) {
                     await wx.showModal({
                         title: '提示', content: '获取用户信息出错，请联系管理员！', showCancel: false
@@ -110,7 +108,6 @@ export class WXUtils {
             }
 
             option.fail = (res: any) => {
-                ////console.log(res)
                 resolve(null);
             }
             fun(option);
@@ -124,12 +121,10 @@ export class WXUtils {
             }
 
             option.fail = (res: any) => {
-                // console.log(res, option)
                 resolve(null);
             }
             const task = wx.downloadFile(option);
             task.abort();
-            //////console.log(task)
         })
     }
 

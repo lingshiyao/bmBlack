@@ -7,8 +7,7 @@ const NULL: any = null;
 Component({
     properties: {
         data: {
-            type: Array,
-            value: new Array<CollectCardDataEntity>(),
+            type: Array, value: new Array<CollectCardDataEntity>(),
         }, bannerData: {
             type: Object, value: new CollectBannerEntity()
         }, store: Object
@@ -24,14 +23,11 @@ Component({
             this.setData({
                 safeArea: `padding-bottom:${Utils.getBottomSafeAreaPxHeight()}px`
             })
-            //console.log(this.data.safeArea)
-        },
-        copyAddressText() {
+        }, copyAddressText() {
             wx.setClipboardData({
-                data: this.data.address,
-                success: function (res) {
+                data: this.data.address, success: function () {
                     wx.getClipboardData({
-                        success: function (res) {
+                        success: function () {
                             wx.showToast({
                                 title: '复制成功'
                             })
@@ -39,8 +35,17 @@ Component({
                     })
                 }
             })
-        },
-        async getBlind() {
+        }, async getBlind() {
+            wx.showModal(
+                {
+                    title: '提示', content: "小程序暂不支持购买，请用浏览器访问wu-jie.art", showCancel: false, success(res) {
+                        if (res.confirm) {
+                        } else if (res.cancel) {
+                        }
+                    }
+                }
+            )
+            return;
             const result = await this.data.phoneModelPay.show(this.properties.data[0].price.toString());
             if (result != null) {
                 this.triggerEvent('getBlind', result);
@@ -48,19 +53,11 @@ Component({
         }
     }, observers: {
         'data': function (data: Array<CollectCardDataEntity>) {
-            ////////////////////////console.log(data)
             this.setData({
                 price: parseFloat(data[0].price.toString())
             })
-            //////////////////////////////console.log(data)
-        }, 'bannerData': function (bannerData: CollectBannerEntity) {
-            ////////////////////////console.log(bannerData)
-            //////////////////////////////console.log(bannerData)
         }, 'store': function (store: any) {
-            ////////////////////////console.log(store)
-            //////////////////////////////console.log(store)
             if (new Date(store.openingTime).getTime() - new Date().getTime() > 0) {
-                // ////////////////////////////////console.log("// 即将开售")
                 this.setData({
                     theSale: Utils.formatDate(new Date(store.openingTime), "MM-dd HH:mm")
                 })
@@ -71,12 +68,10 @@ Component({
                 })
             } else {
                 if (store.totalSupply - 0 > 0) {
-                    // ////////////////////////////////console.log("// 立即购买")
                     this.setData({
                         buyStatus: 0
                     })
                 } else {
-                    // ////////////////////////////////console.log("// 已售罄")
                     this.setData({
                         buyStatus: 2
                     })
@@ -88,6 +83,5 @@ Component({
             phoneModelPay: this.selectComponent("#phoneModelPay"),
         })
         this.initSafeArea();
-        //
     }
 });

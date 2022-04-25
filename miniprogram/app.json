@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/PhoneApp",
+    "pages/PhoneWebView",
     "pages/PhoneThreeTestIndexPage",
     "pages/PhoneLoginNew",
     "pages/TestPage",

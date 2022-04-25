@@ -126,7 +126,6 @@ export default (_canvas) => {
                 material.normalMap.wrapS = THREE.RepeatWrapping;
 
                 group.traverse(function (child) {
-                    //////console.log('child', child.isMesh)
                     if (child.isMesh) {
                         child.material = material;
                     }

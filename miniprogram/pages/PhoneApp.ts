@@ -4,6 +4,7 @@ import {PicCDNUtils} from "../api/net/PicCDNUtils";
 import {Utils} from "../api/utils/Utils";
 import {WXUtils} from "../api/utils/WXUtils";
 import {Globals} from "../api/Globals";
+import { User } from "../api/net/gql/graphql";
 
 const NULL: any = null;
 
@@ -21,15 +22,10 @@ Page({
     },
 
     async initHotBannerHeight() {
-        //////////////////////console.log("initHotBannerHeight")
         if (Globals.homeBannerHeight == 0) {
             const res = await WXUtils.getRect("#phoneHomeTitleBar");
             Globals.homeBannerHeight = WXUtils.getScreenHeight() - WXUtils.getStatusBarHeight() - res[0].height;
         }
-
-        ////////////////////////////console.log(res);
-        ////////////////////////////console.log(res[0].height);
-        ////////////////////////////console.log(wx.getSystemInfoSync(), WXUtils.getScreenHeight())
         this.setData({
             hotScrollHeight: `height:${Globals.homeBannerHeight}px;`
         })
@@ -49,30 +45,14 @@ Page({
 
         this.createdTabbarData();
         this.setSelectTabbarItem();
-
-        // ////////////////////////////////console.log(Utils.getBottomSafeAreaRpxHeight());
         this.setData({
             'bottomSafe': `padding-bottom: ${Utils.getBottomSafeAreaPxHeight() * 0.7}px;`
         })
-
-        // var query = wx.createSelectorQuery();
-        // query.select('#phoneHomeTitleBar').boundingClientRect()
-        // query.exec(function (res) {
-        //     //res就是 所有标签为mjltest的元素的信息 的数组
-        //     ////////////////////////////console.log(res);
-        //     //取高度
-        //     ////////////////////////////console.log(res[0].height);
-        // })
         this.initHotBannerHeight();
-
         this.selectComponent("#phoneTabbar").choose(this.data.index);
-        ////////////////////console.log(this.selectComponent("#phoneTabbar"))
         this.setData({
             phoneMy: this.selectComponent("#phone-my-id")
         })
-        ////////////////////console.log(this.data.phoneMy)
-
-        // WXUtils.shakeToDebugPage();
     },
 
     setSelectTabbarItem() {
@@ -112,7 +92,6 @@ Page({
 
     async taBarIndexMy(event: any) {
         let index = parseInt(event.detail);
-        ////////////////////console.log(index)
         if (index == 1) {
             // this._taBarIndex(index);
         } else {
@@ -162,8 +141,7 @@ Page({
 
     async _taBarIndex(index: number) {
         if (index === 3) {
-            const result = await UserSet.getUserInfoIfFailedGoLogin();
-            //////////////console.log(result)
+            const result: User | null = await UserSet.getUserInfoIfFailedGoLogin();
             if (result == null)
                 return
         }
@@ -230,7 +208,6 @@ Page({
             }
         }
     }, handleTouchStart() {
-        //////////////console.log("handleTouchStart")
         const anim = "animate__animated animate__fadeOutDownBig";
         if (this.data.tabbarAnimation != anim) {
             this.setData({
@@ -241,22 +218,16 @@ Page({
         //     tabbarStatus: 0
         // })
     }, handleTouchEnd() {
-        //////////////console.log("handleTouchEnd")
         const that = this;
         setTimeout(() => {
             that.setData({
                 tabbarAnimation: "animate__animated animate__fadeInUpBig"
             })
-            //////////////console.log(that.data.tabbarAnimation)
+            setTimeout(() => {
+                that.setData({
+                    tabbarAnimation: ""
+                })
+            }, 1000)
         }, 1000)
-        // await Utils.sleep(1000)
-        // this.setData({
-        //     tabbarStatus: 1
-        // })
-
-        // this.setData({
-        //     tabbarAnimation: ""
-        // })
-
     }
 });

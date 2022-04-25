@@ -9,6 +9,7 @@ const NULL: any = null;
 
 let _pageIndex = 0;
 let _total = 0;
+let _loading = false;
 
 Page({
     data: {
@@ -20,6 +21,8 @@ Page({
         oarts: [],
     },
     bindDownLoad() {
+        if (_loading)
+            return;
         _pageIndex++;
         this.search();
     },
@@ -38,11 +41,11 @@ Page({
         this.setData({
             scrollStyle: `height:${WXUtils.getScreenHeight() - WXUtils.getStatusBarHeight() - rect[0].height}px`
         })
-        //////////////////////console.log(rect)
     },
     onLoad: function (options) {
         _pageIndex = 0;
         _total = 0;
+        _loading = false;
         this.setData({
             arts: []
         })
@@ -50,7 +53,6 @@ Page({
         this.search();
     },
     goToInfo(event: any) {
-        // ////////////////////////////////console.log(event, this.data);
         const index = parseInt(event.currentTarget.dataset.index.toString());
 
         wx.navigateTo({
@@ -61,7 +63,6 @@ Page({
         this.setData({
             search: e.detail.value.toString()
         })
-        //////////////////////console.log(e.detail.value.toString() == "")
         if (e.detail.value.toString() == "") {
 
             this.setData({
@@ -72,7 +73,6 @@ Page({
                 deleteIconShow: true
             })
         }
-        //////////////////////////////console.log(e.detail, e.detail.value.toString(), this.data.search)
     },
     async clickSearch() {
         this.setData({
@@ -82,8 +82,8 @@ Page({
     },
     async search() {
         const key = this.data.search;
-        ////////////////////////////console.log(key)
         await wx.showLoading({title: "加载中..."})
+        _loading = true;
         const arts = await request.arts({
             ascByPrice: true,
             key: key,
@@ -91,10 +91,10 @@ Page({
             pageSize: 6,
             storeId: null,
         })
+        _loading = false;
         this.setData({
             oarts: arts.list
         })
-        //console.log(arts)
         wx.hideLoading();
         _total = arts.total;
         for (let i = 0; i < arts.list.length; i++) {
@@ -117,7 +117,6 @@ Page({
                 arts: artsT
             })
             await Utils.sleep(200);
-            // ////////////////////console.log(this.data.arts)
         }
     }
 });

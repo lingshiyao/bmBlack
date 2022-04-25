@@ -12,11 +12,7 @@
                     用户头像
                 </view>
                 <view class="input-line">
-                    <!--                <input id="input_img" accept="image/*" class="file-ele" file-model="image" multiple="" name="image"-->
-                    <!--                       nv-file-select="" type="file" uploader=""-->
-                    <!--                       :bindchange="getImage">-->
-                    <!--                </input>-->
-                    <image
+                    <LoadingImg
                             mode="aspectFill"
                             src="{{defaultUrl}}"
                             class="header-box"
@@ -24,7 +20,7 @@
                             stylee="width: 12.8vw;height: 12.8vw;border-radius: 6.4vw;"
                             anim="animate__animated animate__bounceIn animate__faster"
                             bindtap="chooseImg">
-                    </image>
+                    </LoadingImg>
                     <image lazy-load="true" src="{{rightArrowUrl}}" class="right-arrow"></image>
                 </view>
             </view>
@@ -33,12 +29,12 @@
                     用户名
                 </view>
                 <view class="input-line">
-                    <view wx:if="{{userDetail.user.phoneNumber == '' || userDetail.user.phoneNumber == null}}"
+                    <view wx:if="{{userDetail.base.phoneNumber == '' || userDetail.base.phoneNumber == null}}"
                           class="input-text">
                         请输入
                     </view>
                     <view wx:else class="input-text-has">
-                        {{ userDetail.user.phoneNumber }}
+                        {{ userDetail.base.phoneNumber }}
                     </view>
                     <image lazy-load="true" src="{{rightArrowUrl}}" class="right-arrow hidden"></image>
                 </view>
@@ -48,12 +44,12 @@
                     昵称
                 </view>
                 <view class="input-line">
-                    <view wx:if="{{userDetail.userExt.nickname == '' || userDetail.userExt.nickname == null}}"
+                    <view wx:if="{{userDetail.ext.nickname == '' || userDetail.ext.nickname == null}}"
                           class="input-text">
                         请输入
                     </view>
                     <view wx:else class="input-text-has">
-                        {{ userDetail.userExt.nickname }}
+                        {{ userDetail.ext.nickname }}
                     </view>
                     <image lazy-load="true" src="{{rightArrowUrl}}" class="right-arrow"></image>
                 </view>
@@ -63,12 +59,12 @@
                     个性签名
                 </view>
                 <view class="input-line">
-                    <view wx:if="{{userDetail.userExt.intro == '' || userDetail.userExt.intro == null}}"
+                    <view wx:if="{{userDetail.ext.intro == '' || userDetail.ext.intro == null}}"
                           class="input-text">
                         请输入
                     </view>
                     <view wx:else class="input-text-has">
-                        {{ userDetail.userExt.intro }}
+                        {{ userDetail.ext.intro }}
                     </view>
                     <image lazy-load="true" src="{{rightArrowUrl}}" class="right-arrow"></image>
                 </view>
@@ -78,12 +74,12 @@
                     Email
                 </view>
                 <view class="input-line">
-                    <view wx:if="{{userDetail.userExt.email == '' || userDetail.userExt.email == null}}"
+                    <view wx:if="{{userDetail.ext.email == '' || userDetail.ext.email == null}}"
                           class="input-text">
                         请输入
                     </view>
                     <view wx:else class="input-text-has">
-                        {{ userDetail.userExt.email }}
+                        {{ userDetail.ext.email }}
                     </view>
                     <image lazy-load="true" src="{{rightArrowUrl}}" class="right-arrow"></image>
                 </view>
@@ -94,23 +90,14 @@
                     钱包地址
                 </view>
                 <view class="input-line">
-                    <view wx:if="{{userDetail.userExt.address == '' || userDetail.userExt.address == null}}"
+                    <view wx:if="{{userDetail.ext.address == '' || userDetail.ext.address == null}}"
                           class="input-text">
                         请输入
                     </view>
                     <view wx:else class="input-text-has">
-                        {{ userDetail.userExt.address }}
+                        {{ userDetail.ext.address }}
                     </view>
                     <image lazy-load="true" src="{{rightArrowUrl}}" class="right-arrow hidden"></image>
-                </view>
-            </view>
-            <view class="line-h" style="margin-top: 6.67vw;"></view>
-            <view class="line" style="margin-top: 7.2vw;" bindtap="changePwd">
-                <view class="text">
-                    登录密码
-                </view>
-                <view class="input-line">
-                    <image lazy-load="true" src="{{rightArrowUrl}}" class="right-arrow"></image>
                 </view>
             </view>
             <view class="line-h" style="margin-top: 6.67vw;"></view>
@@ -146,10 +133,6 @@
                     <image lazy-load="true" src="{{rightArrowUrl}}" class="right-arrow"></image>
                 </view>
             </view>
-            <!--            <view class="login-out" style="margin-top: 12.67vw;" bindtap="logout">-->
-            <!--                退出登录-->
-            <!--            </view>-->
-
             <view style="{{footStyle}}"></view>
         </view>
     </scroll-view>

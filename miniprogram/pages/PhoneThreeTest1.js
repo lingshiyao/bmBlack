@@ -18,10 +18,7 @@ Page({
             .fields({node: true, size: true})
             .exec((res) => {
                 const canvas = res[0].node;
-                //console.log(canvas)
-                //console.log(canvas.getContext("webgl"))
                 const {windowWidth, windowHeight} = wx.getSystemInfoSync();
-                //////console.log(windowWidth, windowHeight)
                 // 设置视图窗口大小 默认是300 * 150
                 this.setData({
                     canvasWidth: windowWidth, canvasHeight: windowHeight,

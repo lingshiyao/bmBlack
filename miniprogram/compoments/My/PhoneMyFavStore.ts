@@ -1,5 +1,5 @@
 import {MyCollectionsItemEntity} from "../../api/entity/My/MyCollectionsItemEntity";
-import {Store, StorePagedList, User} from "../../api/net/gql/graphql";
+import {StoreFavorite, User} from "../../api/net/gql/graphql";
 import {UserSet} from "../../api/storage/UserSet";
 import {ImgPathUtils} from "../../api/utils/ImgPathUtils";
 import {request} from "../../api/Api";
@@ -26,23 +26,24 @@ Component({
             if (!userDetail) return;
             wx.showLoading({title: "加载中..."})
             _loading = true;
-            const stores: StorePagedList = await request.stores({
-                pageIndex: _pageIndex, owner: userDetail.ext.address, pageSize: 4
-            });
+            const storeFavoriteList = await request.storeFavoriteList({
+                pageIndex: _pageIndex, pageSize: 4
+            }, true);
+            console.log(storeFavoriteList)
             _loading = false;
-            _total = stores.total;
+            _total = storeFavoriteList.total;
             wx.hideLoading()
-            if (stores == null) return;
-            for (let i = 0; i < stores.list.length; i++) {
-                const item: Store = stores.list[i];
+            if (storeFavoriteList == null) return;
+            for (let i = 0; i < storeFavoriteList.list.length; i++) {
+                const item: StoreFavorite = storeFavoriteList.list[i];
                 const item_: MyCollectionsItemEntity = new MyCollectionsItemEntity();
-                item_.banner = ImgPathUtils.getSBanner(item.id);
-                item_.headerImg = ImgPathUtils.getSIcon(item.id);
-                item_.name = item.name;
-                item_.id = item.id;
-                item_.description = item.description;
-                item_.artCount = item.artCount.toString();
-                item_.category = item.category.name;
+                item_.banner = ImgPathUtils.getSBanner(item.store.id);
+                item_.headerImg = ImgPathUtils.getSIcon(item.store.id);
+                item_.name = item.store.name;
+                item_.id = item.store.id;
+                item_.description = item.store.description;
+                item_.artCount = item.store.artCount.toString();
+                item_.category = item.store.category.name;
                 const lstT = this.data.lst;
                 lstT.push(item_);
                 this.setData({

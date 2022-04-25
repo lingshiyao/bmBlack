@@ -7,7 +7,6 @@ Component({
         selectBoxData: new SelectBoxEntity()
     }, methods: {
         async bindDownLoad() {
-            console.log("bindDownLoad")
         },
         clickCallBack(event: any) {
             const json = event.detail;
@@ -44,11 +43,5 @@ Component({
         this.setData({
             'selectBoxData': selectBoxData_c01d026c
         });
-    }, observers: {
-        'data': function (data) {
-            //////////////////////////console.log(data)
-        }, 'bannerData': function (bannerData) {
-            //////////////////////////console.log(bannerData)
-        }
     }
 });

@@ -25,9 +25,6 @@ const EventBus = {
     dispatchEvent(event) {
         const type = event.type;
         const listeners = events[type]
-
-        ////console.log(event, listeners)
-
         if (listeners) {
             for (let i = 0; i < listeners.length; i++) {
                 listeners[i](event)

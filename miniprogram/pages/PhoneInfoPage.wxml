@@ -47,7 +47,7 @@
                 <view class="header-black-attr-base" style="margin-top:4vw">
                     <view class="header-black-attr-xianliang-layer">
                         <view class="header-black-attr-xianliang1">限量</view>
-                        <view class="header-black-attr-xianliang2">10000份</view>
+                        <view class="header-black-attr-xianliang2">{{art.maxSupply}}份</view>
                     </view>
                     <block wx:for="{{attrLst}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
                         <view class="header-black-attr">{{item}}</view>
@@ -67,11 +67,12 @@
                             class="guanzhu-layout-img"></LoadingImg>
                 </view>
                 <view class="guanzhu-layout-y" style="margin-left:2.78vw;">
-                    <view class="guanzhu-layout-txt1">变形金刚数字典藏旗舰店</view>
+                    <view class="guanzhu-layout-txt1">{{art.stores[0].name}}</view>
                     <!--                <view class="guanzhu-layout-txt2">作品20</view>-->
                 </view>
                 <view class="guanzhu-layout-flex1">
-                    <view class="guanzhu-layout-btn" bindtap="guanzhu">关注</view>
+                    <view wx:if="{{isFavStore == false}}" class="guanzhu-layout-btn" bindtap="guanzhu">关注</view>
+                    <view wx:else class="yijing-guanzhu-layout-btn" bindtap="guanzhu">已关注</view>
                 </view>
             </view>
 
@@ -82,8 +83,8 @@
                         <view class="description-rich-new-msg-area-layout-line-txt1">合约地址</view>
                         <view class="description-rich-new-msg-area-layout-line-txt2">{{address}}</view>
                     </view>
-                    <view class="description-rich-new-msg-area-layout-line-line"></view>
-                    <view bindtap='copyAuthorizationText' class="description-rich-new-msg-area-layout-line">
+                    <view wx:if="{{art.copyrightLink != ''}}" class="description-rich-new-msg-area-layout-line-line"></view>
+                    <view wx:if="{{art.copyrightLink != ''}}" bindtap='copyAuthorizationText' class="description-rich-new-msg-area-layout-line">
                         <view class="description-rich-new-msg-area-layout-line-txt1">授权声明</view>
                         <view class="description-rich-new-msg-area-layout-line-txt2">{{art.copyrightLink}}</view>
                     </view>
@@ -95,7 +96,7 @@
                     <view class="description-rich-new-msg-area-layout-line-line"></view>
                     <view class="description-rich-new-msg-area-layout-line">
                         <view class="description-rich-new-msg-area-layout-line-txt1">认证标准</view>
-                        <view class="description-rich-new-msg-area-layout-line-txt2">REC-721</view>
+                        <view class="description-rich-new-msg-area-layout-line-txt2">ERC-721</view>
                     </view>
                     <view class="description-rich-new-msg-area-layout-line-line"></view>
                     <view class="description-rich-new-msg-area-layout-line">

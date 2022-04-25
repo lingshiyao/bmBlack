@@ -1,7 +1,3 @@
-import {ImgPathUtils} from "../../utils/ImgPathUtils";
-
-const testImg = ImgPathUtils.getImgPath('slsls');
-
 export class CollectCardDataEntity {
     public author: string = "";         //// 作者   改为项目名称
     public name: string = "";           //// 暂时删除

@@ -1,5 +1,6 @@
 import {ImageCache} from "../../api/ImageCache";
 import {DownloadTask} from "../../api/DownloadTask";
+import { PicCDNUtils } from "../../api/net/PicCDNUtils";
 
 Component({
     properties: {
@@ -24,6 +25,10 @@ Component({
                 'imgClass': `img ${this.properties.anim}`
             })
         }, onLoadingError() {
+            this.setData({
+                newSrc: PicCDNUtils.getPicUrl("pic_user.png", false)
+            })
+            console.log(this.data.newSrc)
         },
         async setImage(src: string) {
             if (src == "") return

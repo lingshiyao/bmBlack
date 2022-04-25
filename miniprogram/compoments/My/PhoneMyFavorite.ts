@@ -8,19 +8,24 @@ import {Utils} from "../../api/utils/Utils";
 const ARRAY: any = [];
 let _pageIndex = 0;
 let _total = 0;
+let _loading = false;
 
 Component({
     data: {favList: ARRAY, scrollStyle: ""}, methods: {
         async bindDownLoad() {
+            if (_loading)
+                return;
             _pageIndex++;
             this.init()
         }, async init() {
             if (_total != 0 && this.data.favList.length == _total) return;
             wx.showLoading({title: "加载中..."});
-            const pagedFavorites = await request.favoriteList({
+            _loading = true;
+            const pagedFavorites = await request.artFavoriteList({
                 pageIndex: _pageIndex, pageSize: 6
             }, true);
-            //////////////////////console.log(pagedFavorites)
+            console.log(pagedFavorites)
+            _loading = false;
             wx.hideLoading();
             _total = pagedFavorites.total;
             if (pagedFavorites != null) {
@@ -60,6 +65,7 @@ Component({
     }, ready() {
         _pageIndex = 0;
         _total = 0;
+        _loading = false;
         this.setData({
             favList: []
         })
@@ -69,7 +75,6 @@ Component({
             this.setData({
                 scrollStyle: `height:${WXUtils.getScreenHeight() - data}px;`
             })
-            //////////////////////console.log(this.data.scrollStyle)
         }
 
     }

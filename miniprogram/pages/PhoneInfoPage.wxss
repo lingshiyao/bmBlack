@@ -338,6 +338,21 @@
     z-index: 9999;
 }
 
+.yijing-guanzhu-layout-btn {
+    width: 21.11vw;
+    height: 8.33vw;
+    border: 1px solid #FDD3A1;
+    border-radius: 4vw;
+
+    font-size: 4.17vw;
+    font-family: PingFang SC;
+    font-weight: 500;
+    color: #FDD3A1;
+    line-height: 8.33vw;
+    text-align: center;
+    margin-right: 4.17vw;
+}
+
 .guanzhu-layout-btn {
     width: 21.11vw;
     height: 8.33vw;

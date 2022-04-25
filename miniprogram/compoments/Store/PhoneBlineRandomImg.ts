@@ -33,7 +33,6 @@ Component({
                             this.setData({
                                 styles: cleanStyles
                             })
-                            // ////////////////////////////////console.log(this.data.styles)
                             break;
                         }
                     }
@@ -54,7 +53,6 @@ Component({
 
     }, observers: {
         'data': function (data: any) {
-            // ////////////////////////////////console.log(data)
             const stylesT = [];
             for (let i = 0; i < data.length; i++) {
                 stylesT.push("display: none;");

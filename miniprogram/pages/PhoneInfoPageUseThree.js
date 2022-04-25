@@ -12,9 +12,6 @@ let cube;
 
 export default (_canvas, id, width, height) => {
     canvas = _canvas;
-
-    ////console.log(pixelRatio)
-
     canvas.width = width * pixelRatio;
     canvas.height = height * pixelRatio;
 
@@ -133,7 +130,6 @@ export default (_canvas, id, width, height) => {
     function render() {
         renderer.render(scene, camera)
         controls.update()
-        // //////console.log("render")
         canvas.requestAnimationFrame(() => {
             render()
         });

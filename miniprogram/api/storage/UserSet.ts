@@ -1,7 +1,7 @@
 import {StorageUtils} from "../utils/StorageUtils";
-import {UserDetail} from "../net/gql/graphql";
 import {AppConstant} from "../AppConstant";
 import {WXUtils} from "../utils/WXUtils";
+import { User } from "../net/gql/graphql";
 
 export class UserSet {
 
@@ -25,7 +25,7 @@ export class UserSet {
     /**
      * 如果 获取 用户信息失败 就跳转登陆
      */
-    public static getUserInfoIfFailedGoLogin = async (): Promise<UserDetail | null> => {
+    public static getUserInfoIfFailedGoLogin = async (): Promise<User | null> => {
         const result = await StorageUtils.getStorage(AppConstant.USER);
         if (result) {
             return result;

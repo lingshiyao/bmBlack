@@ -6,7 +6,6 @@
         <view class="base-b">
             <view class="b-area1-layout">
                 <view class="b-area1-layout-center">
-                    <!--            <image class="b-area1-layout-gif"></image>-->
                     <view class="b-area1-layout-gif-border">
                         <PhoneBlineRandomImg data="{{data}}" class="b-area1-layout-gif"></PhoneBlineRandomImg>
                     </view>
@@ -31,15 +30,10 @@
                         <view class="description-rich-new-msg-area-layout-line-txt1">合约地址</view>
                         <view class="description-rich-new-msg-area-layout-line-txt2">{{address}}</view>
                     </view>
-                    <!--                    <view class="description-rich-new-msg-area-layout-line-line"></view>-->
-                    <!--                    <view bindtap='copyAuthorizationText' class="description-rich-new-msg-area-layout-line">-->
-                    <!--                        <view class="description-rich-new-msg-area-layout-line-txt1">授权文件</view>-->
-                    <!--                        <view class="description-rich-new-msg-area-layout-line-txt2">{{art.copyrightLink}}</view>-->
-                    <!--                    </view>-->
                     <view class="description-rich-new-msg-area-layout-line-line"></view>
                     <view class="description-rich-new-msg-area-layout-line">
                         <view class="description-rich-new-msg-area-layout-line-txt1">认证标准</view>
-                        <view class="description-rich-new-msg-area-layout-line-txt2">REC-721</view>
+                        <view class="description-rich-new-msg-area-layout-line-txt2">ERC-721</view>
                     </view>
                     <view class="description-rich-new-msg-area-layout-line-line"></view>
                     <view class="description-rich-new-msg-area-layout-line">
@@ -85,8 +79,5 @@
             </view>
         </view>
     </view>
-
 </view>
-
-
 <PhoneModelPay price="{{price}}" id="phoneModelPay"></PhoneModelPay>

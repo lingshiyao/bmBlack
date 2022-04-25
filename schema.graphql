@@ -16,7 +16,6 @@ type Art {
     # 描述
     description: String!
 
-    # 文件数据
     # 文件的IPFS地址
     mediaIpfs: String
 
@@ -25,6 +24,9 @@ type Art {
 
     # 外部链接
     externalLink: String!
+
+    # 版权链接
+    copyrightLink: String!
 
     # 属性
     attrs: JSON!
@@ -44,11 +46,17 @@ type Art {
     # 收藏数量
     favCount: Int!
 
+    # 开启时间(从店铺查询时才有意义)
+    openingTime: DateTime!
+
     # 创建时间
     createdAt: DateTime!
 
-    # 是否上链
-    createdOnChain: Boolean!
+    # 上链Id
+    tx: String!
+
+    # 上链状态
+    txState: TxState!
 
     # 已铸造的Nft列表
     nfts: [Nft!]!
@@ -83,6 +91,9 @@ input ArtAddInput {
     # 外部链接
     externalLink: String!
 
+    # 版权链接
+    copyrightLink: String!
+
     # 属性
     attrs: JSON!
 
@@ -91,6 +102,9 @@ input ArtAddInput {
 
     # 个人持有限制
     holdLimit: Int!
+
+    # 开启时间
+    openingTime: DateTime!
 }
 
 type ArtPagedList {
@@ -122,8 +136,14 @@ input ArtUpdateInput {
     # 外部链接
     externalLink: String!
 
+    # 版权链接
+    copyrightLink: String!
+
     # 属性
     attrs: JSON!
+
+    # 开启时间
+    openingTime: DateTime!
 }
 
 input ArtUpdateThumbnailInput {
@@ -215,7 +235,7 @@ type Favorite {
     addedAt: DateTime!
 
     # 收藏者
-    user: UserDetail!
+    user: User!
 
     # 收藏作品
     art: Art!
@@ -306,6 +326,12 @@ type Mutation {
     #
     # 1. 需要`SuperAdmin`
     userUpdateRole(userId: ID!, newRole: UserRole!): Boolean!
+
+    # 修改昵称
+    #
+    # 1. 需要`User`
+    # 2. `User`只能修改自己，`Admin`可修改任何人
+    userUpdateNickname(userId: ID!, nickname: String!): Boolean!
 
     # 设置用户禁用状态
     #
@@ -400,10 +426,18 @@ type Mutation {
     # 2. 验证所有者
     storeUpdateBanner(input: StoreUpdateBannerInput!): Boolean!
 
+    # 收藏或取消收藏店铺
+    #
+    # 1. 需要`User`
+    # 2. 验证店铺的有效性
+    # 3. 返回值(true:收藏,false:未收藏)
+    storeFavoriteToggle(storeId: ID!): Boolean!
+
     # 新增作品
     #
     # 1. 需要`User`
-    # 2. 验证上架店铺所有权
+    # 2. 验证店铺所有者是商户
+    # 3. 验证上架店铺所有权
     artAdd(input: ArtAddInput!): ID!
 
     # 修改作品
@@ -436,14 +470,7 @@ type Mutation {
     # 1. 需要`User`
     # 2. 验证作品的有效性
     # 3. 返回值(true,收藏;false,未收藏)
-    favoriteToggle(artId: ID!): Boolean!
-
-    # 收藏或取消收藏店铺
-    #
-    # 1. 需要`User`
-    # 2. 验证店铺的有效性
-    # 3. 返回值(true:收藏,false:未收藏)
-    storeFavoriteToggle(storeId: ID!): Boolean!
+    artFavoriteToggle(artId: ID!): Boolean!
 
     # 修改配置
     #
@@ -532,7 +559,7 @@ type Order {
     state: OrderState!
 
     # 所属用户
-    user: UserDetail!
+    user: User!
 
     # 下单店铺
     store: Store!
@@ -622,12 +649,12 @@ enum OrderState {
     UNKNOWN
 }
 
-type QueryRoot {
+type Query {
     # 首页推荐信息
-    top: TopInfo!
+    top(includeHidden: Boolean! = true): TopInfo!
 
     # 获取用户信息
-    user(userId: ID!): UserDetail!
+    user(userId: ID!): User!
 
     # 获取用户列表
     #
@@ -663,9 +690,22 @@ type QueryRoot {
     storeLadder(
         cateId: ID
         queryType: StoreLadderQueryType!
-        includeHidden: Boolean!
+        includeHidden: Boolean! = true
         limit: Int! = 100
     ): [StoreLadderItem!]!
+
+    # 用户是否收藏了店铺
+    #
+    # 1. 需要`User`
+    storeFavoriteExists(storeId: ID!): Boolean!
+
+    # 获取`StoreFavorite`列表
+    #
+    # 1. 需要`User`
+    storeFavoriteList(
+        pageIndex: Int! = 0
+        pageSize: Int! = 20
+    ): StoreFavoritePagedList!
 
     # 获取作品列表
     arts(
@@ -678,13 +718,25 @@ type QueryRoot {
     ): ArtPagedList!
 
     # 查询单个Art的信息
-    art(artId: ID!): Art!
+    #
+    # store_id 查询指定店铺内的作品，一个作品可以属于多个店铺
+    art(artId: ID!, storeId: Int): Art!
 
     # 作品属性相关统计
     #
     # 1. 指定店铺 id，返回该店铺内所有作品属性的统计信息
     # 2. 客户端根据返回的字典，自行查询
     artStat(storeId: ID!): JSONObject!
+
+    # 用户是否收藏了作品
+    #
+    # 1. 需要`User`
+    artFavoriteExists(artId: String!): Boolean!
+
+    # 获取`Favorite`列表
+    #
+    # 1. 需要`User`
+    artFavoriteList(pageIndex: Int! = 0, pageSize: Int! = 20): FavoritePagedList!
 
     # 获取订单列表
     #
@@ -699,29 +751,6 @@ type QueryRoot {
     #
     # 1. nft存储在区块链，没法遍历所有Nft信息
     nfts(userId: ID!, key: String): [Nft!]!
-
-    # 用户是否收藏了作品
-    #
-    # 1. 需要`User`
-    favoriteExists(artId: String!): Boolean!
-
-    # 获取`Favorite`列表
-    #
-    # 1. 需要`User`
-    favoriteList(pageIndex: Int! = 0, pageSize: Int! = 20): FavoritePagedList!
-
-    # 用户是否收藏了店铺
-    #
-    # 1. 需要`User`
-    storeFavoriteExists(storeId: ID!): Boolean!
-
-    # 获取`StoreFavorite`列表
-    #
-    # 1. 需要`User`
-    storeFavoriteList(
-        pageIndex: Int! = 0
-        pageSize: Int! = 20
-    ): StoreFavoritePagedList!
 
     # 查询是否启用交易
     dealEnable: Boolean!
@@ -793,13 +822,11 @@ type Store {
     # 描述
     description: String!
 
-    # 图像
-    # 广告图片
+    # 额外描述（盲盒专用）
+    descriptionEx: String!
+
     # 外部链接（如：博客，官网等）
     externalLink: String!
-
-    # 版权链接
-    copyrightLink: String!
 
     # 商店内单个账户购买限制
     holdLimit: Int!
@@ -820,7 +847,7 @@ type Store {
     updatedAt: DateTime!
 
     # 店铺所有者
-    user: UserDetail!
+    user: User!
 
     # 店铺类型
     category: Category!
@@ -848,6 +875,9 @@ input StoreAddInput {
     # 描述
     description: String!
 
+    # 额外描述
+    descriptionEx: String!
+
     # 图像
     icon: Upload
 
@@ -856,9 +886,6 @@ input StoreAddInput {
 
     # 外部链接
     externalLink: String!
-
-    # 版权链接
-    copyrightLink: String!
 
     # 店内购买限制
     holdLimit: Int!
@@ -875,7 +902,7 @@ type StoreFavorite {
     addedAt: DateTime!
 
     # 收藏者
-    user: UserDetail!
+    user: User!
 
     # 收藏店铺
     store: Store!
@@ -999,11 +1026,11 @@ input StoreUpdateInput {
     # 描述
     description: String!
 
+    # 额外描述
+    descriptionEx: String!
+
     # 外部链接
     externalLink: String!
-
-    # 版权链接
-    copyrightLink: String!
 
     # 店内购买限制
     holdLimit: Int!
@@ -1039,10 +1066,37 @@ enum TradeType {
     WX_MINI_PROGRAM
 }
 
+# 上链状态
+enum TxState {
+    # 未发起上链
+    NONE
+
+    # 进行中
+    PENDING
+
+    # 成功
+    SUCCESS
+
+    # 失败
+    FAILED
+}
+
 scalar Upload
 
-# 用户信息
+# 用户详情
 type User {
+    # 编号
+    id: ID!
+
+    # 用户信息
+    base: UserBase!
+
+    # 用户扩展信息
+    ext: UserExt!
+}
+
+# 用户信息
+type UserBase {
     # 编号
     id: ID!
 
@@ -1061,20 +1115,11 @@ type User {
     # 最后一次登录时间
     lastLoginAt: DateTime!
 
-    # 是否已上链
-    createdOnChain: Boolean!
-}
+    # 交易 ID
+    tx: String!
 
-# 用户详情
-type UserDetail {
-    # 编号
-    id: ID!
-
-    # 用户信息
-    user: User!
-
-    # 用户扩展信息
-    userExt: UserExt!
+    # 交易状态
+    txState: TxState!
 }
 
 # 用户扩展信息
@@ -1082,7 +1127,6 @@ type UserExt {
     # 钱包地址
     address: String!
 
-    # 图像
     # 昵称
     nickname: String
 

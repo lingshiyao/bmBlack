@@ -448,7 +448,7 @@ class OBJLoader extends Loader {
             success(res) {
                 onLoad(scope.parse(res.data));
             }, fail(res) {
-                //console.log(res)
+                console.log(res)
             }
         })
     }

@@ -1,0 +1,17 @@
+<scroll-view
+        scroll-y="true"
+        enhanced="true"
+        bindscrolltolower="bindDownLoad"
+        show-scrollbar="{{false}}"
+        class="animate__animated animate__fadeIn animate__faster"
+        style="{{scrollStyle}}">
+    <PhoneNothing wx:if="{{lst.length == 0}}"></PhoneNothing>
+    <view class="grid">
+        <block wx:for="{{lst}}" wx:for-item="item" wx:for-index="index" wx:key="unique">
+            <PhoneExploreItem data="{{item}}"
+                              class="animate__animated animate__fadeInUp animate__faster" bindtap="goToStore"
+                              data-index="{{index}}"></PhoneExploreItem>
+        </block>
+    </view>
+    <view style="height:26vw;"/>
+</scroll-view>
