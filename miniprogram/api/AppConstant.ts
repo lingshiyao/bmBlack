@@ -3,8 +3,8 @@ export class AppConstant {
     // public static readonly HOST: string = "https://kicouas.cn";
     // public static readonly HOST: string = "http://192.168.1.167:8081";
     // public static readonly HOST: string = "http://192.168.1.167:8002"
-    public static readonly HOST: string = "http://192.168.1.167:8000"
-    // public static readonly HOST: string = "https://wu-jie.art";
+    // public static readonly HOST: string = "http://192.168.1.167:8000"
+    public static readonly HOST: string = "https://wu-jie.art";
 
     public static readonly API_URL: string = AppConstant.HOST + "/api";
 

@@ -45,7 +45,7 @@ Page({
         guanzhuHeader: "",
         favTxt: "...",
         zaimayifen: false,
-        address: "https://testnet.confluxscan.io/address/cfxtest:acdk7r6rzc1u9yr039mf3t1hsk1r4km4rekdzc7m4b",
+        address: "https://confluxscan.io/address/cfx:acg2a333cj5w2fec0jsm6xumscesj6htm6bnfhv4ka",
         taiziUrl: PicCDNUtils.getPicUrl("pic_taizi.png", false),
         loading3d: true,
         ipfsAddress: "",
